@@ -1,0 +1,5 @@
+dataset,model,MAE_inflation_pct_mean,MAE_inflation_pct_std,dR2_mean,dR2_std
+A,XGBoost,59,2,-0.077,0.004
+A,RandomForest,61,1,-0.08,0.003
+B,XGBoost,54,2,-0.074,0.002
+B,RandomForest,45,1,-0.067,0.002

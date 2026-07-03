@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+# raw UCI data is fetched by code/get_datasetA.py, not committed
+data/train.csv
+data/unique_m.csv
+*.log
+build/

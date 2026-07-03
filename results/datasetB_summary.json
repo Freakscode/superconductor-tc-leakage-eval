@@ -1,0 +1,65 @@
+{
+  "datasetA": {
+    "cv": "see prior run"
+  },
+  "datasetB": {
+    "n_total": 16406,
+    "n_superconductors": 12440,
+    "n_features": 132,
+    "basis": "Tc>0 superconductors, paper Dataset-B hyperparameters",
+    "cv": {
+      "random_cv_RandomForest": {
+        "MAE": 4.327877796049628,
+        "RMSE": 8.308433328103323,
+        "R2": 0.916165147990394
+      },
+      "random_cv_XGBoost": {
+        "MAE": 3.89647786227502,
+        "RMSE": 7.667663937511007,
+        "R2": 0.9285976568401038
+      },
+      "grouped_cv_RandomForest": {
+        "MAE": 6.517409770510625,
+        "RMSE": 11.555672487106294,
+        "R2": 0.8378276639425566
+      },
+      "grouped_cv_XGBoost": {
+        "MAE": 6.27848208476207,
+        "RMSE": 11.247439448271093,
+        "R2": 0.8463637666269253
+      }
+    },
+    "single": {
+      "random_RandomForest": {
+        "MAE": 4.188065827858854,
+        "RMSE": 8.309657922877445,
+        "R2": 0.9147390431006965
+      },
+      "random_XGBoost": {
+        "MAE": 3.7165859802239107,
+        "RMSE": 7.174462937860699,
+        "R2": 0.9364431003900193
+      },
+      "grouped_RandomForest": {
+        "MAE": 6.496639001798038,
+        "RMSE": 11.300995810135609,
+        "R2": 0.8558261583312884
+      },
+      "grouped_XGBoost": {
+        "MAE": 6.14586238602871,
+        "RMSE": 10.800478581352694,
+        "R2": 0.8683141707189999
+      }
+    },
+    "nn_dist_median": {
+      "random": 0.13975473474925415,
+      "grouped": 1.2384987162242322
+    },
+    "topk100": {
+      "random_mean": 0.958,
+      "random_std": 0.00979795897113272,
+      "grouped_mean": 0.8140000000000001,
+      "grouped_std": 0.07282856582413251
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+ "intervals": [
+  {
+   "dataset": "A",
+   "model": "XGBoost",
+   "split": "random",
+   "MAE_mean": 5.25,
+   "MAE_std": 0.02,
+   "R2_mean": 0.928,
+   "R2_std": 0.001
+  },
+  {
+   "dataset": "A",
+   "model": "XGBoost",
+   "split": "grouped",
+   "MAE_mean": 8.34,
+   "MAE_std": 0.1,
+   "R2_mean": 0.85,
+   "R2_std": 0.004
+  },
+  {
+   "dataset": "A",
+   "model": "RandomForest",
+   "split": "random",
+   "MAE_mean": 5.41,
+   "MAE_std": 0.01,
+   "R2_mean": 0.924,
+   "R2_std": 0.001
+  },
+  {
+   "dataset": "A",
+   "model": "RandomForest",
+   "split": "grouped",
+   "MAE_mean": 8.69,
+   "MAE_std": 0.07,
+   "R2_mean": 0.844,
+   "R2_std": 0.003
+  },
+  {
+   "dataset": "B",
+   "model": "XGBoost",
+   "split": "random",
+   "MAE_mean": 4.03,
+   "MAE_std": 0.01,
+   "R2_mean": 0.929,
+   "R2_std": 0.001
+  },
+  {
+   "dataset": "B",
+   "model": "XGBoost",
+   "split": "grouped",
+   "MAE_mean": 6.2,
+   "MAE_std": 0.05,
+   "R2_mean": 0.854,
+   "R2_std": 0.003
+  },
+  {
+   "dataset": "B",
+   "model": "RandomForest",
+   "split": "random",
+   "MAE_mean": 4.46,
+   "MAE_std": 0.01,
+   "R2_mean": 0.916,
+   "R2_std": 0.0
+  },
+  {
+   "dataset": "B",
+   "model": "RandomForest",
+   "split": "grouped",
+   "MAE_mean": 6.48,
+   "MAE_std": 0.03,
+   "R2_mean": 0.849,
+   "R2_std": 0.002
+  }
+ ],
+ "gap": [
+  {
+   "dataset": "A",
+   "model": "XGBoost",
+   "MAE_inflation_pct_mean": 59,
+   "MAE_inflation_pct_std": 2,
+   "dR2_mean": -0.077,
+   "dR2_std": 0.004
+  },
+  {
+   "dataset": "A",
+   "model": "RandomForest",
+   "MAE_inflation_pct_mean": 61,
+   "MAE_inflation_pct_std": 1,
+   "dR2_mean": -0.08,
+   "dR2_std": 0.003
+  },
+  {
+   "dataset": "B",
+   "model": "XGBoost",
+   "MAE_inflation_pct_mean": 54,
+   "MAE_inflation_pct_std": 2,
+   "dR2_mean": -0.074,
+   "dR2_std": 0.002
+  },
+  {
+   "dataset": "B",
+   "model": "RandomForest",
+   "MAE_inflation_pct_mean": 45,
+   "MAE_inflation_pct_std": 1,
+   "dR2_mean": -0.067,
+   "dR2_std": 0.002
+  }
+ ],
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ]
+}

@@ -1,0 +1,22 @@
+{
+  "family_mean_random": {
+    "MAE": 9.38,
+    "R2": 0.802,
+    "test_family_seen_pct": 93.4
+  },
+  "family_mean_grouped": {
+    "MAE": 29.38,
+    "R2": -0.004,
+    "test_family_seen_pct": 0.0
+  },
+  "xgb_random": {
+    "MAE": 5.24,
+    "R2": 0.927
+  },
+  "xgb_grouped": {
+    "MAE": 8.3,
+    "R2": 0.852
+  },
+  "r2_fraction_reachable_lookup": 0.87,
+  "mae_reduction_from_features_random_pct": 44
+}

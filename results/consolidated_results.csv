@@ -1,0 +1,9 @@
+dataset,featurization,model,split,MAE_K,RMSE_K,R2
+"A (Hamidieh/UCI, N=21,263)",81 statistical,XGBoost,Random,5.222,9.122,0.9291
+"A (Hamidieh/UCI, N=21,263)",81 statistical,XGBoost,Chemical-family,8.394,13.285,0.8496
+"A (Hamidieh/UCI, N=21,263)",81 statistical,RandomForest,Random,5.396,9.474,0.9235
+"A (Hamidieh/UCI, N=21,263)",81 statistical,RandomForest,Chemical-family,8.683,13.468,0.8454
+"B (Stanev/SuperCon, N=12,440)",132 Magpie,XGBoost,Random,3.896,7.668,0.9286
+"B (Stanev/SuperCon, N=12,440)",132 Magpie,XGBoost,Chemical-family,6.278,11.247,0.8464
+"B (Stanev/SuperCon, N=12,440)",132 Magpie,RandomForest,Random,4.328,8.308,0.9162
+"B (Stanev/SuperCon, N=12,440)",132 Magpie,RandomForest,Chemical-family,6.517,11.556,0.8378

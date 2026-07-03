@@ -1,0 +1,5 @@
+split,predictor,MAE_K,R2
+Random,"Family-mean lookup (no features, no model)",9.38,0.802
+Random,XGBoost (full model),5.24,0.927
+Chem-family,"Family-mean lookup (no features, no model)",29.38,-0.004
+Chem-family,XGBoost (full model),8.3,0.852
