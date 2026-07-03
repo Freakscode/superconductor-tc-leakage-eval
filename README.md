@@ -89,9 +89,12 @@ python tc_pipeline.py          # full random-vs-family CV, both models
 - **Grouping is deterministic.** Chemical-family group ids are generated with
   `pandas.factorize` on the sorted element-set string, **never** Python's
   per-process-randomized `hash()`. Splits are identical across runs and machines.
-- **Single-threaded execution.** Both matminer featurization and scikit-learn CV run
-  with `n_jobs=1` to avoid deadlocks under restricted semaphore limits and to remove
-  run-to-run non-determinism from parallel backends.
+- **Fixed random seeds.** Every model is fitted with a fixed `random_state`, so the
+  tree ensembles are reproducible independent of thread count. The Dataset A pipeline
+  (`tc_pipeline.py`) fits with `n_jobs=-1` for speed; the Dataset B pipeline
+  (`datasetB_pipeline.py`) additionally runs matminer featurization and CV
+  single-threaded (`n_jobs=1`) to avoid matminer/loky deadlocks under restricted
+  semaphore limits. Neither choice affects the reported numbers.
 - **Datasets are public.** Dataset A is UCI ML Repository #464 (Hamidieh 2018);
   Dataset B is the SuperCon formula list released with Stanev et al. 2018, re-featurized
   from scratch with matminer's Magpie descriptors.
