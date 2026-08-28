@@ -1,0 +1,91 @@
+{
+  "A": {
+    "label": "Dataset A: top-100 agrupado, presencia de elementos vs features completas",
+    "baseline_mean": 90.88,
+    "variant_mean": 83.16,
+    "effect": -7.719999999999999,
+    "seed_sd": 3.487119154832545,
+    "effect_over_noise": 2.2138618318509167,
+    "verdict": "exceeds seed noise - reportable",
+    "paired": {
+      "mean_paired_diff": -7.72000000000001,
+      "sd_paired_diff": 1.0353743284435797,
+      "n_seeds_favouring_variant": 0
+    },
+    "_baseline_by_seed": [
+      88.60000000000001,
+      92.4,
+      95.60000000000001,
+      88.79999999999998,
+      89.0
+    ],
+    "_variant_by_seed": [
+      80.59999999999998,
+      86.19999999999999,
+      88.4,
+      80.39999999999999,
+      80.19999999999999
+    ],
+    "_paired_gaps": [
+      8.0,
+      6.2,
+      7.2,
+      8.4,
+      8.8
+    ]
+  },
+  "B": {
+    "label": "Dataset B: top-100 agrupado, presencia de elementos vs features completas",
+    "baseline_mean": 84.6,
+    "variant_mean": 70.24000000000001,
+    "effect": -14.359999999999985,
+    "seed_sd": 1.4573949361789393,
+    "effect_over_noise": 9.85319740279162,
+    "verdict": "exceeds seed noise - reportable",
+    "paired": {
+      "mean_paired_diff": -14.36,
+      "sd_paired_diff": 2.651037532740726,
+      "n_seeds_favouring_variant": 0
+    },
+    "_baseline_by_seed": [
+      83.39999999999999,
+      83.79999999999998,
+      84.60000000000001,
+      86.0,
+      85.2
+    ],
+    "_variant_by_seed": [
+      71.4,
+      70.39999999999999,
+      71.6,
+      67.19999999999999,
+      70.60000000000001
+    ],
+    "_paired_gaps": [
+      12.0,
+      13.4,
+      13.0,
+      18.8,
+      14.6
+    ]
+  },
+  "cross_B_vs_A": {
+    "label": "Brecha de presencia-de-elementos: Dataset B vs Dataset A (top-100 agrupado)",
+    "baseline_mean": 7.719999999999999,
+    "variant_mean": 14.36,
+    "effect": 6.640000000000001,
+    "seed_sd": 2.012461179749811,
+    "effect_over_noise": 3.299442526799689,
+    "verdict": "exceeds seed noise - reportable",
+    "paired": {
+      "mean_paired_diff": 6.639999999999999,
+      "sd_paired_diff": 2.3891421054428723,
+      "n_seeds_favouring_variant": 5
+    }
+  },
+  "brecha_folds_deterministas": {
+    "A": 2.8000000000000025,
+    "B": 18.400000000000006
+  },
+  "procedencia": "results_v2/run_v2_measurements.py + effect_vs_seed_noise (measure-before-you-claim)"
+}

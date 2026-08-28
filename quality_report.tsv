@@ -1,0 +1,10 @@
+metric	value
+rows	26321.0
+tc_nulls	0.0
+tc_min	0.0
+tc_p50	17.1
+tc_p95	93.4
+tc_max	323.0
+high_tc(>300K)	1.0
+neg_tc	0.0
+dup_groups(key)	1575.0

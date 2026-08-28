@@ -1,0 +1,11 @@
+seed,method,coverage,coverage_hiTc,width_mean
+0,split,0.8132,0.447,23.539
+0,distance-mondrian,0.7796,0.416,18.777
+1,split,0.8516,0.554,22.995
+1,distance-mondrian,0.8226,0.5436,18.418
+2,split,0.8442,0.5776,22.841
+2,distance-mondrian,0.8036,0.5182,17.978
+3,split,0.7954,0.4629,19.946
+3,distance-mondrian,0.7679,0.448,16.497
+4,split,0.8178,0.4839,23.392
+4,distance-mondrian,0.7862,0.4597,18.814

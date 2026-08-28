@@ -1,0 +1,128 @@
+{
+  "featurization_identity": {
+    "n_rows_live": 12440,
+    "n_rows_npz": 12440,
+    "same_shape": true,
+    "y_exactly_equal": true,
+    "group_partition_identical": true,
+    "bitwise_equal_after_cast_live_to_float32": true,
+    "allclose_rtol1e5": true,
+    "max_abs_diff": 0.0001219397563545499,
+    "max_rel_diff": 5.9343613786858335e-08,
+    "n_cells_nonzero_diff": 592814,
+    "n_cells_total": 1642080,
+    "n_cols_absdiff_gt_1e4": 2,
+    "n_rows_absdiff_gt_1e4": 542,
+    "n_cols_reldiff_gt_1e5": 0,
+    "veredicto": "identicos a precision float32; la unica diferencia es dtype de almacenamiento (live float64 vs npz float32)"
+  },
+  "group_labelling": {
+    "live_labels_min": 0,
+    "live_labels_max": 4189,
+    "live_n_unique": 3063,
+    "npz_labels_min": 0,
+    "npz_labels_max": 3062,
+    "npz_n_unique": 3063,
+    "folds_identical": false,
+    "test_rows_differing_per_fold": [
+      1897,
+      1753,
+      1779,
+      1721,
+      1787
+    ],
+    "fold_test_size": 2488,
+    "causa": "datasetB_pipeline.featurize() aplica pandas.factorize ANTES de la mascara Tc>0, dejando etiquetas con huecos 0..4189; el .npz las trae recontadas 0..3062. GroupKFold asigna grupos por tamano decreciente y rompe empates por orden de etiqueta, asi que el etiquetado cambia la particion aunque las familias sean las mismas."
+  },
+  "determinism": {
+    "repeat_run_identical": true,
+    "n_jobs_invariant_1_2_4_16": true,
+    "seed_sensitivity_grouped": {
+      "A": {
+        "seeds": [
+          0,
+          1,
+          2,
+          7,
+          42,
+          123
+        ],
+        "means_pct": [
+          86.0,
+          86.6,
+          86.6,
+          86.4,
+          87.0,
+          87.4
+        ]
+      },
+      "B": {
+        "seeds": [
+          0,
+          1,
+          2,
+          7,
+          42,
+          123
+        ],
+        "means_pct": [
+          85.8,
+          84.4,
+          85.6,
+          86.6,
+          85.2,
+          83.6
+        ]
+      }
+    },
+    "tie_break_argsort_equivalent": true
+  },
+  "published_vs_measured": {
+    "B_grouped_published": {
+      "mean_pct": 81.4,
+      "std_pct": 7.2828565824,
+      "folds_recovered_by_arithmetic": "24 soluciones enteras posibles; ninguna coincide con la medida [74,85,87,90,90]"
+    },
+    "B_grouped_measured_canonical": {
+      "mean_pct": 85.2,
+      "std_pct": 5.9127
+    },
+    "A_grouped_published": {
+      "mean_pct": 89.8,
+      "std_pct": 9.0421,
+      "folds": [
+        77,
+        84,
+        100,
+        100,
+        88
+      ]
+    },
+    "A_grouped_measured_canonical": {
+      "mean_pct": 87.0,
+      "std_pct": 11.0272,
+      "folds": [
+        88,
+        70,
+        100,
+        97,
+        80
+      ]
+    },
+    "live_pipeline_rerun": {
+      "grouped_mean_pct": 83.6,
+      "grouped_std_pct": 6.8,
+      "random_mean_pct": 96.0,
+      "note": "ruta matminer en vivo con etiquetas con huecos = lo que datasetB_pipeline.py produce hoy"
+    }
+  },
+  "live_run": {
+    "featurize_seconds": 10.77,
+    "full_pipeline_wall_seconds": 463.28,
+    "n_featurized": 16406,
+    "n_failed": 8,
+    "n_used": 12440,
+    "note": "featurizacion 10.8s de 463s totales; el coste real son los 4 CV completos (RF+XGB x random+grouped)"
+  },
+  "procedencia_global": "python3.13/xgboost3.0.5/sklearn1.7.2/numpy2.3.3/matminer0.9.2; env=supercon-repro; arm64-Darwin; 2026-08-21T17:43:07"
+}

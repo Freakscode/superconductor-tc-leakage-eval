@@ -1,0 +1,38 @@
+{
+  "n_featurized": 16406,
+  "n_features": 132,
+  "basis": "Tc>0 superconductors",
+  "n_used": 12440,
+  "n_families": 3063,
+  "cv": {
+    "random_RandomForest": {
+      "MAE": 4.322636758475471,
+      "RMSE": 8.302700059992247,
+      "R2": 0.9162808092295728
+    },
+    "grouped_RandomForest": {
+      "MAE": 6.483831239806981,
+      "RMSE": 11.496560746895524,
+      "R2": 0.8394825689632036
+    },
+    "random_XGBoost": {
+      "MAE": 3.9146463900614337,
+      "RMSE": 7.6795602885820795,
+      "R2": 0.928375924043758
+    },
+    "grouped_XGBoost": {
+      "MAE": 6.184156072605712,
+      "RMSE": 11.032843318692567,
+      "R2": 0.8521704601798721
+    }
+  },
+  "nn_dist_median": {
+    "random": 0.13975473474925415,
+    "grouped": 1.2384987162242322
+  },
+  "topk100": {
+    "random_mean": 0.96,
+    "grouped_mean": 0.8360000000000001,
+    "grouped_std": 0.068
+  }
+}

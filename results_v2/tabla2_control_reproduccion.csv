@@ -1,0 +1,5 @@
+dataset,modelo,MAE_grouped_pub,MAE_grouped_repro,MAE_grouped_std_pub,MAE_grouped_std_repro,MAE_random_pub,MAE_random_repro,infl_pub,infl_repro
+A,RandomForest,8.69,8.69,0.07,0.02,5.41,5.41,61,60.7
+A,XGBoost,8.34,8.43,0.1,0.07,5.25,5.25,59,60.5
+B,RandomForest,6.48,6.47,0.03,0.01,4.46,4.32,45,49.9
+B,XGBoost,6.2,6.19,0.05,0.03,4.03,3.87,54,59.7

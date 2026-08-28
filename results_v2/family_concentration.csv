@@ -1,0 +1,3 @@
+dataset,N,k_familias,tam_medio,pct_en_familias_ge5,n_familias_ge5,n_singleton,tam_familia_max,top3_tam,procedencia
+A,21263,3365,6.318870728083209,79.50900625499695,1052,1169,720,720;358;323,run_diagnostics_v2.py | familias = conjunto de elementos vía pandas.factorize
+B,12440,3063,4.06137773424747,66.69614147909968,715,1322,131,131;129;111,run_diagnostics_v2.py | familias = conjunto de elementos vía pandas.factorize

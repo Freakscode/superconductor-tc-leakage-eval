@@ -1,0 +1,144 @@
+{
+  "pregunta": "GroupKFold(5) sin shuffle, \u00bfda folds identicos entre invocaciones? \u00bfy con shuffle=True y semillas 0-4?",
+  "respuesta_corta": "SI, identicos sin shuffle (la particion es determinista, la semilla solo cambia el modelo). Con shuffle=True las 5 semillas dan 5 particiones distintas.",
+  "jaccard_esperado_si_particiones_independientes": 0.1111111111111111,
+  "nota_jaccard": "Para dos subconjuntos independientes de 1/5 de las familias, el Jaccard esperado es (1/25)/(9/25)=1/9=0.111. El observado coincide, lo que confirma que shuffle=True aleatoriza de verdad la asignacion de familias a folds.",
+  "entornos": {
+    "sklearn": "1.7.2",
+    "xgboost": "3.0.5",
+    "numpy": "2.3.3",
+    "pandas": "2.3.2",
+    "scipy": "1.16.2"
+  },
+  "procedencia": "run_tabla2_shuffle.py --paso1 (funcion paso1_determinismo) | GroupKFold de sklearn 1.7.2; grupos = familia quimica (conjunto de elementos) via pandas.factorize; A: tc_pipeline.chemical_families(unique_m.csv); B: campo 'groups' de datasetB_featurized.npz (base Tc>0)",
+  "datasets": {
+    "A": {
+      "dataset": "A",
+      "n": 21263,
+      "n_familias": 3365,
+      "noshuffle_5_invocaciones_folds_identicos": true,
+      "noshuffle_fold_sizes": [
+        4253,
+        4253,
+        4253,
+        4252,
+        4252
+      ],
+      "noshuffle_fold1_n_familias": 671,
+      "shuffle_n_particiones_distintas_de_5": 5,
+      "shuffle_jaccard_fold1_pares_min": 0.10418375717801477,
+      "shuffle_jaccard_fold1_pares_mean": 0.11224805335243067,
+      "shuffle_jaccard_fold1_pares_max": 0.12166666666666667,
+      "shuffle_fold_sizes_por_semilla": {
+        "0": [
+          4816,
+          4325,
+          4424,
+          3998,
+          3700
+        ],
+        "1": [
+          4042,
+          3962,
+          5081,
+          4617,
+          3561
+        ],
+        "2": [
+          3969,
+          4560,
+          4809,
+          3849,
+          4076
+        ],
+        "3": [
+          3728,
+          4265,
+          4408,
+          5033,
+          3829
+        ],
+        "4": [
+          5206,
+          4679,
+          3821,
+          3758,
+          3799
+        ]
+      },
+      "shuffle_vs_noshuffle_jaccard_fold1": {
+        "0": 0.11627906976744186,
+        "1": 0.09803921568627451,
+        "2": 0.12093411175979983,
+        "3": 0.10073710073710074,
+        "4": 0.10526315789473684
+      },
+      "kfold_random_n_particiones_distintas_de_5": 5,
+      "grouped_shuffle_familias_compartidas_total": 0
+    },
+    "B": {
+      "dataset": "B",
+      "n": 12440,
+      "n_familias": 3063,
+      "noshuffle_5_invocaciones_folds_identicos": true,
+      "noshuffle_fold_sizes": [
+        2488,
+        2488,
+        2488,
+        2488,
+        2488
+      ],
+      "noshuffle_fold1_n_familias": 612,
+      "shuffle_n_particiones_distintas_de_5": 5,
+      "shuffle_jaccard_fold1_pares_min": 0.09074733096085409,
+      "shuffle_jaccard_fold1_pares_mean": 0.10985372919600778,
+      "shuffle_jaccard_fold1_pares_max": 0.14259086672879775,
+      "shuffle_fold_sizes_por_semilla": {
+        "0": [
+          2594,
+          2736,
+          2326,
+          2331,
+          2453
+        ],
+        "1": [
+          2328,
+          2518,
+          2545,
+          2473,
+          2576
+        ],
+        "2": [
+          2403,
+          2521,
+          2478,
+          2497,
+          2541
+        ],
+        "3": [
+          2508,
+          2353,
+          2336,
+          2946,
+          2297
+        ],
+        "4": [
+          2522,
+          2638,
+          2476,
+          2420,
+          2384
+        ]
+      },
+      "shuffle_vs_noshuffle_jaccard_fold1": {
+        "0": 0.1187214611872146,
+        "1": 0.11363636363636363,
+        "2": 0.09865470852017937,
+        "3": 0.10459873760144274,
+        "4": 0.11262488646684832
+      },
+      "kfold_random_n_particiones_distintas_de_5": 5,
+      "grouped_shuffle_familias_compartidas_total": 0
+    }
+  }
+}

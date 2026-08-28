@@ -1,0 +1,163 @@
+{
+  "metrics_cv": [
+    {
+      "vista": "Vista A",
+      "modelo": "RF",
+      "MAE": 4.815208476949659,
+      "RMSE": 9.494180255395975,
+      "R2": 0.9144536187425729
+    },
+    {
+      "vista": "Vista A",
+      "modelo": "XGB",
+      "MAE": 5.006285662507451,
+      "RMSE": 9.35868494681559,
+      "R2": 0.9167831548407476
+    },
+    {
+      "vista": "Vista B",
+      "modelo": "RF",
+      "MAE": 8.14558060819974,
+      "RMSE": 15.759148883259218,
+      "R2": 0.7110299716980453
+    },
+    {
+      "vista": "Vista B",
+      "modelo": "XGB",
+      "MAE": 8.367462308938418,
+      "RMSE": 15.640970695671149,
+      "R2": 0.7132899790360747
+    }
+  ],
+  "temporal_validation": [
+    {
+      "cut_year": 1995,
+      "model": "RF",
+      "n_train": 8353,
+      "n_test": 7463,
+      "MAE": 11.13982140420067,
+      "RMSE": 17.131284447369044,
+      "R2": 0.7094430738318741,
+      "modelo": "RF"
+    },
+    {
+      "cut_year": 2005,
+      "model": "RF",
+      "n_train": 12339,
+      "n_test": 3477,
+      "MAE": 9.511759804274023,
+      "RMSE": 15.212848674549265,
+      "R2": 0.5617137595148736,
+      "modelo": "RF"
+    },
+    {
+      "cut_year": 2015,
+      "model": "RF",
+      "n_train": 15133,
+      "n_test": 683,
+      "MAE": 4.452153775636349,
+      "RMSE": 13.779960005570356,
+      "R2": 0.5569705920662844,
+      "modelo": "RF"
+    },
+    {
+      "cut_year": 1995,
+      "model": "XGB",
+      "n_train": 8353,
+      "n_test": 7463,
+      "MAE": 11.25392457885881,
+      "RMSE": 17.302597450023423,
+      "R2": 0.7036028741965579,
+      "modelo": "XGB"
+    },
+    {
+      "cut_year": 2005,
+      "model": "XGB",
+      "n_train": 12339,
+      "n_test": 3477,
+      "MAE": 10.23920739962618,
+      "RMSE": 16.423306977079918,
+      "R2": 0.4891916742057837,
+      "modelo": "XGB"
+    },
+    {
+      "cut_year": 2015,
+      "model": "XGB",
+      "n_train": 15133,
+      "n_test": 683,
+      "MAE": 4.638958704878261,
+      "RMSE": 14.009928303092082,
+      "R2": 0.5420601193460058,
+      "modelo": "XGB"
+    }
+  ],
+  "importances": {
+    "rf_top5": [
+      {
+        "feature": "mag_thermal_conductivity_range",
+        "importance": 0.538099821362119,
+        "family": "mag_thermal"
+      },
+      {
+        "feature": "frac_O",
+        "importance": 0.08517336865032832,
+        "family": "frac/O"
+      },
+      {
+        "feature": "frac_Ba",
+        "importance": 0.05346642395364307,
+        "family": "frac/Ba"
+      },
+      {
+        "feature": "frac_Ca",
+        "importance": 0.03847744915147145,
+        "family": "frac/Ca"
+      },
+      {
+        "feature": "frac_Fe",
+        "importance": 0.016098196232867786,
+        "family": "frac/Fe"
+      }
+    ],
+    "xgb_top5": [
+      {
+        "feature": "mag_thermal_conductivity_range",
+        "importance": 0.7661173343658447,
+        "family": "mag_thermal"
+      },
+      {
+        "feature": "mag_atomic_radius_range",
+        "importance": 0.032532818615436554,
+        "family": "mag_atomic"
+      },
+      {
+        "feature": "frac_Cu",
+        "importance": 0.020321985706686974,
+        "family": "frac/Cu"
+      },
+      {
+        "feature": "frac_Ba",
+        "importance": 0.011434860527515411,
+        "family": "frac/Ba"
+      },
+      {
+        "feature": "mag_atomic_mass_range",
+        "importance": 0.007482954300940037,
+        "family": "mag_atomic"
+      }
+    ]
+  },
+  "classification": {
+    "modelo": "XGB",
+    "ROC_AUC": 0.9869168872186589,
+    "PR_AUC": 0.9256295102079505,
+    "F1_opt": 0.8588612670408982,
+    "threshold_opt": 0.26247555017471313
+  },
+  "quantile": {
+    "MAE_p10": 13.86396733811939,
+    "MAE_p50": 6.166553348016924,
+    "MAE_p90": 10.99215520154829
+  },
+  "summary_text": "Resumen del flujo Superconductors:\n\n1. Limpieza y normalización de Tc + control de calidad (banderas y deduplicación).\n2. Extracción de features fisicoquímicos (bag-of-elements + magpie) y creación de dos vistas: Vista A = una fila por material con Tc mediana e IQR; Vista B = todas las mediciones originales por publicación.\n3. Entrenamiento y validación cruzada (GroupKFold) con RandomForest y XGBoost/HistGB en ambas vistas.\n4. Validación temporal y análisis de importancias para interpretar drivers de Tc.\n5. Evaluación adicional: clasificación para Tc>=77K y cuantiles predictivos cuando aplica.\n\nResultados clave:\n\n• CV Vista A RF: MAE 4.82 K, RMSE 9.49 K, R² 0.914.\n• CV Vista A XGB: MAE 5.01 K, RMSE 9.36 K, R² 0.917.\n• CV Vista B RF: MAE 8.15 K, RMSE 15.76 K, R² 0.711.\n• CV Vista B XGB: MAE 8.37 K, RMSE 15.64 K, R² 0.713.\n• Top 5 features RF: mag_thermal_conductivity_range (0.54), frac_O (0.09), frac_Ba (0.05), frac_Ca (0.04), frac_Fe (0.02)\n• Top 5 features Boosting: mag_thermal_conductivity_range (0.77), mag_atomic_radius_range (0.03), frac_Cu (0.02), frac_Ba (0.01), mag_atomic_mass_range (0.01)\n• Clasificación XGB: ROC-AUC 0.987, PR-AUC 0.926, F1 0.859 (umbral 0.26).\n• MAE cuantiles: p10=13.86 K, p50=6.17 K, p90=10.99 K.\n\nLos datos auxiliares quedan disponibles en JSON para reportes adicionales."
+}

@@ -1,0 +1,9 @@
+data_number	common_formula	chemical_formula	structure_name	tc_unit	tc_recommended	journal	quality_flag
+140	ErBa2Cu3O7	Er1Ba2Cu3O7-X	Y123	K	275.0	J.PHYS.C,20(1987)673	tc_gt_150
+9632	PbCO3.2PbO+Ag2O	Pb2C1Ag2O6		K	323.0	Physica C, 351(2001)78-81	tc_gt_300
+155301	H2S	H2S1		K	185.0	cond-mat/1412.0460	tc_gt_150
+157510	H2S	H2S1		K	203.0	Nature, 525(2015)73	tc_gt_150
+158158	CsEuFe4As4	Cs1Eu1Fe4As4	CaRb1144	K	287.0	Phys.Rev.B, 98(2018)014518	tc_gt_150
+158159	CsEuFe4As4	Cs1Eu1Fe4As4		K	287.0	Phys.Rev.B, 98(2018)014518	tc_gt_150
+158881	LaH	La1H10	fcc	K	250.0	Nature 569(2019)528	tc_gt_150
+158986	C-S-H	C1S1		K	287.7	Nature, 586(2020)373	tc_gt_150

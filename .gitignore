@@ -5,3 +5,11 @@ data/train.csv
 data/unique_m.csv
 *.log
 build/
+
+# --- local working-tree exclusions (added with referee-response) ---
+.venv/
+Papers/
+.idea/
+.DS_Store
+__pycache__/
+*.pyc

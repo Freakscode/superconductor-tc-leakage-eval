@@ -1,0 +1,11 @@
+seed,variable,spearman_rho_vs_violation
+0,nn_dist,-0.1629
+0,pred_tc,0.4022
+1,nn_dist,-0.1654
+1,pred_tc,0.3615
+2,nn_dist,-0.1629
+2,pred_tc,0.337
+3,nn_dist,-0.204
+3,pred_tc,0.4166
+4,nn_dist,-0.1102
+4,pred_tc,0.41

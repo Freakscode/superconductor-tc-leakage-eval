@@ -1,0 +1,39 @@
+featurized 16406/16414 formulas in 10s
+[check] topk def matches tc_pipeline.topk_precision: 0.8800 == 0.8800
+[A] A/features_completas_paper/random: MAE=5.230 R2=0.9283 top100=98.4+-1.2 (5s)
+[A] A/features_completas_paper/grouped: MAE=8.313 R2=0.8546 top100=87.0+-11.0 (7s)
+[A] A/presencia_elementos/random: MAE=8.421 R2=0.8469 top100=95.6+-2.8 (5s)
+[A] A/presencia_elementos/grouped: MAE=10.035 R2=0.8026 top100=84.2+-15.1 (9s)
+[A] A/family_mean_null/random: MAE=9.404 R2=0.8006 top100=95.8
+[A] A/family_mean_null/grouped: MAE=29.413 R2=-0.0068 top100=11.6
+[A] B/features_completas_paper/random: MAE=3.915 R2=0.9284 top100=96.0+-0.6 (29s)
+[A] B/features_completas_paper/grouped: MAE=6.170 R2=0.8534 top100=85.2+-5.9 (28s)
+[A] B/presencia_elementos/random: MAE=6.405 R2=0.8459 top100=80.0+-3.1 (2s)
+[A] B/presencia_elementos/grouped: MAE=7.998 R2=0.7793 top100=66.8+-13.3 (2s)
+[A] B/family_mean_null/random: MAE=8.192 R2=0.7640 top100=80.2
+[A] B/family_mean_null/grouped: MAE=22.669 R2=-0.0033 top100=9.6
+wrote nulo_presencia.csv
+[B] A: N=21263 k=3365 ICC=0.8541 eta2=0.8769 deff=(5.543,5.527) Neff=(3836,3847)
+[B] B: N=12440 k=3063 ICC=0.8457 eta2=0.8835 deff=(3.589,3.585) Neff=(3466,3470)
+wrote design_effect.csv
+[C] A/features_completas_paper/seed=42: top100=88.60
+[C] A/features_completas_paper/seed=0: top100=92.40
+[C] A/features_completas_paper/seed=1: top100=95.60
+[C] A/features_completas_paper/seed=2: top100=88.80
+[C] A/features_completas_paper/seed=3: top100=89.00
+[C] A/presencia_elementos/seed=42: top100=80.60
+[C] A/presencia_elementos/seed=0: top100=86.20
+[C] A/presencia_elementos/seed=1: top100=88.40
+[C] A/presencia_elementos/seed=2: top100=80.40
+[C] A/presencia_elementos/seed=3: top100=80.20
+[C] B/features_completas_paper/seed=42: top100=83.40
+[C] B/features_completas_paper/seed=0: top100=83.80
+[C] B/features_completas_paper/seed=1: top100=84.60
+[C] B/features_completas_paper/seed=2: top100=86.00
+[C] B/features_completas_paper/seed=3: top100=85.20
+[C] B/presencia_elementos/seed=42: top100=71.40
+[C] B/presencia_elementos/seed=0: top100=70.40
+[C] B/presencia_elementos/seed=1: top100=71.60
+[C] B/presencia_elementos/seed=2: top100=67.20
+[C] B/presencia_elementos/seed=3: top100=70.60
+wrote seed_runs_top100.csv | TOTAL wall 402s
