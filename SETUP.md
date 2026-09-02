@@ -51,3 +51,24 @@ GitHub release `v2.0` → put the DOI in README and in the paper's Data availabi
 - `results_v2/datasetB_featurized_live.npz` (8 MB) is not committed; it equals the shipped
   `.npz` at float32 precision (see README) and `code/v2/_capture_live_featurization.py`
   recreates it.
+
+## 6. Overleaf
+
+The manuscript is edited in the Overleaf project `6a9212a058f7c7e7826047fc`, which was created on 2026-08-28 by
+importing this repository from GitHub and holds a full copy of it (the manuscript source and figures
+live at the repository root for that reason). Synchronisation is **not automatic** in either
+direction; two mechanisms exist:
+
+1. *Overleaf UI* — Menu → Sync → GitHub → "Pull GitHub changes into Overleaf" (after a push to
+   `main`) or "Push Overleaf changes to GitHub" (after editing in Overleaf).
+2. *Overleaf's own git remote* — `https://git.overleaf.com/6a9212a058f7c7e7826047fc`, branch `main`, authenticated
+   with a Git-integration token (Account Settings → Git integration). This is what was used on
+   2026-09-02 to bring Overleaf from the 28-08 snapshot to `main` @ v2.0: the tree of `main` was
+   committed on top of Overleaf's history and pushed; a fresh clone was then verified identical to
+   `main` byte for byte (156 files). The Overleaf history is independent of GitHub's (one squashed
+   commit per sync), so always sync by *content*, never by rebasing one onto the other.
+
+Before editing in Overleaf, pull; after editing there, push to GitHub (or clone the Overleaf remote
+and cherry-pick) before running any script that reads the root `.tex` — `verify_manuscript.py`
+checks the file it is given, and `paper1_submission/` in the local project folder is a third copy
+that must be kept equal to the root file.
