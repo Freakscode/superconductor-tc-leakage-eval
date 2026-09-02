@@ -1,0 +1,41 @@
+{
+  "target_coverage": 0.9,
+  "summary": {
+    "iid|split-conformal": {
+      "coverage_mean": 0.8996,
+      "coverage_std": 0.0054,
+      "width_mean": 23.578,
+      "mae_mean": 4.371
+    },
+    "iid|normalized-conformal": {
+      "coverage_mean": 0.8983,
+      "coverage_std": 0.0037,
+      "width_mean": 21.393,
+      "mae_mean": 4.371
+    },
+    "iid|mondrian-conformal": {
+      "coverage_mean": 0.8971,
+      "coverage_std": 0.003,
+      "width_mean": 23.312,
+      "mae_mean": 4.371
+    },
+    "shift|split-conformal": {
+      "coverage_mean": 0.891,
+      "coverage_std": 0.019,
+      "width_mean": 34.607,
+      "mae_mean": 6.604
+    },
+    "shift|normalized-conformal": {
+      "coverage_mean": 0.8932,
+      "coverage_std": 0.0108,
+      "width_mean": 31.906,
+      "mae_mean": 6.604
+    },
+    "shift|mondrian-conformal": {
+      "coverage_mean": 0.8916,
+      "coverage_std": 0.0159,
+      "width_mean": 34.041,
+      "mae_mean": 6.604
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "B|paired_hiTc_norm_minus_split": {
+    "mean": 0.25066514366000686,
+    "ci": [
+      0.20080674585223338,
+      0.30140487863599547
+    ],
+    "p_two_sided_gt0": 0.0
+  },
+  "B|paired_all_norm_minus_split": {
+    "mean": -0.021489619287128794,
+    "ci": [
+      -0.04363715466593398,
+      -0.000896869827798672
+    ],
+    "p_two_sided_gt0": 0.044
+  },
+  "B|width_hiTc_norm_over_split": 1.9767358612831665,
+  "B|width_lowTc_norm_over_split": 0.8444486720295759,
+  "B|simpson_far_minus_near_hiTc": {
+    "mean": -0.0957134925097836,
+    "ci": [
+      -0.17601261683281524,
+      -0.0116305967140966
+    ],
+    "p_two_sided_gt0": 0.022
+  },
+  "B|logit_nn_coef_adjusted_for_pred": {
+    "mean": -0.0898742353038247,
+    "ci": [
+      -0.3687272465243677,
+      0.0340008502233574
+    ],
+    "p_two_sided_gt0": 0.7533333333333333
+  },
+  "B|logit_nn_coef_unadjusted": {
+    "mean": -1.5066235323599353,
+    "ci": [
+      -2.260054041981746,
+      -0.8052087179769826
+    ],
+    "p_two_sided_gt0": 0.0
+  },
+  "A|paired_hiTc_norm_minus_split": {
+    "mean": 0.1994096078630707,
+    "ci": [
+      0.13228278891880402,
+      0.26382997828195853
+    ],
+    "p_two_sided_gt0": 0.0
+  },
+  "A|paired_all_norm_minus_split": {
+    "mean": -0.008093420042091013,
+    "ci": [
+      -0.03669458074484422,
+      0.021750514220753334
+    ],
+    "p_two_sided_gt0": 0.578
+  },
+  "A|width_hiTc_norm_over_split": 1.562257133901199,
+  "A|width_lowTc_norm_over_split": 0.8777965628182847,
+  "A|simpson_far_minus_near_hiTc": {
+    "mean": -0.19278528916454266,
+    "ci": [
+      -0.2887986454775356,
+      -0.09750466072522784
+    ],
+    "p_two_sided_gt0": 0.0
+  },
+  "A|logit_nn_coef_adjusted_for_pred": {
+    "mean": -0.009525961825085598,
+    "ci": [
+      -0.18442489978154225,
+      0.14837999529409893
+    ],
+    "p_two_sided_gt0": 0.9066666666666666
+  },
+  "A|logit_nn_coef_unadjusted": {
+    "mean": -0.49986204903718146,
+    "ci": [
+      -0.6601105026187368,
+      -0.3454960805775086
+    ],
+    "p_two_sided_gt0": 0.0
+  }
+}

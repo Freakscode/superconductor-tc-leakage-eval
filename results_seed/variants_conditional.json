@@ -1,0 +1,103 @@
+{
+  "target_coverage": 0.9,
+  "summary": {
+    "iid|split": {
+      "coverage": 0.8996,
+      "coverage_hiTc": 0.7232,
+      "width_mean": 23.5781,
+      "mae": 4.371,
+      "fam_cov_p10": 0.6202,
+      "frac_families_undercovered": 0.2186,
+      "coverage_std": 0.0054,
+      "coverage_hiTc_std": 0.0278
+    },
+    "iid|normalized": {
+      "coverage": 0.8983,
+      "coverage_hiTc": 0.7321,
+      "width_mean": 21.3935,
+      "mae": 4.371,
+      "fam_cov_p10": 0.6572,
+      "frac_families_undercovered": 0.1737,
+      "coverage_std": 0.0037,
+      "coverage_hiTc_std": 0.028
+    },
+    "iid|mondrian": {
+      "coverage": 0.8971,
+      "coverage_hiTc": 0.7358,
+      "width_mean": 23.3119,
+      "mae": 4.371,
+      "fam_cov_p10": 0.6673,
+      "frac_families_undercovered": 0.1615,
+      "coverage_std": 0.003,
+      "coverage_hiTc_std": 0.033
+    },
+    "shift|split": {
+      "coverage": 0.891,
+      "coverage_hiTc": 0.6612,
+      "width_mean": 34.6072,
+      "mae": 6.6046,
+      "fam_cov_p10": 0.6107,
+      "frac_families_undercovered": 0.1678,
+      "coverage_std": 0.019,
+      "coverage_hiTc_std": 0.04
+    },
+    "shift|normalized": {
+      "coverage": 0.8932,
+      "coverage_hiTc": 0.6963,
+      "width_mean": 31.9057,
+      "mae": 6.6046,
+      "fam_cov_p10": 0.5939,
+      "frac_families_undercovered": 0.1672,
+      "coverage_std": 0.0108,
+      "coverage_hiTc_std": 0.0505
+    },
+    "shift|mondrian": {
+      "coverage": 0.8916,
+      "coverage_hiTc": 0.6868,
+      "width_mean": 34.041,
+      "mae": 6.6046,
+      "fam_cov_p10": 0.6015,
+      "frac_families_undercovered": 0.1756,
+      "coverage_std": 0.0159,
+      "coverage_hiTc_std": 0.0325
+    },
+    "deploy|split": {
+      "coverage": 0.8244,
+      "coverage_hiTc": 0.5051,
+      "width_mean": 22.5428,
+      "mae": 6.3686,
+      "fam_cov_p10": 0.3889,
+      "frac_families_undercovered": 0.2608,
+      "coverage_std": 0.0207,
+      "coverage_hiTc_std": 0.0515
+    },
+    "deploy|normalized": {
+      "coverage": 0.8167,
+      "coverage_hiTc": 0.5319,
+      "width_mean": 19.5366,
+      "mae": 6.3686,
+      "fam_cov_p10": 0.3761,
+      "frac_families_undercovered": 0.2814,
+      "coverage_std": 0.0228,
+      "coverage_hiTc_std": 0.0476
+    },
+    "deploy|mondrian": {
+      "coverage": 0.8271,
+      "coverage_hiTc": 0.5303,
+      "width_mean": 22.3661,
+      "mae": 6.3686,
+      "fam_cov_p10": 0.3568,
+      "frac_families_undercovered": 0.2778,
+      "coverage_std": 0.0158,
+      "coverage_hiTc_std": 0.0463
+    }
+  },
+  "width_change_pct_vs_split": {
+    "iid|normalized": -9.27,
+    "iid|mondrian": -1.13,
+    "shift|normalized": -7.81,
+    "shift|mondrian": -1.64,
+    "deploy|normalized": -13.34,
+    "deploy|mondrian": -0.78
+  }
+}

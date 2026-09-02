@@ -8,3 +8,11 @@ build/
 
 # compiled manuscript: Overleaf regenerates it from the root .tex
 /paper1_manuscript.pdf
+
+# --- local working-tree exclusions (inherited from referee-response) ---
+.venv/
+Papers/
+.idea/
+.DS_Store
+# raw SuperCon dump: redistribution terms unverified (see exploratory/README.md)
+data/primary.tsv

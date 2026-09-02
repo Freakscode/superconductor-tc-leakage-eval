@@ -1,0 +1,65 @@
+{
+  "deployment_coverage": {
+    "coverage": 0.7907,
+    "coverage_hiTc": 0.6071,
+    "width_mean": 27.7208,
+    "mae": 8.8048,
+    "fam_cov_p10": 0.4236,
+    "frac_families_undercovered": 0.2811
+  },
+  "coverage_std": 0.029,
+  "coverage_hiTc_std": 0.0617,
+  "spearman_vs_violation": {
+    "nn_dist": -0.1611,
+    "pred_tc": 0.3855
+  },
+  "coverage_by_nn_dist_quintile": {
+    "0": {
+      "d_median": 0.4814,
+      "coverage": 0.7453,
+      "mae": 10.4236,
+      "frac_hiTc": 0.2425
+    },
+    "1": {
+      "d_median": 1.0325,
+      "coverage": 0.7472,
+      "mae": 10.3532,
+      "frac_hiTc": 0.2806
+    },
+    "2": {
+      "d_median": 1.5663,
+      "coverage": 0.69,
+      "mae": 11.2858,
+      "frac_hiTc": 0.2755
+    },
+    "3": {
+      "d_median": 2.5864,
+      "coverage": 0.8332,
+      "mae": 7.4372,
+      "frac_hiTc": 0.088
+    },
+    "4": {
+      "d_median": 4.1208,
+      "coverage": 0.9375,
+      "mae": 4.5418,
+      "frac_hiTc": 0.0255
+    }
+  },
+  "nn_dist_within_highTc": {
+    "0": {
+      "d_median": 0.5098,
+      "coverage": 0.6433,
+      "n": 802.2
+    },
+    "1": {
+      "d_median": 0.993,
+      "coverage": 0.6357,
+      "n": 805.6
+    },
+    "2": {
+      "d_median": 1.704,
+      "coverage": 0.461,
+      "n": 805.2
+    }
+  }
+}

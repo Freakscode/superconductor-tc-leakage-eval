@@ -222,6 +222,20 @@ If you use this code or the leakage-aware protocol, please cite the accompanying
 }
 ```
 
+## Beyond the paper: `code/referee/` and `exploratory/`
+
+Two bodies of work that share this repository's data and family grouping but are **not** inputs to
+any number in the manuscript:
+
+- **`code/referee/`** — conformal prediction intervals for $T_c$ under family-held-out deployment
+  (split / CQR / normalized conformal; heteroskedasticity vs. exchangeability decomposition; paired
+  family bootstrap). Outputs in `results_referee/` and `results_seed/`. Re-run and verified
+  identical on 2026-09-02. See `code/referee/README.md`.
+- **`exploratory/`** — the pre-paper EDA on the raw SuperCon dump, including a temporal validation
+  by publication year that the paper does not use. See `exploratory/README.md`.
+
+Both were merged from the `referee-response` branch, whose history is preserved.
+
 ## License
 
 MIT — see [LICENSE](LICENSE). Dataset A and Dataset B remain under their original
