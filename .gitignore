@@ -5,3 +5,6 @@ data/train.csv
 data/unique_m.csv
 *.log
 build/
+
+# compiled manuscript: Overleaf regenerates it from the root .tex
+/paper1_manuscript.pdf
