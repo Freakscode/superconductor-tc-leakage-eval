@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this code or the released chemical-family splits, please cite the paper and this repository."
+type: software
+title: "superconductor-tc-leakage-eval: leakage-aware evaluation of composition-based superconductor Tc models"
+version: "2.0"
+date-released: "2026-09-02"
+license: MIT
+repository-code: "https://github.com/Freakscode/superconductor-tc-leakage-eval"
+authors:
+  - family-names: "Cardona Osorio"
+    given-names: "Gabriel Jaime"
+    orcid: "https://orcid.org/0009-0003-3743-8559"
+    affiliation: "Faculty of Engineering, Institución Universitaria Pascual Bravo, Medellín, Colombia"
+keywords:
+  - superconductivity
+  - critical temperature
+  - machine learning
+  - data leakage
+  - group cross-validation
+  - chemical families
+preferred-citation:
+  type: article
+  title: "Random splits inflate the accuracy of composition-based superconductor Tc models: a leakage-aware evaluation replicated across two datasets"
+  authors:
+    - family-names: "Cardona Osorio"
+      given-names: "Gabriel Jaime"
+      orcid: "https://orcid.org/0009-0003-3743-8559"
+  journal: "Machine Learning: Science and Technology"
+  year: 2026
+  notes: "Revised manuscript (v2), under review."
