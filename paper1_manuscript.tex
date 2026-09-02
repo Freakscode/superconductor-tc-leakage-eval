@@ -137,8 +137,16 @@ mean, geometric mean, entropy, range and standard deviation of atomic mass, ioni
 atomic radius, density, electron affinity, fusion heat, thermal conductivity and valence),
 accompanied by a per-element composition table giving the chemical formula of each entry.
 
-\textbf{Dataset~B} is the SuperCon-derived list curated by Stanev \etal~\cite{stanev2018}. We
-retain entries with $\Tc > 0$ and a formula parseable by \texttt{pymatgen}, yielding \num{12440}
+Dataset~A is used as distributed. It contains \num{66} rows that are exact duplicates of another
+row in every feature and in $\Tc$, and \num{6093} rows (\SI{28.7}{\percent}) whose \num{81}
+features coincide exactly with those of another row while $\Tc$ differs, because identical
+compositions yield identical composition-derived features. We do not remove them: they are the
+object of study, and the family grouping of section~\ref{sec:families} places every such pair in
+the same fold.
+
+\textbf{Dataset~B} is the SuperCon-derived list curated by Stanev \etal~\cite{stanev2018}, which
+has \num{16414} entries. We drop the \num{3966} entries with $\Tc \le 0$ (non-superconducting
+compositions) and \num{8} whose formula \texttt{pymatgen} cannot parse, yielding \num{12440}
 compounds, and featurize them with the \num{132} Magpie descriptors~\cite{ward2016} as
 implemented in \texttt{matminer}~\cite{ward2018}.
 
@@ -188,6 +196,7 @@ since scikit-learn~1.6, so that the grouped partition genuinely varies with the 
 initialisation.
 
 \subsection{Models}
+\label{sec:models}
 
 We use the two tree ensembles that dominate reported results on this task, with
 hyperparameters fixed per dataset from prior grid searches and held constant across protocols.
@@ -200,8 +209,13 @@ method; random forest with \num{150} trees and maximum depth \num{30}, without f
 subsampling. Both forests use \texttt{min\_samples\_leaf} \num{3} and
 \texttt{min\_samples\_split} \num{5}. The two configurations differ because each was tuned
 against its own featurization; they are held fixed across protocols, which is what the
-random-versus-grouped comparison requires. Regression metrics (MAE, RMSE, $\Rsq$) are computed
-on pooled out-of-fold predictions.
+random-versus-grouped comparison requires. Both were selected by grid search under
+\emph{random} $K$-fold cross-validation in earlier work, i.e.\ under the protocol this paper
+argues is leaky. Because that could in principle bias the measured gap---a model tuned to
+interpolate may lose more when forced to extrapolate---section~\ref{sec:results-tuning} repeats
+the comparison with hyperparameters selected by nested grouped cross-validation and over a
+\num{16}-point grid. Regression metrics (MAE, RMSE, $\Rsq$) are computed on pooled out-of-fold
+predictions.
 
 \subsection{Nulls and the family-identity ceiling}
 \label{sec:nulls}
@@ -347,7 +361,26 @@ The nearest-neighbour diagnostic confirms the mechanism (figure~\ref{fig:anatomy
 random hold-out the median distance from a test compound to its closest training compound is
 \num{0.054} in Dataset~A; under a grouped hold-out of the same size it is \num{1.273}, a factor
 of \num{23}. For Dataset~B the medians are \num{0.140} and \num{1.584}, a factor of \num{11}.
-The random protocol is not evaluating extrapolation; it is evaluating recall of near-duplicates.
+The distance ratio understates the mechanism. Counting directly, \SI{37.0 \pm 1.1}{\percent} of
+Dataset~A test rows under five-fold random splitting have a training row with an
+\emph{identical} \num{81}-feature vector; under family-aware splitting the fraction is
+\SI{0.0}{\percent}. The random protocol is not evaluating extrapolation, nor even
+near-duplicate recall: for more than a third of its test set it is evaluating exact-duplicate
+recall, where the only thing left to predict is the measurement scatter of $\Tc$ within one
+composition. That scatter sets a floor: among the \num{8511} Dataset~A rows that share their
+feature vector with another row, the mean absolute deviation of $\Tc$ from the within-group mean
+is \SI{3.49}{\kelvin}, and XGBoost under random splitting reaches \SI{4.83}{\kelvin} on those
+same rows. The floor is measured only on that \SI{40}{\percent} of the data and says nothing
+about the remainder; on the rows it does cover, most of the residual random-split error is
+label noise that no composition-based model can remove.
+
+The gap itself is not a sampling artefact. Bootstrapping the pooled out-of-fold predictions
+(\num{2000} resamples of the test rows) gives \SI{95}{\percent} intervals for the MAE inflation of
+\SIrange[range-phrase=--,range-units=single]{55.1}{63.0}{\percent} on Dataset~A and \SIrange[range-phrase=--,range-units=single]{51.4}{63.9}{\percent} on Dataset~B, for
+XGBoost at seed \num{42}; the random and grouped MAE intervals
+(\SIrange[range-phrase=--,range-units=single]{5.13}{5.33}{\kelvin} versus \SIrange[range-phrase=--,range-units=single]{8.18}{8.44}{\kelvin} on~A,
+\SIrange[range-phrase=--,range-units=single]{3.79}{4.03}{\kelvin} versus \SIrange[range-phrase=--,range-units=single]{6.01}{6.33}{\kelvin} on~B) do not approach each
+other.
 
 \subsection{The gap is stable across partitions}
 \label{sec:results-robust}
@@ -407,6 +440,74 @@ or near the \SI{10}{\percent} base rate, while XGBoost retains \SI{87.0}{\percen
 \SI{85.2}{\percent}. The threshold is the 90th percentile of training-fold $\Tc$.}
 \label{fig:null}
 \end{figure}
+
+\subsection{The gap depends on model complexity, not on how the model was tuned}
+\label{sec:results-tuning}
+
+The hyperparameters of section~\ref{sec:models} were chosen under random cross-validation, so a
+sceptic could ask whether the gap is partly an artefact of tuning under the leaky protocol. We
+test this two ways (table~\ref{tab:tuning}). First, nested grouped cross-validation: within each
+of the five outer \texttt{GroupKFold} folds, a \num{16}-point XGBoost grid (maximum depth
+$\{4,6,8,10\}$, learning rate $\{0.05,0.1\}$, minimum child weight $\{1,10\}$; \num{300}
+estimators) is selected by an inner three-fold \texttt{GroupKFold} on the training families only,
+then refit and scored on the outer test families. Second, the full grid evaluated under both
+protocols, which shows how the gap moves with complexity.
+
+Tuning without leakage does not close the gap. The nested procedure selects the same complexity
+region as the original tuning (depth \numrange{8}{10} in every outer fold of both datasets) and
+returns a grouped MAE of \SI{8.37}{\kelvin} (A) and \SI{6.23}{\kelvin} (B), \SI{0.06}{\kelvin}
+\emph{worse} than the published configuration scored under the same grouped protocol. The clean
+comparison---the same nested-selected configuration in both arms, so that only the partition
+protocol changes---gives an inflation of \SI{63.9}{\percent} on~A and \SI{53.1}{\percent} on~B.
+
+What the grid reveals is where the gap comes from. Across all \num{16} configurations the grouped
+MAE moves within \SI{0.9}{\kelvin} on A and \SI{0.9}{\kelvin} on B, and within
+\SI{0.2}{\kelvin} once depth is at least \num{6}; the random-split MAE, by contrast, falls
+monotonically with depth: on~A from \SIrange[range-phrase=--,range-units=single]{6.5}{7.1}{\kelvin} at depth \num{4} to
+\SIrange[range-phrase=--,range-units=single]{5.05}{5.11}{\kelvin} at depth \num{10}, on~B from \SIrange[range-phrase=--,range-units=single]{5.1}{5.7}{\kelvin} to
+\SIrange[range-phrase=--,range-units=single]{3.87}{4.07}{\kelvin}. The inflation therefore rises with depth: on~A from
+\SIrange[range-phrase=--,range-units=single]{28.5}{39.6}{\percent} at depth \num{4} to \SIrange[range-phrase=--,range-units=single]{63.4}{68.7}{\percent} at depth
+\num{10}, on~B from \SIrange[range-phrase=--,range-units=single]{22.6}{32.5}{\percent} to \SIrange[range-phrase=--,range-units=single]{52.4}{60.7}{\percent}.
+Additional capacity buys fit to the within-family replicas that random splitting leaves in the
+training set; it buys almost nothing on unseen families. The single figure of
+$\sim$\SI{58}{\percent} quoted elsewhere in this paper is thus the inflation for a competitively
+tuned model; for any configuration in the competitive region (depth $\geq 8$) it lies between
+\SI{46.5}{\percent} and \SI{68.7}{\percent}, and it is not a consequence of having tuned under the
+leaky protocol.
+
+\begin{table}[t]
+\caption{\label{tab:tuning}Sensitivity of the random-versus-grouped gap to hyperparameter
+selection, XGBoost, pooled out-of-fold MAE (K). \emph{Nested}: hyperparameters chosen by inner
+three-fold \texttt{GroupKFold} within each outer \texttt{GroupKFold(5)} fold. \emph{Grid}: the
+same \num{16} configurations each scored under \texttt{KFold(5)} (shuffle, seed 42) and
+\texttt{GroupKFold(5)}; ranges are over the \num{16} points. Inflation is grouped MAE over random
+MAE minus one, computed with the same configuration in both arms.}
+\centering\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lS[table-format=1.2]S[table-format=1.2]S[table-format=2.1]S[table-format=1.2]S[table-format=1.2]S[table-format=2.1]@{}}
+\toprule
+& \multicolumn{3}{c}{Dataset A} & \multicolumn{3}{c}{Dataset B} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+& {random} & {grouped} & {inflation (\%)} & {random} & {grouped} & {inflation (\%)} \\
+\midrule
+Published configuration & 5.23 & 8.31 & 58.9 & 3.91 & 6.17 & 57.6 \\
+Nested grouped selection & 5.11 & 8.37 & 63.9 & 4.07 & 6.23 & 53.1 \\
+Grid, depth 4 (range)   & {6.48--7.13} & {8.92--9.19} & {28.5--39.6} & {5.15--5.74} & {6.82--7.04} & {22.6--32.5} \\
+Grid, depth 6 (range)   & {5.50--5.93} & {8.46--8.53} & {43.4--55.2} & {4.33--4.68} & {6.34--6.47} & {38.3--46.4} \\
+Grid, depth 8 (range)   & {5.15--5.37} & {8.32--8.40} & {55.0--63.1} & {4.03--4.27} & {6.18--6.34} & {46.5--54.0} \\
+Grid, depth 10 (range)  & {5.05--5.11} & {8.31--8.52} & {63.4--68.7} & {3.87--4.07} & {6.17--6.31} & {52.4--60.7} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A related robustness question is whether the gap depends on where the largest family lands.
+The \{Ba, Cu, O, Y\} family holds \num{720} Dataset~A compounds, \SI{64}{\percent} of them above
+\SI{77}{\kelvin}, and as an indivisible block it makes whichever fold receives it the hardest.
+Replacing \texttt{GroupKFold} with \texttt{StratifiedGroupKFold} on five $\Tc$ quantile bins
+(three seeds) leaves the inflation at \SIrange[range-phrase=--,range-units=single]{57.2}{61.9}{\percent} on~A and
+\SIrange[range-phrase=--,range-units=single]{57.7}{63.3}{\percent} on~B, against \SIrange[range-phrase=--,range-units=single]{54.4}{57.2}{\percent} and
+\SIrange[range-phrase=--,range-units=single]{60.3}{61.3}{\percent} for the unstratified grouped splitter with the same seeds. The
+pooled gap does not depend on the placement of the largest family; what changes is the error of
+the single fold that receives it.
 
 \subsection{What the inflated number was measuring}
 \label{sec:results-ceiling}
@@ -487,7 +588,7 @@ paired per-seed MAE inflation and the signed change in $\Rsq$. MAE rises
 deterministic partition, error bars its between-fold standard deviation, open circles the
 individual folds. (d)~Distance to the nearest training neighbour in standardised feature space
 for a single $80/20$ hold-out per scheme (A: $n=\num{4253}$ and \num{4344}; B: $n=\num{2488}$
-and \num{2845} test materials); boxes show the interquartile range, whiskers the 5th--95th
+and \num{2477} test materials); boxes show the interquartile range, whiskers the 5th--95th
 percentile. All quantities except the distances in~(d) are cross-validated.}
 \label{fig:summary}
 \end{figure}
@@ -633,17 +734,26 @@ compounds published after a cut-off date and measuring realised accuracy.
 \subsection{Reproducibility}
 \label{sec:repro}
 
-The pipeline code, the deterministic family splits, the featurized Dataset~B checkpoint, the
-result tables underlying every table and figure in this paper, and the scripts that render the
-figures from those tables are released together for this revision (see Data availability).
-Dataset~A is redistributed by UCI and is fetched by a script rather than bundled.
+The pipeline code, the featurized Dataset~B checkpoint, the result tables underlying every table
+and figure in this paper, and the scripts that render the figures from those tables are released
+together for this revision (see Data availability). Dataset~A is redistributed by UCI and is
+fetched by a script rather than bundled. Because a deterministic \emph{procedure} turned out not
+to be a sufficient specification of a partition (see below), the partitions themselves are
+released as data: for every row of both datasets, its family identifier, its fold under the
+deterministic \texttt{GroupKFold(5)}, its fold under \texttt{GroupKFold} with shuffling for seeds
+\numrange{0}{4}, and its fold under \texttt{KFold} for the same seeds. The exact library versions
+are pinned, the SHA-256 of each data file is recorded, and one script checks every number in this
+text against the result file it came from.
 
 Three implementation details materially affect the numbers and are documented here because they
 are not obvious from the protocol description. First, family labels must be assigned after row
 filtering: \texttt{GroupKFold} breaks ties by label order, and with thousands of singleton
-families a gapped labelling reassigns roughly \num{1800} of \num{2488} test rows per fold
-relative to a contiguous one. Numbers produced from a gapped labelling are not fold-comparable
-with numbers produced from a contiguous one even though the families are identical. Second, the
+families a gapped labelling changes the fold of \num{8937} of the \num{12440} Dataset~B rows
+(\numrange{1721}{1897} per fold) relative to a contiguous labelling of the same families. The
+v1 release of our own Dataset~B pipeline factorised family codes before removing the $\Tc \le 0$
+rows and therefore evaluated a different partition from the one stored in its distributed
+checkpoint; every Dataset~B number in this version was computed on the checkpoint partition,
+which is the one released row by row, and the pipeline now factorises after filtering. Second, the
 top-100 threshold must be stated explicitly, since the training-fold and whole-dataset
 definitions differ by \num{0.4} points on Dataset~B. Third, top-100 precision is sensitive to the
 XGBoost version: the algorithmic changes across major versions alter the ranking of predictions
@@ -676,14 +786,16 @@ splits so that it costs one command.
 
 \section*{Data availability}
 
-Code, deterministic chemical-family splits, the featurized Dataset~B checkpoint, all result
-tables and the figure-generation scripts are available at
+Code, the row-level cross-validation partitions of both datasets (\texttt{splits/}), the
+featurized Dataset~B checkpoint, all result tables (\texttt{results\_v2/}), the scripts that
+produced them and that render every figure (\texttt{code/v2/}), pinned dependency versions
+(\texttt{requirements.txt}) and SHA-256 checksums of the data files
+(\texttt{data/CHECKSUMS.sha256}) are available at
 \url{https://github.com/Freakscode/superconductor-tc-leakage-eval} under the MIT licence, at the
-tagged release accompanying this revision.
-%% TODO antes de enviar: los scripts de figuras (results_v2/make_figures.py) y las tablas de
-%% results_v2/ todavía NO están commiteados en ese repositorio. Hay que hacer push y crear el
-%% tag v2.0 (+ DOI de Zenodo) para que esta frase sea cierta. Ver CAMBIOS_V2.md, sección
-%% "Pendientes antes de enviar".
+tagged release accompanying this revision. \texttt{python code/v2/verify\_manuscript.py} checks
+every number in this text against its result file.
+%% TODO antes de enviar: el working tree ya contiene todo lo anterior; falta el commit, el push,
+%% el tag v2.0 y el DOI de Zenodo. Ver CAMBIOS_V2.md §8.
 Dataset~A is the UCI Superconductivity Data Set~\cite{hamidieh2018}, retrieved by the included
 \texttt{get\_datasetA.py}. Dataset~B derives from the curated list of Stanev
 \etal~\cite{stanev2018}.
