@@ -1,0 +1,61 @@
+{
+  "n_rows_stanev_csv": 16414,
+  "n_parse_failures_pymatgen": 8,
+  "n_rows_Tc_gt0": 12440,
+  "n_rows_npz": 12440,
+  "formulas_match_live_npz": true,
+  "y_match_npz": true,
+  "n_families_prefilter": 4191,
+  "prefilter_code_range_after_mask": [
+    0,
+    4189
+  ],
+  "n_families_postfilter": 3063,
+  "postfilter_code_range": [
+    0,
+    3062
+  ],
+  "n_unique_prefilter_codes_after_mask": 3063,
+  "codes_post_array_equal_npz_groups": true,
+  "codes_pre_array_equal_npz_groups": false,
+  "groupkfold_test_idx_post_equal_npz": true,
+  "groupkfold_test_idx_pre_equal_npz": false,
+  "rows_changing_fold_pre_vs_npz": 8937,
+  "rows_changing_fold_pre_vs_npz_per_fold": [
+    1897,
+    1753,
+    1779,
+    1721,
+    1787
+  ],
+  "fold_sizes_npz": [
+    2488,
+    2488,
+    2488,
+    2488,
+    2488
+  ],
+  "procedencia": {
+    "script": "fix_factorize verification cell (this session)",
+    "funcion": "pymatgen.core.Composition -> '|'.join(sorted(elements)) -> pd.factorize; GroupKFold(5) no shuffle",
+    "fix": "code/datasetB_pipeline.py::featurize(superconductors_only=True) factorizes AFTER the Tc>0 mask",
+    "python": "3.13.15",
+    "numpy": "2.3.3",
+    "pandas": "2.3.2",
+    "sklearn": "1.7.2",
+    "xgboost": "3.0.5",
+    "pymatgen": "2025.6.14"
+  },
+  "live_run_of_fixed_featurize": {
+    "live_fixed_featurize_seconds": 10.4,
+    "n_rows": 12440,
+    "groups_array_equal_npz": true,
+    "y_array_equal_npz": true,
+    "X_allclose_npz_float32": true,
+    "X_max_abs_diff_vs_npz": 0.0001219397563545499,
+    "groupkfold_test_idx_equal_npz": true,
+    "live_npz_postmask_X_equal_float32": true,
+    "live_npz_postmask_y_equal": true,
+    "live_npz_groups_same_partition_as_npz": true
+  }
+}

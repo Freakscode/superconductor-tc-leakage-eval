@@ -1,0 +1,12 @@
+archivo,filas,cols_num,misma_forma,max_abs_diff,max_rel_diff,veredicto
+nulo_presencia.csv,12,8,True,0.0,0.0,idéntico
+design_effect.csv,2,21,True,0.0,0.0,idéntico
+seed_runs_top100.csv,20,5,True,0.0,0.0,idéntico
+nn_distance.csv,2,9,True,0.0,0.0,idéntico
+family_concentration.csv,2,7,True,0.0,0.0,idéntico
+reproduction_check.csv,2,5,True,0.0,0.0,idéntico
+tabla2_shuffle.csv,4,19,True,1.3322676295501878e-15,,≤1e-6
+tabla2_runs_por_semilla.csv,60,7,True,75.40000000000003,,DIFIERE (75.4)
+tabla2_inflacion_por_semilla.csv,20,2,True,1.4210854715202004e-14,,≤1e-6
+tabla2_noshuffle_control.csv,4,19,True,7.105427357601002e-15,,≤1e-6
+tabla2_control_reproduccion.csv,4,8,True,0.0,,idéntico

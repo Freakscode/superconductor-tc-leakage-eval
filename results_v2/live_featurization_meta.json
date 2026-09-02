@@ -1,0 +1,11 @@
+{
+  "featurize_seconds": 10.76615595817566,
+  "n_featurized": 16406,
+  "n_features": 132,
+  "n_used_Tcgt0": 12440,
+  "n_families_premask": 4191,
+  "n_families_postmask": 3063,
+  "X_dtype": "float64",
+  "y_dtype": "float64",
+  "procedencia": "datasetB_pipeline.featurize() via importlib, matminer ElementProperty magpie, live"
+}

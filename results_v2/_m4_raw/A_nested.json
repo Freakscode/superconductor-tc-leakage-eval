@@ -1,0 +1,623 @@
+{
+ "folds": [
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "n_test": 4253,
+   "n_familias_test": 671,
+   "config_ganadora": "d10,lr0.05,mcw10",
+   "MAE_interna_ganadora": 8.469236777995649,
+   "MAE_externa_ganadora": 8.65403397577833,
+   "MAE_externa_publicada": 8.503685883162076,
+   "ranking_interno": "d10,lr0.05,mcw10=8.469;d8,lr0.05,mcw10=8.480;d8,lr0.05,mcw1=8.524;d10,lr0.05,mcw1=8.531;d8,lr0.1,mcw10=8.540"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "n_test": 4253,
+   "n_familias_test": 674,
+   "config_ganadora": "d10,lr0.05,mcw10",
+   "MAE_interna_ganadora": 9.029934813340137,
+   "MAE_externa_ganadora": 7.426108494643458,
+   "MAE_externa_publicada": 7.272852452658519,
+   "ranking_interno": "d10,lr0.05,mcw10=9.030;d8,lr0.1,mcw10=9.035;d10,lr0.1,mcw10=9.065;d8,lr0.05,mcw10=9.071;d10,lr0.05,mcw1=9.121"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "n_test": 4253,
+   "n_familias_test": 674,
+   "config_ganadora": "d10,lr0.05,mcw10",
+   "MAE_interna_ganadora": 8.530057838141808,
+   "MAE_externa_ganadora": 8.990282565177369,
+   "MAE_externa_publicada": 8.742586536693773,
+   "ranking_interno": "d10,lr0.05,mcw10=8.530;d8,lr0.1,mcw10=8.545;d10,lr0.1,mcw10=8.583;d8,lr0.05,mcw10=8.583;d8,lr0.05,mcw1=8.593"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "n_test": 4252,
+   "n_familias_test": 673,
+   "config_ganadora": "d10,lr0.05,mcw10",
+   "MAE_interna_ganadora": 8.401250361795082,
+   "MAE_externa_ganadora": 8.086211377240334,
+   "MAE_externa_publicada": 8.339650417287418,
+   "ranking_interno": "d10,lr0.05,mcw10=8.401;d8,lr0.1,mcw1=8.452;d8,lr0.05,mcw1=8.457;d10,lr0.05,mcw1=8.459;d8,lr0.05,mcw10=8.462"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "n_test": 4252,
+   "n_familias_test": 673,
+   "config_ganadora": "d8,lr0.05,mcw10",
+   "MAE_interna_ganadora": 8.359800745605229,
+   "MAE_externa_ganadora": 8.692192617978135,
+   "MAE_externa_publicada": 8.707155671589577,
+   "ranking_interno": "d8,lr0.05,mcw10=8.360;d8,lr0.05,mcw1=8.369;d8,lr0.1,mcw10=8.378;d10,lr0.05,mcw10=8.383;d10,lr0.1,mcw10=8.469"
+  }
+ ],
+ "inner": [
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d4,lr0.05,mcw1",
+   "MAE_interna": 9.345740584201913,
+   "MAE_interna_folds": "9.1284;9.1479;9.7610"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d4,lr0.05,mcw10",
+   "MAE_interna": 9.365924490149794,
+   "MAE_interna_folds": "9.1404;9.1421;9.8153"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d4,lr0.1,mcw1",
+   "MAE_interna": 9.194510125504621,
+   "MAE_interna_folds": "8.9980;9.0598;9.5257"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d4,lr0.1,mcw10",
+   "MAE_interna": 9.160241739241316,
+   "MAE_interna_folds": "8.9864;9.0522;9.4421"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d6,lr0.05,mcw1",
+   "MAE_interna": 8.851937562713278,
+   "MAE_interna_folds": "8.4616;8.6488;9.4453"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d6,lr0.05,mcw10",
+   "MAE_interna": 8.802811929081301,
+   "MAE_interna_folds": "8.4659;8.6571;9.2854"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d6,lr0.1,mcw1",
+   "MAE_interna": 8.718220738289805,
+   "MAE_interna_folds": "8.2828;8.7286;9.1433"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d6,lr0.1,mcw10",
+   "MAE_interna": 8.76744837660006,
+   "MAE_interna_folds": "8.3992;8.5995;9.3036"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d8,lr0.05,mcw1",
+   "MAE_interna": 8.524280936628182,
+   "MAE_interna_folds": "8.1684;8.3361;9.0684"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d8,lr0.05,mcw10",
+   "MAE_interna": 8.480427968112986,
+   "MAE_interna_folds": "8.0988;8.2559;9.0866"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d8,lr0.1,mcw1",
+   "MAE_interna": 8.640049361305524,
+   "MAE_interna_folds": "8.2818;8.5895;9.0489"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d8,lr0.1,mcw10",
+   "MAE_interna": 8.540169808751507,
+   "MAE_interna_folds": "7.9651;8.5546;9.1008"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d10,lr0.05,mcw1",
+   "MAE_interna": 8.531142007274287,
+   "MAE_interna_folds": "8.0840;8.5108;8.9986"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d10,lr0.05,mcw10",
+   "MAE_interna": 8.469236777995649,
+   "MAE_interna_folds": "8.1493;8.2672;8.9912"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d10,lr0.1,mcw1",
+   "MAE_interna": 8.58172106484987,
+   "MAE_interna_folds": "8.0136;8.6823;9.0493"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 0,
+   "config": "d10,lr0.1,mcw10",
+   "MAE_interna": 8.553791375998172,
+   "MAE_interna_folds": "8.0827;8.4552;9.1235"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d4,lr0.05,mcw1",
+   "MAE_interna": 10.120488988427082,
+   "MAE_interna_folds": "9.5903;11.0359;9.7352"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d4,lr0.05,mcw10",
+   "MAE_interna": 10.002019792538386,
+   "MAE_interna_folds": "9.5410;10.9220;9.5431"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d4,lr0.1,mcw1",
+   "MAE_interna": 9.809669262628365,
+   "MAE_interna_folds": "9.2533;10.7983;9.3774"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d4,lr0.1,mcw10",
+   "MAE_interna": 9.815196290027277,
+   "MAE_interna_folds": "9.1060;10.7451;9.5945"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d6,lr0.05,mcw1",
+   "MAE_interna": 9.296394950041764,
+   "MAE_interna_folds": "8.6614;10.3327;8.8951"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d6,lr0.05,mcw10",
+   "MAE_interna": 9.169256651433246,
+   "MAE_interna_folds": "8.6314;10.0201;8.8564"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d6,lr0.1,mcw1",
+   "MAE_interna": 9.457797846555264,
+   "MAE_interna_folds": "8.9918;10.1807;9.2009"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d6,lr0.1,mcw10",
+   "MAE_interna": 9.203984273223224,
+   "MAE_interna_folds": "8.8351;10.0090;8.7678"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d8,lr0.05,mcw1",
+   "MAE_interna": 9.135646101570277,
+   "MAE_interna_folds": "8.7476;10.1576;8.5018"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d8,lr0.05,mcw10",
+   "MAE_interna": 9.071285530593938,
+   "MAE_interna_folds": "8.7051;10.0539;8.4548"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d8,lr0.1,mcw1",
+   "MAE_interna": 9.329518749352692,
+   "MAE_interna_folds": "9.0100;9.9788;8.9997"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d8,lr0.1,mcw10",
+   "MAE_interna": 9.035476364760932,
+   "MAE_interna_folds": "8.6689;9.9022;8.5353"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d10,lr0.05,mcw1",
+   "MAE_interna": 9.120897140377965,
+   "MAE_interna_folds": "8.9184;9.9167;8.5276"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d10,lr0.05,mcw10",
+   "MAE_interna": 9.029934813340137,
+   "MAE_interna_folds": "8.8491;9.7921;8.4486"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d10,lr0.1,mcw1",
+   "MAE_interna": 9.172888425805377,
+   "MAE_interna_folds": "8.8227;9.9777;8.7183"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 1,
+   "config": "d10,lr0.1,mcw10",
+   "MAE_interna": 9.065465690056799,
+   "MAE_interna_folds": "8.5350;9.9983;8.6631"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d4,lr0.05,mcw1",
+   "MAE_interna": 9.26668561263154,
+   "MAE_interna_folds": "9.3128;9.2757;9.2116"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d4,lr0.05,mcw10",
+   "MAE_interna": 9.285392845332822,
+   "MAE_interna_folds": "9.4178;9.2575;9.1809"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d4,lr0.1,mcw1",
+   "MAE_interna": 9.208929885072218,
+   "MAE_interna_folds": "9.3720;9.1458;9.1089"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d4,lr0.1,mcw10",
+   "MAE_interna": 9.129163511946356,
+   "MAE_interna_folds": "9.2136;9.1791;8.9948"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d6,lr0.05,mcw1",
+   "MAE_interna": 8.688619994815781,
+   "MAE_interna_folds": "8.6411;8.6991;8.7256"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d6,lr0.05,mcw10",
+   "MAE_interna": 8.699512537163725,
+   "MAE_interna_folds": "8.6816;8.7462;8.6707"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d6,lr0.1,mcw1",
+   "MAE_interna": 8.645270769754186,
+   "MAE_interna_folds": "8.4327;8.7219;8.7812"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d6,lr0.1,mcw10",
+   "MAE_interna": 8.717777215932134,
+   "MAE_interna_folds": "8.5823;8.6849;8.8861"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d8,lr0.05,mcw1",
+   "MAE_interna": 8.593146285070382,
+   "MAE_interna_folds": "8.4986;8.5900;8.6909"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d8,lr0.05,mcw10",
+   "MAE_interna": 8.58273292318204,
+   "MAE_interna_folds": "8.5887;8.5901;8.5694"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d8,lr0.1,mcw1",
+   "MAE_interna": 8.713748224008052,
+   "MAE_interna_folds": "8.5907;8.6775;8.8730"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d8,lr0.1,mcw10",
+   "MAE_interna": 8.544696887768751,
+   "MAE_interna_folds": "8.3315;8.7122;8.5903"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d10,lr0.05,mcw1",
+   "MAE_interna": 8.710975504065063,
+   "MAE_interna_folds": "8.5301;8.7419;8.8610"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d10,lr0.05,mcw10",
+   "MAE_interna": 8.530057838141808,
+   "MAE_interna_folds": "8.5243;8.5405;8.5254"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d10,lr0.1,mcw1",
+   "MAE_interna": 8.660725832908406,
+   "MAE_interna_folds": "8.7973;8.6313;8.5536"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 2,
+   "config": "d10,lr0.1,mcw10",
+   "MAE_interna": 8.58272223323816,
+   "MAE_interna_folds": "8.7205;8.6509;8.3767"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d4,lr0.05,mcw1",
+   "MAE_interna": 9.354158871899621,
+   "MAE_interna_folds": "9.9964;8.6269;9.4391"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d4,lr0.05,mcw10",
+   "MAE_interna": 9.270222167051694,
+   "MAE_interna_folds": "9.8555;8.5629;9.3921"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d4,lr0.1,mcw1",
+   "MAE_interna": 9.065702723723152,
+   "MAE_interna_folds": "9.7111;8.4405;9.0454"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d4,lr0.1,mcw10",
+   "MAE_interna": 9.014764059669337,
+   "MAE_interna_folds": "9.6752;8.3074;9.0615"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d6,lr0.05,mcw1",
+   "MAE_interna": 8.605819568770364,
+   "MAE_interna_folds": "9.3397;7.8836;8.5940"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d6,lr0.05,mcw10",
+   "MAE_interna": 8.660320491494447,
+   "MAE_interna_folds": "9.3462;7.9156;8.7191"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d6,lr0.1,mcw1",
+   "MAE_interna": 8.696891143087496,
+   "MAE_interna_folds": "9.4406;7.8989;8.7510"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d6,lr0.1,mcw10",
+   "MAE_interna": 8.658681086864876,
+   "MAE_interna_folds": "9.4440;8.1246;8.4073"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d8,lr0.05,mcw1",
+   "MAE_interna": 8.456942999649717,
+   "MAE_interna_folds": "9.2119;7.7317;8.4271"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d8,lr0.05,mcw10",
+   "MAE_interna": 8.461546485160138,
+   "MAE_interna_folds": "9.2257;7.7046;8.4542"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d8,lr0.1,mcw1",
+   "MAE_interna": 8.452278693912902,
+   "MAE_interna_folds": "9.3134;7.8486;8.1948"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d8,lr0.1,mcw10",
+   "MAE_interna": 8.507617949107688,
+   "MAE_interna_folds": "9.4136;7.6583;8.4508"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d10,lr0.05,mcw1",
+   "MAE_interna": 8.45936142681355,
+   "MAE_interna_folds": "9.2656;7.7873;8.3251"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d10,lr0.05,mcw10",
+   "MAE_interna": 8.401250361795082,
+   "MAE_interna_folds": "9.2115;7.6127;8.3794"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d10,lr0.1,mcw1",
+   "MAE_interna": 8.540109397732765,
+   "MAE_interna_folds": "9.2860;7.8424;8.4918"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 3,
+   "config": "d10,lr0.1,mcw10",
+   "MAE_interna": 8.461679028109048,
+   "MAE_interna_folds": "9.6183;7.5896;8.1769"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d4,lr0.05,mcw1",
+   "MAE_interna": 9.186058682672334,
+   "MAE_interna_folds": "8.7033;8.8151;10.0398"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d4,lr0.05,mcw10",
+   "MAE_interna": 9.245296365512973,
+   "MAE_interna_folds": "8.7546;8.8605;10.1208"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d4,lr0.1,mcw1",
+   "MAE_interna": 9.10214810643884,
+   "MAE_interna_folds": "8.5579;8.7644;9.9842"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d4,lr0.1,mcw10",
+   "MAE_interna": 9.110228928861506,
+   "MAE_interna_folds": "8.4764;8.8224;10.0321"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d6,lr0.05,mcw1",
+   "MAE_interna": 8.726797155007112,
+   "MAE_interna_folds": "8.3396;8.4667;9.3742"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d6,lr0.05,mcw10",
+   "MAE_interna": 8.607227358532482,
+   "MAE_interna_folds": "8.2470;8.2914;9.2833"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d6,lr0.1,mcw1",
+   "MAE_interna": 8.627729768667123,
+   "MAE_interna_folds": "8.1893;8.4185;9.2754"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d6,lr0.1,mcw10",
+   "MAE_interna": 8.568052317284698,
+   "MAE_interna_folds": "8.1746;8.3387;9.1910"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d8,lr0.05,mcw1",
+   "MAE_interna": 8.36919624154888,
+   "MAE_interna_folds": "8.2186;8.0837;8.8053"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d8,lr0.05,mcw10",
+   "MAE_interna": 8.359800745605229,
+   "MAE_interna_folds": "8.0480;8.1480;8.8834"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d8,lr0.1,mcw1",
+   "MAE_interna": 8.577430710104098,
+   "MAE_interna_folds": "8.5105;8.3016;8.9202"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d8,lr0.1,mcw10",
+   "MAE_interna": 8.377862175312695,
+   "MAE_interna_folds": "8.1108;8.2343;8.7885"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d10,lr0.05,mcw1",
+   "MAE_interna": 8.538465463347736,
+   "MAE_interna_folds": "8.4230;8.3124;8.8800"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d10,lr0.05,mcw10",
+   "MAE_interna": 8.383325256381054,
+   "MAE_interna_folds": "8.2299;8.1854;8.7347"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d10,lr0.1,mcw1",
+   "MAE_interna": 8.511919716805515,
+   "MAE_interna_folds": "8.4655;8.3127;8.7575"
+  },
+  {
+   "dataset": "A",
+   "outer_fold": 4,
+   "config": "d10,lr0.1,mcw10",
+   "MAE_interna": 8.469238945225102,
+   "MAE_interna_folds": "8.2365;8.3423;8.8290"
+  }
+ ],
+ "MAE_nested_pooled": 8.369763977993328,
+ "R2_nested": 0.8531378266219786
+}

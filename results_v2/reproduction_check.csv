@@ -1,0 +1,3 @@
+dataset,MAE,RMSE,R2,n_train,n_test,procedencia
+A,5.1430551050168765,8.846319504776465,0.9320139886717004,17010,4253,run_diagnostics_v2.py | split único 80/20 random_state=42; XGBoost de tc_pipeline.make_models
+B,3.756368225404637,7.3018855148856945,0.9341654381441338,9952,2488,run_diagnostics_v2.py | split único 80/20 random_state=42; XGBoost de datasetB_pipeline.make_models

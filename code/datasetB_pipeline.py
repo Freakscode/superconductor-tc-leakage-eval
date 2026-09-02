@@ -51,8 +51,32 @@ def cv_predict_manual(model_fn, X, y, cv, groups=None):
     return yp
 
 
-def featurize(supercon_csv: str):
-    """Magpie-featurize Stanev formulas, single-threaded. Returns X, y, groups, formulas."""
+def family_codes(formulas) -> np.ndarray:
+    """Chemical-family id = constituent-element set (same rule as tc_pipeline.chemical_families).
+    Integer codes come from pandas.factorize over the sorted "|"-joined element symbols, so
+    they are deterministic across processes (no str hashing)."""
+    key = pd.Series(["|".join(sorted(e.symbol for e in Composition(f).elements)) for f in formulas])
+    return pd.factorize(key)[0]
+
+
+def featurize(supercon_csv: str, superconductors_only: bool = True):
+    """Magpie-featurize Stanev formulas, single-threaded. Returns X, y, groups, formulas.
+
+    superconductors_only=True keeps the Tc>0 rows (the paper's Dataset B basis, 12 440 rows)
+    and computes the family codes ON THE FILTERED rows.
+
+    v2 FIX (factorize-after-filter). In v1 this function factorized the family key over ALL
+    featurized rows (16 406, 4 191 families) and run() applied the Tc>0 mask afterwards,
+    leaving 3 063 surviving families with non-contiguous codes (gaps in 0..4190). The
+    partition (which rows share a family) is unaffected, but GroupKFold assigns groups to
+    folds by sorted group size with ties broken by code order, so the gapped codes produce a
+    DIFFERENT fold assignment than the contiguous codes stored as `groups` in
+    data/datasetB_featurized.npz (~1 800 of 2 488 rows per test fold change fold). Every v1
+    Dataset-B number produced by running this script live therefore came from a different
+    5-fold partition than the distributed checkpoint. Factorizing after the mask yields codes
+    that are np.array_equal to the .npz `groups` and identical GroupKFold(5) test indices
+    (see results_v2/fix_factorize_verificacion.json and splits/datasetB_folds.csv).
+    """
     sc = pd.read_csv(supercon_csv)                       # columns: name, Tc
     ep = ElementProperty.from_preset("magpie"); labels = ep.feature_labels()
     feats, tcs, formulas = [], [], []
@@ -65,18 +89,21 @@ def featurize(supercon_csv: str):
     print(f"featurized {len(feats)}/{len(sc)} formulas in {time.time()-t0:.0f}s")
     B = pd.DataFrame(feats, columns=labels); B["critical_temp"] = tcs; B["formula"] = formulas
     B = B.dropna().reset_index(drop=True)
+    if superconductors_only:                              # filter FIRST ...
+        B = B[B["critical_temp"] > 0].reset_index(drop=True)
     X = B[labels].values; y = B["critical_temp"].values
-    key = pd.Series(["|".join(sorted(e.symbol for e in Composition(f).elements)) for f in B["formula"]])
-    groups = pd.factorize(key)[0]
+    groups = family_codes(B["formula"].values)            # ... THEN factorize (contiguous codes)
     return X, y, groups, B["formula"].values
 
 
 def run(supercon: str, out: str, seed: int = 42, superconductors_only: bool = True):
     out = Path(out); out.mkdir(parents=True, exist_ok=True)
-    X, y, groups, formulas = featurize(supercon)
+    # The Tc>0 mask is applied INSIDE featurize() so that family codes are factorized on the
+    # filtered rows (v2 fix; see featurize docstring). Masking here after factorize would
+    # reproduce the v1 fold-assignment bug.
+    X, y, groups, formulas = featurize(supercon, superconductors_only=superconductors_only)
     res = {"n_featurized": int(len(X)), "n_features": int(X.shape[1])}
     if superconductors_only:                              # reproduce the paper's R2~0.93 basis
-        m = y > 0; X, y, groups = X[m], y[m], groups[m]
         res["basis"] = "Tc>0 superconductors"
     res["n_used"] = int(len(X)); res["n_families"] = int(len(set(groups)))
 

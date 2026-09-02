@@ -1,0 +1,3 @@
+dataset,nn_median_random,nn_median_grouped,ratio,nn_p25_random,nn_p75_random,nn_p25_grouped,nn_p75_grouped,n_test_random,n_test_grouped,procedencia
+A,0.05422848663376715,1.2727018022919308,23.469248015109482,8.429369702178807e-08,0.31027371425801925,0.838378845278402,2.5399131199107616,4253,4344,"run_diagnostics_v2.py | StandardScaler global; 1-NN euclidiana; hold-out 80/20 (random_state=42) vs GroupShuffleSplit(test_size=0.2, random_state=42)"
+B,0.13975469022989273,1.5841007232666016,11.334866262168362,0.03144456446170807,0.6676111668348312,0.722113311290741,2.8672902584075928,2488,2477,"run_diagnostics_v2.py | StandardScaler global; 1-NN euclidiana; hold-out 80/20 (random_state=42) vs GroupShuffleSplit(test_size=0.2, random_state=42)"

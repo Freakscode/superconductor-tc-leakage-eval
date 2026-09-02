@@ -1,0 +1,26 @@
+{
+  "definicion": "rango de la inflacion de MAE sobre las 4 combinaciones dataset x modelo, brazo agrupado con GroupKFold shuffle=True",
+  "medias_por_combinacion": {
+    "A/RandomForest": 59.5,
+    "A/XGBoost": 56.9,
+    "B/RandomForest": 52.5,
+    "B/XGBoost": 60.8
+  },
+  "rango_de_medias_pct": [
+    52.5,
+    60.8
+  ],
+  "rango_todas_las_corridas_pct": [
+    51.9,
+    61.5
+  ],
+  "rango_publicado_medias_pct": [
+    45,
+    61
+  ],
+  "rango_control_noshuffle_pct": [
+    49.9,
+    60.7
+  ],
+  "procedencia": "run_tabla2_shuffle.py + agg_tabla2.py | brazo agrupado = GroupKFold(5, shuffle=True, random_state=s), s=0..4 (sklearn 1.7.2); brazo aleatorio = KFold(5, shuffle=True, random_state=s); modelo = make_models(s) importado de code/tc_pipeline.py (A) y code/datasetB_pipeline.py (B); grupos = familia quimica (conjunto de elementos) via pandas.factorize; inflacion emparejada por semilla; dR2 = R2_grouped - R2_random (signado); std ddof=0"
+}

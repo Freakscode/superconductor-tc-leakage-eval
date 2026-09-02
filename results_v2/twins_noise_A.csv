@@ -1,0 +1,12 @@
+dataset,metrica,split,valor,sd_entre_folds,n,procedencia
+A,frac_test_con_gemelo_exacto_en_train,random_KFold5_rs42,0.3700320884665774,0.010927303412126872,21263,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features"
+A,frac_test_con_gemelo_exacto_en_train,GroupKFold5_familias,0.0,0.0,21263,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features"
+A,filas_con_features_duplicadas,-,6093.0,,21263,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features"
+A,filas_duplicadas_features_y_Tc,-,66.0,,21263,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features"
+A,n_filas_con_gemelo,-,8511.0,,21263,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features"
+A,piso_ruido_MAE_solo_filas_con_gemelo_K,-,3.4913471762105663,,8511,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features | media |Tc - media del grupo de gemelos|"
+A,piso_ruido_mediana_solo_filas_con_gemelo_K,-,1.163333333333334,,8511,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features"
+A,pct_filas_features_duplicadas,-,28.655410807505998,,21263,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features"
+A,MAE_random_modelo_solo_filas_con_gemelo_K,random_KFold5_rs42,4.831129986468635,,8511,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features | XGBoost make_models(42)"
+A,MAE_random_modelo_filas_sin_gemelo_K,random_KFold5_rs42,5.496682991331448,,12752,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features | XGBoost make_models(42)"
+A,cota_inferior_MAE_global_aportada_K,-,1.3974912202759784,,21263,"script=results_v2/run_twins_noise.py | sklearn 1.7.2 | KFold(5,shuffle,rs=42) vs GroupKFold(5) familias | gemelo = hash idéntico de las 81 features | = frac_gemelos * piso"

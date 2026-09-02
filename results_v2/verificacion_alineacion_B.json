@@ -1,0 +1,27 @@
+{
+  "n_rows_after_Tc_gt0_filter": 12440,
+  "n_rows_npz": 12440,
+  "expected": 12440,
+  "n_rows_ok": true,
+  "y_allclose": true,
+  "y_array_equal": true,
+  "max_abs_dy": 0.0,
+  "X_allclose": true,
+  "max_abs_dX": 0.0001219397563545499,
+  "groups_codes_array_equal_prefilter_factorize": false,
+  "groups_codes_array_equal_postfilter_factorize": true,
+  "groups_same_partition_vs_prefilter": [
+    true,
+    1,
+    1
+  ],
+  "groups_same_partition_vs_postfilter": [
+    true,
+    1,
+    1
+  ],
+  "n_families_npz": 3063,
+  "n_families_rebuilt": 3063,
+  "nota": "Los codigos enteros de 'groups' del npz corresponden a un factorize APLICADO DESPUES del filtro Tc>0; un factorize aplicado ANTES del filtro produce etiquetas distintas pero la PARTICION es identica (1-a-1 en ambos sentidos). y y X coinciden exactamente (X a precision float32). Alineacion CONFIRMADA.",
+  "procedencia": "results_v2/run_v2_measurements.py | datasetB_pipeline.featurize(supercon_stanev.csv) vs datasetB_featurized.npz"
+}

@@ -1,0 +1,49 @@
+{
+  "pregunta": "Fig 3(d) Dataset B: la mediana de distancia 1-NN del hold-out agrupado (GroupShuffleSplit test_size=0.2 random_state=42) depende de la convencion de codigos de familia?",
+  "resultados": {
+    "live X f64 + groups_all[m] (manuscript fig3d path)": {
+      "median_random": 0.13975473474925415,
+      "median_grouped": 1.2384987162242322,
+      "ratio": 8.86194459490999,
+      "n_test_grouped": 2845,
+      "test_rows_hash": "fb3feea45d48"
+    },
+    "live X f64 + npz groups": {
+      "median_random": 0.13975473474925415,
+      "median_grouped": 1.5841006876186152,
+      "ratio": 11.33486239633158,
+      "n_test_grouped": 2477,
+      "test_rows_hash": "3f33f7e0d032"
+    },
+    "npz X f32 + npz groups (fallback; run_diagnostics)": {
+      "median_random": 0.13975470423386405,
+      "median_grouped": 1.5841007240059317,
+      "ratio": 11.334865131660358,
+      "n_test_grouped": 2477,
+      "test_rows_hash": "3f33f7e0d032"
+    },
+    "npz X f32 + groups_all[m]": {
+      "median_random": 0.13975470423386405,
+      "median_grouped": 1.2384987559217762,
+      "ratio": 8.861946813964025,
+      "n_test_grouped": 2845,
+      "test_rows_hash": "fb3feea45d48"
+    }
+  },
+  "codigos_misma_particion": true,
+  "codigos_mismo_orden_np_unique": false,
+  "explicacion": "GroupShuffleSplit permuta np.unique(groups); los codigos pre-mascara (v1) ordenan las familias por primera aparicion INCLUYENDO filas Tc<=0, asi que np.unique mapea la misma permutacion a familias distintas -> hold-out distinto (2845 vs 2477 filas de test). float32 vs float64 solo cambia la mediana en la 8a cifra.",
+  "consecuencia": "La figura 3(d) del PNG de 2026-08-21 (paper1_submission/figure3.png) anota '8.9x farther' para B y su caption dice n=2,845; el texto del manuscrito (§3, 0.140 / 1.584, factor 11) y results_v2/nn_distance.csv usan los codigos del npz. Valores de referencia: mediana aleatoria 0.1398, agrupada 1.5841, razon 11.33, n_test_grouped 2477. code/v2/make_figures.py corregido (usa siempre npz groups) y con assert nuevo contra nn_distance.csv.",
+  "cambios_v2_md_linea_134_era_falsa": true,
+  "procedencia": {
+    "script": "code/v2/make_figures.py::recompute.nn_dists replicado en celda (esta sesion)",
+    "seed": 42,
+    "sklearn": "1.7.2",
+    "numpy": "2.3.3",
+    "pandas": "2.3.2",
+    "fuentes": [
+      "results_v2/datasetB_featurized_live.npz (X float64, groups_all)",
+      "data/datasetB_featurized.npz (X float32, groups)"
+    ]
+  }
+}
