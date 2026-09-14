@@ -1,0 +1,65 @@
+% Procedencia: results_v3/temporal_validation.csv, temporal_validation_comparacion.csv (code/v3/temporal_validation.py,
+% corpus code/v3/temporal_corpus.py); cifras copiadas de results_v3/temporal_validation.md y temporal_validation_tabla.tex.
+% Todos los intervalos son bootstrap de familias completas (B=2000, semilla 0), condicionales a las predicciones ajustadas.
+% Idioma: ingles, como paper1_manuscript.tex. Tabla: \input{results_v3/temporal_validation_tabla.tex} (booktabs, siunitx, multirow).
+
+\subsection{Which retrospective protocol anticipates performance on later superconductors?}
+\label{sec:temporal}
+
+Cross-validation protocols are proxies for a question that can be asked directly of SuperCon: how well does a model trained on
+everything known up to a year $T$ predict the superconductors first reported at or after $T$? We dated every SuperCon entry by the
+year in its bibliographic field (99.7\,\% of rows; the year of the \emph{report}, not of discovery), applied the chemical exclusions of
+Sec.~\ref{sec:audit} to the exact formulas, and collapsed the 20\,771 dated $T_c>0$ reports to 12\,543 normalised compositions
+(3\,267 elemental systems), each dated by its first report and labelled with the median $T_c$ of its reports. For each cut
+$T\in\{1995, 2005, 2010, 2015\}$ we fitted the Dataset-B models on all compositions first reported before $T$ and evaluated them,
+frozen, on those reported at or after $T$; independently, using only the pre-$T$ data, we computed the five-fold out-of-fold estimate
+that each protocol L0--L4 would have produced at the time. Between 72\,\% and 84\,\% of the later compositions belong to elemental
+systems that did not exist in the database before the cut, so the forward-in-time test is dominated by the regime that grouped
+validation is meant to emulate.
+
+The realised performance is far below the random-CV figure at every cut (Table~\ref{tab:temporal}, Fig.~\ref{fig:temporal}). At the
+principal cut $T=2010$ (10\,215 training compositions, 2\,328 later ones, 76\,\% in new systems) XGBoost reaches MAE
+$7.43$\,K [6.67, 8.27] and $R^2=0.33$ [0.18, 0.47]; on the later compositions from \emph{new} systems $R^2$ is $0.19$ [0.01, 0.34]
+(MAE $8.47$\,K), on those from systems already seen it is $0.83$ [0.71, 0.89] (MAE $4.07$\,K), and on later re-measurements of
+compositions already in the training set the model recovers MAE $2.39$\,K and $R^2=0.80$. Random five-fold CV on the same pre-2010
+data estimates MAE $4.34$\,K and $R^2=0.91$: it understates the realised error by $3.10$\,K [2.25, 4.03] and overstates $R^2$ by
+$0.58$ [0.44, 0.73]. The $R^2$ overstatement of random CV is significant at all four cuts (+0.28, +0.60, +0.58, +0.42 for 1995,
+2005, 2010, 2015); grouping by composition (L1) changes nothing, because the corpus holds one row per composition. Grouping by
+elemental system (L2) or by host elements (L3) moves the MAE estimate into the realised interval at 2005 and 2010
+($\Delta$MAE $=-0.67$\,K [$-1.83$, 0.43] and $+0.10$\,K [$-1.00$, 1.12] at 2010) but reduces the $R^2$ overstatement only marginally
+(+0.50 and +0.47 at 2010). Leave-clusters-out (L4, $k=50$) is the only protocol whose $R^2$ estimate matches the realised value at
+1995 ($\Delta R^2=-0.05$ [$-0.12$, 0.02]) and 2015 (+0.11 [$-0.16$, 0.29]), but it is pessimistic in MAE after 2005
+(+3.9\,K [2.6, 5.2] at 2010) and still overstates $R^2$ by $0.28$--$0.31$ at 2005--2010. Averaged over the four cuts, the mean
+absolute discrepancy in $R^2$ falls monotonically with the strength of the grouping (L0 0.47, L2 0.39, L3 0.35, L4 0.19), while in
+MAE the host-element protocol is closest (L3 2.2\,K; L0 3.8\,K; L4 3.5\,K). Re-weighting the random-CV out-of-fold rows to the
+new/seen-system mix of the later compositions does not recover the realised value either ($R^2$ 0.81 versus 0.33 at 2010): the
+out-of-fold rows from new systems inside a random split are not representative of the systems that are actually discovered later.
+
+Two further observations bound the comparison. First, the screening metric cannot be transferred across time as a precision: the
+prevalence of compositions above the training 90th percentile among the later compositions collapses from 9.2\,\% at 1995 to
+0.9--1.8\,\% at 2005--2015, so the realised top-100 precision falls from 0.90 to 0.08--0.47 while every protocol estimates
+0.36--0.99; as a lift over prevalence the forward-in-time ranking is in fact strong (18--26$\times$ at 2005--2010), and the Spearman
+rank correlation degrades more gently (0.95 retrospective versus 0.57--0.78 realised). Second, the realised $R^2$ is fragile:
+removing the 526 training compositions whose year came from a fallback dating rule (5\,\% of the training set, mostly 1960s--1970s
+alloys and Chevrel phases) shifts the XGBoost predictions for the then-unseen Bi--S--O family from about 15\,K to about 60\,K and drives the realised
+$R^2$ at 2010 from $0.33$ to $-0.20$ (MAE 7.4 to 9.1\,K), whereas the random-CV and leave-clusters-out estimates move by less than 0.3\,K in MAE
+and 0.02 in $R^2$ (the host-element estimate by 1.1\,K and 0.05). Using the maximum instead of the median $T_c$ per composition, or re-seeding the random and cluster partitions,
+leaves all conclusions unchanged (Supplementary Table).
+
+\emph{Answer to the question.} No retrospective protocol reproduces the forward-in-time performance. Random cross-validation is the
+worst proxy for $R^2$ at every cut and for MAE at 1995 and 2005; at 2010 the worst MAE proxy is leave-clusters-out
+($+3.9$\,K against $-3.1$\,K for random CV), at 2015 random CV is the closest in MAE because the later compositions are
+low-$T_c$ and low-variance, and at 1995 random CV is also the closest in top-100 precision (+0.02), where all protocols agree
+within their intervals. The
+grouped protocols are consistently closer, with the host-element grouping (L3) the best predictor of the realised MAE and
+leave-clusters-out (L4) the best predictor of the realised $R^2$, and the direction of their residual error is stable (random CV
+optimistic, LOCO pessimistic in MAE after 2005). The realised $R^2$ on new elemental systems ($0.1$--$0.5$) is the number a user of
+these models should expect, and none of the protocols, applied to the data available at the time, would have predicted it to
+within $0.1$ at more than one cut.
+
+% Figura: results_v3/temporal_validation_fig.pdf
+% \begin{figure*}[t]\centering\includegraphics[width=\textwidth]{results_v3/temporal_validation_fig.pdf}
+% \caption{Retrospective out-of-fold estimate of each protocol (points, 95\,\% family-bootstrap intervals) against the realised
+% forward-in-time performance (line and band) for four cuts; XGBoost in colour, RandomForest in grey (realised value at the right
+% of each panel). Open diamonds: random CV re-weighted to the new/seen-system mix of the later compositions.}\label{fig:temporal}
+% \end{figure*}

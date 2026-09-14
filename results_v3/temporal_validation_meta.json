@@ -1,0 +1,75 @@
+{
+ "script": "code/v3/temporal_validation.py",
+ "python": "3.13.15",
+ "numpy": "2.3.3",
+ "pandas": "2.3.2",
+ "sklearn": "1.7.2",
+ "xgboost": "3.0.5",
+ "matminer": "0.9.2",
+ "pymatgen": "2025.6.14",
+ "input": "data/temporal_corpus_v3.npz",
+ "modelos": "code/datasetB_pipeline.make_models(42), n_jobs=8",
+ "corte": "train year_first<T, test year_first>=T",
+ "umbral_top100": "percentil 90 de y del entrenamiento, operador >=",
+ "bootstrap": "familias completas, B=2000, semilla 0, pareado; condicional a las predicciones OOF/temporales",
+ "protocolos": "L0 KFold(5,shuffle,rs=42); L1==L0 (corpus deduplicado); L2 GroupKFold(5) familia; L3 GroupKFold(5) anfitrion (fraccion>=0.05); L4 GroupKFold(5) sobre KMeans(k=50, rs=0) de fracciones estandarizadas del train",
+ "segundos_total": 2194.6,
+ "corte_principal": 2010,
+ "meta": {
+  "report_level_available": true,
+  "principal_T1995": {
+   "n_train": 6281,
+   "n_test": 6262,
+   "thr_p90_train": 76.5,
+   "frac_familia_nueva_test": 0.7425742574257426,
+   "fam_train": 1822,
+   "fam_test": 1734,
+   "segundos": 237.5
+  },
+  "principal_T2005": {
+   "n_train": 9254,
+   "n_test": 3289,
+   "thr_p90_train": 80.0,
+   "frac_familia_nueva_test": 0.8364244451200973,
+   "fam_train": 2375,
+   "fam_test": 1092,
+   "segundos": 232.6
+  },
+  "principal_T2010": {
+   "n_train": 10215,
+   "n_test": 2328,
+   "thr_p90_train": 79.5,
+   "frac_familia_nueva_test": 0.7633161512027491,
+   "fam_train": 2642,
+   "fam_test": 798,
+   "segundos": 218.3
+  },
+  "principal_T2015": {
+   "n_train": 11734,
+   "n_test": 809,
+   "thr_p90_train": 77.0,
+   "frac_familia_nueva_test": 0.7181705809641533,
+   "fam_train": 3021,
+   "fam_test": 351,
+   "segundos": 242.9
+  },
+  "tc_max_T2010": {
+   "n_train": 10215,
+   "n_test": 2328,
+   "thr_p90_train": 80.0,
+   "frac_familia_nueva_test": 0.7633161512027491,
+   "fam_train": 2642,
+   "fam_test": 798,
+   "segundos": 186.9
+  },
+  "sin_ambiguos_T2010": {
+   "n_train": 9689,
+   "n_test": 2284,
+   "thr_p90_train": 80.0,
+   "frac_familia_nueva_test": 0.7679509632224168,
+   "fam_train": 2520,
+   "fam_test": 790,
+   "segundos": 174.1
+  }
+ }
+}

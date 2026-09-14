@@ -1,0 +1,74 @@
+{
+ "family": "Ba|Cu|O|Y",
+ "datasetA": {
+  "rows_total": 21263,
+  "family_rows": 720,
+  "family_distinct_formulas": 184,
+  "family_Tc_min_K": 4.3,
+  "family_Tc_max_K": 130.0,
+  "family_Tc_sd_K": 21.026990755924203,
+  "CuY_ratio_counts": {
+   "3.00": 596,
+   "4.00": 51,
+   "3.50": 38,
+   "2.50": 6,
+   "2.73": 5,
+   "3.33": 3,
+   "1.00": 3,
+   "0.83": 2
+  },
+  "rows_CuY_eq_3_(123-type)": 596,
+  "rows_CuY_eq_3.5_(247-type)": 38,
+  "rows_CuY_eq_4_(124-type)": 51,
+  "example_formulas_CuY_4": [
+   "Y1Ba2Cu4O8",
+   "Y1Ba2Cu4O7.8",
+   "Y1Ba2Cu4O7.96",
+   "Y1Ba2Cu4O7.986",
+   "Y1Ba2Cu4O8.045"
+  ]
+ },
+ "datasetB": {
+  "rows_Tc_pos_before_parse_filter": 12448,
+  "rows_parse_failures_dropped": 8,
+  "rows_total": 12440,
+  "family_rows": 99,
+  "family_distinct_formulas": 99,
+  "family_Tc_min_K": 4.3,
+  "family_Tc_max_K": 100.1,
+  "CuY_ratio_counts": {
+   "3.00": 55,
+   "3.50": 20,
+   "4.00": 9,
+   "2.50": 2,
+   "2.73": 2,
+   "1.00": 1,
+   "3.54": 1,
+   "2.88": 1
+  },
+  "rows_CuY_eq_3_(123-type)": 55,
+  "rows_CuY_eq_3.5_(247-type)": 20,
+  "rows_CuY_eq_4_(124-type)": 9,
+  "example_formulas_CuY_4": [
+   "Y1Ba2Cu4O7.8",
+   "Y1Ba2Cu4O8.043",
+   "Y1Ba2Cu4O7.96",
+   "Y1Ba2Cu4O8.045",
+   "Y1Ba2Cu4O7.9"
+  ]
+ },
+ "interpretacion": "Un unico conjunto de elementos {Ba,Cu,O,Y} agrupa fases con estequiometria Cu/Y = 3, 3.5 y 4 (estructuras 123, 247 y 124), con Tc entre ~4 K y >100 K. El grupo es una agrupacion operativa por sistema elemental, no una serie de dopaje uno-a-uno.",
+ "procedencia": {
+  "script": "code/v3/h09_ybco_family_check.py",
+  "definicion_familia": "tc_pipeline.chemical_families (A); pymatgen Composition + factorize tras Tc>0 (B)",
+  "python": "3.13.15",
+  "numpy": "2.3.3",
+  "pandas": "2.3.2",
+  "pymatgen": "2025.6.14",
+  "semilla": "no aplica (conteo determinista)",
+  "datos": [
+   "data/unique_m.csv",
+   "data/supercon_stanev.csv"
+  ]
+ }
+}

@@ -1,0 +1,235 @@
+{
+ "tex": "/Users/freakscode/Proyectos 2025/Proyectos Académicos/Superconductors/superconductor-tc-leakage-eval/paper1_manuscript.tex",
+ "seed": 0,
+ "n_random": 12,
+ "baseline_failing_ids": [
+  "gap_dR2_A",
+  "grid_grp_range_d6plus"
+ ],
+ "known_baseline": [
+  "gap_dR2_A",
+  "grid_grp_range_d6plus"
+ ],
+ "mutations": [
+  {
+   "k": 0,
+   "id": "seed_gap_BA",
+   "where": "l.668 [Screening utility survives, and is genuinely descriptor-driven] …that in Dataset~A,",
+   "original": "6.6",
+   "mutant": "6.7",
+   "line": 668,
+   "exit": 1,
+   "new_failures": [
+    "seed_gap_BA"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 1,
+   "id": "data_nfeat_A",
+   "where": "l.135 [Datasets] …h2018}: \\num{21263}\ncompounds with \\num{81} statistical features derived",
+   "original": "81",
+   "mutant": "82",
+   "line": 135,
+   "exit": 1,
+   "new_failures": [
+    "data_N_A",
+    "data_nfeat_A"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 2,
+   "id": "pres_share_91",
+   "where": "l.564 [What the inflated number was measuring] …for the full featurization---about \\SI{91}",
+   "original": "91",
+   "mutant": "92",
+   "line": 564,
+   "exit": 1,
+   "new_failures": [
+    "pres_share_91"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 3,
+   "id": "concl_Neff_B",
+   "where": "l.774 [Conclusion] …chemical families---\\num{3847} and \\num{3470} effective observations f",
+   "original": "3470",
+   "mutant": "3471",
+   "line": 774,
+   "exit": 1,
+   "new_failures": [
+    "concl_Neff_A",
+    "concl_Neff_B"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 4,
+   "id": "fam_pct5_B",
+   "where": "l.170 [Chemical families] …ies for \\num{12440} compounds, with\n\\SI{66.7}{\\percent} in fami",
+   "original": "66.7",
+   "mutant": "66.8",
+   "line": 170,
+   "exit": 1,
+   "new_failures": [
+    "fam_N_B",
+    "fam_pct5_B"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 5,
+   "id": "tab_main_B_N",
+   "where": "tab:main l.342 fila 'Dataset B (Stanev/SuperCon, N= 12440 , k' col 1 part 0",
+   "original": "12440",
+   "mutant": "12441",
+   "line": 342,
+   "exit": 1,
+   "new_failures": [
+    "tab_main_B_N"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 6,
+   "id": "tab_tuning_B_d10_MAE_grouped_lo",
+   "where": "tab:tuning l.497 fila 'Grid, depth 10 (range)' col 6 part 0",
+   "original": "6.17",
+   "mutant": "6.18",
+   "line": 497,
+   "exit": 1,
+   "new_failures": [
+    "tab_tuning_B_d10_MAE_grouped_lo"
+   ],
+   "caught": true,
+   "v2_exit": 1,
+   "v2_summary": "116 OK / 1 discrepancias"
+  },
+  {
+   "k": 7,
+   "id": "gap_A_rand",
+   "where": "l.354 [Holding out chemical families inflates the error] …int folds raises XGBoost's MAE\nf",
+   "original": "5.23",
+   "mutant": "5.24",
+   "line": 354,
+   "exit": 1,
+   "new_failures": [
+    "gap_A_grp",
+    "gap_A_rand"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 8,
+   "id": "repro_MAE_A",
+   "where": "l.289 [Reproducing the reported performance] …le random $80/20$\nsplit gives MAE $=\\SI{5.14",
+   "original": "5.14",
+   "mutant": "5.15",
+   "line": 289,
+   "exit": 1,
+   "new_failures": [
+    "repro_MAE_A"
+   ],
+   "caught": true,
+   "v2_exit": 1,
+   "v2_summary": "117 OK / 1 discrepancias"
+  },
+  {
+   "k": 9,
+   "id": "fam_k_A",
+   "where": "l.167 [Chemical families] …g:anatomy}(a)). Dataset~A contains\n\\num{3365} families for \\num",
+   "original": "3365",
+   "mutant": "3366",
+   "line": 167,
+   "exit": 1,
+   "new_failures": [
+    "fam_k_A"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 10,
+   "id": "fig4_eta2_A",
+   "where": "l.604 [What the inflated number was measuring] …s computed on \\emph{all} the data\n(\\num{0.",
+   "original": "0.877",
+   "mutant": "0.878",
+   "line": 604,
+   "exit": 1,
+   "new_failures": [
+    "fig4_eta2_A",
+    "fig4_eta2_B"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 11,
+   "id": "screen_pres_grp_A",
+   "where": "l.660 [Screening utility survives, and is genuinely descriptor-driven] …s retain\nsubstanti",
+   "original": "84.2",
+   "mutant": "84.3",
+   "line": 660,
+   "exit": 1,
+   "new_failures": [
+    "screen_pres_grp_A",
+    "screen_pres_grp_B"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 12,
+   "id": "tab_tuning_A_pub_MAE_random_publicada",
+   "where": "tab:tuning l.492 fila 'Published configuration' col 2 part 0",
+   "original": "5.23",
+   "mutant": "99.99",
+   "line": 492,
+   "exit": 1,
+   "new_failures": [
+    "tab_tuning_A_pub_MAE_random_publicada"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  },
+  {
+   "k": 13,
+   "id": "tab_tuning_A_pub_MAE_random_publicada",
+   "where": "tab:tuning l.492 fila 'Published configuration' col 2 part 0",
+   "original": "5.23",
+   "mutant": "8.31",
+   "line": 492,
+   "exit": 1,
+   "new_failures": [
+    "tab_tuning_A_pub_MAE_random_publicada"
+   ],
+   "caught": true,
+   "v2_exit": 0,
+   "v2_summary": "117 OK / 0 discrepancias"
+  }
+ ],
+ "caught": 14,
+ "total": 14,
+ "pass": true,
+ "procedencia": "code/v3/test_verify_mutation.py | mutant = last digit + 1 (or the two review cases 5.23->99.99 / 5.23->8.31); verifier = code/v3/verify_manuscript.py"
+}

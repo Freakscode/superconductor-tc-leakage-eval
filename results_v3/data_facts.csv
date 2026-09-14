@@ -1,0 +1,5 @@
+dataset,fact,value,family_id,family_key,n_family,procedencia
+A,largest_family_pct_Tc_gt_77K,63.61111111111111,8,Ba|Cu|O|Y,720,code/v3/data_facts.py | family = constituent-element set (A: tc_pipeline.chemical_families(unique_m.csv); B: npz groups); strict Tc > thr
+A,largest_family_pct_Tc_ge_77K,64.16666666666667,8,Ba|Cu|O|Y,720,"code/v3/data_facts.py | same, Tc >= thr"
+B,largest_family_pct_Tc_gt_77K,13.740458015267176,1,,131,code/v3/data_facts.py | family = constituent-element set (A: tc_pipeline.chemical_families(unique_m.csv); B: npz groups); strict Tc > thr
+B,largest_family_pct_Tc_ge_77K,14.50381679389313,1,,131,"code/v3/data_facts.py | same, Tc >= thr"

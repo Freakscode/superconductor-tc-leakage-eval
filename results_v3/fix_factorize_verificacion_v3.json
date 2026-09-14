@@ -1,0 +1,153 @@
+{
+ "n_rows_stanev_csv": 16414,
+ "n_parse_failures_pymatgen": 8,
+ "n_rows_Tc_le0": 3966,
+ "n_rows_Tc_gt0": 12440,
+ "n_rows_npz": 12440,
+ "y_match_npz": true,
+ "n_families_prefilter": 4191,
+ "prefilter_code_range_after_mask": [
+  0,
+  4189
+ ],
+ "n_families_postfilter": 3063,
+ "postfilter_code_range": [
+  0,
+  3062
+ ],
+ "codes_post_array_equal_npz_groups": true,
+ "codes_pre_array_equal_npz_groups": false,
+ "same_family_partition_pre_vs_post": true,
+ "groupkfold_test_idx_post_equal_npz": true,
+ "groupkfold_post_equal_splits_fold_deterministic": true,
+ "groupkfold_pre_equal_splits_v1_column": true,
+ "rows_changing_fold_pre_vs_npz": 8937,
+ "rows_changing_fold_pre_vs_npz_per_fold": [
+  1897,
+  1753,
+  1779,
+  1721,
+  1787
+ ],
+ "fold_sizes_npz": [
+  2488,
+  2488,
+  2488,
+  2488,
+  2488
+ ],
+ "procedencia": "code/v3/factorize_check.py | pymatgen Composition -> sorted element symbols; pandas.factorize; sklearn GroupKFold(5) | python 3.13.15, numpy 2.3.3, pandas 2.3.2",
+ "comparison_with_v2": {
+  "n_rows_stanev_csv": {
+   "v3": 16414,
+   "v2": 16414,
+   "equal": true
+  },
+  "n_parse_failures_pymatgen": {
+   "v3": 8,
+   "v2": 8,
+   "equal": true
+  },
+  "n_rows_Tc_gt0": {
+   "v3": 12440,
+   "v2": 12440,
+   "equal": true
+  },
+  "n_rows_npz": {
+   "v3": 12440,
+   "v2": 12440,
+   "equal": true
+  },
+  "y_match_npz": {
+   "v3": true,
+   "v2": true,
+   "equal": true
+  },
+  "n_families_prefilter": {
+   "v3": 4191,
+   "v2": 4191,
+   "equal": true
+  },
+  "prefilter_code_range_after_mask": {
+   "v3": [
+    0,
+    4189
+   ],
+   "v2": [
+    0,
+    4189
+   ],
+   "equal": true
+  },
+  "n_families_postfilter": {
+   "v3": 3063,
+   "v2": 3063,
+   "equal": true
+  },
+  "postfilter_code_range": {
+   "v3": [
+    0,
+    3062
+   ],
+   "v2": [
+    0,
+    3062
+   ],
+   "equal": true
+  },
+  "codes_post_array_equal_npz_groups": {
+   "v3": true,
+   "v2": true,
+   "equal": true
+  },
+  "codes_pre_array_equal_npz_groups": {
+   "v3": false,
+   "v2": false,
+   "equal": true
+  },
+  "groupkfold_test_idx_post_equal_npz": {
+   "v3": true,
+   "v2": true,
+   "equal": true
+  },
+  "rows_changing_fold_pre_vs_npz": {
+   "v3": 8937,
+   "v2": 8937,
+   "equal": true
+  },
+  "rows_changing_fold_pre_vs_npz_per_fold": {
+   "v3": [
+    1897,
+    1753,
+    1779,
+    1721,
+    1787
+   ],
+   "v2": [
+    1897,
+    1753,
+    1779,
+    1721,
+    1787
+   ],
+   "equal": true
+  },
+  "fold_sizes_npz": {
+   "v3": [
+    2488,
+    2488,
+    2488,
+    2488,
+    2488
+   ],
+   "v2": [
+    2488,
+    2488,
+    2488,
+    2488,
+    2488
+   ],
+   "equal": true
+  }
+ }
+}

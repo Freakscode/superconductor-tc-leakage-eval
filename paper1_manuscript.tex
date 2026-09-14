@@ -1,13 +1,16 @@
 %% ============================================================================
 %%  Machine Learning: Science and Technology (IOP Publishing) — submission source
-%%  Paper 1, version 2 (revised).
+%%  Paper 1, version 3 (major revision after adversarial review; see REVISION_RESPUESTA.md).
 %%  Class: iopjournal.cls  (IOP Publishing 2025 official template; obtain from
 %%         https://publishingsupport.iopscience.iop.org/ -> "LaTeX template".
 %%         Place iopjournal.cls in this folder, or install into your TeX tree.)
 %%  Engine: pdflatex  (run twice for cross-references)
-%%  Figures: figure1.png (anatomy), figure2.png (null decomposition),
-%%           figure3.png (cross-dataset summary), figure4.png (family ceiling)
-%%           — all in same folder
+%%  Figures: figure1.png (anatomy), figure2.png (representation ablation as loss differences),
+%%           figure3.png (cross-dataset summary), figure4.png (clustering / design effect),
+%%           figure5.png (temporal validation) — all in same folder, produced by
+%%           code/v3/make_figures_v3.py and code/v3/temporal_report.py --lang en.
+%%  Every number in this file is checked in its own location by code/v3/verify_manuscript.py
+%%  against code/v3/manuscript_numbers.json (built by code/v3/build_manifest_v3.py).
 %% ============================================================================
 \documentclass{iopjournal}
 
@@ -16,23 +19,34 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{booktabs}
+\usepackage{multirow}
 \usepackage{siunitx}
 \usepackage{url}
 
-\sisetup{detect-weight=true, detect-family=true, table-number-alignment=center}
+\sisetup{detect-weight=true, detect-family=true, table-number-alignment=center, retain-explicit-plus}
 
 \newcommand{\Tc}{T_{\mathrm c}}
 \newcommand{\Rsq}{R^{2}}
 \newcommand{\etal}{\textit{et al}}
 \newcommand{\ICC}{\mathrm{ICC}}
 \newcommand{\Neff}{N_{\mathrm{eff}}}
+\newcommand{\ci}[2]{[#1, #2]}
+
+% The class prints "Journal Name", a Crossmark box and "dd Month yyyy" placeholders in \articletype;
+% the publisher fills them at production. Suppress the placeholders in the submission PDF.
+\renewcommand{\articletype}[1]{{\vspace*{-8mm}\noindent \Large \sf Machine Learning: Science and Technology}
+\vspace*{8mm} \noindent\reversemarginpar
+\marginpar{\vspace{-3mm} {\color{gray}\hrule} \ \\ {\scriptsize \sf{\bfseries \MakeUppercase{#1}}}}}
+\fancyhead[L]{{\small \sf IOP Publishing}\hspace{5mm} {\it Mach. Learn.: Sci. Technol.} (submitted)}
+\fancyhead[R]{Cardona Osorio\ }
 
 \begin{document}
 
 \articletype{Paper}
 
-\title{Random splits inflate the accuracy of composition-based superconductor
-$\Tc$ models: a leakage-aware evaluation replicated across two datasets}
+\title{Which retrospective evaluation anticipates the performance of composition-based
+superconductor $\Tc$ models on unseen chemistries? A leakage-aware audit of two SuperCon
+curations}
 
 \author{Gabriel Jaime Cardona Osorio\orcid{0009-0003-3743-8559}}
 
@@ -41,89 +55,92 @@ $\Tc$ models: a leakage-aware evaluation replicated across two datasets}
 \email{gabriel.cardona@pascualbravo.edu.co}
 
 \keywords{superconductivity, critical temperature, machine learning, materials informatics,
-data leakage, cross-validation, cluster sampling, design effect}
+data leakage, cross-validation, temporal validation, clustered data}
 
 \begin{abstract}
-Composition-based machine-learning models routinely report $\Rsq \approx 0.93$ and
-MAE $\approx \SI{5}{\kelvin}$ for superconducting critical temperature, but these figures are
-obtained by splitting datasets at the level of the individual compound. Superconductor datasets
-are not samples of independent compounds: they are assembled from doping series, so a random
-split places near-identical stoichiometric variants of the same chemistry on both sides of the
-partition. We quantify what that costs. Holding out whole chemical families---materials sharing
-a constituent-element set---inflates MAE by \SIrange{52}{61}{\percent} and lowers $\Rsq$ by
-\numrange{0.071}{0.081} across two independently curated datasets
-(\num{21263} and \num{12440} compounds) and two featurizations, with the effect measured over
-five independent partitions. We then ask what the inflated number was measuring. Treating family
-identity as a clustering variable, the intraclass correlation of $\Tc$ within a family is
-\num{0.85} in both datasets, giving a cluster design effect of \numrange{3.6}{5.5} and an
-effective sample size (\num{3847} and \num{3470}) within \SI{14}{\percent} of the number of
-chemical families rather than the number of compounds. In-sample, family identity alone---no
-chemistry, no descriptors---accounts for \SI{87.7}{\percent} and \SI{88.4}{\percent} of the
-variance in $\Tc$, which is the share of the target that a categorical label already explains.
-Screening utility,
-however, survives: under family-held-out validation the top-100 precision remains
-\SI{87.0}{\percent} and \SI{85.2}{\percent} against a \SI{10}{\percent} base rate, while a
-family-mean lookup collapses to chance (\SI{11.6}{\percent} and \SI{9.6}{\percent}). The
-correction is one extra cross-validation run, and we release deterministic family splits and
-code so it can be adopted as a reporting standard.
+Composition-based models of the superconducting critical temperature are usually validated by
+splitting SuperCon-derived datasets at the level of the individual row, although those datasets
+are assembled from doping series of a few thousand element systems. We ask which retrospective
+evaluation best anticipates performance on element systems or dates that were not observed, and
+which predictive information survives once duplication, family dependence and corpus selection are
+controlled. On two curations of SuperCon (\num{21263} rows in \num{3365} element systems;
+\num{12336} audited rows in \num{3046} systems) holding out whole element systems raises the pooled
+MAE of gradient-boosted trees and random forests by \SIrange{53}{64}{\percent} and lowers $\Rsq$ by
+\numrange{0.074}{0.084}, with paired family-bootstrap intervals that exclude zero; averaged per
+system the inflation is \SIrange{22}{29}{\percent}, so the gap concentrates in the large systems.
+The two curations share \SI{96.6}{\percent} of their element systems and are not independent
+replicates. Element identity alone explains most of the conventional $\Rsq$; of what the Magpie
+descriptors add over element presence, about nine-tenths is recovered by stoichiometric fractions,
+and on held-out systems the descriptors alone do not beat presence plus fractions
+(\SI{+0.46}{\kelvin} \ci{0.00}{0.98} and \SI{+0.16}{\kelvin} \ci{-0.18}{0.59} MAE). Separation by
+composition, element system, host elements and composition clusters defines different target
+populations that are not nested. Retrospective top-\num{100} precision among corpus materials whose
+systems were held out stays at \SI{87.0}{\percent} and \SI{82.4}{\percent} (\SI{78.2}{\percent}
+once measured non-superconductors are admitted to the candidate pool) against fold prevalences of
+\SIrange{3.6}{18.2}{\percent}. Finally, on a corpus of \num{12543} compositions dated by first
+report, no retrospective protocol reproduces forward-in-time performance: random cross-validation on
+pre-2010 data estimates $\Rsq = \num{0.91}$ where the realised value on later compositions is
+\num{0.33}; grouped protocols are closer and leave-clusters-out is closest in $\Rsq$, but none is
+within \num{0.1} at more than one cut. Row-level partitions, the audited checkpoint and a per-claim
+verifier are released.
 \end{abstract}
 
 \section{Introduction}
 
 Predicting the superconducting critical temperature $\Tc$ from chemical composition alone is one
-of the most-benchmarked regression tasks in materials informatics. The headline numbers are
-consistently strong: gradient-boosted trees and random forests on the Hamidieh
-featurization~\cite{hamidieh2018} or on Magpie descriptors~\cite{ward2016} report
-$\Rsq \gtrsim 0.92$ and MAE below \SI{6}{\kelvin}, and deep architectures push the same metrics
-further~\cite{konno2021,zeng2019,stanev2018}. Those numbers are quoted when arguing that
-machine learning is ready to guide the search for new superconductors, and models of this class
-have been used to propose candidates from text-mined phase diagrams~\cite{court2020}, from
-Eliashberg-theory descriptors~\cite{xie2022}, and to screen hydride
-families~\cite{sanna2024,wrona2024}.
+of the most-benchmarked regression tasks in materials informatics. Gradient-boosted trees and
+random forests on the Hamidieh featurization~\cite{hamidieh2018} or on Magpie
+descriptors~\cite{ward2016} report $\Rsq \gtrsim \num{0.92}$ and MAE below \SI{6}{\kelvin}, and
+deep architectures push the same metrics further~\cite{konno2021,zeng2019,stanev2018}. Such
+numbers are quoted when arguing that machine learning is ready to guide the search for new
+superconductors, and models of this class have been used to propose candidates from text-mined
+phase diagrams~\cite{court2020}, from Eliashberg-theory descriptors~\cite{xie2022}, and to screen
+hydride families~\cite{sanna2024,wrona2024}.
 
-They are also obtained in a way that does not resemble the search. The datasets used are derived
-from SuperCon and are assembled from \emph{doping series}: families of materials that share a
-constituent-element set and differ only in stoichiometry. A YBa$_2$Cu$_3$O$_{7-\delta}$ series
-contributes dozens of entries whose compositions differ in the third decimal place of the oxygen
-content and whose $\Tc$ values differ by a few kelvin. When such a dataset is split at random,
-near-identical twins of every test compound sit in the training set. The resulting metric measures
-interpolation within a series the model has already seen. A discovery campaign asks the opposite
-question: what is $\Tc$ for a chemistry that has never been synthesised?
+They are obtained in a way that does not resemble the search. The datasets derive from SuperCon and
+are assembled from \emph{doping series}: materials that share a constituent-element set and differ
+in stoichiometry. A YBa$_2$Cu$_3$O$_{7-\delta}$ series contributes dozens of entries whose
+compositions differ in the oxygen content and whose $\Tc$ values differ by a few kelvin. When such
+a dataset is split at random, near-identical variants of every test row sit in the training set,
+and the metric measures interpolation within a series the model has already seen.
 
-The general form of this problem is well known. Meredig \etal~\cite{meredig2018} introduced
-leave-one-cluster-out cross-validation for materials discovery and showed that extrapolative
-performance is systematically worse than the interpolative figure. Kapoor and
-Narayanan~\cite{kapoor2023} document leakage from non-independent samples as a recurring failure
-mode across machine-learning-based science. The Matbench efforts~\cite{dunn2020,riebesell2024}
-make the related point that strong regression metrics need not translate into discovery utility.
-What has been missing for superconductors specifically is a quantitative answer to three
-questions: which grouping is the right one for this domain, how large the gap is, and whether the
-gap is a property of one dataset or of the task.
-
-This paper answers all three, and then asks a fourth question that the leakage framing does not
-by itself address. Sections~\ref{sec:results-gap} and~\ref{sec:results-robust} establish the gap
-and its stability. Section~\ref{sec:results-ceiling} asks what the inflated number was actually
-measuring, and finds that family identity alone---a variable containing no chemical information
-beyond a label---accounts for almost all of it. Section~\ref{sec:results-screening} shows that
-the practical screening application nonetheless survives, so the correct conclusion is a
-recalibration rather than a dismissal.
+That extrapolative validation is harder than interpolative validation is established. Meredig
+\etal~\cite{meredig2018} showed with leave-one-cluster-out cross-validation that extrapolative
+performance for materials discovery is systematically worse than the interpolative figure; Xiong
+\etal~\cite{xiong2020} proposed forward cross-validation to score explorative prediction; the same
+lesson is settled in cheminformatics~\cite{sheridan2013} and ecology~\cite{roberts2017}, and Kapoor
+and Narayanan~\cite{kapoor2023} place it within a broader pattern of leakage-driven
+irreproducibility. For superconductors specifically, grouping by the constituent-element set is
+already practice: Sommer \etal~\cite{sommer2023} use it as the default validation protocol of the
+3DSC benchmark, with the same Ba--Cu--O--Y example, and PhaseSelect~\cite{vasylenko2023} takes the
+element set itself as the unit of analysis. We do not claim the grouping as a contribution. What
+has not been measured is how much of the headline accuracy the practice removes, for which target
+population, and---the question this paper is organised around---\emph{which retrospective
+evaluation best predicts performance on element systems or dates not yet observed, and which
+predictive information survives when duplication, family dependence and corpus selection are
+controlled}.
 
 Our contributions are:
 \begin{enumerate}
-\item A domain-appropriate grouping variable: the constituent-element set, which corresponds
-      one-to-one with the doping series that generate the redundancy, and which can be verified
-      by inspection rather than assumed from an unsupervised clustering.
-\item A measurement of the resulting gap, replicated across two independently curated datasets
-      with two different featurizations and evaluated over five independent partitions.
-\item A reframing of the gap in cluster-sampling terms: the intraclass correlation, design effect
-      and effective sample size of each dataset, which quantify the inflation in a
-      model-independent and protocol-independent way.
-\item A ladder of nulls---family-mean lookup, element-presence indicators, full descriptors---that
-      separates memorisation from learned chemistry, and shows that screening skill is genuine
-      while most of the variance the conventional $\Rsq$ rewards is already available from a
-      family label.
-\item Deterministic, released family splits and the code to reproduce every number, so that the
-      corrected protocol costs one command.
+\item A controlled measurement of the random-versus-grouped gap on identical rows, descriptors,
+      models and test budgets, on two curations of SuperCon with two featurizations, with
+      family-paired uncertainty rather than row-resampled intervals, and with the overlap between the
+      curations measured rather than assumed away (section~\ref{sec:results-gap}).
+\item A ladder of separation levels and of nulls. Separation by normalised composition, by element
+      system, by host elements and by composition clusters is compared at matched test-set size
+      (section~\ref{sec:results-levels}); family-mean and element-presence nulls bound how much of the
+      conventional $\Rsq$ is available from a label alone, and a presence $\to$ fractions $\to$
+      descriptors ablation isolates what each representation adds as differences of losses
+      (section~\ref{sec:results-ceiling}).
+\item A characterisation of the corpus as clustered data---family concentration and intraclass
+      correlation as descriptive quantities, with an explicitly defined estimator behind any
+      effective-sample-size statement---together with an audit of the chemical unit of evaluation
+      (formula parsing, duplication, cross-dataset overlap; sections~\ref{sec:audit}
+      and~\ref{sec:overlap}).
+\item A forward-in-time test on SuperCon dated by first report, which scores each retrospective
+      protocol against the performance actually realised on later compositions
+      (section~\ref{sec:temporal}), plus row-level partitions and a per-claim verifier so that the
+      corrected protocols and every number in the paper can be regenerated with one command.
 \end{enumerate}
 
 \section{Data and methods}
@@ -131,199 +148,261 @@ Our contributions are:
 \subsection{Datasets}
 \label{sec:data}
 
-\textbf{Dataset~A} is the UCI Superconductivity Data Set~\cite{hamidieh2018}: \num{21263}
-compounds with \num{81} statistical features derived from elemental properties (mean, weighted
-mean, geometric mean, entropy, range and standard deviation of atomic mass, ionisation energy,
-atomic radius, density, electron affinity, fusion heat, thermal conductivity and valence),
-accompanied by a per-element composition table giving the chemical formula of each entry.
+\textbf{Dataset~A} is the UCI Superconductivity Data Set~\cite{hamidieh2018}: \num{21263} rows with
+\num{81} statistical features derived from elemental properties (mean, weighted mean, geometric
+mean, entropy, range and standard deviation of atomic mass, ionisation energy, atomic radius,
+density, electron affinity, fusion heat, thermal conductivity and valence), accompanied by a
+per-element composition table giving the formula of each entry. It is used as distributed. It
+contains \num{66} rows that are exact duplicates of another row in every feature and in $\Tc$, and
+\num{6093} rows (\SI{28.7}{\percent}) whose \num{81} features coincide exactly with those of another
+row while $\Tc$ differs, because identical compositions yield identical composition-derived
+features. We do not remove them: they are part of the object of study, and the grouping of
+section~\ref{sec:families} places every such pair in the same fold.
 
-Dataset~A is used as distributed. It contains \num{66} rows that are exact duplicates of another
-row in every feature and in $\Tc$, and \num{6093} rows (\SI{28.7}{\percent}) whose \num{81}
-features coincide exactly with those of another row while $\Tc$ differs, because identical
-compositions yield identical composition-derived features. We do not remove them: they are the
-object of study, and the family grouping of section~\ref{sec:families} places every such pair in
-the same fold.
+\textbf{Dataset~B} is the SuperCon-derived list curated by Stanev \etal~\cite{stanev2018}
+(\num{16414} entries). Dropping the \num{3966} entries with $\Tc \le 0$ and \num{8} whose formula
+\texttt{pymatgen} cannot parse leaves \num{12440} rows (the checkpoint of the previous version of
+this paper). The semantic audit of section~\ref{sec:audit} excludes \num{104} of these and corrects
+\num{3}, giving the audited checkpoint used throughout: \num{12336} rows in \num{3046} element
+systems, featurized with the \num{132} Magpie descriptors~\cite{ward2016} of
+\texttt{matminer}~\cite{ward2018}.
 
-\textbf{Dataset~B} is the SuperCon-derived list curated by Stanev \etal~\cite{stanev2018}, which
-has \num{16414} entries. We drop the \num{3966} entries with $\Tc \le 0$ (non-superconducting
-compositions) and \num{8} whose formula \texttt{pymatgen} cannot parse, yielding \num{12440}
-compounds, and featurize them with the \num{132} Magpie descriptors~\cite{ward2016} as
-implemented in \texttt{matminer}~\cite{ward2018}.
+\subsection{Semantic audit of the corpus}
+\label{sec:audit}
 
-The two datasets share a common ancestry in SuperCon but differ in curation, in size, and
-entirely in featurization. Agreement between them is therefore evidence about the task rather
-than about a particular data-processing choice.
+The chemical unit of evaluation is the formula string, so we audited every Dataset~B formula
+against the SuperCon conventions documented by Sommer \etal~\cite{sommer2023} for 3DSC, where each
+element must carry an explicit coefficient and a trailing \texttt{Y} after \texttt{O} (as in
+\texttt{Bi4.4Sr3.6Ca2Cu4OY}) denotes an unknown oxygen content, not yttrium. The audit
+(\texttt{data/audit/semantic\_audit\_B.csv}) assigns each of the \num{12440} rows a category and a
+decision. We exclude \num{104} rows: \num{75} whose oxygen content is the indeterminate \texttt{OY}
+marker (\num{54} of them had been assigned to a spurious yttrium-containing system), \num{7} ending
+in \texttt{O} without a coefficient, \num{19} with another element lacking a coefficient in a
+multi-element formula, \num{2} unrecoverable typographical coefficients and \num{1} artefact of
+string concatenation. We correct \num{3} formulas with a misplaced decimal or a duplicated site,
+leaving their element system unchanged. Deuterium and tritium isotopes, atomic-percentage alloys,
+fulleride and clathrate coefficients, site-notation repeated elements and the \num{760} rows that
+duplicate another normalised composition are kept and flagged. No retained row changes system;
+\num{17} systems disappear, \num{12} of which existed only through \texttt{OY} rows. Because
+\texttt{GroupKFold} breaks ties by label order, the deterministic grouped partition nevertheless
+changes for \num{9453} of the \num{12336} retained rows, so a comparison of results between the two
+checkpoints includes partition noise; the comparison is reported in
+section~\ref{sec:results-repro}.
 
-\subsection{Chemical families}
+The same audit applied to Dataset~A revealed a collateral defect in the distributed composition
+table: \num{1927} formulas (\SI{9.1}{\percent} of the rows) end in \texttt{O} without a coefficient
+and are recorded with an oxygen amount of exactly one. Dataset~A is used as distributed---its
+features cannot be recomputed---but section~\ref{sec:results-gap} reports the sensitivity of the
+gap to removing those rows.
+
+\subsection{Two curations of one source}
+\label{sec:overlap}
+
+The two datasets share their ancestry in SuperCon, and the overlap is nearly complete:
+\SI{95.7}{\percent} of the audited Dataset~B rows have an identical formula string in Dataset~A,
+\SI{96.5}{\percent} an identical normalised composition, and \SI{96.6}{\percent} belong to an
+element system present in~A (\num{2883} of the \num{3046} systems; conversely \SI{92.8}{\percent}
+of the Dataset~A rows belong to a system present in~B). Agreement between the two datasets is
+therefore evidence that a result is stable under a second curation and a second featurization of
+the \emph{same} materials, not an independent replication. The complements are small and
+unrepresentative: \num{416} Dataset~B rows in \num{163} systems absent from~A (mean $\Tc$
+\SI{5.7}{\kelvin}) and \num{1535} Dataset~A rows in \num{482} systems absent from~B (mean $\Tc$
+\SI{64.3}{\kelvin}, \num{683} of them with the coefficient-less oxygen of
+section~\ref{sec:audit}). A cross-evaluation on these complements is reported in
+section~\ref{sec:results-gap} with those cautions. The publication of origin of each row is not
+present in either distribution, so an intersection by publication cannot be computed.
+
+\subsection{Element systems as the grouping unit}
 \label{sec:families}
 
-We define a \emph{chemical family} as the set of constituent elements of a compound, irrespective
-of stoichiometry: Ba$_{0.2}$La$_{1.8}$Cu$_{1}$O$_{4}$ and Ba$_{0.1}$La$_{1.9}$Cu$_{1}$O$_{4}$
-both belong to the family $\{$Ba, La, Cu, O$\}$. This is the grouping that corresponds to the
-doping series responsible for the redundancy, and unlike an unsupervised clustering it is
-inspectable: a reader can verify family membership from the formula.
+We group rows by their \emph{element system}, the set of constituent elements irrespective of
+stoichiometry: Ba$_{0.2}$La$_{1.8}$Cu$_{1}$O$_{4}$ and Ba$_{0.1}$La$_{1.9}$Cu$_{1}$O$_{4}$ both
+belong to $\{$Ba, La, Cu, O$\}$. This is the grouping used by 3DSC~\cite{sommer2023} and, as the
+unit of analysis, by PhaseSelect~\cite{vasylenko2023}; it is inspectable from the formula. It is an
+\emph{operational} grouping, not a one-to-one map onto doping series: the single system
+$\{$Ba, Cu, O, Y$\}$ holds \num{720} Dataset~A rows in \num{184} distinct formulas with $\Tc$ from
+\SI{4.3}{\kelvin} to \SI{130}{\kelvin}, and it merges the structurally distinct
+YBa$_2$Cu$_3$O$_{7-\delta}$, Y$_2$Ba$_4$Cu$_7$O$_{15-\delta}$ and YBa$_2$Cu$_4$O$_8$ phases
+(\num{596}, \num{38} and \num{51} rows with Cu:Y ratios of \num{3}, \num{3.5} and
+\num{4})~\cite{gupta1993}. Holding out a system therefore holds out several related phases at once,
+which is a conservative choice for the question of unseen chemistries and a coarse one for the
+question of unseen phases; section~\ref{sec:results-levels} compares it with finer and coarser
+separations.
 
-The resulting concentration is severe (figure~\ref{fig:anatomy}(a)). Dataset~A contains
-\num{3365} families for \num{21263} compounds, with \SI{79.5}{\percent} of all materials in
-families of five or more members; the three largest families hold \num{720}, \num{358} and
-\num{323} compounds. Dataset~B contains \num{3063} families for \num{12440} compounds, with
-\SI{66.7}{\percent} in families of five or more and a largest family of \num{131}. Both datasets
-also carry a long tail of singletons (\num{1169} and \num{1322} respectively).
+The concentration is severe (figure~\ref{fig:anatomy}(a)). Dataset~A has \num{3365} systems for
+\num{21263} rows, \SI{79.5}{\percent} of the rows in systems of five or more members, the three
+largest holding \num{720}, \num{358} and \num{323} rows, and \num{1169} singletons. Dataset~B has
+\num{3046} systems for \num{12336} rows, \SI{66.5}{\percent} in systems of five or more, a largest
+system of \num{131} rows and \num{1316} singletons. Labels are assigned with
+\texttt{pandas.factorize} \emph{after} all row filtering (section~\ref{sec:repro}).
 
-Family labels are assigned with \texttt{pandas.factorize} applied \emph{after} all row filtering.
-This ordering matters: applying it before a $\Tc>0$ mask leaves gaps in the label sequence, and
-because \texttt{GroupKFold} breaks ties by label order when assigning groups to folds, gapped and
-contiguous labellings produce different partitions of the same families. We return to this point
-in section~\ref{sec:repro}.
-
-\subsection{Cross-validation protocols}
+\subsection{Separation levels and cross-validation protocols}
 \label{sec:protocols}
 
-We compare two protocols, identical in every respect except how the partition is formed:
+The main comparison is between two five-fold protocols identical in every respect except the
+partition: \textbf{random} (\texttt{KFold(5, shuffle=True)}; members of a system routinely fall on
+both sides) and \textbf{element-system} (\texttt{GroupKFold(5)} on the system label; every system
+in exactly one fold). For the robustness analysis both protocols are repeated with shuffled
+splitters over seeds \numrange{0}{4} (\texttt{GroupKFold(n\_splits=5, shuffle=True,
+random\_state=s)}, available since scikit-learn~1.6), so the grouped partition varies with the seed
+and not only the model initialisation.
 
-\begin{itemize}
-\item \textbf{Random}: \texttt{KFold(5, shuffle=True)}. Compounds are assigned to folds
-      independently, so members of the same family routinely appear on both sides.
-\item \textbf{Chemical-family}: \texttt{GroupKFold(5)} with the family label as the grouping
-      variable. Every family appears in exactly one fold, so no test compound shares a chemistry
-      with any training compound.
-\end{itemize}
-
-For the robustness analysis of section~\ref{sec:results-robust} both protocols are repeated over
-five seeds. We use \texttt{GroupKFold(n\_splits=5, shuffle=True, random\_state=s)}, available
-since scikit-learn~1.6, so that the grouped partition genuinely varies with the seed; without
-\texttt{shuffle} the grouped splitter is deterministic and repeated runs differ only in model
-initialisation.
+Because ``unseen'' admits several definitions, section~\ref{sec:results-levels} embeds the two
+protocols in a ladder of five separation levels, all \texttt{GroupKFold(5)} with a different key
+and therefore the same test-set size: \textbf{L0} rows (the random protocol); \textbf{L1}
+normalised composition (fractions rounded to $10^{-3}$, so replicate measurements of one
+composition never cross folds); \textbf{L2} element system (the grouped protocol);
+\textbf{L3} host system, the set of elements with molar fraction at least \num{0.05} (dopants
+below that threshold are ignored; \num{0.02} and \num{0.10} as sensitivity); \textbf{L4}
+leave-clusters-out, \texttt{KMeans(50)} on the standardised presence-plus-fraction representation,
+in the spirit of Meredig \etal~\cite{meredig2018}.
 
 \subsection{Models}
 \label{sec:models}
 
-We use the two tree ensembles that dominate reported results on this task, with
-hyperparameters fixed per dataset from prior grid searches and held constant across protocols.
-Dataset~A: XGBoost~\cite{chen2016} with \num{250} estimators, maximum depth \num{8}, learning
-rate \num{0.07}, subsample \num{0.9}, column subsample \num{0.7}, \texttt{gamma} \num{0},
-\texttt{reg\_alpha} \num{0.01}; random forest with \num{150} trees, maximum depth \num{25} and
-\texttt{sqrt} feature subsampling. Dataset~B: XGBoost with \num{300} estimators, maximum depth
-\num{10}, learning rate \num{0.05}, subsample and column subsample \num{0.8}, \texttt{hist} tree
-method; random forest with \num{150} trees and maximum depth \num{30}, without feature
-subsampling. Both forests use \texttt{min\_samples\_leaf} \num{3} and
-\texttt{min\_samples\_split} \num{5}. The two configurations differ because each was tuned
-against its own featurization; they are held fixed across protocols, which is what the
-random-versus-grouped comparison requires. Both were selected by grid search under
-\emph{random} $K$-fold cross-validation in earlier work, i.e.\ under the protocol this paper
-argues is leaky. Because that could in principle bias the measured gap---a model tuned to
-interpolate may lose more when forced to extrapolate---section~\ref{sec:results-tuning} repeats
-the comparison with hyperparameters selected by nested grouped cross-validation and over a
-\num{16}-point grid. Regression metrics (MAE, RMSE, $\Rsq$) are computed on pooled out-of-fold
-predictions.
+We use the two tree ensembles that dominate reported results on this task, with hyperparameters
+fixed per dataset from prior grid searches and held constant across protocols. Dataset~A:
+XGBoost~\cite{chen2016} with \num{250} estimators, maximum depth \num{8}, learning rate \num{0.07},
+subsample \num{0.9}, column subsample \num{0.7}, \texttt{gamma} \num{0}, \texttt{reg\_alpha}
+\num{0.01}; random forest with \num{150} trees, maximum depth \num{25} and \texttt{sqrt} feature
+subsampling. Dataset~B: XGBoost with \num{300} estimators, maximum depth \num{10}, learning rate
+\num{0.05}, subsample and column subsample \num{0.8}, \texttt{hist} tree method; random forest with
+\num{150} trees and maximum depth \num{30}, without feature subsampling. Both forests use
+\texttt{min\_samples\_leaf} \num{3} and \texttt{min\_samples\_split} \num{5}. Both configurations
+were selected under \emph{random} $K$-fold cross-validation in earlier work; because that could
+bias the measured gap, section~\ref{sec:results-tuning} repeats the comparison with
+hyperparameters selected by nested cross-validation in \emph{both} arms and over a \num{16}-point
+grid. Regression metrics (MAE, RMSE, $\Rsq$) are computed on pooled out-of-fold predictions.
 
-\subsection{Nulls and the family-identity ceiling}
+\subsection{Representations and nulls}
 \label{sec:nulls}
 
-To separate memorisation from learned chemistry we evaluate a ladder of three predictors under
-both protocols, on identical folds:
+To separate what the descriptors add from what a label already provides, we evaluate, on identical
+folds under both protocols: a \textbf{family-mean null} (no features; predict the training-fold
+mean $\Tc$ of the row's system, falling back to the global training mean for an unseen system);
+and the same XGBoost on four representations---\textbf{R0} binary element presence
+(\num{86} indicators for~A, \num{83} for~B), \textbf{R1} presence plus molar fractions
+(\num{172} and \num{166} columns), \textbf{R2} the published descriptors (\num{81} and \num{132}),
+and \textbf{R3} descriptors plus fractions (\num{253} and \num{298}). Hyperparameters are not
+re-tuned per representation. Two model-class controls accompany them: a five-nearest-neighbour
+regressor on R1 and an extra-trees ensemble of \num{500} trees on R2. Differences between
+representations are reported as differences of losses ($\Delta$MAE, $\Delta\Rsq$ and the relative
+reduction of the sum of squared errors, $1 - \mathrm{SSE}_b/\mathrm{SSE}_a$) with paired intervals;
+we do not decompose $\Rsq$ additively, since $\Rsq$ values of nested models are not shares of a
+common total.
 
-\begin{enumerate}
-\item \textbf{Family-mean null.} No features at all: predict the mean $\Tc$ of the compound's
-      family as computed on the training fold, falling back to the global training mean for
-      unseen families. This is a pure lookup table.
-\item \textbf{Element-presence null.} The same XGBoost, trained on binary indicators of element
-      presence only (\num{86} indicators for Dataset~A, \num{83} for Dataset~B): does the
-      compound contain Cu, does it contain O, and so on. All statistical and Magpie descriptors,
-      and all stoichiometric information, are discarded.
-\item \textbf{Full model.} The published featurization.
-\end{enumerate}
+\subsection{Clustering descriptors and the design effect}
+\label{sec:cluster}
 
-Separately, we quantify how much of the variance in $\Tc$ is attributable to family identity
-alone, treating the dataset as a clustered sample. With $N$ compounds in $k$ families of sizes
-$n_i$, a one-way random-effects ANOVA gives the intraclass correlation
+With $N$ rows in $k$ systems of sizes $n_i$, a one-way random-effects ANOVA gives the intraclass
+correlation
 \begin{equation}
 \ICC = \frac{\mathrm{MS_B} - \mathrm{MS_W}}{\mathrm{MS_B} + (m_0 - 1)\,\mathrm{MS_W}},
 \qquad
 m_0 = \frac{N - \sum_i n_i^2 / N}{k - 1},
 \label{eq:icc}
 \end{equation}
-where $m_0$ is Searle's cluster size for unequal clusters. The corresponding design effect and
-effective sample size are
+and the in-sample share of $\Tc$ variance attributable to system identity is
+$\eta^2 = 1 - \mathrm{SS_{within}}/\mathrm{SS_{total}}$, computed from system means over the full
+dataset. $\eta^2$ is not a cross-validated score: it uses every system's mean, including systems a
+cross-validated model never sees, and it is not commensurable with any $\Rsq$ in either direction.
+We never take differences or ratios between $\eta^2$ and an $\Rsq$, and draw it hatched.
+
+A design effect is defined only for a specified estimator. Under a random-intercept model with
+independent systems, common marginal variance $\sigma^2$ and within-system correlation $\rho$, the
+variance of the \emph{row-weighted} mean of $\Tc$ is
+$\sigma^2 N^{-2}\,[(1-\rho)N + \rho\sum_i n_i^2]$, so
 \begin{equation}
-\mathrm{deff} = 1 + (m - 1)\,\ICC,
-\qquad
-\Neff = N / \mathrm{deff},
+\mathrm{deff}_{\mathrm{rows}} = 1 + \rho\,(m_w - 1), \qquad m_w = \sum_i n_i^2 / N,
+\qquad \Neff = N/\mathrm{deff},
 \label{eq:deff}
 \end{equation}
-which we report for both $m = \bar m = N/k$ and $m = m_0$. We also report the oracle bound
-$\eta^2 = 1 - \mathrm{SS_{within}}/\mathrm{SS_{total}}$ obtained from family means computed on
-the full dataset. We emphasise that $\eta^2$ is \emph{not} a cross-validated $\Rsq$: it is
-computed with knowledge of every family's mean, including families that a cross-validated model
-would never see. It measures how much of the target a categorical label explains in-sample, and it
-is not commensurable with a cross-validated score in either direction: the grouped-CV figures of
-table~\ref{tab:main} fall below it while the random-split figures exceed it. We therefore never
-take differences or ratios between $\eta^2$ and any $\Rsq$, and plot it with distinct hatching
-throughout.
+whereas for the \emph{mean of system means} (rows weighted $1/n_i$)
+$\mathrm{deff}_{\mathrm{sys}} = (N/k^2)\sum_i[\rho + (1-\rho)/n_i]$. Neither equals
+$1 + \rho(m_0 - 1)$, which the previous version of this paper used and which is not the variance
+of any estimator of the mean under this model. We report both estimators and state which one a
+number refers to; none of them is the effective sample size of the learning problem or of a
+predictor's MAE.
 
-\subsection{Screening metric}
+\subsection{Selection metric}
 \label{sec:screening}
 
-Discovery campaigns rank candidates rather than predicting each $\Tc$ exactly, so we also report
-top-100 precision: the fraction of the \num{100} highest-predicted test compounds whose true
-$\Tc$ exceeds a high-$\Tc$ threshold. We define that threshold as the 90th percentile of $\Tc$
-\emph{within the training fold}, so the base rate is \SI{10}{\percent} by construction and no
-information from the test fold enters the evaluation criterion. Using the whole-dataset
-percentile instead changes the Dataset~B grouped figure by \num{0.4} points, but it would let
-test compounds influence the threshold that judges them---the same class of leakage this paper
-is about. Precision is reported as the mean over folds with the between-fold standard deviation;
-features are not standardised.
+Discovery campaigns rank candidates, so we also score selection. A test row is a positive if its
+$\Tc$ is at least the 90th percentile of the \emph{training-fold} $\Tc$ (operator $\ge$; ties at
+the threshold occur), so no test information enters the criterion. The prevalence of positives in a
+test fold is then close to, but not equal to, \SI{10}{\percent}: under the element-system protocol
+whole high-$\Tc$ systems land in one fold and the prevalence ranges from \SI{3.6}{\percent} to
+\SI{18.2}{\percent} across the five Dataset~A folds and from \SI{6.3}{\percent} to
+\SI{13.5}{\percent} in Dataset~B. The expected precision of a random selector, and of any ranker
+whose predictions are constant within a fold, is that fold's prevalence---not \SI{10}{\percent}.
+For $K = \num{100}$ we report precision, recall and enrichment (precision over prevalence) as
+\emph{fractional} quantities under ties (a tied group contributes its expected number of positives),
+the number of distinct systems among the selected rows, the precision under a budget of at most
+three rows per system, and, for Dataset~B, the precision when the \num{3925} measured
+non-superconductors of the Stanev list ($\Tc \le 0$, \SI{24.1}{\percent} of the enlarged pool) are
+admitted to the candidate pool as scored negatives. Intervals are family bootstraps of the test
+pools, paired across rankers; per-fold standard deviations are also given.
+
+\subsection{Inference}
+\label{sec:inference}
+
+All intervals in this paper are \SI{95}{\percent} percentile intervals from a bootstrap of
+\emph{whole element systems} (\num{2000} resamples, seed~0), \emph{paired} between the conditions
+being compared (the same resampled systems enter both arms) and conditional on the fitted
+out-of-fold predictions; they therefore describe uncertainty over systems, not over refitting,
+which the seed analysis of section~\ref{sec:results-robust} covers. Row-resampled intervals, which
+the previous version used, are \numrange{1.5}{5.6} times narrower for the same statistics because they
+treat replicates of one system as independent. Alongside the pooled MAE we report the
+\emph{macro} MAE---the mean over systems of the per-system MAE---so that the gap can be read both
+per row and per system.
 
 \subsection{Nearest-neighbour diagnostic}
 
-To confirm that the two protocols differ in the way the family construction predicts, we measure
-the Euclidean distance from each test compound to its nearest training compound in standardised
-feature space, under a random $80/20$ hold-out and under a grouped hold-out of the same size.
+To confirm that the protocols differ in the way the construction predicts, we measure the Euclidean
+distance from each test row to its nearest training row in descriptor space standardised with a
+scaler fitted on the \emph{training} rows only, under a random $80/20$ hold-out and a grouped
+hold-out of the same size.
+
+\subsection{Temporal corpus}
+\label{sec:temporal-data}
+
+For the forward-in-time test we rebuilt a corpus from the primary SuperCon export (\num{26321}
+reports; not redistributed, see Data availability). Each report was dated by the year in its
+bibliographic field (\SI{99.7}{\percent} of reports; the year of the \emph{report}, not of
+discovery; fallback rules for the rest), the chemical exclusions of section~\ref{sec:audit} were
+applied to the exact formulas, reports with $\Tc \le 0$ were dropped, and the \num{20771} dated
+reports were collapsed to \num{12543} normalised compositions in \num{3267} element systems, each
+dated by its first report and labelled with the median $\Tc$ of its reports (maximum as
+sensitivity). Compositions are featurized with the Dataset-B recipe and scored with the Dataset-B
+models. For each cut $T$ the models are fitted on compositions first reported before $T$ and
+evaluated, frozen, on those first reported at or after $T$; independently, using only the pre-$T$
+data, each protocol L0--L4 produces the five-fold out-of-fold estimate it would have produced at
+the time.
 
 \section{Results}
 
 \subsection{Reproducing the reported performance}
 \label{sec:results-repro}
 
-Under the conventional protocol our models match the published range. A single random $80/20$
-split gives MAE $=\SI{5.14}{\kelvin}$ and $\Rsq = 0.932$ on Dataset~A, and
-MAE $=\SI{3.76}{\kelvin}$ with $\Rsq = 0.934$ on Dataset~B. These are the figures a reader of
-the literature would expect, and they establish that what follows is not an artefact of a weak
-baseline.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figure1}
-\caption{\textbf{Chemical leakage in Dataset~A is structural rather than incidental: most
-materials share their exact element set with another material, so validation that ignores
-families tests models on near-duplicates.} (a)~Distribution of chemical-family size, a family
-being the set of materials with an identical constituent-element set ($n=\num{21263}$ materials
-in $k=\num{3365}$ families; the largest, $\{$Ba, Cu, O, Y$\}$, holds \num{720} doping variants).
-(b)~Test MAE under both protocols for both models; bars are means over five independent family
-partitions, error bars the standard deviation across them, open circles the individual
-partitions. (c)~Parity plot for XGBoost under chemical-family hold-out, pooling out-of-fold
-predictions of the deterministic partition ($n=\num{21263}$ predictions, each from a model that
-never saw the test material's family; MAE $=\SI{8.3}{\kelvin}$, $\Rsq=0.85$, both
-cross-validated). (d)~Distance from each test material to its nearest training material in
-standardised feature space for a single $80/20$ hold-out per scheme ($n=\num{4253}$ random and
-\num{4344} family-split test materials; distances clipped at \num{3} for display). The median
-test material is \num{23} times farther from its nearest training example under the family
-split, which is the mechanism behind the error increase in~(b).}
-\label{fig:anatomy}
-\end{figure}
-
-\subsection{Holding out chemical families inflates the error}
-\label{sec:results-gap}
-
-Table~\ref{tab:main} reports both protocols for both models and both datasets, together with the
-family-mean null.
+Under the conventional protocol our models match the published range: pooled five-fold random
+cross-validation gives MAE $=\SI{5.23}{\kelvin}$ and $\Rsq = \num{0.928}$ for XGBoost on Dataset~A,
+and MAE $=\SI{3.78}{\kelvin}$ with $\Rsq = \num{0.932}$ on Dataset~B (table~\ref{tab:main}). These
+are the figures a reader of the literature expects, so what follows is not an artefact of a weak
+baseline. The audit of section~\ref{sec:audit} moves the Dataset-B figures by little: relative to
+the previous checkpoint (\num{12440} rows) the random-split XGBoost MAE falls from
+\SI{3.91}{\kelvin} to \SI{3.78}{\kelvin} and the grouped MAE is unchanged (\SI{6.17}{\kelvin} to
+\SI{6.18}{\kelvin}), so the XGBoost inflation rises from \SI{57.6}{\percent} to
+\SI{63.7}{\percent}; for the random forest it rises from \SI{49.9}{\percent} to
+\SI{53.0}{\percent}. Part of that shift is partition noise (section~\ref{sec:audit}), and the
+intervals of section~\ref{sec:results-gap} cover both values.
 
 \begin{table}[t]
-\caption{Pooled out-of-fold performance under random and chemical-family cross-validation.
-The family-mean null uses no features: it predicts the training-fold mean $\Tc$ of the compound's
-family. Under the grouped protocol every test family is unseen by construction, so the null
-degenerates to a constant predictor and its $\Rsq$ is zero by definition---the informative
-comparison is the random column, where the same lookup reaches $\Rsq = 0.80$ and $0.76$.}
+\caption{Pooled out-of-fold performance under random and element-system cross-validation (seed
+\num{42}; deterministic \texttt{GroupKFold}). The family-mean null uses no features: it predicts the
+training-fold mean $\Tc$ of the row's element system. Under the grouped protocol every test system
+is unseen, so the null returns the training-fold mean and its $\Rsq$ is close to zero; it is
+slightly negative because the training-fold mean differs from the test-fold mean by
+\SIrange{0.8}{4.4}{\kelvin} across folds. Dataset~B is the audited checkpoint.}
 \label{tab:main}
 \centering
 \setlength{\tabcolsep}{5pt}
@@ -331,68 +410,112 @@ comparison is the random column, where the same lookup reaches $\Rsq = 0.80$ and
 \toprule
 Model & Split & {MAE (K)} & {RMSE (K)} & {$\Rsq$} \\
 \midrule
-\multicolumn{5}{@{}l}{\textit{Dataset A} (Hamidieh/UCI, $N=\num{21263}$, $k=\num{3365}$ families)}\\
+\multicolumn{5}{@{}l}{\textit{Dataset A} (Hamidieh/UCI, $N=\num{21263}$, $k=\num{3365}$ systems)}\\
 Family-mean null & Random & 9.40 & 15.30 & 0.801 \\
-Family-mean null & Chemical-family & 29.41 & 34.37 & -0.007 \\
+Family-mean null & Element-system & 29.41 & 34.37 & -0.007 \\
 XGBoost & Random & 5.23 & 9.17 & 0.928 \\
-XGBoost & Chemical-family & 8.31 & 13.06 & 0.855 \\
-Random forest & Random & 5.40 & 9.47 & 0.923 \\
-Random forest & Chemical-family & 8.68 & 13.47 & 0.845 \\
+XGBoost & Element-system & 8.31 & 13.06 & 0.855 \\
+Random forest & Random & 5.38 & 9.44 & 0.924 \\
+Random forest & Element-system & 8.69 & 13.47 & 0.845 \\
 \midrule
-\multicolumn{5}{@{}l}{\textit{Dataset B} (Stanev/SuperCon, $N=\num{12440}$, $k=\num{3063}$ families)}\\
-Family-mean null & Random & 8.19 & 13.94 & 0.764 \\
-Family-mean null & Chemical-family & 22.67 & 28.74 & -0.003 \\
-XGBoost & Random & 3.91 & 7.68 & 0.928 \\
-XGBoost & Chemical-family & 6.17 & 10.99 & 0.853 \\
-Random forest & Random & 4.33 & 8.31 & 0.916 \\
-Random forest & Chemical-family & 6.52 & 11.56 & 0.838 \\
+\multicolumn{5}{@{}l}{\textit{Dataset B} (Stanev/SuperCon, audited, $N=\num{12336}$, $k=\num{3046}$ systems)}\\
+Family-mean null & Random & 8.07 & 13.71 & 0.769 \\
+Family-mean null & Element-system & 22.49 & 28.55 & -0.003 \\
+XGBoost & Random & 3.78 & 7.44 & 0.932 \\
+XGBoost & Element-system & 6.18 & 11.12 & 0.848 \\
+Random forest & Random & 4.22 & 8.18 & 0.918 \\
+Random forest & Element-system & 6.46 & 11.46 & 0.838 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The pattern is the same in both datasets. Enforcing family-disjoint folds raises XGBoost's MAE
-from \SI{5.23}{\kelvin} to \SI{8.31}{\kelvin} on Dataset~A and from \SI{3.91}{\kelvin} to
-\SI{6.17}{\kelvin} on Dataset~B, and lowers $\Rsq$ by \num{0.073} and \num{0.075}. The random
-forest behaves identically. That two datasets with different curation, different size and
-completely different featurizations agree to within a few hundredths of $\Rsq$ indicates that the
-gap is a property of the prediction task, not of a particular data pipeline.
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.76\textwidth]{figure1}
+\caption{\textbf{Chemical leakage in Dataset~A is structural: most rows share their exact element
+set with another row, so validation that ignores element systems tests models on near-duplicates.}
+(a)~Distribution of element-system size ($n=\num{21263}$ rows in $k=\num{3365}$ systems; the
+largest, $\{$Ba, Cu, O, Y$\}$, holds \num{720} rows). (b)~Test MAE under both protocols for both
+models; bars are means over five shuffled partitions (seeds \numrange{0}{4}), error bars the standard
+deviation across them, open circles the individual partitions. (c)~Parity plot for XGBoost under
+element-system hold-out, pooling out-of-fold predictions of the deterministic partition
+(MAE $=\SI{8.3}{\kelvin}$, $\Rsq=\num{0.85}$, both cross-validated). (d)~Distance from each test row
+to its nearest training row in descriptor space standardised on the training rows only, for a
+single $80/20$ hold-out per scheme ($n=\num{4253}$ random and \num{4344} grouped test rows;
+clipped at \num{3} for display). The median test row is \num{23} times farther from its nearest
+training example under the grouped split.}
+\label{fig:anatomy}
+\end{figure}
 
-The nearest-neighbour diagnostic confirms the mechanism (figure~\ref{fig:anatomy}(d)). Under a
-random hold-out the median distance from a test compound to its closest training compound is
-\num{0.054} in Dataset~A; under a grouped hold-out of the same size it is \num{1.273}, a factor
-of \num{23}. For Dataset~B the medians are \num{0.140} and \num{1.584}, a factor of \num{11}.
-The distance ratio understates the mechanism. Counting directly, \SI{37.0 \pm 1.1}{\percent} of
-Dataset~A test rows under five-fold random splitting have a training row with an
-\emph{identical} \num{81}-feature vector; under family-aware splitting the fraction is
-\SI{0.0}{\percent}. The random protocol is not evaluating extrapolation, nor even
-near-duplicate recall: for more than a third of its test set it is evaluating exact-duplicate
-recall, where the only thing left to predict is the measurement scatter of $\Tc$ within one
-composition. That scatter sets a floor: among the \num{8511} Dataset~A rows that share their
-feature vector with another row, the mean absolute deviation of $\Tc$ from the within-group mean
-is \SI{3.49}{\kelvin}, and XGBoost under random splitting reaches \SI{4.83}{\kelvin} on those
-same rows. The floor is measured only on that \SI{40}{\percent} of the data and says nothing
-about the remainder; on the rows it does cover, most of the residual random-split error is
-label noise that no composition-based model can remove.
+\subsection{Holding out element systems inflates the error}
+\label{sec:results-gap}
 
-The gap itself is not a sampling artefact. Bootstrapping the pooled out-of-fold predictions
-(\num{2000} resamples of the test rows) gives \SI{95}{\percent} intervals for the MAE inflation of
-\SIrange[range-phrase=--,range-units=single]{55.1}{63.0}{\percent} on Dataset~A and \SIrange[range-phrase=--,range-units=single]{51.4}{63.9}{\percent} on Dataset~B, for
-XGBoost at seed \num{42}; the random and grouped MAE intervals
-(\SIrange[range-phrase=--,range-units=single]{5.13}{5.33}{\kelvin} versus \SIrange[range-phrase=--,range-units=single]{8.18}{8.44}{\kelvin} on~A,
-\SIrange[range-phrase=--,range-units=single]{3.79}{4.03}{\kelvin} versus \SIrange[range-phrase=--,range-units=single]{6.01}{6.33}{\kelvin} on~B) do not approach each
-other.
+Enforcing system-disjoint folds raises XGBoost's pooled MAE from \SI{5.23}{\kelvin} to
+\SI{8.31}{\kelvin} on Dataset~A ($\Delta$MAE $=\SI{3.08}{\kelvin}$ \ci{2.58}{3.65}, inflation
+\SI{58.9}{\percent} \ci{50.4}{68.6}) and from \SI{3.78}{\kelvin} to \SI{6.18}{\kelvin} on
+Dataset~B (\SI{2.41}{\kelvin} \ci{2.01}{2.88}; \SI{63.7}{\percent} \ci{54.6}{74.3}), and lowers
+$\Rsq$ by \num{0.074} \ci{0.058}{0.094} and \num{0.084} \ci{0.066}{0.109}. The random forest
+behaves alike (\SI{61.4}{\percent} \ci{52.2}{71.5} and \SI{53.0}{\percent} \ci{44.5}{62.8}). All
+intervals are paired family bootstraps and none approaches zero. Read per system rather than per
+row, the gap is about half as large: the macro MAE of XGBoost rises from \SI{5.07}{\kelvin} to
+\SI{6.43}{\kelvin} on~A (\SI{27.0}{\percent} \ci{23.8}{30.5}) and from \SI{3.50}{\kelvin} to
+\SI{4.53}{\kelvin} on~B (\SI{29.4}{\percent} \ci{25.4}{33.8}); for the random forest
+\SI{25.5}{\percent} and \SI{21.9}{\percent}. The pooled inflation is therefore concentrated in the
+large systems, whose many rows dominate the pooled average and whose replicates are exactly what a
+random split lets the model see (figure~\ref{fig:summary}(a),(b)). That the two curations agree is
+consistent with the gap being a property of the task rather than of one pipeline, but since they
+share \SI{96.6}{\percent} of their systems (section~\ref{sec:overlap}) it is not an independent
+replication.
+
+The nearest-neighbour diagnostic confirms the mechanism (figures~\ref{fig:anatomy}(d)
+and~\ref{fig:summary}(d)). Under a random hold-out the median distance from a test row to its
+closest training row is \num{0.054} in Dataset~A; under a grouped hold-out of the same size it is
+\num{1.26}, a factor of \num{23}. For Dataset~B the medians are \num{0.149} and \num{1.51}, a
+factor of \num{10}. Counting directly, \SI{37.0}{\percent} of Dataset~A test rows under five-fold
+random splitting have a training row with an \emph{identical} \num{81}-feature vector; under
+system-aware splitting the fraction is \SI{0.0}{\percent}. For more than a third of its test set the
+random protocol is evaluating exact-duplicate recall. Among the \num{8511} Dataset~A rows that share
+their feature vector with at least one other row (\num{2418} groups), the mean absolute deviation
+of $\Tc$ from the group median is \SI{3.22}{\kelvin} (\SI{3.49}{\kelvin} from the group mean). We
+call this the \emph{dispersion not explained by the representation}: it is variation that no
+deterministic model of these descriptors can reproduce on those rows, but it is neither a lower
+bound on the population MAE nor pure measurement error, because it uses all labels of the group and
+may reflect structure, pressure, preparation or unrecorded conditions. A replicate-excluded
+predictor (the median of the \emph{other} replicates of the group) reaches MAE \SI{4.72}{\kelvin}
+on these rows, against \SI{4.83}{\kelvin} for XGBoost under random splitting and
+\SI{7.81}{\kelvin} under grouped splitting.
+
+Two sensitivity checks bound the measurement. Removing the \num{1927} Dataset~A rows with
+coefficient-less oxygen (section~\ref{sec:audit}; \num{19336} rows and \num{3171} systems remain,
+folds redrawn) leaves the XGBoost inflation at \SI{61.9}{\percent} \ci{52.8}{72.1} and the
+$\Rsq$ drop at \num{0.078}, against \SI{58.9}{\percent} and \num{0.074} on the full table; the
+random-forest inflation moves from \SI{61.4}{\percent} to \SI{57.9}{\percent} \ci{48.3}{69.3}.
+Second, in the common Magpie space a model trained on all of Dataset~B predicts the Dataset~A rows
+whose system \emph{is} in~B with $\Rsq = \num{0.923}$ and the \num{1535} rows whose system is not
+with $\Rsq = \num{0.500}$ \ci{0.413}{0.570} (MAE \SI{17.68}{\kelvin}); a model trained on all of~A
+predicts the \num{416} Dataset-B rows in systems absent from~A with $\Rsq = \num{0.615}$
+\ci{0.415}{0.694} (MAE \SI{3.73}{\kelvin}) and the rest with $\Rsq = \num{0.980}$. The
+high in-system values are not generalisation---the same formulas are in both tables---and the
+complement values are provisional because the complements are small, unrepresentative
+(section~\ref{sec:overlap}) and, for~A, dominated by the oxygen defect; they point the same way as
+the grouped protocol.
 
 \subsection{The gap is stable across partitions}
 \label{sec:results-robust}
 
-A single partition could be unrepresentative, so we repeat both protocols over five independent
-partitions (table~\ref{tab:robust}).
+Repeating both protocols over five shuffled partitions (table~\ref{tab:robust}) gives MAE
+inflations from \SI{51.0}{\percent} to \SI{60.5}{\percent} across the four dataset--model
+combinations and $\Delta\Rsq$ from \num{-0.071} to \num{-0.081}, with across-seed standard
+deviations of at most \num{1.6} percentage points. Pooled out-of-fold metrics average over the
+whole dataset, so redrawing the partition moves them little; the uncertainty that matters for a
+single reported figure is the between-system uncertainty of section~\ref{sec:results-gap}, which is
+an order of magnitude wider.
 
 \begin{table}[t]
-\caption{Robustness over five independent partitions. Both arms use shuffled splitters with
-seeds \numrange{0}{4}, so the grouped partition itself varies between seeds and not only the
-model initialisation. Inflation is computed per seed and then averaged. Uncertainties are
-standard deviations across seeds.}
+\caption{Robustness over five shuffled partitions (seeds \numrange{0}{4}; both arms use shuffled
+splitters, so the grouped partition varies between seeds and not only the model initialisation).
+Inflation is computed per seed and averaged; uncertainties are standard deviations across seeds.
+Dataset~B is the audited checkpoint.}
 \label{tab:robust}
 \centering
 \setlength{\tabcolsep}{5pt}
@@ -403,403 +526,630 @@ standard deviations across seeds.}
 \midrule
 A & XGBoost & 5.25 & 0.01 & 8.24 & 0.07 & 56.9 & 1.6 & -0.071 & 0.003 \\
 A & Random forest & 5.41 & 0.01 & 8.62 & 0.07 & 59.5 & 1.4 & -0.076 & 0.002 \\
-B & XGBoost & 3.87 & 0.02 & 6.23 & 0.04 & 60.8 & 0.5 & -0.081 & 0.002 \\
-B & Random forest & 4.32 & 0.01 & 6.58 & 0.02 & 52.5 & 0.6 & -0.081 & 0.002 \\
+B & XGBoost & 3.84 & 0.02 & 6.16 & 0.05 & 60.5 & 1.0 & -0.081 & 0.002 \\
+B & Random forest & 4.26 & 0.01 & 6.43 & 0.04 & 51.0 & 1.1 & -0.079 & 0.003 \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-MAE inflation ranges from \SI{52.5}{\percent} to \SI{60.8}{\percent} across the four
-dataset--model combinations, and $\Delta\Rsq$ from \num{-0.071} to \num{-0.081}
-(figure~\ref{fig:summary}(a),(b)). The
-across-seed standard deviations are small---at most \num{1.6} percentage points of inflation---so
-the effect is not an artefact of a fortunate partition. We note that these dispersions do
-\emph{not} grow appreciably when the partition is allowed to vary rather than only the model
-seed: pooled out-of-fold metrics average over the whole dataset, so redrawing the partition moves
-them very little. The honest statement of run-to-run uncertainty for a single reported figure is
-therefore the between-fold spread, which is considerably larger, and we quote it for the
-per-fold screening metric in section~\ref{sec:results-screening}.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figure2}
-\caption{\textbf{A featureless predictor that returns only each family's mean $\Tc$ reproduces
-most of the headline performance under random splitting, locating that performance in family
-memorisation rather than in composition--property learning.} (a)~Decomposition of the
-cross-validated $\Rsq$ into the part the family-mean null already achieves (grey) and the
-increment contributed by features and model (blue), for both datasets under both protocols
-(Dataset~A: $n=\num{21263}$, $k=\num{3365}$; Dataset~B: $n=\num{12440}$, $k=\num{3063}$). Under
-random splitting the null alone reaches \SI{86}{\percent} (A) and \SI{82}{\percent} (B) of the
-full model's $\Rsq$; under family-aware splitting it collapses to $\Rsq \approx 0$
-($\num{-0.007}$ and $\num{-0.003}$, drawn as a baseline stub) because a held-out family has no
-training mean to look up. All values are cross-validated; none is an oracle. (b)~Top-100
-screening precision of the same featureless ranker against XGBoost. Under random splitting the
-null ranks nearly as well as the model (\SI{95.8}{\percent} versus \SI{98.4}{\percent} on A);
-under family-aware splitting it falls to \SI{11.6}{\percent} (A) and \SI{9.6}{\percent} (B), at
-or near the \SI{10}{\percent} base rate, while XGBoost retains \SI{87.0}{\percent} and
-\SI{85.2}{\percent}. The threshold is the 90th percentile of training-fold $\Tc$.}
-\label{fig:null}
-\end{figure}
 
 \subsection{The gap depends on model complexity, not on how the model was tuned}
 \label{sec:results-tuning}
 
-The hyperparameters of section~\ref{sec:models} were chosen under random cross-validation, so a
-sceptic could ask whether the gap is partly an artefact of tuning under the leaky protocol. We
-test this two ways (table~\ref{tab:tuning}). First, nested grouped cross-validation: within each
-of the five outer \texttt{GroupKFold} folds, a \num{16}-point XGBoost grid (maximum depth
-$\{4,6,8,10\}$, learning rate $\{0.05,0.1\}$, minimum child weight $\{1,10\}$; \num{300}
-estimators) is selected by an inner three-fold \texttt{GroupKFold} on the training families only,
-then refit and scored on the outer test families. Second, the full grid evaluated under both
-protocols, which shows how the gap moves with complexity.
-
-Tuning without leakage does not close the gap. The nested procedure selects the same complexity
-region as the original tuning (depth \numrange{8}{10} in every outer fold of both datasets) and
-returns a grouped MAE of \SI{8.37}{\kelvin} (A) and \SI{6.23}{\kelvin} (B), \SI{0.06}{\kelvin}
-\emph{worse} than the published configuration scored under the same grouped protocol. The clean
-comparison---the same nested-selected configuration in both arms, so that only the partition
-protocol changes---gives an inflation of \SI{63.9}{\percent} on~A and \SI{53.1}{\percent} on~B.
-
-What the grid reveals is where the gap comes from. Across all \num{16} configurations the grouped
-MAE moves within \SI{0.9}{\kelvin} on A and \SI{0.9}{\kelvin} on B, and within
-\SI{0.2}{\kelvin} once depth is at least \num{6}; the random-split MAE, by contrast, falls
-monotonically with depth: on~A from \SIrange[range-phrase=--,range-units=single]{6.5}{7.1}{\kelvin} at depth \num{4} to
-\SIrange[range-phrase=--,range-units=single]{5.05}{5.11}{\kelvin} at depth \num{10}, on~B from \SIrange[range-phrase=--,range-units=single]{5.1}{5.7}{\kelvin} to
-\SIrange[range-phrase=--,range-units=single]{3.87}{4.07}{\kelvin}. The inflation therefore rises with depth: on~A from
-\SIrange[range-phrase=--,range-units=single]{28.5}{39.6}{\percent} at depth \num{4} to \SIrange[range-phrase=--,range-units=single]{63.4}{68.7}{\percent} at depth
-\num{10}, on~B from \SIrange[range-phrase=--,range-units=single]{22.6}{32.5}{\percent} to \SIrange[range-phrase=--,range-units=single]{52.4}{60.7}{\percent}.
-Additional capacity buys fit to the within-family replicas that random splitting leaves in the
-training set; it buys almost nothing on unseen families. The single figure of
-$\sim$\SI{58}{\percent} quoted elsewhere in this paper is thus the inflation for a competitively
-tuned model; for any configuration in the competitive region (depth $\geq 8$) it lies between
-\SI{46.5}{\percent} and \SI{68.7}{\percent}, and it is not a consequence of having tuned under the
-leaky protocol.
+The hyperparameters of section~\ref{sec:models} were chosen under random cross-validation, so the
+gap could in principle be an artefact of tuning under the leaky protocol. Table~\ref{tab:tuning}
+tests this in two blocks that keep the two arms symmetric. In the first the \emph{same} fixed
+configuration is scored under both protocols (the published one, and the configuration most often
+selected by grouped nested search). In the second a nested search over a \num{16}-point XGBoost
+grid (maximum depth $\{4,6,8,10\}$, learning rate $\{0.05,0.1\}$, minimum child weight
+$\{1,10\}$; \num{300} estimators) is run inside \emph{each} arm: inner three-fold
+\texttt{GroupKFold} within each outer grouped fold, inner three-fold \texttt{KFold} within each
+outer random fold. Tuning without leakage does not close the gap: with nested selection in both
+arms the inflation is \SI{65.6}{\percent} \ci{56.2}{75.8} on~A and \SI{64.4}{\percent}
+\ci{55.4}{74.8} on~B, indistinguishable from the fixed-configuration values. (The previous version
+of this paper compared a nested grouped arm with a fixed random arm; that mixed comparison is not a
+same-hyperparameter comparison and is withdrawn.)
 
 \begin{table}[t]
 \caption{\label{tab:tuning}Sensitivity of the random-versus-grouped gap to hyperparameter
-selection, XGBoost, pooled out-of-fold MAE (K). \emph{Nested}: hyperparameters chosen by inner
-three-fold \texttt{GroupKFold} within each outer \texttt{GroupKFold(5)} fold. \emph{Grid}: the
-same \num{16} configurations each scored under \texttt{KFold(5)} (shuffle, seed 42) and
-\texttt{GroupKFold(5)}; ranges are over the \num{16} points. Inflation is grouped MAE over random
-MAE minus one, computed with the same configuration in both arms.}
-\centering\setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}lS[table-format=1.2]S[table-format=1.2]S[table-format=2.1]S[table-format=1.2]S[table-format=1.2]S[table-format=2.1]@{}}
+selection, XGBoost, pooled out-of-fold MAE (K), with paired family-bootstrap intervals for the
+inflation. \emph{Fixed}: the same configuration in both arms. \emph{Nested}: hyperparameters
+selected inside each arm by an inner three-fold search on the outer training fold. \emph{Grid}: the
+\num{16} configurations each scored under \texttt{KFold(5)} (shuffle, seed 42) and
+\texttt{GroupKFold(5)}; ranges are over the configurations of that depth. Dataset~B is the audited
+checkpoint.}
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lS[table-format=1.2]S[table-format=1.2]lS[table-format=1.2]S[table-format=1.2]l@{}}
 \toprule
 & \multicolumn{3}{c}{Dataset A} & \multicolumn{3}{c}{Dataset B} \\
 \cmidrule(lr){2-4}\cmidrule(lr){5-7}
-& {random} & {grouped} & {inflation (\%)} & {random} & {grouped} & {inflation (\%)} \\
+& {rand.} & {group.} & inflation (\%) & {rand.} & {group.} & inflation (\%) \\
 \midrule
-Published configuration & 5.23 & 8.31 & 58.9 & 3.91 & 6.17 & 57.6 \\
-Nested grouped selection & 5.11 & 8.37 & 63.9 & 4.07 & 6.23 & 53.1 \\
-Grid, depth 4 (range)   & {6.48--7.13} & {8.92--9.19} & {28.5--39.6} & {5.15--5.74} & {6.82--7.04} & {22.6--32.5} \\
-Grid, depth 6 (range)   & {5.50--5.93} & {8.46--8.53} & {43.4--55.2} & {4.33--4.68} & {6.34--6.47} & {38.3--46.4} \\
-Grid, depth 8 (range)   & {5.15--5.37} & {8.32--8.40} & {55.0--63.1} & {4.03--4.27} & {6.18--6.34} & {46.5--54.0} \\
-Grid, depth 10 (range)  & {5.05--5.11} & {8.31--8.52} & {63.4--68.7} & {3.87--4.07} & {6.17--6.31} & {52.4--60.7} \\
+Fixed, published & 5.23 & 8.31 & 58.9 \ci{50.4}{68.6} & 3.78 & 6.18 & 63.7 \ci{54.6}{74.3} \\
+Fixed, modal nested & 5.11 & 8.35 & 63.4 \ci{54.1}{73.6} & 3.95 & 6.23 & 57.6 \ci{49.2}{67.1} \\
+Nested in both arms & 5.05 & 8.37 & 65.6 \ci{56.2}{75.8} & 3.78 & 6.21 & 64.4 \ci{55.4}{74.8} \\
+Grid, depth four & {6.48--7.13} & {8.92--9.19} & 28.5--39.6 & {5.05--5.59} & {6.73--6.99} & 24.7--33.2 \\
+Grid, depth six & {5.50--5.93} & {8.46--8.53} & 43.4--55.2 & {4.20--4.59} & {6.25--6.42} & 39.7--49.3 \\
+Grid, depth eight & {5.15--5.37} & {8.32--8.40} & 55.0--63.1 & {3.87--4.17} & {6.23--6.31} & 50.2--61.0 \\
+Grid, depth ten & {5.05--5.11} & {8.31--8.52} & 63.4--68.7 & {3.78--3.95} & {6.18--6.32} & 57.6--64.4 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-A related robustness question is whether the gap depends on where the largest family lands.
-The \{Ba, Cu, O, Y\} family holds \num{720} Dataset~A compounds, \SI{64}{\percent} of them above
+What the grid reveals is where the gap comes from. Across all \num{16} configurations the grouped
+MAE of Dataset~A moves within \SI{0.9}{\kelvin}, and within \SI{0.2}{\kelvin} once depth is at least
+six, whereas the random-split MAE falls monotonically with depth, from
+\SIrange[range-phrase=--,range-units=single]{6.48}{7.13}{\kelvin} at depth four to
+\SIrange[range-phrase=--,range-units=single]{5.05}{5.11}{\kelvin} at depth ten; the inflation
+therefore rises with depth, from \SIrange[range-phrase=--,range-units=single]{28.5}{39.6}{\percent}
+to \SIrange[range-phrase=--,range-units=single]{63.4}{68.7}{\percent}. Dataset~B shows the same
+pattern (grouped MAE within \SI{0.8}{\kelvin} over the grid and \SI{0.2}{\kelvin} from depth six; random MAE from \SIrange[range-phrase=--,range-units=single]{5.05}{5.59}{\kelvin} to \SIrange[range-phrase=--,range-units=single]{3.78}{3.95}{\kelvin}; inflation from \SIrange[range-phrase=--,range-units=single]{24.7}{33.2}{\percent} to \SIrange[range-phrase=--,range-units=single]{57.6}{64.4}{\percent}). Additional capacity buys fit to the within-system replicates that random
+splitting leaves in the training set; it buys almost nothing on unseen systems.
+
+A related question is whether the gap depends on where the largest system lands. The
+$\{$Ba, Cu, O, Y$\}$ system holds \num{720} Dataset~A rows, \SI{64}{\percent} of them above
 \SI{77}{\kelvin}, and as an indivisible block it makes whichever fold receives it the hardest.
 Replacing \texttt{GroupKFold} with \texttt{StratifiedGroupKFold} on five $\Tc$ quantile bins
-(three seeds) leaves the inflation at \SIrange[range-phrase=--,range-units=single]{57.2}{61.9}{\percent} on~A and
-\SIrange[range-phrase=--,range-units=single]{57.7}{63.3}{\percent} on~B, against \SIrange[range-phrase=--,range-units=single]{54.4}{57.2}{\percent} and
-\SIrange[range-phrase=--,range-units=single]{60.3}{61.3}{\percent} for the unstratified grouped splitter with the same seeds. The
-pooled gap does not depend on the placement of the largest family; what changes is the error of
-the single fold that receives it.
+(three seeds) leaves the inflation at
+\SIrange[range-phrase=--,range-units=single]{57.2}{61.9}{\percent} on~A and
+\SIrange[range-phrase=--,range-units=single]{58.1}{59.2}{\percent} on~B, against
+\SIrange[range-phrase=--,range-units=single]{54.4}{57.2}{\percent} and
+\SIrange[range-phrase=--,range-units=single]{60.3}{62.0}{\percent} for the unstratified
+grouped splitter with the same seeds. The pooled gap does not depend on the placement of the
+largest system; what changes is the error of the single fold that receives it.
 
-\subsection{What the inflated number was measuring}
-\label{sec:results-ceiling}
+\subsection{Separation levels define different target populations}
+\label{sec:results-levels}
 
-The gap tells us the conventional figure is optimistic. It does not by itself say what the
-figure was measuring. Treating family identity as a clustering variable answers that
-(table~\ref{tab:deff}).
+Table~\ref{tab:levels} embeds the two protocols in the ladder of section~\ref{sec:protocols}. The
+levels are not nested. Grouping by normalised composition (L1) removes every exact replicate from
+the training side but leaves \SI{88.1}{\percent} (A) and \SI{86.1}{\percent} (B) of test rows with
+their element system represented in training, and it costs almost nothing:
+$\Delta$MAE $=\SI{+0.24}{\kelvin}$ \ci{+0.12}{+0.36} on~A and \SI{+0.08}{\kelvin} \ci{+0.02}{+0.15}
+on~B. Grouping by element system (L2) removes all of them and costs \SI{3.08}{\kelvin} and
+\SI{2.41}{\kelvin}. Grouping by host system (L3, dopants below \num{0.05} molar fraction ignored)
+is stricter in one direction and looser in another: no test row shares its host with training, but
+\SI{50.9}{\percent} (A) and \SI{41.8}{\percent} (B) of test rows again share their full element
+system with a training row, because a system that differs only in a trace dopant is a different
+system but the same host; L3 withdraws whole classes (all doped variants of one host) at once and
+costs \SI{3.72}{\kelvin} and \SI{3.35}{\kelvin}. Leave-clusters-out on composition (L4) is the
+most demanding in error (\SI{+5.65}{\kelvin} and \SI{+5.30}{\kelvin}) and in neighbour distance,
+yet \SI{12.6}{\percent} and \SI{13.2}{\percent} of its test rows share their element system with
+training. Each level therefore answers a different question---new measurements of known
+compositions (L0/L1), new stoichiometries of known systems (L1), unseen systems (L2), unseen hosts
+(L3), unseen composition regions (L4)---and the strictest is not ``the correct one'' by default;
+section~\ref{sec:temporal} asks which of them anticipates what actually happens over time. The
+sensitivity of L3 to its threshold is large (A: MAE \SI{8.47}{\kelvin} at \num{0.02},
+\SI{10.73}{\kelvin} at \num{0.10}; B: \SI{6.64}{\kelvin} and \SI{7.92}{\kelvin}), which is a
+further reason not to treat any single grouping as canonical.
 
 \begin{table}[t]
-\caption{Cluster structure of the two datasets. $\ICC$ is the intraclass correlation of $\Tc$
-within a chemical family from a one-way random-effects ANOVA, equation~(\ref{eq:icc});
-$\mathrm{deff}$ and $\Neff$ follow equation~(\ref{eq:deff}), reported for both the mean cluster
-size $\bar m$ and Searle's $m_0$ for unequal clusters. $\eta^2$ is the in-sample fraction of $\Tc$
-variance attributable to family identity, computed from family means over the full dataset; it is
-not a cross-validated score and is not commensurable with the $\Rsq$ values in
-table~\ref{tab:main}.}
-\label{tab:deff}
-\centering
-\setlength{\tabcolsep}{6pt}
-\begin{tabular}{@{}lS[table-format=5.0]S[table-format=4.0]S[table-format=1.3]S[table-format=1.3]S[table-format=1.2]S[table-format=1.2]S[table-format=4.0]S[table-format=4.0]S[table-format=1.2]@{}}
+\caption{Separation levels (XGBoost, published descriptors, five folds, seed \num{42}). ``Shared
+with training'' is the percentage of test rows whose normalised composition, element system or
+host system (fraction $\ge$ \num{0.05}) occurs in the training fold. $d_{1}$ is the median distance
+to the nearest training row (training-fold scaler). Top-$K$ is the top-\num{100} precision (\%). MAE
+intervals and $\Delta$MAE versus L0 are paired family bootstraps; the L0 row equals the random
+protocol and L2 the element-system protocol of table~\ref{tab:main}.}
+\label{tab:levels}
+\centering\footnotesize\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{@{}lS[table-format=5.0]S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]S[table-format=1.3]lS[table-format=1.3]S[table-format=2.1]l@{}}
 \toprule
-& & & & & \multicolumn{2}{c}{deff} & \multicolumn{2}{c}{$\Neff$} & \\
-\cmidrule(lr){6-7}\cmidrule(lr){8-9}
-Dataset & {$N$} & {$k$} & {$\ICC$} & {$\eta^2$}
-& {$\bar m$} & {$m_0$} & {$\bar m$} & {$m_0$} & {$\Neff/k$} \\
+& & \multicolumn{3}{c}{shared with training (\%)} & & & & & \\
+\cmidrule(lr){3-5}
+Level & {groups} & {comp.} & {syst.} & {host} & {$d_{1}$} & MAE (K) & {$\Rsq$} & {top-$K$} & $\Delta$MAE vs L0 (K) \\
 \midrule
-A & 21263 & 3365 & 0.854 & 0.877 & 5.54 & 5.53 & 3836 & 3847 & 1.14 \\
-B & 12440 & 3063 & 0.846 & 0.884 & 3.59 & 3.59 & 3466 & 3470 & 1.13 \\
+\multicolumn{10}{@{}l}{\textit{Dataset A}}\\
+L0 rows (random) & 21263 & 40.3 & 93.3 & 94.9 & 0.057 & 5.23 \ci{4.88}{5.59} & 0.928 & 98.4 & {---} \\
+L1 composition & 14612 & 0.0 & 88.1 & 92.2 & 0.183 & 5.47 \ci{5.09}{5.85} & 0.923 & 97.4 & +0.24 \ci{+0.12}{+0.36} \\
+L2 element system & 3365 & 0.0 & 0.0 & 73.7 & 1.454 & 8.31 \ci{7.57}{9.07} & 0.855 & 87.0 & +3.08 \ci{+2.58}{+3.65} \\
+L3 host system & 2371 & 0.0 & 50.9 & 0.0 & 1.291 & 8.95 \ci{8.28}{9.63} & 0.836 & 84.0 & +3.72 \ci{+3.25}{+4.19} \\
+L4 clusters (LOCO) & 50 & 0.0 & 12.6 & 46.1 & 2.080 & 10.88 \ci{9.94}{11.89} & 0.772 & 69.8 & +5.65 \ci{+4.94}{+6.47} \\
+\multicolumn{10}{@{}l}{\textit{Dataset B}}\\
+L0 rows (random) & 12336 & 10.0 & 87.4 & 90.4 & 0.144 & 3.78 \ci{3.49}{4.09} & 0.932 & 96.0 & {---} \\
+L1 composition & 11529 & 0.0 & 86.1 & 89.6 & 0.176 & 3.86 \ci{3.56}{4.19} & 0.931 & 94.2 & +0.08 \ci{+0.02}{+0.15} \\
+L2 element system & 3046 & 0.0 & 0.0 & 62.6 & 1.516 & 6.18 \ci{5.58}{6.88} & 0.848 & 82.4 & +2.41 \ci{+2.01}{+2.88} \\
+L3 host system & 2215 & 0.0 & 41.8 & 0.0 & 1.353 & 7.13 \ci{6.46}{7.81} & 0.799 & 68.6 & +3.35 \ci{+2.91}{+3.83} \\
+L4 clusters (LOCO) & 50 & 0.0 & 13.2 & 32.4 & 3.015 & 9.08 \ci{8.26}{9.98} & 0.718 & 52.4 & +5.30 \ci{+4.67}{+5.99} \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-Two facts stand out. First, the intraclass correlation is \num{0.85} in both datasets: knowing
-which doping series a compound belongs to determines most of its $\Tc$. Second, the resulting
-effective sample size is essentially the number of chemical families. Dataset~A's \num{21263}
-compounds carry the statistical information of \num{3847} independent observations against
-\num{3365} families, a ratio of \num{1.14}; Dataset~B's \num{12440} carry \num{3470} against
-\num{3063} families, a ratio of \num{1.13}. This is the expected limit: as $\ICC \to 1$,
-$\mathrm{deff} \to m$ and hence $\Neff \to N/m = k$. At $\ICC = 0.85$ both datasets sit within
-\SI{14}{\percent} of it. The choice of cluster size makes almost no difference---using
-$\bar m$ instead of $m_0$ changes $\Neff$ by less than \SI{0.3}{\percent} in both
-datasets---so the conclusion does not rest on the equal-cluster approximation.
-
-The consequence for the headline metric is shown in figure~\ref{fig:ceiling}. In-sample, family
-identity alone accounts for $\eta^2 = \num{0.877}$ of the variance in $\Tc$ on Dataset~A and
-\num{0.884} on Dataset~B. This is not a score any model achieves or competes with---it is
-computed with knowledge of every family's mean, and the cross-validated figures in
-table~\ref{tab:main} are not commensurable with it. What it measures is the share of the target
-that a categorical label already explains: on this task, seven-eighths of it.
-
-The element-presence null makes a commensurable version of the same point, because it is
-cross-validated on identical folds. With no statistical or Magpie descriptors whatsoever, binary
-indicators of which elements are present reach $\Rsq = 0.847$ and \num{0.846} under a random
-split, against \num{0.928} for the full featurization---about \SI{91}{\percent} of the headline
-figure from element identity alone. The descriptor advantage does not widen when near-duplicates
-are removed; in $\Rsq$ it narrows, from \num{0.081} to \num{0.052} on Dataset~A
-(\num{0.803} versus \num{0.855} grouped) and from \num{0.082} to \num{0.074} on Dataset~B
-(\num{0.779} versus \num{0.853}). Under both protocols and in both datasets, element identity
-alone recovers more than nine-tenths of the regression score the full featurization achieves.
-The screening metric behaves differently, and we return to it in
-section~\ref{sec:results-screening}.
-
-We stress the direction of this argument. It does not show that the models are learning nothing;
-section~\ref{sec:results-screening} shows the opposite for the task that matters. It shows that
-the conventional $\Rsq$ is a poor instrument for detecting what they learn, because most of the
-variance it rewards is available from a categorical label.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.98\textwidth]{figure3}
-\caption{\textbf{The gap is not an artefact of one dataset, one featurization or one model: it
-replicates across two independently constructed datasets, two model families and five
-independent partitions.} (a)~Test MAE and (b)~$\Rsq$ for each dataset--model combination under
-both protocols. Points are means over five independent partitions; the annotation gives the
-paired per-seed MAE inflation and the signed change in $\Rsq$. MAE rises
-\SIrange{52}{61}{\percent} and $\Rsq$ falls by \numrange{0.071}{0.081} in all four combinations.
-(c)~Top-100 screening precision under both protocols; bars are the five-fold mean of the
-deterministic partition, error bars its between-fold standard deviation, open circles the
-individual folds. (d)~Distance to the nearest training neighbour in standardised feature space
-for a single $80/20$ hold-out per scheme (A: $n=\num{4253}$ and \num{4344}; B: $n=\num{2488}$
-and \num{2477} test materials); boxes show the interquartile range, whiskers the 5th--95th
-percentile. All quantities except the distances in~(d) are cross-validated.}
+\caption{\textbf{The random-to-grouped gap in two curations of SuperCon.} (a)~Pooled MAE under both
+protocols for each dataset--model combination (points with \SI{95}{\percent} paired family-bootstrap
+intervals; annotation: pooled inflation). (b)~The same inflation pooled over rows and as the mean of
+per-system MAEs (macro): averaged per system the gap roughly halves. (c)~Top-\num{100} precision of
+the family-mean null, element presence and XGBoost under both protocols (fractional under ties,
+family-bootstrap intervals); the dashed line is the mean fold prevalence of the high-$\Tc$ class,
+i.e.\ the expected precision of a random selector. (d)~Distance to the nearest training row in
+descriptor space standardised on the training rows, for one $80/20$ hold-out per scheme (A:
+$n=\num{4253}$ and \num{4344}; B: $n=\num{2468}$ and \num{2432} test rows); boxes show the
+interquartile range, whiskers the 5th--95th percentiles.}
 \label{fig:summary}
 \end{figure}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{figure4}
-\caption{\textbf{Family identity alone accounts in-sample for about seven-eighths of the
-variance in $\Tc$, and the clustering that produces this also reduces the effective sample size
-to roughly the number of families.} (a)~Variance in $\Tc$ explained by four quantities, for
-Dataset~A (light) and Dataset~B (dark). The leftmost pair is an \emph{oracle}: $\eta^2$ from a
-one-way random-effects ANOVA using true per-family means computed on \emph{all} the data
-(\num{0.877}, \num{0.884}). It is not a cross-validated score and not achievable by a model that
-has not seen the test family; it is drawn hatched for that reason and must not be read as a
-competitor to the bars beside it. The other three pairs are all cross-validated under grouped
-five-fold CV: the paper's features (\num{0.855}, \num{0.853}), a null trained only on binary
-element-presence indicators (\num{0.803}, \num{0.779}) and the family-mean null
-($\num{-0.007}$, $\num{-0.003}$). The brackets mark the only commensurable difference in the
-panel---features minus element presence, both grouped CV on identical folds---which is
-\num{0.052} on Dataset~A and \num{0.074} on Dataset~B.
-(b)~The same clustering expressed as a design effect. Effective $N$ is $N$ divided by
-$1 + (m_0-1)\ICC$ with Searle's $m_0$; $k$ is the family count (hatched, being a count of design
-units rather than observations). With $\ICC=\num{0.85}$ in both datasets the design effect is
-\num{5.5} (A) and \num{3.6} (B), so \num{21263} materials carry about as much independent
-information as \num{3847}, close to the \num{3365} families.}
-\label{fig:ceiling}
-\end{figure}
+\subsection{What the conventional \texorpdfstring{$\Rsq$}{R2} rewards}
+\label{sec:results-ceiling}
 
-\subsection{Screening utility survives, and is genuinely descriptor-driven}
-\label{sec:results-screening}
-
-If most of the variance the regression metric rewards is already available from a family label,
-does the practical application survive? Table~\ref{tab:screen} reports top-100 precision for the three-rung null ladder.
+\paragraph{The corpus as clustered data.} Treating system identity as a clustering variable, the
+intraclass correlation of $\Tc$ is \num{0.854} (A) and \num{0.846} (B), and system identity alone
+accounts in-sample for \SI{87.7}{\percent} and \SI{88.4}{\percent} of the variance of $\Tc$
+($\eta^2$; table~\ref{tab:deff}, figure~\ref{fig:ceiling}(a)). We report these as descriptions of
+how concentrated the target is within systems. The design effect of the row-weighted mean is
+$1 + \rho(m_w - 1)$ with $m_w = \num{69.6}$ (A) and \num{17.8} (B)---not Searle's $m_0$ of
+\num{6.30} and \num{4.05}---so its effective sample size is \num{357} and \num{809}, rising to
+\num{509} and \num{853} when the largest system is removed: the row-weighted estimator is dominated
+by the largest systems. For the mean of system means the effective size is \num{3621} and
+\num{3249}, close to $k$. These numbers describe the precision of one estimator of the mean $\Tc$
+under one model (figure~\ref{fig:ceiling}(b)); they are not the effective sample size of the
+learning problem or of a predictor's MAE, and we withdraw the previous claim that the datasets carry
+``the information of $k$ independent observations''.
 
 \begin{table}[t]
-\caption{Top-100 precision under both protocols (per cent). The threshold is the 90th percentile
-of training-fold $\Tc$, so the base rate is \SI{10}{\percent}. Values are means over five folds
-with the between-fold standard deviation; the element-presence and full-model rows are additionally
-verified over five independent partitions in the text.}
-\label{tab:screen}
-\centering
-\setlength{\tabcolsep}{6pt}
-\begin{tabular}{@{}llS[table-format=2.1]@{\,$\pm$\,}S[table-format=2.1]S[table-format=2.1]@{\,$\pm$\,}S[table-format=2.1]@{}}
+\caption{Cluster structure of the two datasets. $\ICC$ from equation~(\ref{eq:icc}); $\eta^2$ is
+the in-sample share of $\Tc$ variance attributable to system identity and is not a cross-validated
+score. $m_0$ is Searle's cluster size, $m_w = \sum_i n_i^2/N$. The design effect and $\Neff$ are
+given for two estimators of the mean $\Tc$ (equation~(\ref{eq:deff})): the row-weighted mean
+(``rows''; also without the largest system) and the mean of system means (``systems''). Dataset~B
+is the audited checkpoint.}
+\label{tab:deff}
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lS[table-format=5.0]S[table-format=4.0]S[table-format=1.3]S[table-format=1.3]S[table-format=1.2]S[table-format=2.1]S[table-format=2.1]S[table-format=3.0]S[table-format=3.0]S[table-format=1.2]S[table-format=4.0]@{}}
 \toprule
-& & \multicolumn{2}{c}{Dataset A} & \multicolumn{2}{c}{Dataset B} \\
-Predictor & Split & \multicolumn{2}{c}{} & \multicolumn{2}{c}{} \\
+& & & & & & & \multicolumn{3}{c}{rows} & \multicolumn{2}{c}{systems} \\
+\cmidrule(lr){8-10}\cmidrule(lr){11-12}
+Dataset & {$N$} & {$k$} & {$\ICC$} & {$\eta^2$} & {$m_0$} & {$m_w$} & {deff} & {$\Neff$} & {$\Neff$ w/o largest} & {deff} & {$\Neff$} \\
 \midrule
-Family-mean null & Random & 95.8 & 3.1 & 80.2 & 1.5 \\
-Family-mean null & Chemical-family & 11.6 & 10.9 & 9.6 & 4.5 \\
-Element presence & Random & 95.6 & 2.8 & 80.0 & 3.1 \\
-Element presence & Chemical-family & 84.2 & 15.1 & 66.8 & 13.3 \\
-Full model & Random & 98.4 & 1.2 & 96.0 & 0.6 \\
-Full model & Chemical-family & 87.0 & 11.0 & 85.2 & 5.9 \\
+A & 21263 & 3365 & 0.854 & 0.877 & 6.30 & 69.6 & 59.6 & 357 & 509 & 5.87 & 3621 \\
+B & 12336 & 3046 & 0.846 & 0.884 & 4.05 & 17.8 & 15.3 & 809 & 853 & 3.80 & 3249 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Under family-held-out validation the full model retains \SI{87.0}{\percent} precision on
-Dataset~A and \SI{85.2}{\percent} on Dataset~B against a \SI{10}{\percent} base rate. Screening
-utility is not destroyed by the corrected protocol: a campaign that synthesises the top-ranked
-\num{100} candidates from an unseen chemistry would still find high-$\Tc$ materials in more than
-four out of five attempts.
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\textwidth]{figure4}
+\caption{\textbf{The corpus is clustered, and the effective sample size depends on the estimator.}
+(a)~Variance in $\Tc$ explained by four quantities, for Dataset~A (light) and Dataset~B (dark). The
+leftmost pair is an \emph{oracle}: $\eta^2$ from system means computed on \emph{all} the data
+(\num{0.877}, \num{0.884}). It is not a cross-validated score and not achievable by a model that has
+not seen the test system; it is drawn hatched and must not be read as a competitor to the bars
+beside it. The other three pairs are cross-validated under element-system hold-out on identical
+folds: the published descriptors (\num{0.855}, \num{0.848}), element presence only (\num{0.803},
+\num{0.788}) and the family-mean null (\num{-0.007}, \num{-0.003}). (b)~Effective sample size of
+two estimators of the mean $\Tc$ under the random-intercept model of section~\ref{sec:cluster}, on a
+logarithmic axis, with $N$ and the system count $k$ marked; the two estimators differ tenfold.}
+\label{fig:ceiling}
+\end{figure}
 
-The null ladder shows that this skill is real rather than a lookup artefact
-(figure~\ref{fig:null}). The family-mean null, which dominates under a random split
-(\SI{95.8}{\percent} and \SI{80.2}{\percent}),
-collapses to \SI{11.6}{\percent} and \SI{9.6}{\percent} under grouped validation---at or below
-the base rate, since it cannot consult an unseen family. Element-presence indicators retain
-substantial ranking power (\SI{84.2}{\percent} and \SI{66.8}{\percent}), so a large part of the
-skill is attributable to chemical identity rather than to the descriptors' physics. But the
-descriptors do contribute: measured over five independent partitions, discarding them costs
-$7.7 \pm 1.0$ points on Dataset~A ($2.2\times$ the across-seed dispersion) and
-$14.4 \pm 2.7$ points on Dataset~B ($9.9\times$), with the full model ahead in five seeds out
-of five in both datasets.
+\paragraph{What each representation adds.} Table~\ref{tab:ablation} and figure~\ref{fig:null}
+report the ablation of section~\ref{sec:nulls} as differences of losses. Element presence alone
+reaches $\Rsq = \num{0.847}$ (A) and \num{0.850} (B) under random splits. Adding molar fractions
+removes \SI{48.1}{\percent} \ci{41.9}{53.6} and \SI{52.0}{\percent} \ci{45.4}{57.6} of the
+presence model's squared error, against \SI{53.2}{\percent} and \SI{54.5}{\percent} for the
+published descriptors: under random splits, stoichiometry recovers \SI{90}{\percent} (A) and
+\SI{95}{\percent} (B) of the error reduction the descriptors achieve, and descriptors plus fractions
+add \SI{2.3}{\percent} \ci{0.5}{4.0} (A) and \SI{6.5}{\percent} \ci{3.1}{10.0} (B) over the
+descriptors. Under element-system hold-out the ordering changes: replacing presence plus fractions
+by the descriptors does \emph{not} reduce the error (\SI{+0.46}{\kelvin} \ci{+0.00}{+0.98} on~A,
+\SI{+0.16}{\kelvin} \ci{-0.18}{+0.59} on~B), while adding fractions to the descriptors does
+(\SI{-0.60}{\kelvin} \ci{-1.00}{-0.29} and \SI{-0.51}{\kelvin} \ci{-0.86}{-0.26}). A
+five-nearest-neighbour regressor on presence plus fractions matches the tree model under random
+splits (MAE \SI{5.46}{\kelvin} against \SI{5.23}{\kelvin} on~A) and collapses on unseen systems
+(\SI{9.53}{\kelvin}), which is the signature of a metric that rewards proximity to a replicate.
 
-The two datasets differ in how much the descriptors buy: the gap in Dataset~B is roughly twice
-that in Dataset~A, a difference of \num{6.6} points at $3.3\times$ the across-seed dispersion
-with disjoint ranges. We do not have a confirmed mechanism for the asymmetry. Dataset~A is the
-more family-concentrated of the two (\SI{79.5}{\percent} versus \SI{66.7}{\percent} of compounds
-in families of five or more), which would plausibly make element identity a stronger cue there,
-but we have not tested that explanation and report the asymmetry as an observation.
+\begin{table}[t]
+\caption{Representation ablation (XGBoost unless stated; hyperparameters not re-tuned per
+representation; $p$ = number of columns). MAE and $\Rsq$ with paired family-bootstrap intervals;
+``SSE red.'' is the relative reduction of the sum of squared errors with respect to R0 on the same
+rows; top-$K$ precision for $K=\num{100}$ (mean over folds, fractional under ties). Dataset~B is the
+audited checkpoint.}
+\label{tab:ablation}
+\centering\small\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lS[table-format=3.0]llS[table-format=-2.1]S[table-format=2.1]@{}}
+\toprule
+Representation & {$p$} & MAE (K) & $\Rsq$ & {SSE red. (\%)} & {top-$K$ (\%)} \\
+\midrule
+\multicolumn{6}{@{}l}{\textit{Dataset A, random split}}\\
+R0 element presence & 86 & 8.42 \ci{7.60}{9.27} & 0.847 \ci{0.823}{0.869} & {---} & 95.6 \\
+R1 presence + fractions & 172 & 5.86 \ci{5.50}{6.22} & 0.921 \ci{0.910}{0.930} & 48.1 & 98.6 \\
+R2 descriptors & 81 & 5.23 \ci{4.88}{5.59} & 0.928 \ci{0.918}{0.937} & 53.2 & 98.4 \\
+R3 descriptors + fractions & 253 & 5.25 \ci{4.89}{5.61} & 0.930 \ci{0.920}{0.939} & 54.2 & 98.8 \\
+Five-NN on R1 & 172 & 5.46 \ci{5.07}{5.87} & 0.909 \ci{0.896}{0.921} & 40.7 & 97.2 \\
+Extra trees on R2 & 81 & 4.91 \ci{4.50}{5.31} & 0.928 \ci{0.917}{0.937} & 52.8 & 98.2 \\
+\multicolumn{6}{@{}l}{\textit{Dataset A, element-system split}}\\
+R0 element presence & 86 & 10.03 \ci{9.25}{10.82} & 0.803 \ci{0.774}{0.827} & {---} & 84.2 \\
+R1 presence + fractions & 172 & 7.85 \ci{7.35}{8.33} & 0.867 \ci{0.851}{0.882} & 32.5 & 88.4 \\
+R2 descriptors & 81 & 8.31 \ci{7.57}{9.07} & 0.855 \ci{0.830}{0.875} & 26.4 & 87.0 \\
+R3 descriptors + fractions & 253 & 7.71 \ci{7.16}{8.23} & 0.871 \ci{0.856}{0.885} & 34.4 & 88.8 \\
+Five-NN on R1 & 172 & 9.53 \ci{8.84}{10.20} & 0.782 \ci{0.745}{0.813} & -10.6 & 85.4 \\
+Extra trees on R2 & 81 & 8.51 \ci{7.67}{9.42} & 0.850 \ci{0.826}{0.870} & 24.0 & 88.4 \\
+\multicolumn{6}{@{}l}{\textit{Dataset B, random split}}\\
+R0 element presence & 83 & 6.28 \ci{5.60}{7.00} & 0.850 \ci{0.827}{0.871} & {---} & 79.8 \\
+R1 presence + fractions & 166 & 4.21 \ci{3.92}{4.52} & 0.928 \ci{0.919}{0.936} & 52.0 & 95.2 \\
+R2 descriptors & 132 & 3.78 \ci{3.49}{4.09} & 0.932 \ci{0.923}{0.940} & 54.5 & 96.0 \\
+R3 descriptors + fractions & 298 & 3.73 \ci{3.44}{4.03} & 0.936 \ci{0.928}{0.944} & 57.5 & 95.6 \\
+Five-NN on R1 & 166 & 4.19 \ci{3.86}{4.53} & 0.912 \ci{0.900}{0.922} & 41.2 & 91.4 \\
+Extra trees on R2 & 132 & 3.52 \ci{3.22}{3.84} & 0.937 \ci{0.928}{0.944} & 57.7 & 95.2 \\
+\multicolumn{6}{@{}l}{\textit{Dataset B, element-system split}}\\
+R0 element presence & 83 & 7.82 \ci{7.07}{8.63} & 0.788 \ci{0.754}{0.817} & {---} & 68.2 \\
+R1 presence + fractions & 166 & 6.03 \ci{5.53}{6.53} & 0.864 \ci{0.845}{0.880} & 35.7 & 82.0 \\
+R2 descriptors & 132 & 6.18 \ci{5.58}{6.88} & 0.848 \ci{0.820}{0.869} & 28.2 & 82.4 \\
+R3 descriptors + fractions & 298 & 5.68 \ci{5.20}{6.20} & 0.875 \ci{0.859}{0.889} & 41.2 & 87.4 \\
+Five-NN on R1 & 166 & 7.94 \ci{7.20}{8.73} & 0.756 \ci{0.713}{0.791} & -15.3 & 68.8 \\
+Extra trees on R2 & 132 & 6.11 \ci{5.49}{6.80} & 0.855 \ci{0.826}{0.877} & 31.7 & 86.6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\textwidth]{figure2}
+\caption{\textbf{What each representation adds, as differences of losses.} (a)~Change in pooled
+MAE for three steps---adding molar fractions to element presence, replacing presence plus fractions
+by the published descriptors, adding fractions to the descriptors---for both datasets under both
+protocols; bars are \SI{95}{\percent} paired bootstrap intervals over whole element systems,
+conditional on the fitted out-of-fold predictions. (b)~Relative reduction of the squared error with
+respect to element presence for each richer representation. Under element-system hold-out the
+descriptors alone do not improve on presence plus fractions.}
+\label{fig:null}
+\end{figure}
+
+\paragraph{Relatives versus training-set size.} Removing the same-system relatives of the test rows
+from the training pool shrinks the pool, so part of the grouped penalty could be a sample-size
+effect. Two designs separate the two. With a random test fold (D1), removing all relatives leaves
+\num{3707} training rows on~A and raises the MAE by \SI{4.90}{\kelvin} \ci{4.22}{5.63}; removing
+the same number of rows at random raises it by \SI{1.58}{\kelvin} \ci{1.45}{1.71}, so
+\SI{67.9}{\percent} of the penalty is attributable to the relatives (B: \SI{62.6}{\percent}). With
+half of each grouped fold as test set (D2), the relatives are only \SI{10.1}{\percent} of the pool,
+removing them costs \SI{2.58}{\kelvin} \ci{2.08}{3.14} and removing as many random rows costs
+\SI{0.07}{\kelvin} \ci{0.01}{0.12}: \SI{97.4}{\percent} of the penalty is the relatives (B:
+\SI{95.1}{\percent}). We report both designs; the answer depends on how many rows the relatives
+represent, and in neither is the grouped penalty a training-size artefact.
+
+\subsection{Selection on held-out systems}
+\label{sec:results-screening}
+
+Table~\ref{tab:screen} scores the selection task with the corrected metric of
+section~\ref{sec:screening}. Under random splits the featureless family-mean null selects
+\SI{95.8}{\percent} positives on~A---a lookup of the test row's own system is a strong ranker when
+its replicates are in training---and the descriptor models reach \SI{98.4}{\percent}. Under
+element-system hold-out the null's precision equals the fold prevalence by construction
+(\SI{10.3}{\percent} and \SI{10.2}{\percent}; the previous version reported \SI{11.6}{\percent} and
+\SI{9.6}{\percent}, which were artefacts of how ties were broken among a constant prediction), while
+XGBoost retains \SI{87.0}{\percent} \ci{77.2}{92.0} on~A and \SI{82.4}{\percent} \ci{75.1}{88.8}
+on~B, an enrichment of \num{10.7} and \num{8.6} over prevalence and a recall of about a quarter
+to a third of all positives with \num{100} picks. This is \emph{retrospective precision among corpus
+materials whose systems were held out}: every candidate is a known superconductor, so the number
+says nothing about the yield of a synthesis campaign. Admitting the \num{3925} measured
+non-superconductors of the Stanev list to the Dataset-B candidate pool lowers the grouped XGBoost
+precision from \SI{82.4}{\percent} to \SI{78.2}{\percent} \ci{70.0}{84.8}, with \num{6.2}
+\ci{3.8}{8.8} non-superconductors expected among the \num{100} picks. The selected sets are also
+concentrated: \num{19} distinct systems among \num{100} picks on~A, and a budget of at most three
+rows per system lowers the precision to \SI{74.2}{\percent}.
+
+How much of the selection skill is due to the descriptors rather than to element identity? Element
+presence alone reaches \SI{84.3}{\percent} and \SI{68.0}{\percent} on held-out systems. The paired
+difference XGBoost minus presence is \num{+2.7} percentage points \ci{-0.8}{+14.2} on~A---not
+distinguishable from zero---and \num{+14.4} points \ci{+6.7}{+24.5} on~B. The previous version's
+``$7.7 \pm 1.0$ points'' for~A was an across-seed dispersion, not an uncertainty over systems, and
+is withdrawn. Whether the descriptors contribute selection skill beyond element identity therefore
+depends on the dataset, and on~A the evidence is inconclusive.
+
+\begin{table}[t]
+\caption{Selection metrics at $K=\num{100}$, per cent unless stated (five folds, seed \num{42};
+positives: $\Tc \ge$ the training-fold 90th percentile; fractional under ties). Precision with
+paired family-bootstrap interval and between-fold standard deviation; recall and enrichment
+(precision over prevalence); distinct element systems among the selected rows; precision under a
+budget of at most three rows per system; and, for Dataset~B, precision when the \num{3925}
+measured non-superconductors are admitted to the pool. Dataset~B is the audited checkpoint.}
+\label{tab:screen}
+\centering\small\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}llS[table-format=2.1]S[table-format=2.1]S[table-format=2.2]S[table-format=2.0]S[table-format=2.1]S[table-format=2.1]@{}}
+\toprule
+Ranker & precision & {sd folds} & {recall} & {enrichment} & {systems} & {budget/system} & {with negatives} \\
+\midrule
+\multicolumn{8}{@{}l}{\textit{Dataset A, random split (prevalence 10.1\%)}}\\
+Family-mean null & 95.8 \ci{84.3}{97.9} & 3.1 & 22.5 & 9.56 & 27 & 85.9 & {---} \\
+Element presence & 95.5 \ci{85.0}{97.8} & 2.9 & 22.4 & 9.53 & 26 & 86.1 & {---} \\
+Random forest & 98.4 \ci{92.5}{99.8} & 1.0 & 23.1 & 9.84 & 31 & 93.9 & {---} \\
+XGBoost & 98.4 \ci{93.6}{100.0} & 1.2 & 23.1 & 9.83 & 34 & 94.6 & {---} \\
+\multicolumn{8}{@{}l}{\textit{Dataset A, element-system split (prevalence 10.3\%)}}\\
+Family-mean null & 10.3 \ci{7.7}{12.9} & 5.1 & 2.4 & 1.00 & 73 & 8.8 & {---} \\
+Element presence & 84.3 \ci{67.2}{89.4} & 15.3 & 25.5 & 10.83 & 14 & 58.0 & {---} \\
+Random forest & 85.5 \ci{74.4}{90.7} & 13.4 & 24.3 & 10.36 & 18 & 72.4 & {---} \\
+XGBoost & 87.0 \ci{77.2}{92.0} & 11.3 & 25.2 & 10.71 & 19 & 74.2 & {---} \\
+\multicolumn{8}{@{}l}{\textit{Dataset B, random split (prevalence 10.0\%)}}\\
+Family-mean null & 80.7 \ci{72.7}{87.3} & 6.7 & 32.7 & 8.08 & 44 & 75.9 & {---} \\
+Element presence & 79.7 \ci{73.7}{87.7} & 5.3 & 32.3 & 7.97 & 47 & 77.7 & 74.5 \\
+Random forest & 95.4 \ci{92.0}{97.6} & 2.6 & 38.7 & 9.55 & 52 & 94.4 & 90.8 \\
+XGBoost & 96.0 \ci{93.0}{98.0} & 2.1 & 39.0 & 9.61 & 52 & 94.8 & 90.4 \\
+\multicolumn{8}{@{}l}{\textit{Dataset B, element-system split (prevalence 10.2\%)}}\\
+Family-mean null & 10.2 \ci{8.1}{12.2} & 2.6 & 4.1 & 1.00 & 80 & 9.4 & {---} \\
+Element presence & 68.0 \ci{56.2}{76.6} & 10.8 & 28.8 & 7.11 & 21 & 57.0 & 61.1 \\
+Random forest & 81.0 \ci{73.6}{88.4} & 9.3 & 34.1 & 8.42 & 26 & 70.8 & 77.4 \\
+XGBoost & 82.4 \ci{75.1}{88.8} & 7.6 & 34.8 & 8.57 & 27 & 71.4 & 78.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Which retrospective protocol anticipates performance on later superconductors?}
+\label{sec:temporal}
+
+Cross-validation protocols are proxies for a question that can be asked directly of SuperCon: how
+well does a model trained on everything known up to a year $T$ predict the superconductors first
+reported at or after $T$? On the dated corpus of section~\ref{sec:temporal-data}, between
+\SI{72}{\percent} and \SI{84}{\percent} of the compositions reported after each cut belong to
+element systems that did not exist in the database before it, so the forward-in-time test is
+dominated by the regime that grouped validation is meant to emulate.
+
+The realised performance is far below the random-CV figure at every cut (table~\ref{tab:temporal},
+figure~\ref{fig:temporal}). At the principal cut $T$ = 2010 (\num{10215} training compositions,
+\num{2328} later ones, \SI{76}{\percent} in new systems) XGBoost reaches MAE \SI{7.43}{\kelvin}
+\ci{6.67}{8.27} and $\Rsq = \num{0.33}$ \ci{0.18}{0.47}; on the later compositions from \emph{new}
+systems $\Rsq$ is \num{0.19} \ci{0.01}{0.34} (MAE \SI{8.47}{\kelvin}), on those from systems already
+seen it is \num{0.83} \ci{0.71}{0.89} (MAE \SI{4.07}{\kelvin}), and on later re-measurements of
+compositions already in the training set the model recovers MAE \SI{2.39}{\kelvin} and
+$\Rsq = \num{0.80}$. Random five-fold CV on the same pre-2010 data estimates MAE \SI{4.34}{\kelvin}
+and $\Rsq = \num{0.91}$: it understates the realised error by \SI{3.10}{\kelvin} \ci{2.25}{4.03}
+and overstates $\Rsq$ by \num{0.58} \ci{0.44}{0.73}. The $\Rsq$ overstatement of random CV is
+significant at all four cuts (\num{+0.28}, \num{+0.60}, \num{+0.58} and \num{+0.42} at 1995,
+2005, 2010 and 2015); grouping by composition (L1) changes nothing, because the corpus holds one row
+per composition. Grouping by element system (L2) or by host (L3) moves the MAE estimate into the
+realised interval at 2005 and 2010 ($\Delta$MAE $=\SI{-0.67}{\kelvin}$ \ci{-1.83}{+0.43} and
+\SI{+0.10}{\kelvin} \ci{-1.00}{+1.12} at 2010) but reduces the $\Rsq$ overstatement only
+marginally (\num{+0.50} and \num{+0.47} at 2010). Leave-clusters-out (L4) is the only protocol
+whose $\Rsq$ estimate matches the realised value at 1995 ($\Delta\Rsq = \num{-0.05}$
+\ci{-0.12}{+0.02}) and 2015 (\num{+0.11} \ci{-0.16}{+0.29}), but it is pessimistic in MAE after
+2005 (\SI{+3.92}{\kelvin} \ci{2.55}{5.17} at 2010) and still overstates $\Rsq$ by
+\numrange{0.28}{0.30} at 2005--2010. Averaged over the four cuts, the mean absolute discrepancy
+in $\Rsq$ falls monotonically with the strength of the grouping (L0 \num{0.47}, L2 \num{0.39}, L3
+\num{0.35}, L4 \num{0.19}), while in MAE the host protocol is closest (L3 \SI{2.2}{\kelvin}; L0
+\SI{3.8}{\kelvin}; L4 \SI{3.5}{\kelvin}). Re-weighting the random-CV out-of-fold rows to the
+new/seen-system mix of the later compositions does not recover the realised value either ($\Rsq$
+\num{0.81} versus \num{0.33} at 2010): the out-of-fold rows from new systems inside a random split
+are not representative of the systems that are actually discovered later.
+
+Two observations bound the comparison. First, the screening metric cannot be transferred across
+time as a precision: the prevalence of compositions above the training 90th percentile among the
+later compositions collapses from \SI{9.2}{\percent} at 1995 to \SIrange{0.9}{1.8}{\percent} at
+2005--2015, so the realised top-\num{100} precision falls from \num{0.90} to \numrange{0.08}{0.47}
+while every protocol estimates \numrange{0.36}{0.99}; as a lift over prevalence the
+forward-in-time ranking is strong (\numrange{18}{26} times at 2005--2010), and the Spearman rank
+correlation degrades more gently (\num{0.95} retrospective versus \numrange{0.57}{0.78} realised).
+Second, the realised $\Rsq$ is fragile: removing the \num{526} training compositions whose year came
+from a fallback dating rule (\SI{5}{\percent} of the training set, mostly 1960s--1970s alloys and
+Chevrel phases) shifts the XGBoost predictions for the then-unseen Bi--S--O family from about
+\SI{15}{\kelvin} to about \SI{60}{\kelvin} and drives the realised $\Rsq$ at 2010 from \num{0.33}
+to \num{-0.20} (MAE \SI{7.4}{\kelvin} to \SI{9.1}{\kelvin}), whereas the random-CV and
+leave-clusters-out estimates move by less than \SI{0.3}{\kelvin} in MAE and \num{0.02} in $\Rsq$.
+Using the maximum instead of the median $\Tc$ per composition, or re-seeding the random and cluster
+partitions, leaves all conclusions unchanged (\texttt{results\_v3/temporal\_validation.md}).
+
+\emph{Answer to the question.} No retrospective protocol reproduces the forward-in-time
+performance. Random cross-validation is the worst proxy for $\Rsq$ at every cut and for MAE at 1995
+and 2005; at 2010 the worst MAE proxy is leave-clusters-out (\SI{+3.9}{\kelvin} against
+\SI{-3.1}{\kelvin} for random CV), at 2015 random CV is closest in MAE because the later
+compositions are low-$\Tc$ and low-variance, and at 1995 all protocols agree within their intervals
+on top-\num{100} precision. The grouped protocols are consistently closer, with the host grouping
+(L3) the best predictor of the realised MAE and leave-clusters-out (L4) the best predictor of the
+realised $\Rsq$, and the direction of their residual error is stable (random CV optimistic, LOCO
+pessimistic in MAE after 2005). The realised $\Rsq$ on new element systems
+(\numrange{0.1}{0.5}) is the number a user of these models should expect, and none of the
+protocols, applied to the data available at the time, would have predicted it to within \num{0.1}
+at more than one cut.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.78\textwidth]{figure5}
+\caption{\textbf{Retrospective protocol estimates against realised forward-in-time performance.}
+Columns: cuts $T$ = 1995, 2005, 2010, 2015 (training compositions first reported before $T$, test
+compositions at or after $T$; the share of test compositions in element systems absent before the
+cut is given in each title). Rows: MAE, $\Rsq$ and top-\num{100} precision. The red line and band
+are the realised value of the frozen XGBoost model on the later compositions with its
+\SI{95}{\percent} family-bootstrap interval; blue points are the five-fold out-of-fold estimates
+each protocol L0--L4 would have produced from the pre-$T$ data alone (bars: family-bootstrap
+intervals); open diamonds re-weight the L0 out-of-fold rows to the new/seen-system mix of the later
+compositions; grey squares repeat the protocols and the realised value for the random forest.}
+\label{fig:temporal}
+\end{figure}
+
+\begin{table}[t]
+\caption{Retrospective protocol estimates versus realised forward-in-time performance at the
+principal cut $T$ = 2010 (\num{10215} compositions first reported before 2010, \num{2328} at or after;
+\SI{76}{\percent} of the later compositions belong to element systems absent before 2010).
+Estimate = five-fold out-of-fold predictions using only the pre-2010 data; realised = one model
+fitted on all pre-2010 data and evaluated on the later compositions. $\Delta$ = estimate $-$
+realised; \SI{95}{\percent} intervals from a bootstrap of whole element systems, conditional on
+the fitted predictions. High-$\Tc$ threshold = 90th percentile of the training $\Tc$ (operator
+$\ge$); $K = \num{100}$. L1 differs from L0 only in the partition (the corpus holds one row per
+composition). In the \emph{Realised} rows the $\Delta$ columns give the interval of the realised
+value.}
+\label{tab:temporal}
+\centering\footnotesize\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{@{}lS[table-format=2.2]S[table-format=-1.2]S[table-format=1.3]S[table-format=-1.3]S[table-format=1.2]S[table-format=-1.2]S[table-format=1.2]@{}}
+\toprule
+Protocol & {MAE (K)} & {$\Delta$MAE} & {$\Rsq$} & {$\Delta \Rsq$} & {top-$K$} & {$\Delta$top-$K$} & {Spearman} \\
+\midrule
+\multicolumn{8}{@{}l}{\textit{XGBoost}}\\
+Realised, later compositions & \bfseries 7.43 & {\ci{6.67}{8.27}} & \bfseries 0.328 & {\ci{0.182}{0.469}} & \bfseries 0.17 & {\ci{0.07}{0.29}} & 0.61 \\
+L0 random $K$-fold & 4.34 & -3.10 & 0.910 & +0.582 & 0.99 & +0.82 & 0.95 \\
+L1 by composition & 4.18 & -3.25 & 0.912 & +0.584 & 0.97 & +0.80 & 0.95 \\
+L2 by element system & 6.76 & -0.67 & 0.827 & +0.499 & 0.92 & +0.75 & 0.93 \\
+L3 by host system & 7.53 & +0.10 & 0.799 & +0.471 & 0.87 & +0.70 & 0.91 \\
+L4 leave-clusters-out & 11.35 & +3.92 & 0.604 & +0.276 & 0.54 & +0.37 & 0.83 \\
+L0 re-weighted to the test mix & 4.60 & -2.84 & 0.813 & +0.485 & 0.94 & +0.77 & 0.88 \\
+\midrule
+\multicolumn{8}{@{}l}{\textit{Random forest}}\\
+Realised, later compositions & \bfseries 7.49 & {\ci{6.72}{8.32}} & \bfseries 0.339 & {\ci{0.205}{0.472}} & \bfseries 0.15 & {\ci{0.06}{0.27}} & 0.61 \\
+L0 random $K$-fold & 4.79 & -2.70 & 0.898 & +0.559 & 0.99 & +0.84 & 0.95 \\
+L1 by composition & 4.63 & -2.86 & 0.903 & +0.563 & 0.99 & +0.84 & 0.95 \\
+L2 by element system & 7.06 & -0.43 & 0.817 & +0.478 & 0.85 & +0.70 & 0.92 \\
+L3 by host system & 7.96 & +0.46 & 0.780 & +0.441 & 0.69 & +0.54 & 0.91 \\
+L4 leave-clusters-out & 11.28 & +3.79 & 0.626 & +0.287 & 0.73 & +0.58 & 0.83 \\
+L0 re-weighted to the test mix & 4.95 & -2.54 & 0.794 & +0.454 & 1.00 & +0.85 & 0.87 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \section{Discussion}
 
 \subsection{What the numbers mean}
 
-The single sentence that summarises this work is that \emph{the row is not the sample}. Superconductor
-datasets are clustered samples of doping series, not simple random samples of compounds, and every
-consequence measured here follows from that. The \SIrange{52}{61}{\percent} MAE inflation, the
-$\ICC$ of \num{0.85}, the effective sample size that lands within \SI{14}{\percent} of the family
-count, and the near-duplicate nearest-neighbour distances are four views of one fact.
+Superconductor datasets are clustered samples of doping series, not simple random samples of
+compounds, and every consequence measured here follows from that. Row-level splitting scores
+interpolation within a series the model has already seen: it rewards proximity to a replicate, which
+is why a featureless lookup of the system mean ranks almost as well as the descriptor model
+(table~\ref{tab:screen}), why a five-nearest-neighbour regressor on presence plus fractions matches
+the tree ensemble (table~\ref{tab:ablation}), and why the pooled inflation on unseen systems is
+concentrated in the large systems (figure~\ref{fig:summary}(b)). The clustering has a name outside
+materials informatics---cluster sampling---and the descriptive quantities that go with it (family
+concentration, intraclass correlation) are reported here as descriptions; a design effect, we have
+learned, is only defined once the estimator is named, and the effective sample size of ``the
+dataset'' is not a well-posed quantity.
 
-The framing has a name outside materials informatics. Cluster sampling and its design effect are
-standard in survey statistics, where reporting a nominal $N$ for a clustered sample is understood
-to be an error rather than a modelling choice. Stating the problem this way has two advantages
-over stating it as leakage: the diagnosis does not depend on which model is fitted or which
-cross-validation protocol is used, and the remedy---analyse at the level of the cluster---is
-already settled methodology.
+The forward-in-time test answers the question the paper is organised around. Grouped protocols are
+better proxies for performance on later superconductors than random cross-validation, in MAE and in
+$\Rsq$, and the more the grouping removes---composition, element system, host, composition
+cluster---the smaller the $\Rsq$ overstatement becomes. But none of them reproduces the realised
+value, the best proxy differs by metric and by cut, and the realised $\Rsq$ itself is fragile to how
+a few per cent of the training compositions are dated. The practical reading is that a grouped
+protocol should be reported \emph{as a proxy with a stated direction of error}, not as the
+extrapolation accuracy, and that the number a user should expect on genuinely new element systems is
+$\Rsq$ of order \numrange{0.1}{0.5}, not \num{0.9}.
 
 \subsection{Relation to prior work}
+\label{sec:prior}
 
-That extrapolative validation is harder than interpolative validation for materials discovery is
-established: Meredig \etal~\cite{meredig2018} demonstrated it with leave-one-cluster-out
-cross-validation, and Kapoor and Narayanan~\cite{kapoor2023} place it within a broader pattern of
-leakage-driven irreproducibility. The Matbench benchmarks~\cite{dunn2020,riebesell2024} similarly
-separate regression accuracy from discovery utility. Our contribution is not the observation that
-leakage exists but the specifics for this task: that the correct grouping variable for
-superconductors is the constituent-element set, which is chemically interpretable and directly
-verifiable rather than the output of an unsupervised clustering; that the resulting gap is
-\SIrange{52}{61}{\percent} in MAE and replicates across two independently curated datasets and two
-featurizations; that the inflation admits a model-independent expression as a design effect; and
-that screening utility survives the correction.
+Table~\ref{tab:prior} places this work against the studies that bear directly on it. The two source
+papers of our datasets validate at random~\cite{hamidieh2018,stanev2018}; Stanev \etal\ also report
+that a model trained on one macro-family has no predictive power on another, but their headline
+figure is the random one. Meredig \etal~\cite{meredig2018} introduced leave-one-cluster-out
+validation and showed that extrapolative performance can be far below the interpolative figure; we
+rely on their abstract and on secondary descriptions, since we could not obtain the full text, and
+attribute no procedural detail to them beyond that. Xiong \etal~\cite{xiong2020} order folds by
+the property value instead. Sheridan~\cite{sheridan2013} compared random, time-split and
+leave-class-out validation against realised prospective $\Rsq$ in QSAR and found the random figure
+too optimistic and the class-held-out figure too pessimistic; section~\ref{sec:temporal} is the
+same design on SuperCon, and reaches a compatible conclusion. Roberts \etal~\cite{roberts2017}
+argue for blocked cross-validation with the caution that blocking can induce extrapolation and
+overestimate the interpolative error, which is the caution our separation ladder makes concrete.
+3DSC~\cite{sommer2023} uses element-system grouping as its default protocol and remarks that
+SuperCon is very clustered, without comparing grouped with random validation;
+PhaseSelect~\cite{vasylenko2023} takes the element set as the unit of analysis and thereby discards
+the stoichiometric information whose contribution we measure. What this paper adds is the
+quantification of the gap on identical rows, models and budgets, with family-paired uncertainty;
+the null and representation ladders; the audit of the chemical unit and of the overlap between
+curations; and the forward-in-time scoring of the protocols themselves.
+
+\begin{table}[t]
+\caption{Prior work bearing on the evaluation of composition-based $\Tc$ models. ``Split'' is the
+train/test separation used for the headline figure. Entries marked $^{\dagger}$ rest on the
+published abstract only.}
+\label{tab:prior}
+\centering\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{2.5cm}p{3.4cm}p{4.0cm}p{4.5cm}@{}}
+\toprule
+Work & Split & Finding on extrapolation & What this paper adds \\
+\midrule
+Hamidieh~\cite{hamidieh2018} & random rows, repeated hold-out & not evaluated & the same rows and descriptors under element-system hold-out; released partitions \\
+Stanev \etal~\cite{stanev2018} & random rows; cross-family test between macro-families & no transfer between macro-families & an intermediate separation level with comparable test budget; nulls; inflation with paired intervals \\
+Meredig \etal$^{\dagger}$~\cite{meredig2018} & leave-one-cluster-out ($k$-means clusters) & extrapolative performance far below interpolative & a formula-inspectable grouping (as in 3DSC), controlled budget, two curations, nulls, selection metric \\
+Xiong \etal$^{\dagger}$~\cite{xiong2020} & forward CV ordered by property value & explorative power far lower than CV suggests & separation by chemistry rather than by property value; within-system dependence quantified \\
+Sheridan$^{\dagger}$~\cite{sheridan2013} & random, time-split, leave-class-out vs realised prospective $\Rsq$ (QSAR) & random too optimistic, class-out too pessimistic & the same design on SuperCon (section~\ref{sec:temporal}) \\
+Roberts \etal$^{\dagger}$~\cite{roberts2017} & blocked CV (time, space, groups) & blocking usually more appropriate, but can overstate error & a ladder of blocks with matched budget and a forward-in-time referee \\
+3DSC, Sommer \etal~\cite{sommer2023} & grouped by element system (default) & SuperCon ``very clustered''; grouped vs random not compared & the size of the gap, its per-system distribution, the chemical audit it motivated \\
+PhaseSelect, Vasylenko \etal~\cite{vasylenko2023} & element set is the unit of analysis & --- & what stoichiometry adds within a system, which PhaseSelect discards by design \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Scope and limitations}
 
-Several boundaries should be stated plainly.
+The family-mean null's $\Rsq \approx 0$ under grouped validation is a calibration, not a finding:
+with every test system unseen the lookup returns the training-fold mean, and its pooled $\Rsq$ is
+slightly negative only because that mean differs from the test-fold mean. The oracle $\eta^2$ is an
+in-sample descriptive quantity; the random-split $\Rsq$ of \num{0.928} exceeds it, which is itself a
+symptom of the leakage measured here, and we never combine it arithmetically with a cross-validated
+value.
 
-The family-mean null's collapse to $\Rsq \approx 0$ under grouped validation is a tautology, not
-an empirical finding: with every test family unseen, the lookup returns the global training mean,
-and a constant predictor has $\Rsq = 0$ by definition. We report it for completeness because it
-calibrates the grouped column, but the informative half of that comparison is the random column,
-where the same lookup reaches \num{0.80} and \num{0.76} without using any feature.
-
-The oracle $\eta^2$ is computed with full knowledge of family means, including families a
-cross-validated model never sees, so it is an in-sample descriptive quantity rather than a score
-any protocol could return. It is not a competitor to the cross-validated figures and not a bound
-on them---the random-split $\Rsq$ of \num{0.928} exceeds it, which is itself a symptom of the
-leakage this paper measures. We mark it distinctly in figure~\ref{fig:ceiling} and never combine
-it arithmetically with a cross-validated value.
-
-The element-presence null removes stoichiometry and descriptor physics simultaneously, so it
-cannot attribute the resulting drop to either alone. A third rung---presence plus fractions,
-without Magpie descriptors---would separate them, and we have not run it.
-
-We have measured only tree ensembles. Whether the gap widens with model capacity is a natural
-question for graph and deep composition models, and we expect it to, but we have not measured it
-and make no claim about it.
-
-Finally, the corrected numbers are still retrospective. Family-held-out validation is a better
-proxy for discovery than a random split, but the decisive test is prospective: predicting
-compounds published after a cut-off date and measuring realised accuracy.
+The two curations are not independent (section~\ref{sec:overlap}); their agreement bounds the
+sensitivity of the result to curation and featurization, not to the underlying corpus. Dataset~A is
+used as distributed and carries the oxygen defect of section~\ref{sec:audit}, whose effect on the
+gap we could only bound by row removal. The complement cross-evaluation and the forward-in-time test
+are the only evaluations here whose test materials are not also in the training source, and both
+have small or unrepresentative test sets at some cuts. The temporal corpus is dated by the year of
+the SuperCon report, not of discovery, \SI{23}{\percent} of its compositions have several dated
+reports (the first is used), and a fallback dating rule affects \num{570} compositions; the
+sensitivity to those rows is large for $\Rsq$ and small for MAE. We have measured only tree
+ensembles, a $k$-nearest-neighbour control and extra trees; whether the gap widens for graph and
+deep composition models is not measured here. The selection metric is retrospective throughout: a
+prospective campaign with a pre-registered candidate list would be the decisive test of the
+screening claim, and this paper does not make it.
 
 \subsection{Reproducibility}
 \label{sec:repro}
 
-The pipeline code, the featurized Dataset~B checkpoint, the result tables underlying every table
-and figure in this paper, and the scripts that render the figures from those tables are released
-together for this revision (see Data availability). Dataset~A is redistributed by UCI and is
-fetched by a script rather than bundled. Because a deterministic \emph{procedure} turned out not
-to be a sufficient specification of a partition (see below), the partitions themselves are
-released as data: for every row of both datasets, its family identifier, its fold under the
-deterministic \texttt{GroupKFold(5)}, its fold under \texttt{GroupKFold} with shuffling for seeds
-\numrange{0}{4}, and its fold under \texttt{KFold} for the same seeds. The exact library versions
-are pinned, the SHA-256 of each data file is recorded, and one script checks every number in this
-text against the result file it came from.
-
-Three implementation details materially affect the numbers and are documented here because they
-are not obvious from the protocol description. First, family labels must be assigned after row
-filtering: \texttt{GroupKFold} breaks ties by label order, and with thousands of singleton
-families a gapped labelling changes the fold of \num{8937} of the \num{12440} Dataset~B rows
-(\numrange{1721}{1897} per fold) relative to a contiguous labelling of the same families. The
-v1 release of our own Dataset~B pipeline factorised family codes before removing the $\Tc \le 0$
-rows and therefore evaluated a different partition from the one stored in its distributed
-checkpoint; every Dataset~B number in this version was computed on the checkpoint partition,
-which is the one released row by row, and the pipeline now factorises after filtering. Second, the
-top-100 threshold must be stated explicitly, since the training-fold and whole-dataset
-definitions differ by \num{0.4} points on Dataset~B. Third, top-100 precision is sensitive to the
-XGBoost version: the algorithmic changes across major versions alter the ranking of predictions
-even at fixed seed, and we therefore pin \texttt{xgboost==3.0.5} rather than a lower bound. The
-figures reported here were produced with Python~3.13, numpy~2.3.3, scikit-learn~1.7.2,
-xgboost~3.0.5 and matminer~0.9.2.
+The pipeline code, the audited Dataset-B checkpoint with its row-level audit table, the result
+tables underlying every table and figure, and the scripts that render the figures from those
+tables are released together (Data availability). Dataset~A is redistributed by UCI and fetched by a
+script. The partitions are released as data: for every row of both datasets, its system identifier,
+its fold under the deterministic \texttt{GroupKFold(5)}, its fold under shuffled \texttt{GroupKFold}
+for seeds \numrange{0}{4}, and its fold under \texttt{KFold} for the same seeds. Because
+\texttt{GroupKFold} breaks ties by label order, system labels must be factorised after row
+filtering; the previous release factorised before removing the $\Tc \le 0$ rows and therefore
+evaluated a different partition from the one it distributed, and the audit changes the partition
+again (section~\ref{sec:audit}). Top-\num{100} precision is sensitive to the XGBoost version, so we
+pin \texttt{xgboost==3.0.5}. Every number in this text is checked \emph{in its own location}
+(table cell or sentence) against the result file it comes from by
+\texttt{code/v3/verify\_manuscript.py}; the previous verifier checked only that each number appeared
+somewhere in the file and accepted a corrupted table cell, and a mutation test now confirms that
+each of a set of injected corruptions is detected. The figures reported here were produced with
+Python~3.13, numpy~2.3.3, scikit-learn~1.7.2, xgboost~3.0.5 and matminer~0.9.2.
 
 \section{Conclusion}
 
 Composition-based $\Tc$ models are evaluated on datasets built from doping series, and splitting
-those datasets at the level of the compound measures interpolation within a series rather than
-generalisation to a new chemistry. Holding out whole chemical families inflates MAE by
-\SIrange{52}{61}{\percent} and lowers $\Rsq$ by \numrange{0.071}{0.081}, consistently across two
-independently curated datasets and two featurizations.
+those datasets at the level of the row measures interpolation within a series rather than
+generalisation to a new chemistry. Holding out whole element systems inflates the pooled MAE by
+\SIrange{53}{64}{\percent} and lowers $\Rsq$ by \numrange{0.074}{0.084} in two curations of
+SuperCon and two featurizations, with paired family intervals that exclude zero; per system the
+inflation is \SIrange{22}{29}{\percent}. Most of what the conventional $\Rsq$ rewards is available
+from element identity, most of the remainder from stoichiometry, and on unseen systems the physical
+descriptors do not beat element presence plus fractions. Retrospective selection precision among
+held-out corpus materials remains high (\SI{87.0}{\percent} and \SI{82.4}{\percent}), but it is a
+statement about ranking known superconductors, not about synthesis yield, and on Dataset~A the
+contribution of the descriptors to it is not distinguishable from zero.
 
-Expressed as a clustered sample, the same fact reads more sharply: with an intraclass correlation
-of \num{0.85}, these datasets carry the statistical information of roughly their number of
-chemical families---\num{3847} and \num{3470} effective observations for \num{21263} and
-\num{12440} compounds---and family identity alone accounts in-sample for \SI{87.7}{\percent} and
-\SI{88.4}{\percent} of the variance in $\Tc$. A cross-validated model trained only on which
-elements are present, with no descriptors at all, reaches $\Rsq = \num{0.847}$ and \num{0.846}
-under the conventional protocol, against \num{0.928} for the full featurization.
-
-The practical conclusion is a recalibration rather than a dismissal. Screening precision under
-family-held-out validation remains \SI{87.0}{\percent} and \SI{85.2}{\percent} against a
-\SI{10}{\percent} base rate, and the descriptors demonstrably contribute to it. What changes is
-the number that should be quoted: for Dataset~A, MAE $\approx \SI{8.3}{\kelvin}$ rather than
-\SI{5.2}{\kelvin}. Obtaining it costs one additional cross-validation run, and we release the
-splits so that it costs one command.
+The evaluation that comes closest to a prospective test---training on everything reported before a
+year and scoring what was reported afterwards---is anticipated by none of the retrospective
+protocols: random cross-validation overstates $\Rsq$ by \numrange{0.28}{0.60}, grouped protocols
+are closer and leave-clusters-out closest in $\Rsq$, and the realised $\Rsq$ on new element systems
+is \numrange{0.1}{0.5}. We therefore recommend reporting a grouped protocol alongside the random
+one, stating which target population it stands for, and treating its figure as a proxy with a known
+direction of error. The corrected protocols cost one additional cross-validation run each, and the
+released partitions, audit and verifier make them one command.
 
 \section*{Data availability}
 
-Code, the row-level cross-validation partitions of both datasets (\texttt{splits/}), the
-featurized Dataset~B checkpoint, all result tables (\texttt{results\_v2/}), the scripts that
-produced them and that render every figure (\texttt{code/v2/}), pinned dependency versions
-(\texttt{requirements.txt}) and SHA-256 checksums of the data files
+Code, the row-level cross-validation partitions of both datasets (\texttt{splits/}), the audited
+Dataset-B checkpoint and its audit table (\texttt{data/datasetB\_featurized\_v3.npz},
+\texttt{data/audit/}), all result tables (\texttt{results\_v2/}, \texttt{results\_v3/}), the scripts
+that produced them and that render every figure (\texttt{code/v2/}, \texttt{code/v3/}), pinned
+dependency versions (\texttt{requirements.txt}) and SHA-256 checksums of the data files
 (\texttt{data/CHECKSUMS.sha256}) are available at
 \url{https://github.com/Freakscode/superconductor-tc-leakage-eval} under the MIT licence, at the
-tagged release accompanying this revision. \texttt{python code/v2/verify\_manuscript.py} checks
-every number in this text against its result file.
-%% TODO antes de enviar: el working tree ya contiene todo lo anterior; falta el commit, el push,
-%% el tag v2.0 y el DOI de Zenodo. Ver CAMBIOS_V2.md §8.
-Dataset~A is the UCI Superconductivity Data Set~\cite{hamidieh2018}, retrieved by the included
-\texttt{get\_datasetA.py}. Dataset~B derives from the curated list of Stanev
-\etal~\cite{stanev2018}.
+tagged release accompanying this revision. \texttt{python code/v3/verify\_manuscript.py} checks
+every number in this text against its result file in its own location. Dataset~A is the UCI
+Superconductivity Data Set~\cite{hamidieh2018}, retrieved by the included \texttt{get\_datasetA.py}.
+Dataset~B derives from the curated list of Stanev \etal~\cite{stanev2018}. The primary SuperCon
+export used for the temporal corpus is not redistributed; the derived dated corpus
+(\texttt{data/temporal\_corpus\_v3.csv}) and the script that builds it from the export are.
 
+{\footnotesize
 \begin{thebibliography}{99}
 
 \bibitem{hamidieh2018}
@@ -812,13 +1162,6 @@ Stanev V, Oses C, Kusne A G, Rodriguez E, Paglione J, Curtarolo S and Takeuchi I
 Machine learning modeling of superconducting critical temperature
 \textit{npj Comput. Mater.} \textbf{4} 29
 \url{https://doi.org/10.1038/s41524-018-0085-8}
-
-\bibitem{meredig2018}
-Meredig B, Antono E, Church C, Hutchinson M, Ling J, Paradiso S, Blaiszik B, Foster I,
-Gibbons B, Hattrick-Simpers J, Mehta A and Ward L 2018 Can machine learning identify the next
-high-temperature superconductor? Examining extrapolation performance for materials discovery
-\textit{Mol. Syst. Des. Eng.} \textbf{3} 819--25
-\url{https://doi.org/10.1039/c8me00012c}
 
 \bibitem{konno2021}
 Konno T, Kurokawa H, Nabeshima F, Sakishita Y, Ogawa R, Hosako I and Maeda A 2021
@@ -889,6 +1232,41 @@ Chen T and Guestrin C 2016 XGBoost: A scalable tree boosting system
 \textit{Proc. 22nd ACM SIGKDD Int. Conf. on Knowledge Discovery and Data Mining} 785--94
 \url{https://doi.org/10.1145/2939672.2939785}
 
-\end{thebibliography}
+\bibitem{sommer2023}
+Sommer T, Willa R, Schmalian J and Friederich P 2023 3DSC - a dataset of superconductors including crystal structures
+\textit{Sci. Data} \textbf{10} 816
+\url{https://doi.org/10.1038/s41597-023-02721-y}
+
+\bibitem{meredig2018}
+Meredig B, Antono E, Church C, Hutchinson M, Ling J, Paradiso S, Blaiszik B, Foster I, Gibbons B, Hattrick-Simpers J, Mehta A and Ward L 2018 Can machine learning identify the next high-temperature superconductor? Examining extrapolation performance for materials discovery
+\textit{Mol. Syst. Des. Eng.} \textbf{3} 819--25
+\url{https://doi.org/10.1039/c8me00012c}
+
+\bibitem{vasylenko2023}
+Vasylenko A, Antypov D, Gusev V V, Gaultois M W, Dyer M S and Rosseinsky M J 2023 Element selection for functional materials discovery by integrated machine learning of elemental contributions to properties
+\textit{npj Comput. Mater.} \textbf{9} 164
+\url{https://doi.org/10.1038/s41524-023-01072-x}
+
+\bibitem{xiong2020}
+Xiong Z, Cui Y, Liu Z, Zhao Y, Hu M and Hu J 2020 Evaluating explorative prediction power of machine learning algorithms for materials discovery using $k$-fold forward cross-validation
+\textit{Comput. Mater. Sci.} \textbf{171} 109203
+\url{https://doi.org/10.1016/j.commatsci.2019.109203}
+
+\bibitem{sheridan2013}
+Sheridan R P 2013 Time-split cross-validation as a method for estimating the goodness of prospective prediction
+\textit{J. Chem. Inf. Model.} \textbf{53} 783--90
+\url{https://doi.org/10.1021/ci400084k}
+
+\bibitem{roberts2017}
+Roberts D R, Bahn V, Ciuti S, Boyce M S, Elith J, Guillera-Arroita G, Hauenstein S, Lahoz-Monfort J J, Schröder B, Thuiller W, Warton D I, Wintle B A, Hartig F and Dormann C F 2017 Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure
+\textit{Ecography} \textbf{40} 913--29
+\url{https://doi.org/10.1111/ecog.02881}
+
+\bibitem{gupta1993}
+Gupta R P and Gupta M 1993 A comparative study of the pressure-induced charge redistribution in YBa$_{2}$Cu$_{3}$O$_{7}$ and YBa$_{2}$Cu$_{4}$O$_{8}$
+\textit{Physica C} \textbf{204} 349--58
+\url{https://doi.org/10.1016/0921-4534(93)91019-r}
+
+\end{thebibliography}}
 
 \end{document}

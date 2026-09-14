@@ -1,0 +1,203 @@
+{
+ "tex": "/Users/freakscode/Proyectos 2025/Proyectos Académicos/Superconductors/superconductor-tc-leakage-eval/paper1_manuscript.tex",
+ "seed": 0,
+ "n_random": 12,
+ "baseline_failing_ids": [],
+ "known_baseline": [],
+ "mutations": [
+  {
+   "k": 0,
+   "id": "tab_temporal_RandomForest_L4_leave-clusters-out_todo_Spearman",
+   "where": "tab:temporal l.991 fila 'L4 leave-clusters-out' col 8 part 0",
+   "original": "0.83",
+   "mutant": "0.84",
+   "line": 991,
+   "exit": 1,
+   "new_failures": [
+    "tab_temporal_RandomForest_L4_leave-clusters-out_todo_Spearman"
+   ],
+   "caught": true
+  },
+  {
+   "k": 1,
+   "id": "fam_123",
+   "where": "l.226 [Element systems as the grouping unit] …a}$ and YBa$_2$Cu$_4$O$_8$ phases\n(\\num{596}",
+   "original": "596",
+   "mutant": "597",
+   "line": 226,
+   "exit": 1,
+   "new_failures": [
+    "fam_123",
+    "fam_124",
+    "fam_247"
+   ],
+   "caught": true
+  },
+  {
+   "k": 2,
+   "id": "tab_main_B_RandomForest_random_R2",
+   "where": "tab:main l.426 fila 'Random forest' col 5 part 0",
+   "original": "0.918",
+   "mutant": "0.919",
+   "line": 426,
+   "exit": 1,
+   "new_failures": [
+    "tab_main_B_RandomForest_random_R2"
+   ],
+   "caught": true
+  },
+  {
+   "k": 3,
+   "id": "tab_abl_B_grouped_R3_MAE_fam_hi",
+   "where": "tab:ablation l.780 fila 'R3 descriptors + fractions' col 3 part 2",
+   "original": "6.20",
+   "mutant": "6.21",
+   "line": 780,
+   "exit": 1,
+   "new_failures": [
+    "tab_abl_B_grouped_R3_MAE_fam_hi"
+   ],
+   "caught": true
+  },
+  {
+   "k": 4,
+   "id": "lev_L1_sysB",
+   "where": "l.605 [Separation levels define different target populations] …leaves \\SI{88.1}{\\percent} ",
+   "original": "86.1",
+   "mutant": "86.2",
+   "line": 605,
+   "exit": 1,
+   "new_failures": [
+    "lev_L1_sysA",
+    "lev_L1_sysB"
+   ],
+   "caught": true
+  },
+  {
+   "k": 5,
+   "id": "oc_A_out_r2",
+   "where": "l.495 [Holding out element systems inflates the error] …s whose system is not\nwith $\\Rsq =",
+   "original": "0.500",
+   "mutant": "0.501",
+   "line": 495,
+   "exit": 1,
+   "new_failures": [
+    "oc_A_out_hi",
+    "oc_A_out_lo",
+    "oc_A_out_r2"
+   ],
+   "caught": true
+  },
+  {
+   "k": 6,
+   "id": "data_N_B",
+   "where": "l.166 [Datasets] …udited checkpoint used throughout: \\num{12336} rows in \\num{3046} elemen",
+   "original": "12336",
+   "mutant": "12337",
+   "line": 166,
+   "exit": 1,
+   "new_failures": [
+    "data_N_B",
+    "data_k_B"
+   ],
+   "caught": true
+  },
+  {
+   "k": 7,
+   "id": "tab_screen_B_random_None_precision_pct",
+   "where": "tab:screen l.865 fila 'Family-mean null' col 2 part 0",
+   "original": "80.7",
+   "mutant": "80.8",
+   "line": 865,
+   "exit": 1,
+   "new_failures": [
+    "tab_screen_B_random_None_precision_pct"
+   ],
+   "caught": true
+  },
+  {
+   "k": 8,
+   "id": "disp_322",
+   "where": "l.479 [Holding out element systems inflates the error] …n\nof $\\Tc$ from the group median i",
+   "original": "3.22",
+   "mutant": "3.23",
+   "line": 479,
+   "exit": 1,
+   "new_failures": [
+    "disp_322",
+    "disp_349"
+   ],
+   "caught": true
+  },
+  {
+   "k": 9,
+   "id": "tab_temporal_XGBoost_L4_leave-clusters-out_todo_R2_d",
+   "where": "tab:temporal l.982 fila 'L4 leave-clusters-out' col 5 part 0",
+   "original": "0.276",
+   "mutant": "0.277",
+   "line": 982,
+   "exit": 1,
+   "new_failures": [
+    "tab_temporal_XGBoost_L4_leave-clusters-out_todo_R2_d"
+   ],
+   "caught": true
+  },
+  {
+   "k": 10,
+   "id": "tmp_comp_r2",
+   "where": "l.895 [Which retrospective protocol anticipates performance on later superconductors?] …MA",
+   "original": "0.80",
+   "mutant": "0.81",
+   "line": 895,
+   "exit": 1,
+   "new_failures": [
+    "tmp_comp_mae",
+    "tmp_comp_r2"
+   ],
+   "caught": true
+  },
+  {
+   "k": 11,
+   "id": "tab_abl_A_grouped_ET500_R2_top",
+   "where": "tab:ablation l.768 fila 'Extra trees on R2' col 6 part 0",
+   "original": "88.4",
+   "mutant": "88.5",
+   "line": 768,
+   "exit": 1,
+   "new_failures": [
+    "tab_abl_A_grouped_ET500_R2_top"
+   ],
+   "caught": true
+  },
+  {
+   "k": 12,
+   "id": "tab_tuning_A_a_fixed_Fixed_published_r",
+   "where": "tab:tuning l.567 fila 'Fixed, published' col 2 part 0",
+   "original": "5.23",
+   "mutant": "99.99",
+   "line": 567,
+   "exit": 1,
+   "new_failures": [
+    "tab_tuning_A_a_fixed_Fixed_published_r"
+   ],
+   "caught": true
+  },
+  {
+   "k": 13,
+   "id": "tab_tuning_A_a_fixed_Fixed_published_r",
+   "where": "tab:tuning l.567 fila 'Fixed, published' col 2 part 0",
+   "original": "5.23",
+   "mutant": "8.31",
+   "line": 567,
+   "exit": 1,
+   "new_failures": [
+    "tab_tuning_A_a_fixed_Fixed_published_r"
+   ],
+   "caught": true
+  }
+ ],
+ "caught": 14,
+ "total": 14,
+ "pass": true,
+ "procedencia": "code/v3/test_verify_mutation.py | mutant = last digit + 1 (or the two review cases 5.23->99.99 / 5.23->8.31); verifier = code/v3/verify_manuscript.py"
+}

@@ -1,0 +1,614 @@
+{
+ "generado_utc": "2026-09-14T05:00:00+00:00",
+ "procedencia": {
+  "pdfs": {
+   "3dsc": "Unpaywall -> nature.com PDF (DOI 10.1038/s41597-023-02721-y); paginación = impresa (1–13)",
+   "phaseselect": "Unpaywall -> nature.com PDF (DOI 10.1038/s41524-023-01072-x); paginación = impresa (1–10)",
+   "stanev": "Unpaywall -> nature.com PDF (DOI 10.1038/s41524-018-0085-8); paginación = impresa (1–14)",
+   "hamidieh": "arXiv:1803.10260 PDF (24 pp.; paginación arXiv, NO la de Comput. Mater. Sci. 154 346–354)",
+   "meredig": "NO obtenido: pubs.rsc.org devuelve desafío anti-bot; OSTI 1464980/1484501 sólo registro bibliográfico. Se usa resumen CrossRef/OpenAlex + fragmentos indexados (leyenda Fig. YBCO en ResearchGate)",
+   "xiong, roberts": "resumen CrossRef (texto completo cerrado)",
+   "sheridan": "resumen vía ACS figshare/PubMed (texto completo cerrado)",
+   "gupta1993": "solo registro CrossRef (título, revista, vol., pp.)"
+  },
+  "extraccion": "pypdfium2 vía skill pdf-explore; cada cita comprobada como subcadena del texto extraído (espacios normalizados)",
+  "crossref": "code/v3/fetch_refs_crossref.py -> results_v3/refs_crossref_v3.json"
+ },
+ "informe_H02_verificacion": {
+  "3DSC_p8_separa_por_conjunto_de_elementos_incl_dopantes": true,
+  "3DSC_p8_ejemplo_Ba-Cu-O-Y": true,
+  "3DSC_p10_5fold_por_sistema_quimico": true,
+  "3DSC_p3_nota_OY_oxigeno": true,
+  "3DSC_compara_agrupado_vs_aleatorio": false,
+  "3DSC_cuantifica_brecha_de_fuga": false,
+  "3DSC_citado_en_manuscrito_v5": false,
+  "autoria_3DSC_en_tarea_incorrecta": "La tarea dice 'Sommer, Mustapic, Dürr, Nejadhosseini, Ristić'; PDF y CrossRef: Sommer T, Willa R, Schmalian J, Friederich P"
+ },
+ "citas": [
+  {
+   "fuente": "3dsc",
+   "pagina": 3,
+   "cita": "the Y was considered to represent yttrium, but it actually represented an unknown quantity of oxygen",
+   "n_palabras": 16,
+   "verificado": true
+  },
+  {
+   "fuente": "3dsc",
+   "pagina": 8,
+   "cita": "following Meredig et al. 21 we accounted for some extrapolation between the train and test set",
+   "n_palabras": 16,
+   "verificado": true
+  },
+  {
+   "fuente": "3dsc",
+   "pagina": 8,
+   "cita": "materials with the same chemical system are either all in the train set or all in the test set",
+   "n_palabras": 19,
+   "verificado": true
+  },
+  {
+   "fuente": "3dsc",
+   "pagina": 8,
+   "cita": "the set of all chemical elements which make up the material (incl. dopants), e.g. Ba-Cu-O-Y for YBa2Cu3O7",
+   "n_palabras": 17,
+   "verificado": true
+  },
+  {
+   "fuente": "3dsc",
+   "pagina": 8,
+   "cita": "n randomly repeated 80:20 splits (n=25 for 3DSCICSD, n=100 for 3DSCMP)",
+   "n_palabras": 11,
+   "verificado": true
+  },
+  {
+   "fuente": "3dsc",
+   "pagina": 10,
+   "cita": "XGB models with 5-fold cross-validation grouped by chemical system",
+   "n_palabras": 9,
+   "verificado": true
+  },
+  {
+   "fuente": "3dsc",
+   "pagina": 10,
+   "cita": "The SuperCon dataset is very clustered, with many data points coming from narrow groups of materials",
+   "n_palabras": 16,
+   "verificado": true
+  },
+  {
+   "fuente": "3dsc",
+   "pagina": 10,
+   "cita": "to stay within the extrapolation setting, we removed materials with chemical systems which already occur in these test sets",
+   "n_palabras": 19,
+   "verificado": true
+  },
+  {
+   "fuente": "stanev",
+   "pagina": 4,
+   "cita": "the dataset is randomly split (85%/15%) into training and test subsets",
+   "n_palabras": 11,
+   "verificado": true
+  },
+  {
+   "fuente": "stanev",
+   "pagina": 6,
+   "cita": "Models trained on a single group have no predictive power for materials from other groups",
+   "n_palabras": 15,
+   "verificado": true
+  },
+  {
+   "fuente": "stanev",
+   "pagina": 7,
+   "cita": "R2 for the low-Tc materials is about 0.85, for cuprates is just below 0.8, and for iron-based compounds is about 0.74",
+   "n_palabras": 21,
+   "verificado": true
+  },
+  {
+   "fuente": "hamidieh",
+   "pagina": 14,
+   "cita": "At random, divide the data into 2/3 train data and 1/3 test data",
+   "n_palabras": 13,
+   "verificado": true
+  },
+  {
+   "fuente": "hamidieh",
+   "pagina": 3,
+   "cita": "an out-of-sample error of about 9.5 K based on root-mean-squared-error (rmse), and an out-of-sample R2 values of about 0.92",
+   "n_palabras": 19,
+   "verificado": true
+  },
+  {
+   "fuente": "hamidieh",
+   "pagina": 8,
+   "cita": "We remove the repeating rows",
+   "n_palabras": 5,
+   "verificado": true
+  },
+  {
+   "fuente": "phaseselect",
+   "pagina": 2,
+   "cita": "each phase field is labelled according to the maximum reported value of all materials within it",
+   "n_palabras": 16,
+   "verificado": true
+  },
+  {
+   "fuente": "phaseselect",
+   "pagina": 3,
+   "cita": "three datasets with 4826, 4753 and 40,452 phase fields",
+   "n_palabras": 9,
+   "verificado": true
+  },
+  {
+   "fuente": "phaseselect",
+   "pagina": 6,
+   "cita": "we split the data so 20% is withheld for testing and perform fivefold cross-validation",
+   "n_palabras": 14,
+   "verificado": true
+  },
+  {
+   "fuente": "phaseselect",
+   "pagina": 1,
+   "cita": "phase fields, defined as sets of constituent elements",
+   "n_palabras": 8,
+   "verificado": true
+  }
+ ],
+ "h09_medicion": {
+  "family": "Ba|Cu|O|Y",
+  "datasetA": {
+   "rows_total": 21263,
+   "family_rows": 720,
+   "family_distinct_formulas": 184,
+   "family_Tc_min_K": 4.3,
+   "family_Tc_max_K": 130.0,
+   "family_Tc_sd_K": 21.026990755924203,
+   "CuY_ratio_counts": {
+    "3.00": 596,
+    "4.00": 51,
+    "3.50": 38,
+    "2.50": 6,
+    "2.73": 5,
+    "3.33": 3,
+    "1.00": 3,
+    "0.83": 2
+   },
+   "rows_CuY_eq_3_(123-type)": 596,
+   "rows_CuY_eq_3.5_(247-type)": 38,
+   "rows_CuY_eq_4_(124-type)": 51,
+   "example_formulas_CuY_4": [
+    "Y1Ba2Cu4O8",
+    "Y1Ba2Cu4O7.8",
+    "Y1Ba2Cu4O7.96",
+    "Y1Ba2Cu4O7.986",
+    "Y1Ba2Cu4O8.045"
+   ]
+  },
+  "datasetB": {
+   "rows_Tc_pos_before_parse_filter": 12448,
+   "rows_parse_failures_dropped": 8,
+   "rows_total": 12440,
+   "family_rows": 99,
+   "family_distinct_formulas": 99,
+   "family_Tc_min_K": 4.3,
+   "family_Tc_max_K": 100.1,
+   "CuY_ratio_counts": {
+    "3.00": 55,
+    "3.50": 20,
+    "4.00": 9,
+    "2.50": 2,
+    "2.73": 2,
+    "1.00": 1,
+    "3.54": 1,
+    "2.88": 1
+   },
+   "rows_CuY_eq_3_(123-type)": 55,
+   "rows_CuY_eq_3.5_(247-type)": 20,
+   "rows_CuY_eq_4_(124-type)": 9,
+   "example_formulas_CuY_4": [
+    "Y1Ba2Cu4O7.8",
+    "Y1Ba2Cu4O8.043",
+    "Y1Ba2Cu4O7.96",
+    "Y1Ba2Cu4O8.045",
+    "Y1Ba2Cu4O7.9"
+   ]
+  },
+  "interpretacion": "Un unico conjunto de elementos {Ba,Cu,O,Y} agrupa fases con estequiometria Cu/Y = 3, 3.5 y 4 (estructuras 123, 247 y 124), con Tc entre ~4 K y >100 K. El grupo es una agrupacion operativa por sistema elemental, no una serie de dopaje uno-a-uno.",
+  "procedencia": {
+   "script": "code/v3/h09_ybco_family_check.py",
+   "definicion_familia": "tc_pipeline.chemical_families (A); pymatgen Composition + factorize tras Tc>0 (B)",
+   "python": "3.13.15",
+   "numpy": "2.3.3",
+   "pandas": "2.3.2",
+   "pymatgen": "2025.6.14",
+   "semilla": "no aplica (conteo determinista)",
+   "datos": [
+    "data/unique_m.csv",
+    "data/supercon_stanev.csv"
+   ]
+  }
+ },
+ "crossref": {
+  "sommer2023": {
+   "doi": "10.1038/s41597-023-02721-y",
+   "title": "3DSC - a dataset of superconductors including crystal structures",
+   "authors": [
+    {
+     "family": "Sommer",
+     "given": "Timo"
+    },
+    {
+     "family": "Willa",
+     "given": "Roland"
+    },
+    {
+     "family": "Schmalian",
+     "given": "Jörg"
+    },
+    {
+     "family": "Friederich",
+     "given": "Pascal"
+    }
+   ],
+   "journal": "Scientific Data",
+   "journal_abbrev": "Sci. Data",
+   "volume": "10",
+   "issue": "1",
+   "page": null,
+   "article_number": "816",
+   "year": 2023,
+   "publisher": "Springer Science and Business Media LLC",
+   "procedencia": {
+    "fuente": "api.crossref.org/works/<doi>",
+    "consultado_utc": "2026-09-14T04:59:15+00:00",
+    "script": "code/v3/fetch_refs_crossref.py"
+   }
+  },
+  "meredig2018": {
+   "doi": "10.1039/c8me00012c",
+   "title": "Can machine learning identify the next high-temperature superconductor? Examining extrapolation performance for materials discovery",
+   "authors": [
+    {
+     "family": "Meredig",
+     "given": "Bryce"
+    },
+    {
+     "family": "Antono",
+     "given": "Erin"
+    },
+    {
+     "family": "Church",
+     "given": "Carena"
+    },
+    {
+     "family": "Hutchinson",
+     "given": "Maxwell"
+    },
+    {
+     "family": "Ling",
+     "given": "Julia"
+    },
+    {
+     "family": "Paradiso",
+     "given": "Sean"
+    },
+    {
+     "family": "Blaiszik",
+     "given": "Ben"
+    },
+    {
+     "family": "Foster",
+     "given": "Ian"
+    },
+    {
+     "family": "Gibbons",
+     "given": "Brenna"
+    },
+    {
+     "family": "Hattrick-Simpers",
+     "given": "Jason"
+    },
+    {
+     "family": "Mehta",
+     "given": "Apurva"
+    },
+    {
+     "family": "Ward",
+     "given": "Logan"
+    }
+   ],
+   "journal": "Molecular Systems Design & Engineering",
+   "journal_abbrev": "Mol. Syst. Des. Eng.",
+   "volume": "3",
+   "issue": "5",
+   "page": "819-825",
+   "article_number": null,
+   "year": 2018,
+   "publisher": "Royal Society of Chemistry (RSC)",
+   "procedencia": {
+    "fuente": "api.crossref.org/works/<doi>",
+    "consultado_utc": "2026-09-14T04:59:15+00:00",
+    "script": "code/v3/fetch_refs_crossref.py"
+   }
+  },
+  "vasylenko2023": {
+   "doi": "10.1038/s41524-023-01072-x",
+   "title": "Element selection for functional materials discovery by integrated machine learning of elemental contributions to properties",
+   "authors": [
+    {
+     "family": "Vasylenko",
+     "given": "Andrij"
+    },
+    {
+     "family": "Antypov",
+     "given": "Dmytro"
+    },
+    {
+     "family": "Gusev",
+     "given": "Vladimir V."
+    },
+    {
+     "family": "Gaultois",
+     "given": "Michael W."
+    },
+    {
+     "family": "Dyer",
+     "given": "Matthew S."
+    },
+    {
+     "family": "Rosseinsky",
+     "given": "Matthew J."
+    }
+   ],
+   "journal": "npj Computational Materials",
+   "journal_abbrev": "npj Comput. Mater.",
+   "volume": "9",
+   "issue": "1",
+   "page": null,
+   "article_number": "164",
+   "year": 2023,
+   "publisher": "Springer Science and Business Media LLC",
+   "procedencia": {
+    "fuente": "api.crossref.org/works/<doi>",
+    "consultado_utc": "2026-09-14T04:59:15+00:00",
+    "script": "code/v3/fetch_refs_crossref.py"
+   }
+  },
+  "stanev2018": {
+   "doi": "10.1038/s41524-018-0085-8",
+   "title": "Machine learning modeling of superconducting critical temperature",
+   "authors": [
+    {
+     "family": "Stanev",
+     "given": "Valentin"
+    },
+    {
+     "family": "Oses",
+     "given": "Corey"
+    },
+    {
+     "family": "Kusne",
+     "given": "A. Gilad"
+    },
+    {
+     "family": "Rodriguez",
+     "given": "Efrain"
+    },
+    {
+     "family": "Paglione",
+     "given": "Johnpierre"
+    },
+    {
+     "family": "Curtarolo",
+     "given": "Stefano"
+    },
+    {
+     "family": "Takeuchi",
+     "given": "Ichiro"
+    }
+   ],
+   "journal": "npj Computational Materials",
+   "journal_abbrev": "npj Comput. Mater.",
+   "volume": "4",
+   "issue": "1",
+   "page": null,
+   "article_number": "29",
+   "year": 2018,
+   "publisher": "Springer Science and Business Media LLC",
+   "procedencia": {
+    "fuente": "api.crossref.org/works/<doi>",
+    "consultado_utc": "2026-09-14T04:59:15+00:00",
+    "script": "code/v3/fetch_refs_crossref.py"
+   }
+  },
+  "hamidieh2018": {
+   "doi": "10.1016/j.commatsci.2018.07.052",
+   "title": "A data-driven statistical model for predicting the critical temperature of a superconductor",
+   "authors": [
+    {
+     "family": "Hamidieh",
+     "given": "Kam"
+    }
+   ],
+   "journal": "Computational Materials Science",
+   "journal_abbrev": "Comput. Mater. Sci.",
+   "volume": "154",
+   "issue": null,
+   "page": "346-354",
+   "article_number": null,
+   "year": 2018,
+   "publisher": "Elsevier BV",
+   "procedencia": {
+    "fuente": "api.crossref.org/works/<doi>",
+    "consultado_utc": "2026-09-14T04:59:15+00:00",
+    "script": "code/v3/fetch_refs_crossref.py"
+   }
+  },
+  "xiong2020": {
+   "doi": "10.1016/j.commatsci.2019.109203",
+   "title": "Evaluating explorative prediction power of machine learning algorithms for materials discovery using $k$-fold forward cross-validation",
+   "authors": [
+    {
+     "family": "Xiong",
+     "given": "Zheng"
+    },
+    {
+     "family": "Cui",
+     "given": "Yuxin"
+    },
+    {
+     "family": "Liu",
+     "given": "Zhonghao"
+    },
+    {
+     "family": "Zhao",
+     "given": "Yong"
+    },
+    {
+     "family": "Hu",
+     "given": "Ming"
+    },
+    {
+     "family": "Hu",
+     "given": "Jianjun"
+    }
+   ],
+   "journal": "Computational Materials Science",
+   "journal_abbrev": "Comput. Mater. Sci.",
+   "volume": "171",
+   "issue": null,
+   "page": "109203",
+   "article_number": "109203",
+   "year": 2020,
+   "publisher": "Elsevier BV",
+   "procedencia": {
+    "fuente": "api.crossref.org/works/<doi>",
+    "consultado_utc": "2026-09-14T04:59:15+00:00",
+    "script": "code/v3/fetch_refs_crossref.py"
+   }
+  },
+  "sheridan2013": {
+   "doi": "10.1021/ci400084k",
+   "title": "Time-split cross-validation as a method for estimating the goodness of prospective prediction",
+   "authors": [
+    {
+     "family": "Sheridan",
+     "given": "Robert P."
+    }
+   ],
+   "journal": "Journal of Chemical Information and Modeling",
+   "journal_abbrev": "J. Chem. Inf. Model.",
+   "volume": "53",
+   "issue": "4",
+   "page": "783-790",
+   "article_number": null,
+   "year": 2013,
+   "publisher": "American Chemical Society (ACS)",
+   "procedencia": {
+    "fuente": "api.crossref.org/works/<doi>",
+    "consultado_utc": "2026-09-14T04:59:15+00:00",
+    "script": "code/v3/fetch_refs_crossref.py"
+   }
+  },
+  "roberts2017": {
+   "doi": "10.1111/ecog.02881",
+   "title": "Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure",
+   "authors": [
+    {
+     "family": "Roberts",
+     "given": "David R."
+    },
+    {
+     "family": "Bahn",
+     "given": "Volker"
+    },
+    {
+     "family": "Ciuti",
+     "given": "Simone"
+    },
+    {
+     "family": "Boyce",
+     "given": "Mark S."
+    },
+    {
+     "family": "Elith",
+     "given": "Jane"
+    },
+    {
+     "family": "Guillera‐Arroita",
+     "given": "Gurutzeta"
+    },
+    {
+     "family": "Hauenstein",
+     "given": "Severin"
+    },
+    {
+     "family": "Lahoz‐Monfort",
+     "given": "José J."
+    },
+    {
+     "family": "Schröder",
+     "given": "Boris"
+    },
+    {
+     "family": "Thuiller",
+     "given": "Wilfried"
+    },
+    {
+     "family": "Warton",
+     "given": "David I."
+    },
+    {
+     "family": "Wintle",
+     "given": "Brendan A."
+    },
+    {
+     "family": "Hartig",
+     "given": "Florian"
+    },
+    {
+     "family": "Dormann",
+     "given": "Carsten F."
+    }
+   ],
+   "journal": "Ecography",
+   "journal_abbrev": "Ecography",
+   "volume": "40",
+   "issue": "8",
+   "page": "913-929",
+   "article_number": null,
+   "year": 2017,
+   "publisher": "Wiley",
+   "procedencia": {
+    "fuente": "api.crossref.org/works/<doi>",
+    "consultado_utc": "2026-09-14T04:59:15+00:00",
+    "script": "code/v3/fetch_refs_crossref.py"
+   }
+  },
+  "gupta1993": {
+   "doi": "10.1016/0921-4534(93)91019-r",
+   "title": "A comparative study of the pressure-induced charge redistribution in YBa$_{2}$Cu$_{3}$O$_{7}$ and YBa$_{2}$Cu$_{4}$O$_{8}$",
+   "authors": [
+    {
+     "family": "Gupta",
+     "given": "Raju P."
+    },
+    {
+     "family": "Gupta",
+     "given": "Michèle"
+    }
+   ],
+   "journal": "Physica C: Superconductivity",
+   "journal_abbrev": "Physica C",
+   "volume": "204",
+   "issue": "3-4",
+   "page": "349-358",
+   "article_number": null,
+   "year": 1993,
+   "publisher": "Elsevier BV",
+   "procedencia": {
+    "fuente": "api.crossref.org/works/<doi>",
+    "consultado_utc": "2026-09-14T04:59:15+00:00",
+    "script": "code/v3/fetch_refs_crossref.py"
+   }
+  }
+ }
+}

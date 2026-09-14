@@ -1,0 +1,3 @@
+dataset,checkpoint,N,k_familias,tam_medio,pct_en_familias_ge5,pct_en_familias_ge2,n_familias_ge5,n_singleton,pct_singleton_filas,tam_familia_max,top3_tam,procedencia
+A,unchanged,21263,3365,6.318870728083209,79.50900625499695,94.50218689742745,1052,1169,5.497813102572544,720,720;358;323,"code/v3/family_concentration_v3.py | python 3.13.15, numpy 2.3.3, pandas 2.3.2, scikit-learn 1.7.2, xgboost 3.0.5 | family = constituent-element set (v3_common.load_dataset groups)"
+B,v3,12336,3046,4.049901510177282,66.5207522697795,89.33203631647211,708,1316,10.667963683527885,131,131;120;111,"code/v3/family_concentration_v3.py | python 3.13.15, numpy 2.3.3, pandas 2.3.2, scikit-learn 1.7.2, xgboost 3.0.5 | family = constituent-element set (v3_common.load_dataset groups)"

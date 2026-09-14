@@ -16,3 +16,20 @@ Papers/
 .DS_Store
 # raw SuperCon dump: redistribution terms unverified (see exploratory/README.md)
 data/primary.tsv
+
+# v3: row-level out-of-fold predictions. Regenerate with code/v3/{ablation_representation,
+# topk_metrics,topk_negatives,temporal_validation,nested_both_arms,dump_oof_predictions}.py
+# oof_v3.csv.gz IS tracked: it is the source of the paired family bootstrap in the tables.
+results_v3/ablation_oof.csv.gz
+results_v3/temporal_validation_predicciones.csv.gz
+results_v3/topk_oof_predictions.csv.gz
+results_v3/oof_tabla3_v3.csv.gz
+results_v3/oof_predictions.csv.gz
+
+# scratch page renders used to inspect the compiled PDF
+pg*.png
+sheet.png
+paper1_manuscript.aux
+paper1_manuscript.out
+results_v3/family_losses_v3.csv
+results_v3/topk_negatives_audit.csv

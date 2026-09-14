@@ -1,0 +1,41 @@
+{
+ "crosscheck_vs_results_v3_oof_predictions": {
+  "A/XGBoost/random": {
+   "max_abs_diff": 0.0,
+   "mean_abs_diff": 0.0,
+   "top100_rows_changed_total_5folds": 0,
+   "ref_n_jobs": "tc_pipeline n_jobs=-1 (A) / datasetB_pipeline n_jobs=1 (B)"
+  },
+  "A/XGBoost/grouped": {
+   "max_abs_diff": 0.0,
+   "mean_abs_diff": 0.0,
+   "top100_rows_changed_total_5folds": 0,
+   "ref_n_jobs": "tc_pipeline n_jobs=-1 (A) / datasetB_pipeline n_jobs=1 (B)"
+  },
+  "A/RandomForest/random": {
+   "max_abs_diff": 5.684341886080802e-14,
+   "mean_abs_diff": 3.936384288492675e-15,
+   "top100_rows_changed_total_5folds": 0,
+   "ref_n_jobs": "tc_pipeline n_jobs=-1 (A) / datasetB_pipeline n_jobs=1 (B)"
+  },
+  "A/RandomForest/grouped": {
+   "max_abs_diff": 8.526512829121202e-14,
+   "mean_abs_diff": 4.717886555803757e-15,
+   "top100_rows_changed_total_5folds": 0,
+   "ref_n_jobs": "tc_pipeline n_jobs=-1 (A) / datasetB_pipeline n_jobs=1 (B)"
+  },
+  "Bv2/XGBoost/random": {
+   "max_abs_diff": 0.0,
+   "mean_abs_diff": 0.0,
+   "top100_rows_changed_total_5folds": 0,
+   "ref_n_jobs": "tc_pipeline n_jobs=-1 (A) / datasetB_pipeline n_jobs=1 (B)"
+  },
+  "Bv2/XGBoost/grouped": {
+   "max_abs_diff": 0.0,
+   "mean_abs_diff": 0.0,
+   "top100_rows_changed_total_5folds": 0,
+   "ref_n_jobs": "tc_pipeline n_jobs=-1 (A) / datasetB_pipeline n_jobs=1 (B)"
+  }
+ },
+ "procedencia": "code/v3/topk_prevalence_ties.py | python 3.13.15, numpy 2.3.3, pandas 2.3.2, scikit-learn 1.7.2, xgboost 3.0.5, matminer 0.9.2, pymatgen 2025.6.14 | seed 42; random = KFold(5, shuffle=True, random_state=42); grouped = GroupKFold(5) deterministic (== splits fold_deterministic); family = constituent-element set; threshold = np.percentile(y[train fold], 90), positive := y >= thr; n_jobs=8"
+}

@@ -1,0 +1,10 @@
+{
+ "primary_rows": 26321,
+ "year_extractable_pct": 99.2,
+ "element_parseable_pct": 83.4,
+ "B_year_by_composition_pct": 99.0,
+ "A_year_by_composition_pct": 81.8,
+ "native_corpus_N": 21677,
+ "native_families": 3564,
+ "procedencia": "coordinador, celda interactiva 2026-09-14; a\u00f1o = primer (19xx|20xx) en campo journal; composici\u00f3n = pymatgen fractional_composition redondeada 1e-3 sobre columna element"
+}

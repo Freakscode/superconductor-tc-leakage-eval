@@ -1,0 +1,6282 @@
+{
+ "procedencia": {
+  "script": "code/v3/audit_B.py",
+  "python": "3.13.15",
+  "pandas": "2.3.2",
+  "numpy": "2.3.3",
+  "pymatgen": "2025.6.14",
+  "matminer": "0.9.2",
+  "input": "data/supercon_stanev.csv",
+  "definicion_fila": "fila_origen = fila 0-based de supercon_stanev.csv; checkpoint_row = posicion entre filas parseables con Tc>0 (orden de origen)"
+ },
+ "meta": {
+  "n_source": 16414,
+  "n_parsed_Tc_gt0": 12440,
+  "n_dup_groups_1e3": 658,
+  "n_dup_rows_1e3": 1463,
+  "n_dup_groups_1e6": 363,
+  "n_dup_rows_1e6": 760
+ },
+ "decisions": {
+  "10": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr0.9La1.1Cu1O5.16",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "16": {
+   "decision": "mantener",
+   "formula_v3": "Cu1.5Mo4.5S6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "24": {
+   "decision": "mantener",
+   "formula_v3": "Nb2.5Sn1V0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "28": {
+   "decision": "mantener",
+   "formula_v3": "Zr54.6Ti23.4Ni22",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "37": {
+   "decision": "excluir",
+   "formula_v3": "Bi4Sr3Ca2.7Y0.3Cu4OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "53": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5P0.5Sr2Ca1.8Y0.2Cu3O9.55",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "80": {
+   "decision": "mantener",
+   "formula_v3": "Bi4Rh1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "83": {
+   "decision": "mantener",
+   "formula_v3": "Ge1V3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "93": {
+   "decision": "mantener",
+   "formula_v3": "Pd1T0.81",
+   "categoria": "isotopo_D_T"
+  },
+  "95": {
+   "decision": "mantener",
+   "formula_v3": "Rh45Ta55",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "100": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.3325Sn0.6175In0.05Te1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "122": {
+   "decision": "mantener",
+   "formula_v3": "Au0.635Ge0.205Yb0.16",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "135": {
+   "decision": "mantener",
+   "formula_v3": "La1Os2Ru2P12",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "148": {
+   "decision": "mantener",
+   "formula_v3": "Fe2As2Sr4V2O6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "151": {
+   "decision": "mantener",
+   "formula_v3": "Fe2As2Sr4Mg0.6Ti1.4O6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "165": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "180": {
+   "decision": "mantener",
+   "formula_v3": "V0.75Ge0.2Al0.05",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "194": {
+   "decision": "mantener",
+   "formula_v3": "Mo64Ru16P20",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "195": {
+   "decision": "mantener",
+   "formula_v3": "Zr70.2Ti7.8Ni22",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "210": {
+   "decision": "mantener",
+   "formula_v3": "Pd0.285Zr0.61O0.105",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "219": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti74Ta1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "223": {
+   "decision": "mantener",
+   "formula_v3": "Sn0.57Pb0.38In0.05Te1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "225": {
+   "decision": "mantener",
+   "formula_v3": "Rh41Zr59",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "229": {
+   "decision": "mantener",
+   "formula_v3": "V0.75Si0.2Al0.05",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "232": {
+   "decision": "mantener",
+   "formula_v3": "Ag7F4O8B1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "240": {
+   "decision": "mantener",
+   "formula_v3": "La7Ir3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "242": {
+   "decision": "mantener",
+   "formula_v3": "In0.75Sn0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "255": {
+   "decision": "mantener",
+   "formula_v3": "C1Mo0.8Ta0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "269": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1La1Cu1O5.06",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "277": {
+   "decision": "mantener",
+   "formula_v3": "C3Ho0.4Th1.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "279": {
+   "decision": "mantener",
+   "formula_v3": "Er4Rh6Sn19",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "280": {
+   "decision": "mantener",
+   "formula_v3": "B2.5Nb1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "282": {
+   "decision": "mantener",
+   "formula_v3": "Co0.038Mo99.962",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "295": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Se0.4Te0.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "318": {
+   "decision": "mantener",
+   "formula_v3": "Sr15.9Ca7.6Cu17.6C3.3B2.6O53",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "324": {
+   "decision": "mantener",
+   "formula_v3": "Ga22Nb78",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "337": {
+   "decision": "excluir",
+   "formula_v3": "Bi4.4Sr3.6Ca2Cu4OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "355": {
+   "decision": "mantener",
+   "formula_v3": "Nb79.5Sn2.1Al6.1Ge12.3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "359": {
+   "decision": "mantener",
+   "formula_v3": "Pd1Zr3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "373": {
+   "decision": "mantener",
+   "formula_v3": "Hf1V2D0.5",
+   "categoria": "isotopo_D_T"
+  },
+  "376": {
+   "decision": "excluir",
+   "formula_v3": "Er1Sr2Cu2.85Re0.15OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "379": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr1.9La0.1Ca1Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "382": {
+   "decision": "mantener",
+   "formula_v3": "Sb1.16S5.16Ta2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "389": {
+   "decision": "excluir",
+   "formula_v3": "Ru0.97Co0.03Sr2Gd1CuO8",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "406": {
+   "decision": "mantener",
+   "formula_v3": "Pb1.14Ta2S5.14",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "410": {
+   "decision": "mantener",
+   "formula_v3": "Th1.2Er0.8C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "425": {
+   "decision": "mantener",
+   "formula_v3": "Y1Pd2Pb1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "434": {
+   "decision": "mantener",
+   "formula_v3": "Co7.32Ga25V67.68",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "440": {
+   "decision": "mantener",
+   "formula_v3": "C8Rb1Hg1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "443": {
+   "decision": "mantener",
+   "formula_v3": "Ir3La7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "454": {
+   "decision": "mantener",
+   "formula_v3": "Sn0.6175Pb0.3325In0.05Te1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "463": {
+   "decision": "mantener",
+   "formula_v3": "Ag7B1F4O8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "464": {
+   "decision": "mantener",
+   "formula_v3": "Hg0.5In0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "481": {
+   "decision": "mantener",
+   "formula_v3": "Ga26.5V73.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "492": {
+   "decision": "mantener",
+   "formula_v3": "Sr2Mg0.3Ti0.7Fe1As1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "504": {
+   "decision": "mantener",
+   "formula_v3": "Co35.38Zr64.62",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "507": {
+   "decision": "mantener",
+   "formula_v3": "C1.45Cr0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "524": {
+   "decision": "mantener",
+   "formula_v3": "Se2Ta1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "534": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.6Pb0.4Sr2Cu3Ca2O1013",
+   "categoria": "coeficiente_extremo_error_tipografico"
+  },
+  "568": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr2Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "577": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu3F0.825O",
+   "categoria": "O_final_sin_coeficiente"
+  },
+  "597": {
+   "decision": "excluir",
+   "formula_v3": "Eu2.667Ce1.333La1.333Ba1.333Sr1.333Cu6OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "616": {
+   "decision": "mantener",
+   "formula_v3": "Ta1S2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "625": {
+   "decision": "mantener",
+   "formula_v3": "Nb20Ti75Ta5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "627": {
+   "decision": "mantener",
+   "formula_v3": "Zr33.3V56.7Nb9.9",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "629": {
+   "decision": "mantener",
+   "formula_v3": "Lu0.25Y0.75Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "630": {
+   "decision": "excluir",
+   "formula_v3": "Bi4Sr3Ca2.55Y0.45Cu4OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "631": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr0.9La1.1Cu1O5.18",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "652": {
+   "decision": "mantener",
+   "formula_v3": "Au0.7Nb3Pt0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "660": {
+   "decision": "mantener",
+   "formula_v3": "Nb75Ga10Al15",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "676": {
+   "decision": "mantener",
+   "formula_v3": "Nb79.2Sn5.2Al5.2Ge10.4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "691": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.6Rh0.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "696": {
+   "decision": "mantener",
+   "formula_v3": "Re10Zr90",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "723": {
+   "decision": "mantener",
+   "formula_v3": "Zr1Pd2In1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "734": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Pt0.02Rh0.98",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "737": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.75Ge0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "748": {
+   "decision": "mantener",
+   "formula_v3": "Zr33.3V59.25Nb7.35",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "750": {
+   "decision": "mantener",
+   "formula_v3": "Hf1V2H0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "771": {
+   "decision": "mantener",
+   "formula_v3": "Mg0.95Al0.025Li0.025B2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "782": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.5Nb3Sn0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "804": {
+   "decision": "mantener",
+   "formula_v3": "Mo3S4Sn0.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "823": {
+   "decision": "mantener",
+   "formula_v3": "Th1.8Ho0.2C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "828": {
+   "decision": "mantener",
+   "formula_v3": "Fe0.008Mo99.992",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "832": {
+   "decision": "mantener",
+   "formula_v3": "Nb5Pt3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "842": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr1.9La0.1Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "865": {
+   "decision": "mantener",
+   "formula_v3": "Na2Rb1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "871": {
+   "decision": "mantener",
+   "formula_v3": "D0.018Nb0.982",
+   "categoria": "isotopo_D_T"
+  },
+  "878": {
+   "decision": "mantener",
+   "formula_v3": "Mg0.95Li0.025Al0.025B2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "879": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.745Sc0.255Sb49",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "880": {
+   "decision": "mantener",
+   "formula_v3": "Ru28Zr72",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "887": {
+   "decision": "mantener",
+   "formula_v3": "V0.5Nb2.5Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "910": {
+   "decision": "mantener",
+   "formula_v3": "C60Ca5",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "916": {
+   "decision": "mantener",
+   "formula_v3": "Th99.92U0.08",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "932": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Ge0.5Ga0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "938": {
+   "decision": "mantener",
+   "formula_v3": "Ho1Ir2Rh2B4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "948": {
+   "decision": "mantener",
+   "formula_v3": "Bi0.3Pb0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "972": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr1.55La0.45Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "978": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.9Rh1.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1007": {
+   "decision": "mantener",
+   "formula_v3": "Ba4C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "1023": {
+   "decision": "mantener",
+   "formula_v3": "C",
+   "categoria": "elemento_sin_coeficiente_monoelemental"
+  },
+  "1024": {
+   "decision": "mantener",
+   "formula_v3": "Ag7F2H1O8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1045": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Rh0.98Au0.02",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1046": {
+   "decision": "mantener",
+   "formula_v3": "Y1Ba1.9La0.1Cu3O6.96",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1058": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn0.5Ga0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1063": {
+   "decision": "mantener",
+   "formula_v3": "Nb1Ta2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1065": {
+   "decision": "mantener",
+   "formula_v3": "Au16.7Pd16.6Te66.7",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1071": {
+   "decision": "mantener",
+   "formula_v3": "Nd0.85La1Ce0.15Cu1O4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1074": {
+   "decision": "mantener",
+   "formula_v3": "Cd0.1In0.9La3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1080": {
+   "decision": "mantener",
+   "formula_v3": "S1Se1Ta1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1081": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti65Zr10",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1107": {
+   "decision": "mantener",
+   "formula_v3": "Pb1Nb1S3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1134": {
+   "decision": "mantener",
+   "formula_v3": "Rh24Zr76",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1148": {
+   "decision": "mantener",
+   "formula_v3": "V2Ta1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1160": {
+   "decision": "mantener",
+   "formula_v3": "Ga25Mn14V61",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1165": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5C0.5Sr2Ca1Cu5O10.8",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "1186": {
+   "decision": "mantener",
+   "formula_v3": "Co0.015Mo99.985",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1192": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.745Ti0.255Sb49",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "1193": {
+   "decision": "mantener",
+   "formula_v3": "D0.967Pd1",
+   "categoria": "isotopo_D_T"
+  },
+  "1200": {
+   "decision": "mantener",
+   "formula_v3": "K2Rb1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "1209": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Rh1.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1228": {
+   "decision": "mantener",
+   "formula_v3": "Sb0.25Ti0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1245": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Ga0.5Sn0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1246": {
+   "decision": "mantener",
+   "formula_v3": "La1Fe1P0.6As0.4F0.1O0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1259": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Y1Pb1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1284": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr0.8La1.2Cu1O5.16",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "1292": {
+   "decision": "mantener",
+   "formula_v3": "Nb1Re3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1293": {
+   "decision": "mantener",
+   "formula_v3": "Ta0.8Mo0.2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1326": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr1La1Cu1O5.05",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "1341": {
+   "decision": "mantener",
+   "formula_v3": "Mg0.8Al0.1Li0.1B2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1351": {
+   "decision": "excluir",
+   "formula_v3": "Hg0.7Pb0.3Ba2Ca2Cu3OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "1359": {
+   "decision": "mantener",
+   "formula_v3": "C1.35Ge0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1360": {
+   "decision": "mantener",
+   "formula_v3": "Al0.6Mg0.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1379": {
+   "decision": "mantener",
+   "formula_v3": "C3Er1Th1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1390": {
+   "decision": "mantener",
+   "formula_v3": "Ag7N0.75O10.25F0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1396": {
+   "decision": "mantener",
+   "formula_v3": "Al1La3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1401": {
+   "decision": "mantener",
+   "formula_v3": "La1Ru3Os1P12",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1413": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Ti0.2C2.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1428": {
+   "decision": "mantener",
+   "formula_v3": "Ni19.75Zr79Mn1.25",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1434": {
+   "decision": "mantener",
+   "formula_v3": "Na3.5N0.5C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "1473": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.7Pb0.3Sr1.7La0.3Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "1490": {
+   "decision": "mantener",
+   "formula_v3": "Sn19Er4Rh6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1506": {
+   "decision": "mantener",
+   "formula_v3": "La0.84Sn3Tm0.16",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1514": {
+   "decision": "mantener",
+   "formula_v3": "Li2Pd3B1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1525": {
+   "decision": "mantener",
+   "formula_v3": "Cu1Se1Te1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1527": {
+   "decision": "mantener",
+   "formula_v3": "La1Bi1S1Se1F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1529": {
+   "decision": "excluir",
+   "formula_v3": "Bi1Sr0.9Nd0.1Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "1539": {
+   "decision": "mantener",
+   "formula_v3": "Ru1W1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1541": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.93625Fe0.06375Sb49",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1544": {
+   "decision": "mantener",
+   "formula_v3": "Nb1Sn1V2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1556": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5C0.5Ca3Cu2O6.6",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "1572": {
+   "decision": "mantener",
+   "formula_v3": "Au64Ge22Yb14",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1576": {
+   "decision": "mantener",
+   "formula_v3": "D3.61Th1",
+   "categoria": "isotopo_D_T"
+  },
+  "1579": {
+   "decision": "mantener",
+   "formula_v3": "Y1Ba2Cu2.94Cu0.6O7",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "1587": {
+   "decision": "mantener",
+   "formula_v3": "La1.81Sr0.15Ho0.04Cu1O4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1588": {
+   "decision": "mantener",
+   "formula_v3": "Pb1.14S5.14Ta2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1600": {
+   "decision": "mantener",
+   "formula_v3": "Nb2Sn1Ta0.5V0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1605": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga18Fe2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1614": {
+   "decision": "mantener",
+   "formula_v3": "Mo5.22Zr94.78",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1621": {
+   "decision": "mantener",
+   "formula_v3": "Zn1Mo5S6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1628": {
+   "decision": "mantener",
+   "formula_v3": "V2.7Ti0.3Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1629": {
+   "decision": "mantener",
+   "formula_v3": "C0.4Mo0.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1632": {
+   "decision": "mantener",
+   "formula_v3": "K0.2Sr0.8Fe2As2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1647": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.7Ge0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1662": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8W0.2C3.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1664": {
+   "decision": "mantener",
+   "formula_v3": "La1Bi1S2F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1677": {
+   "decision": "mantener",
+   "formula_v3": "Ca0.4Ba1.35La1.25Cu3O7.15",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1680": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.25Sn0.25V0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1694": {
+   "decision": "mantener",
+   "formula_v3": "Nb1Pb1S3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1707": {
+   "decision": "mantener",
+   "formula_v3": "Re3Ta1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1744": {
+   "decision": "mantener",
+   "formula_v3": "Mo0.9Ru0.1C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1745": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga15Mn5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1777": {
+   "decision": "mantener",
+   "formula_v3": "K3N1H3C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "1781": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.12Si1V2.88",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1803": {
+   "decision": "mantener",
+   "formula_v3": "Cu19.6Zr78.4Mn2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1817": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr0.9La1.1Cu1O5.08",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "1831": {
+   "decision": "mantener",
+   "formula_v3": "Th1.4Ho0.6C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1841": {
+   "decision": "mantener",
+   "formula_v3": "Fe0.011Mo99.989",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1860": {
+   "decision": "mantener",
+   "formula_v3": "V2.7Nb0.3Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1866": {
+   "decision": "mantener",
+   "formula_v3": "Ir45Ta55",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1871": {
+   "decision": "mantener",
+   "formula_v3": "Na1N1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "1877": {
+   "decision": "mantener",
+   "formula_v3": "Al1Mo6Pd1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1885": {
+   "decision": "excluir",
+   "formula_v3": "Hg0.75Mo0.05Sr2Ca2Cu3O",
+   "categoria": "O_final_sin_coeficiente"
+  },
+  "1894": {
+   "decision": "mantener",
+   "formula_v3": "Ta25Ti75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1916": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.5Sn0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1937": {
+   "decision": "corregir",
+   "formula_v3": "Pr1.85Ce0.15Cu1O4",
+   "categoria": "coeficiente_extremo_error_tipografico"
+  },
+  "1971": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Ge0.2C2.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "1978": {
+   "decision": "mantener",
+   "formula_v3": "Ti70Nb15Si15",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "1984": {
+   "decision": "mantener",
+   "formula_v3": "C3Er0.6Th1.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2007": {
+   "decision": "mantener",
+   "formula_v3": "Mo6Se8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2035": {
+   "decision": "mantener",
+   "formula_v3": "Au30Pd3.3Te66.6",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2053": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Rh0.98Pd0.02",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2063": {
+   "decision": "mantener",
+   "formula_v3": "Y2Pt1Ge3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2081": {
+   "decision": "mantener",
+   "formula_v3": "Fe14.3U85.7",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2100": {
+   "decision": "mantener",
+   "formula_v3": "Nd1Bi1S2F0.3O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2137": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.75Ge0.25Sr2Y1.3Ce0.7Cu2O8.59",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "2148": {
+   "decision": "mantener",
+   "formula_v3": "Nb50Zr50",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2172": {
+   "decision": "mantener",
+   "formula_v3": "Co1Zr3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2173": {
+   "decision": "mantener",
+   "formula_v3": "Nb78.1Sn7.3Al7.3Ge7.3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2176": {
+   "decision": "mantener",
+   "formula_v3": "Zr2Co0.85Ni0.15",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2205": {
+   "decision": "mantener",
+   "formula_v3": "Pb1Mo6.35S8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2235": {
+   "decision": "mantener",
+   "formula_v3": "Na2Cs1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "2242": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga18Mn2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2263": {
+   "decision": "mantener",
+   "formula_v3": "Au2In1Y1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2267": {
+   "decision": "mantener",
+   "formula_v3": "Ti1N1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2269": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu1Tb1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2287": {
+   "decision": "mantener",
+   "formula_v3": "Ti56Nb30Si14",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2292": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.6Pb0.4Sr2Cu2.7Mo0.3OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "2293": {
+   "decision": "mantener",
+   "formula_v3": "H0.9Pd1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2295": {
+   "decision": "mantener",
+   "formula_v3": "U6Fe0.5Co0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2327": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.5Sn0.25Ta0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2328": {
+   "decision": "mantener",
+   "formula_v3": "V3Ga0.8Si0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2357": {
+   "decision": "mantener",
+   "formula_v3": "Si0.9V3Ge0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2366": {
+   "decision": "mantener",
+   "formula_v3": "Al0.5Nb3Sn0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2371": {
+   "decision": "mantener",
+   "formula_v3": "Ca0.1La0.9Ba1.65La0.35Cu3O7.15",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "2374": {
+   "decision": "mantener",
+   "formula_v3": "Sn93In3.5Sb3.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2404": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.25Re0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2417": {
+   "decision": "mantener",
+   "formula_v3": "Sr0.5Ce0.5Bi1S2F1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2421": {
+   "decision": "mantener",
+   "formula_v3": "Nd1.5Ce0.5Sr2Cu2Nb1O10",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2435": {
+   "decision": "mantener",
+   "formula_v3": "Nb80.7Sn1.9Al1.9Ge15.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2446": {
+   "decision": "mantener",
+   "formula_v3": "In0.15Nb3Sn0.85",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2459": {
+   "decision": "mantener",
+   "formula_v3": "Cs1Rb2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "2466": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.7425Zr0.0075Al0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2474": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Cr0.2C2.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2477": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.25Nb0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2480": {
+   "decision": "mantener",
+   "formula_v3": "Fe22U78",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2484": {
+   "decision": "excluir",
+   "formula_v3": "Er1Ni2B2C",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "2508": {
+   "decision": "mantener",
+   "formula_v3": "V0.75Ge0.225Al0.025",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2511": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.1Nd0.9Bi1S2F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2524": {
+   "decision": "mantener",
+   "formula_v3": "B2.8C97.2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2539": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr0.8La1.2Cu1O5.01",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "2548": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr2Ca1Cu2O",
+   "categoria": "O_final_sin_coeficiente"
+  },
+  "2553": {
+   "decision": "mantener",
+   "formula_v3": "La1F0.05Fe1As1O0.95",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2554": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.8Ga0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2566": {
+   "decision": "mantener",
+   "formula_v3": "Rb1Eu1Fe4As4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2586": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.222V0.778",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2589": {
+   "decision": "mantener",
+   "formula_v3": "Nb2.5Ta0.5Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2591": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1.1La0.9Cu1O5.19",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "2597": {
+   "decision": "mantener",
+   "formula_v3": "Mg0.7Al0.15Li0.15B2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2609": {
+   "decision": "mantener",
+   "formula_v3": "Bi2Sr2Ca2Cu3O1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2619": {
+   "decision": "mantener",
+   "formula_v3": "Nb77.9Sn11.1Al5.5Ge5.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2626": {
+   "decision": "mantener",
+   "formula_v3": "Ta1Se3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2629": {
+   "decision": "mantener",
+   "formula_v3": "V3Ge0.9Al0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2645": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Ga0.5Al0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2651": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.85Pb0.35Sr1.9Ca2.1Cu3.1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "2662": {
+   "decision": "mantener",
+   "formula_v3": "Nd1.5Ce0.5Sr2Nb1Cu2O10",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2668": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.6Pb0.4Sr2Cu2.9Mo0.1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "2679": {
+   "decision": "mantener",
+   "formula_v3": "Li2Pt3B1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2697": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Si0.2C2.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2699": {
+   "decision": "mantener",
+   "formula_v3": "Ni22Zr78",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2717": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn0.05Sn0.95",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "2722": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.5Cu0.5Sr2Ca1.8Y0.2Cu3O9.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "2733": {
+   "decision": "mantener",
+   "formula_v3": "Th1.9Er0.1C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2738": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr1.5La0.5Ca1Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "2750": {
+   "decision": "mantener",
+   "formula_v3": "V75Ge20Sb5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2769": {
+   "decision": "excluir",
+   "formula_v3": "Eu1Ba2Cu3OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "2778": {
+   "decision": "mantener",
+   "formula_v3": "La0.998Gd0.002Al2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2782": {
+   "decision": "mantener",
+   "formula_v3": "V3Ga0.2Si0.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2790": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti70Zr5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2812": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.85Ag0.15OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "2827": {
+   "decision": "mantener",
+   "formula_v3": "Sn0.25Ta0.25V0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2832": {
+   "decision": "excluir",
+   "formula_v3": "Bi1Sr0.85Nd0.15Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "2859": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8V0.2C2.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2877": {
+   "decision": "mantener",
+   "formula_v3": "C60Rb2",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "2896": {
+   "decision": "mantener",
+   "formula_v3": "Bi0.8Rh0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2903": {
+   "decision": "mantener",
+   "formula_v3": "V75Si2.57Ga22.4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "2914": {
+   "decision": "mantener",
+   "formula_v3": "Hf1V2D0.25",
+   "categoria": "isotopo_D_T"
+  },
+  "2931": {
+   "decision": "mantener",
+   "formula_v3": "Ir1Zr3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2948": {
+   "decision": "mantener",
+   "formula_v3": "Hf1Pd2In1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2969": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Sn0.125Zr0.125",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2981": {
+   "decision": "mantener",
+   "formula_v3": "S3Sn1Ta1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2990": {
+   "decision": "excluir",
+   "formula_v3": "YbCa0.2Ba1.6Sr0.4Cu4O8",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "2993": {
+   "decision": "mantener",
+   "formula_v3": "La3In0.9Cd0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "2994": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr0.8La1.2Cu1O5.11",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "2995": {
+   "decision": "mantener",
+   "formula_v3": "Mo0.5Rh0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3000": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.95La0.05Sr1Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "3006": {
+   "decision": "mantener",
+   "formula_v3": "Ni18Zr82",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3030": {
+   "decision": "mantener",
+   "formula_v3": "Na3N1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "3037": {
+   "decision": "mantener",
+   "formula_v3": "Nb2.75Ta0.25Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3038": {
+   "decision": "mantener",
+   "formula_v3": "C1Mo0.9Re0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3051": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Al0.23Ge0.02",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3063": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Hf1Al1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3069": {
+   "decision": "mantener",
+   "formula_v3": "S1.2Se0.8Ta1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3070": {
+   "decision": "mantener",
+   "formula_v3": "Cs2Rb1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "3074": {
+   "decision": "excluir",
+   "formula_v3": "Bi4Sr3Ca2.4Y0.6Cu4OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "3080": {
+   "decision": "excluir",
+   "formula_v3": "La1.85Sr0.15CuNi0.037O4",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "3098": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga16Co4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3112": {
+   "decision": "mantener",
+   "formula_v3": "Ni36.5Zr63.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3119": {
+   "decision": "mantener",
+   "formula_v3": "Bi0Mo0.33Cu2.67Sr2Y1O7.41",
+   "categoria": "coeficiente_cero"
+  },
+  "3123": {
+   "decision": "mantener",
+   "formula_v3": "Mo16Ru64P20",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3124": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Y0.8Er0.2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3129": {
+   "decision": "mantener",
+   "formula_v3": "Mo3Se4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3137": {
+   "decision": "excluir",
+   "formula_v3": "Sr2BaCu1F2O2",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "3146": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Te0.9Se0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3153": {
+   "decision": "mantener",
+   "formula_v3": "Nb78Ga16Mn6",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3168": {
+   "decision": "mantener",
+   "formula_v3": "Ru13Zr87",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3169": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr0.9La1.1Cu1O5.24",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "3191": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Al0.225Ga0.025",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3202": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1.1La0.9Cu1O5.18",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "3205": {
+   "decision": "mantener",
+   "formula_v3": "Sr16.7Ca7.7Cu19.4C1.9B2.9O51.7",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3209": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5P0.5Sr2Ca1.8Y0.2Cu3O9.35",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "3224": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.75Ti0.25Sr2Y1.3Ce0.7Cu2O8.71",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "3229": {
+   "decision": "mantener",
+   "formula_v3": "Cu60Sn40",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3242": {
+   "decision": "mantener",
+   "formula_v3": "La1.25Ca0.3Ba1.45Cu3O7.11",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3243": {
+   "decision": "mantener",
+   "formula_v3": "Re1Y1Os1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3245": {
+   "decision": "mantener",
+   "formula_v3": "Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3297": {
+   "decision": "mantener",
+   "formula_v3": "Nb76Sn2.4Al19.2Ge2.4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3300": {
+   "decision": "mantener",
+   "formula_v3": "Os1W3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3304": {
+   "decision": "mantener",
+   "formula_v3": "N0.93H2.79Na1Rb2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "3308": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.281V0.719",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3311": {
+   "decision": "mantener",
+   "formula_v3": "Re30Zr70",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3312": {
+   "decision": "mantener",
+   "formula_v3": "V2.94La0.06Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3318": {
+   "decision": "mantener",
+   "formula_v3": "Ca0.3La0.7Ba1.45La0.55Cu3O7.16",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "3320": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.745Ru0.255Sb49",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "3335": {
+   "decision": "mantener",
+   "formula_v3": "Ni17Zr83",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3369": {
+   "decision": "mantener",
+   "formula_v3": "Nb2.91Zr0.09Al1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3433": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Bi0.15Sn0.85",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3437": {
+   "decision": "mantener",
+   "formula_v3": "Y2I1Br1C2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3454": {
+   "decision": "mantener",
+   "formula_v3": "Ga25Mn4.92V70.08",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3457": {
+   "decision": "mantener",
+   "formula_v3": "Zr25.8V51.3Nb22.9",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3472": {
+   "decision": "mantener",
+   "formula_v3": "La1Ru2Os2P12",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3476": {
+   "decision": "mantener",
+   "formula_v3": "Sn0.6Mo3S4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3478": {
+   "decision": "mantener",
+   "formula_v3": "C1Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3484": {
+   "decision": "mantener",
+   "formula_v3": "Ti0.5V0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3507": {
+   "decision": "mantener",
+   "formula_v3": "La1.85Nd0Ca1.15Cu2O5.99",
+   "categoria": "coeficiente_cero"
+  },
+  "3519": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Nb0.2C2.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3522": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.5Sn0.25V0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3526": {
+   "decision": "mantener",
+   "formula_v3": "In3Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3527": {
+   "decision": "mantener",
+   "formula_v3": "Si23.27V75.15",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "3540": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.9Pb0.1Sr1.9La0.1Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "3552": {
+   "decision": "mantener",
+   "formula_v3": "Mo15Se19",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3558": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.25V0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3587": {
+   "decision": "mantener",
+   "formula_v3": "Hg1In1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3591": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.3Cu0.7Sr2Ca3Cu4O11.05",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "3617": {
+   "decision": "mantener",
+   "formula_v3": "Nd1Bi1S2F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3625": {
+   "decision": "mantener",
+   "formula_v3": "Sb2Yb1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3633": {
+   "decision": "mantener",
+   "formula_v3": "Ba1K1Bi1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3635": {
+   "decision": "mantener",
+   "formula_v3": "Mo5S6Zn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3641": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga19Fe1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3662": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr0.8La1.2Cu1O5.25",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "3666": {
+   "decision": "mantener",
+   "formula_v3": "Eu1.4Ce0.6Sr2Ru1Cu2O10",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3674": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.8Zn0.2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "3677": {
+   "decision": "mantener",
+   "formula_v3": "Au1Nb3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3682": {
+   "decision": "mantener",
+   "formula_v3": "Zr27.1V54.1Nb18.8",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3683": {
+   "decision": "mantener",
+   "formula_v3": "B0.3Ru0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3684": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.1Ti0.4V0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3691": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr0.8La1.2Cu1O5.06",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "3728": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.184Sn0.736In0.08Te1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3736": {
+   "decision": "mantener",
+   "formula_v3": "Mn0.03Si1V2.97",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3737": {
+   "decision": "mantener",
+   "formula_v3": "Er1Rh2Ir2B4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3740": {
+   "decision": "mantener",
+   "formula_v3": "Al0.95Be0.05Nb3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3743": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr1.4La0.6Ca1Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "3745": {
+   "decision": "mantener",
+   "formula_v3": "Nb78.5Sn2.2Al9.6Ge9.6",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3749": {
+   "decision": "mantener",
+   "formula_v3": "Na2Rb0.25Cs0.75C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "3750": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Te0.8Se0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3767": {
+   "decision": "mantener",
+   "formula_v3": "N0.9H2.7Na1Rb2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "3768": {
+   "decision": "mantener",
+   "formula_v3": "In3Sn97",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3769": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.8725Fe0.1275Sb49",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "3778": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.9Zn0.1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "3788": {
+   "decision": "mantener",
+   "formula_v3": "In0.5Pb0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3796": {
+   "decision": "mantener",
+   "formula_v3": "Na0.2W1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3808": {
+   "decision": "mantener",
+   "formula_v3": "S1N1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3815": {
+   "decision": "mantener",
+   "formula_v3": "In1Y1Au2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3845": {
+   "decision": "mantener",
+   "formula_v3": "Cu1Rh1.992Cr0.008S4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3846": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.8Pt0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3851": {
+   "decision": "mantener",
+   "formula_v3": "U2Pt1C2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3857": {
+   "decision": "mantener",
+   "formula_v3": "Sr4V2Fe2As2O6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3861": {
+   "decision": "mantener",
+   "formula_v3": "V1N1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3865": {
+   "decision": "mantener",
+   "formula_v3": "Sb1Ti3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3870": {
+   "decision": "mantener",
+   "formula_v3": "K0.4O3W1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3877": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.4Nd0.6Bi1S2F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3890": {
+   "decision": "mantener",
+   "formula_v3": "Rh1Zr3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3943": {
+   "decision": "mantener",
+   "formula_v3": "O1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3956": {
+   "decision": "mantener",
+   "formula_v3": "Nb1Se3Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3959": {
+   "decision": "mantener",
+   "formula_v3": "Ca2Sr2Cu3Ga1O9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3972": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Ru0.2C2.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3988": {
+   "decision": "mantener",
+   "formula_v3": "La0.84Tm0.16Sn3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3989": {
+   "decision": "mantener",
+   "formula_v3": "Re0.6W0.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "3992": {
+   "decision": "mantener",
+   "formula_v3": "Th1.6Ho0.4C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4007": {
+   "decision": "mantener",
+   "formula_v3": "Sr0.5La0.5F1Bi1S2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4008": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn0.1Sn0.9",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4009": {
+   "decision": "excluir",
+   "formula_v3": "Ba0.7K0.75Bi1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "4018": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu1.7Tb0.3",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "4030": {
+   "decision": "mantener",
+   "formula_v3": "Nb2Ta0.5V0.5Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4037": {
+   "decision": "mantener",
+   "formula_v3": "Er0.4Y0.6Pd2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4040": {
+   "decision": "mantener",
+   "formula_v3": "Fe1.03Te0.5Se0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4067": {
+   "decision": "mantener",
+   "formula_v3": "Si1V2.7Ru0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4073": {
+   "decision": "mantener",
+   "formula_v3": "Ag7N1O11",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4076": {
+   "decision": "mantener",
+   "formula_v3": "Au0.1C1.3Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4078": {
+   "decision": "mantener",
+   "formula_v3": "Mo6Se6Te2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4082": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.745Mo0.255Sb49",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "4085": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.75Cr0.25Sr2Y1.3Ce0.7Cu2O8.87",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4090": {
+   "decision": "mantener",
+   "formula_v3": "Ni0.3Th0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4097": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga17Fe3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4102": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.1Si0.9V3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4110": {
+   "decision": "mantener",
+   "formula_v3": "Li2B1Pt3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4115": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Rh0.95Ir0.05",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4116": {
+   "decision": "mantener",
+   "formula_v3": "K1Hg1C8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4123": {
+   "decision": "mantener",
+   "formula_v3": "Li2B1Pd1.5Pt1.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4132": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.3Nd0.7F0.5Bi1S2O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4136": {
+   "decision": "mantener",
+   "formula_v3": "Y0.4Cu0.6Ba1.4La0.6Cu3O6.95",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4145": {
+   "decision": "mantener",
+   "formula_v3": "Ag7H1F2O8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4146": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu3O6050",
+   "categoria": "coeficiente_extremo_error_tipografico"
+  },
+  "4150": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.236V0.764",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4155": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.2Nd0.8Bi1S2F0.3O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4170": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Tm1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4180": {
+   "decision": "mantener",
+   "formula_v3": "La1Fe1As0.4P0.6F0.1O0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4185": {
+   "decision": "mantener",
+   "formula_v3": "Nb50Ti10Zr40",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4188": {
+   "decision": "mantener",
+   "formula_v3": "Al2C1Mo3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4190": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Y1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4197": {
+   "decision": "mantener",
+   "formula_v3": "Nb82Si18",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4208": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1La1Cu1O5.21",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4222": {
+   "decision": "mantener",
+   "formula_v3": "Nb78Ga18Mn4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4239": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5C0.5Sr2Ca1Cu2O7",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4244": {
+   "decision": "mantener",
+   "formula_v3": "Ni31Zr69",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4266": {
+   "decision": "mantener",
+   "formula_v3": "Y0.5Lu0.5Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4270": {
+   "decision": "mantener",
+   "formula_v3": "Re0.75Ta0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4275": {
+   "decision": "mantener",
+   "formula_v3": "Mo30Re70",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4277": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.76Ge0.24",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4281": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.38Sn0.57In0.05Te1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4285": {
+   "decision": "mantener",
+   "formula_v3": "Hf0.6Zr0.4V2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4291": {
+   "decision": "mantener",
+   "formula_v3": "Rb2.7Tl2.2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "4292": {
+   "decision": "mantener",
+   "formula_v3": "Fe1.03Se0.5Te0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4298": {
+   "decision": "mantener",
+   "formula_v3": "Be8Nb5Zr2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4308": {
+   "decision": "mantener",
+   "formula_v3": "Pd0.5Sb0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4324": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.5Ge0.5Nb3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4329": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.92Ge0.08",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4330": {
+   "decision": "mantener",
+   "formula_v3": "In0.5Nb3Zr0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4333": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Y0.6Er0.4Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4339": {
+   "decision": "mantener",
+   "formula_v3": "Nb55Mo25Si20",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4348": {
+   "decision": "mantener",
+   "formula_v3": "O0.105Pd0.285Zr0.61",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4349": {
+   "decision": "mantener",
+   "formula_v3": "Th1.6Er0.4C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4350": {
+   "decision": "mantener",
+   "formula_v3": "Zr55Co30Al15",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4385": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn0.5Ge0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4388": {
+   "decision": "mantener",
+   "formula_v3": "Os2.76Re97.24",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4411": {
+   "decision": "mantener",
+   "formula_v3": "Y0.4Cu0.6Ba1.3La0.7Cu3O7",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4412": {
+   "decision": "mantener",
+   "formula_v3": "Zr1B12",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4438": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.4Nd0.6F0.5Bi1S2O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4456": {
+   "decision": "mantener",
+   "formula_v3": "C1.35Nb0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4459": {
+   "decision": "mantener",
+   "formula_v3": "Nb50.2Zr39.4Mo10.4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4460": {
+   "decision": "mantener",
+   "formula_v3": "Sn1Ta1V2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4471": {
+   "decision": "mantener",
+   "formula_v3": "La1Ba1Ca1Cu3O7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4496": {
+   "decision": "mantener",
+   "formula_v3": "Al0.9Ga0.1Nb3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4498": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.05Sn0.95",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4517": {
+   "decision": "mantener",
+   "formula_v3": "Ga28.1V71.9",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4531": {
+   "decision": "mantener",
+   "formula_v3": "Nb25V10Ti65",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4532": {
+   "decision": "mantener",
+   "formula_v3": "Rb2Fe4Se5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4534": {
+   "decision": "mantener",
+   "formula_v3": "Nb77.5Sn5.6Al11.3Ge5.6",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4538": {
+   "decision": "mantener",
+   "formula_v3": "H00.33Nb0.67",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4539": {
+   "decision": "mantener",
+   "formula_v3": "V2.994La0.006Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4544": {
+   "decision": "mantener",
+   "formula_v3": "C1.35Sn0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4547": {
+   "decision": "mantener",
+   "formula_v3": "Th1Er1C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4550": {
+   "decision": "mantener",
+   "formula_v3": "Mn0.21Si1V2.79",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4560": {
+   "decision": "mantener",
+   "formula_v3": "Y2La0.2Ba3.8Cu6O13.92",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4566": {
+   "decision": "mantener",
+   "formula_v3": "D0.966Pd1",
+   "categoria": "isotopo_D_T"
+  },
+  "4569": {
+   "decision": "mantener",
+   "formula_v3": "Pd29Zr71",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4574": {
+   "decision": "mantener",
+   "formula_v3": "Pb1S1Pb1Se1",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4579": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.92Mo6S7.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4589": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.85Re0.15Sr2Y1Cu2O7.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4592": {
+   "decision": "mantener",
+   "formula_v3": "Si23.8V74.65",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "4593": {
+   "decision": "mantener",
+   "formula_v3": "Ni45Zr55",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4603": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr2.6Nd0.4Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "4609": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.5Pt0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4618": {
+   "decision": "mantener",
+   "formula_v3": "La0.75Y0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4638": {
+   "decision": "mantener",
+   "formula_v3": "Zr2Co1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4686": {
+   "decision": "mantener",
+   "formula_v3": "Nb79.7Sn6.1Al2Ge12.2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4689": {
+   "decision": "mantener",
+   "formula_v3": "U0.88Mo0.12",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4750": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5P0.5Sr2Ca1.8Y0.2Cu3O9.45",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4763": {
+   "decision": "mantener",
+   "formula_v3": "Ir1Os1Y1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4764": {
+   "decision": "mantener",
+   "formula_v3": "Lu1Pd2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4767": {
+   "decision": "mantener",
+   "formula_v3": "Nb76.3Sn10.5Ge2.3Al10.9",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4774": {
+   "decision": "mantener",
+   "formula_v3": "Bi0.4Pd0.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4795": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.5Ga0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4810": {
+   "decision": "mantener",
+   "formula_v3": "Th1.4Er0.6C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4824": {
+   "decision": "mantener",
+   "formula_v3": "Mo0.95Hf0.05C0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4825": {
+   "decision": "mantener",
+   "formula_v3": "Hf0.5V2Zr0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4844": {
+   "decision": "mantener",
+   "formula_v3": "Li2Pd2.4Pt0.6B1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4849": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga16Mn4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4857": {
+   "decision": "mantener",
+   "formula_v3": "Sn1Ta2V1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4858": {
+   "decision": "mantener",
+   "formula_v3": "Te2Mo6Se6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4865": {
+   "decision": "mantener",
+   "formula_v3": "Rb1Hg1C8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4879": {
+   "decision": "mantener",
+   "formula_v3": "Co0.02Nb3Rh0.98",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4922": {
+   "decision": "mantener",
+   "formula_v3": "Mo1S2Sr0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4924": {
+   "decision": "mantener",
+   "formula_v3": "Pb2Cu0.9La1.1Cu2O6.28",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "4926": {
+   "decision": "mantener",
+   "formula_v3": "Zr55Cu25Nb5Al10Ni5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "4966": {
+   "decision": "mantener",
+   "formula_v3": "Sn1Ta1S3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4977": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.2Nb0.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4986": {
+   "decision": "mantener",
+   "formula_v3": "B1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4994": {
+   "decision": "mantener",
+   "formula_v3": "Fe2P2Sr4Sc2O6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "4997": {
+   "decision": "mantener",
+   "formula_v3": "Rb1Cs2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "4998": {
+   "decision": "mantener",
+   "formula_v3": "Sn99.2In0.4Sb0.4",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5034": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.296V0.704",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5036": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti74Mo1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5042": {
+   "decision": "mantener",
+   "formula_v3": "Nb1Ta1V1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5045": {
+   "decision": "mantener",
+   "formula_v3": "Au0.22La0.78",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5055": {
+   "decision": "mantener",
+   "formula_v3": "Ta1S1Se1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5057": {
+   "decision": "mantener",
+   "formula_v3": "K1Rb2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5064": {
+   "decision": "mantener",
+   "formula_v3": "Hf0.6V2Zr0.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5069": {
+   "decision": "mantener",
+   "formula_v3": "N1S1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5075": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.925Zn0.075OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "5087": {
+   "decision": "mantener",
+   "formula_v3": "La3In0.5Tl0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5099": {
+   "decision": "mantener",
+   "formula_v3": "Co25Zr75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5115": {
+   "decision": "mantener",
+   "formula_v3": "D0.85Pd1",
+   "categoria": "isotopo_D_T"
+  },
+  "5148": {
+   "decision": "mantener",
+   "formula_v3": "Mo6Pb0.92S7.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5150": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.4Cu0.6Sr2Ca1.7Y0.3Cu3O9.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "5151": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr0.9La1.1Cu1O5.06",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "5172": {
+   "decision": "mantener",
+   "formula_v3": "Mo2B1C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5181": {
+   "decision": "mantener",
+   "formula_v3": "Nb1Sn1Ta1V1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5187": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.988Zn0.012OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "5195": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.7Zn0.3OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "5199": {
+   "decision": "mantener",
+   "formula_v3": "N0.86H2.58Na1Rb2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5203": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.25Sn0.25Ta0.25V0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5213": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn0.5Al0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5216": {
+   "decision": "mantener",
+   "formula_v3": "Be40Zr60",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5235": {
+   "decision": "mantener",
+   "formula_v3": "Na2Cs0.75C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5240": {
+   "decision": "mantener",
+   "formula_v3": "In0.8La3Sn0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5241": {
+   "decision": "mantener",
+   "formula_v3": "Ga29.6V70.4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5255": {
+   "decision": "mantener",
+   "formula_v3": "C8K1Hg1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5263": {
+   "decision": "mantener",
+   "formula_v3": "Mo6Pb1S7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5265": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr1.7La0.3Ca1Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "5275": {
+   "decision": "excluir",
+   "formula_v3": "La1.3Ba1.7SrCu3O6.885",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "5288": {
+   "decision": "mantener",
+   "formula_v3": "Ba6C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5290": {
+   "decision": "mantener",
+   "formula_v3": "Eu1.4Ce0.6Ru1Sr2Cu2O10",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5299": {
+   "decision": "mantener",
+   "formula_v3": "Cr0.75Rh0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5307": {
+   "decision": "mantener",
+   "formula_v3": "Si2W3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5309": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga13Co7",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5325": {
+   "decision": "mantener",
+   "formula_v3": "Ga24.8V75.2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5355": {
+   "decision": "mantener",
+   "formula_v3": "Mg0.9Al0.05Li0.05B2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5361": {
+   "decision": "mantener",
+   "formula_v3": "V75Si12.5Ga12.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5362": {
+   "decision": "mantener",
+   "formula_v3": "C60Sr4",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5368": {
+   "decision": "mantener",
+   "formula_v3": "Bi1.08Ta2S5.08",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5376": {
+   "decision": "mantener",
+   "formula_v3": "Nb78Ga21Mn1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5399": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.8W0.2Sr2Y1Cu2O7.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "5411": {
+   "decision": "mantener",
+   "formula_v3": "C3Er0.4Th1.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5415": {
+   "decision": "mantener",
+   "formula_v3": "K0.3Re1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5416": {
+   "decision": "mantener",
+   "formula_v3": "D0.77Pd1",
+   "categoria": "isotopo_D_T"
+  },
+  "5418": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Au0.2C2.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5426": {
+   "decision": "mantener",
+   "formula_v3": "Cu30Sn70",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5443": {
+   "decision": "mantener",
+   "formula_v3": "Na2K1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5458": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.6Pb0.4Sr2Cu2.8Mo0.2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "5464": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga17Co3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5476": {
+   "decision": "mantener",
+   "formula_v3": "Ce1Fe1As1D0.3O0.7",
+   "categoria": "isotopo_D_T"
+  },
+  "5480": {
+   "decision": "mantener",
+   "formula_v3": "Au22La78",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5489": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.49V0.51Sb49",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5501": {
+   "decision": "mantener",
+   "formula_v3": "N0.74H2.22Na1Rb2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5502": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn0.2Ga0.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5518": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu0.877Tb1.123",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5535": {
+   "decision": "mantener",
+   "formula_v3": "Pb1Te1Sn1Te1",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "5546": {
+   "decision": "mantener",
+   "formula_v3": "Ti60Nb25Si15",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5547": {
+   "decision": "mantener",
+   "formula_v3": "V0.75Si0.225Al0.025",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5577": {
+   "decision": "mantener",
+   "formula_v3": "Mo3.29Zr96.71",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5584": {
+   "decision": "mantener",
+   "formula_v3": "O0.105Rh0.285Zr0.61",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5587": {
+   "decision": "excluir",
+   "formula_v3": "Bi4Sr3Ca1.95Y1.05Cu4OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "5598": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu1.4Tb0.6",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5603": {
+   "decision": "mantener",
+   "formula_v3": "Ni27Zr73",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5631": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.03Si1V2.97",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5635": {
+   "decision": "mantener",
+   "formula_v3": "Rh0.25Zr0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5659": {
+   "decision": "mantener",
+   "formula_v3": "Ag7O11N1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5663": {
+   "decision": "mantener",
+   "formula_v3": "Pb4Pt1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5667": {
+   "decision": "mantener",
+   "formula_v3": "La3In0.7Ga0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5678": {
+   "decision": "mantener",
+   "formula_v3": "Ni40Zr60",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5682": {
+   "decision": "mantener",
+   "formula_v3": "Li2Na1N1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5691": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.6Pb0.4Sr1.6La0.4Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "5695": {
+   "decision": "mantener",
+   "formula_v3": "Ca0.1Ba1.65La1.25Cu3O7.06",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5705": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga19.4Fe0.06",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5707": {
+   "decision": "mantener",
+   "formula_v3": "Sr4Sc2Fe2P2O6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5718": {
+   "decision": "mantener",
+   "formula_v3": "V2.97Mn0.03Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5725": {
+   "decision": "mantener",
+   "formula_v3": "Co28Zr72",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5734": {
+   "decision": "mantener",
+   "formula_v3": "Tb0.25Er0.75Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5735": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Lu1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5736": {
+   "decision": "mantener",
+   "formula_v3": "Sn0.25Ta0.5V0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5757": {
+   "decision": "excluir",
+   "formula_v3": "Tl2.2Ca2Ba2.14Cu3.72OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "5780": {
+   "decision": "mantener",
+   "formula_v3": "Ta1Se2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5788": {
+   "decision": "mantener",
+   "formula_v3": "Nb79.1Sn9.4Al2.1Ge9.4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5810": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Hf1In1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5818": {
+   "decision": "mantener",
+   "formula_v3": "Rb2Cs1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "5833": {
+   "decision": "mantener",
+   "formula_v3": "Re16Zr84",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5837": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Zr1In1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5839": {
+   "decision": "mantener",
+   "formula_v3": "Ca0.2La0.8Ba1.55La0.45Cu3O7.16",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "5842": {
+   "decision": "mantener",
+   "formula_v3": "As0.5Ni0.06Pd0.44",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5843": {
+   "decision": "mantener",
+   "formula_v3": "Ir0.02Nb3Rh0.98",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5853": {
+   "decision": "mantener",
+   "formula_v3": "Zr33.3V61.8Nb4.8",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5856": {
+   "decision": "mantener",
+   "formula_v3": "V1Ta2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5857": {
+   "decision": "mantener",
+   "formula_v3": "Ti1Re1O1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5873": {
+   "decision": "mantener",
+   "formula_v3": "Fe1P1Sr2Sc1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5888": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Pd0.02Rh0.98",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5890": {
+   "decision": "mantener",
+   "formula_v3": "Am0.01Si2Th1",
+   "categoria": "elemento_raro_Am_Cm_Po"
+  },
+  "5894": {
+   "decision": "mantener",
+   "formula_v3": "La0.006Si1V2.994",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5896": {
+   "decision": "mantener",
+   "formula_v3": "Al1Pd1Mo6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5898": {
+   "decision": "mantener",
+   "formula_v3": "Y1.4Th0.6C2.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5905": {
+   "decision": "mantener",
+   "formula_v3": "Nd0.4Sm0.6F0.3Bi1S2O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5920": {
+   "decision": "excluir",
+   "formula_v3": "Ho1Ni2B2C",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "5927": {
+   "decision": "mantener",
+   "formula_v3": "Pb1Ta1S3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5928": {
+   "decision": "mantener",
+   "formula_v3": "Nd0.8Sm0.2F0.3Bi1S2O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "5947": {
+   "decision": "mantener",
+   "formula_v3": "Co0.032Mo99.968",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "5963": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr2.5Nd0.5Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "5986": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Sn1Y1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6000": {
+   "decision": "mantener",
+   "formula_v3": "Rh37Zr63",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6012": {
+   "decision": "mantener",
+   "formula_v3": "Yb1Pd2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6018": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.25Ti0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6024": {
+   "decision": "mantener",
+   "formula_v3": "Bi0.1C1.45Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6026": {
+   "decision": "mantener",
+   "formula_v3": "Co4.95Ga25V70.05",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6034": {
+   "decision": "mantener",
+   "formula_v3": "Nd0.6Sm0.4F0.3Bi1S2O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6045": {
+   "decision": "mantener",
+   "formula_v3": "Ge1Pt1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6058": {
+   "decision": "mantener",
+   "formula_v3": "Tb0.2Er0.8Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6070": {
+   "decision": "mantener",
+   "formula_v3": "Er0.75Tb0.25Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6071": {
+   "decision": "mantener",
+   "formula_v3": "Ce1Fe1As1H0.3O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6089": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ni2Pd",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "6107": {
+   "decision": "mantener",
+   "formula_v3": "Au25Sb75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6119": {
+   "decision": "excluir",
+   "formula_v3": "Bi2.05Pb0.05Sr1.9Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "6122": {
+   "decision": "mantener",
+   "formula_v3": "Li2Pd3B1B1",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6126": {
+   "decision": "mantener",
+   "formula_v3": "C3Ho0.6Th1.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6137": {
+   "decision": "mantener",
+   "formula_v3": "Nb2.75Sn1Ta0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6142": {
+   "decision": "mantener",
+   "formula_v3": "Nb81Si19",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6159": {
+   "decision": "mantener",
+   "formula_v3": "U6Mn0.5Fe0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6164": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Al0.225Ge0.025",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6172": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.253V0.747",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6192": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Ga0.8Sn0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6211": {
+   "decision": "mantener",
+   "formula_v3": "Cr0.008Cu1Rh1.992S4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6222": {
+   "decision": "mantener",
+   "formula_v3": "Si1V2.7Nb0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6227": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.3Cu0.7Sr2Ca2.9Y0.1Cu4O11.1",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6233": {
+   "decision": "mantener",
+   "formula_v3": "Tm1Pd2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6235": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu0.934Tb1.066",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6241": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu1.15Tb0.85",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6244": {
+   "decision": "mantener",
+   "formula_v3": "Pb1S3Ta1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6248": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.975Zn0.025OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "6263": {
+   "decision": "mantener",
+   "formula_v3": "Rb2K1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "6267": {
+   "decision": "mantener",
+   "formula_v3": "Mg0.7Li0.15Al0.15B2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6268": {
+   "decision": "mantener",
+   "formula_v3": "Th0.6Sc1.4C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6270": {
+   "decision": "mantener",
+   "formula_v3": "O3Rb0.33W1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6274": {
+   "decision": "mantener",
+   "formula_v3": "Ga20.5V79.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6302": {
+   "decision": "mantener",
+   "formula_v3": "Cu70Sn30",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6304": {
+   "decision": "mantener",
+   "formula_v3": "V75Si5Ge20",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6309": {
+   "decision": "mantener",
+   "formula_v3": "V75Ge20Sn5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6316": {
+   "decision": "mantener",
+   "formula_v3": "Li2B1Pd3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6329": {
+   "decision": "mantener",
+   "formula_v3": "Pb2Cu0.9La1.1Cu2O6.24",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6336": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.6Nd0.4Bi1S2F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6354": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr2Ca2Cu3O",
+   "categoria": "O_final_sin_coeficiente"
+  },
+  "6360": {
+   "decision": "corregir",
+   "formula_v3": "Rb3C60",
+   "categoria": "coeficiente_extremo_error_tipografico"
+  },
+  "6363": {
+   "decision": "mantener",
+   "formula_v3": "Er1Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6364": {
+   "decision": "mantener",
+   "formula_v3": "Nb3In0.15Sn0.85",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6382": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Rh0.98Os0.02",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6387": {
+   "decision": "mantener",
+   "formula_v3": "Se3Ta1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6388": {
+   "decision": "mantener",
+   "formula_v3": "Re0.6W00.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6399": {
+   "decision": "mantener",
+   "formula_v3": "Nb60Mo20Si20",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6400": {
+   "decision": "mantener",
+   "formula_v3": "Nb1S3Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6404": {
+   "decision": "mantener",
+   "formula_v3": "Dy1Ir2Rh2B4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6426": {
+   "decision": "mantener",
+   "formula_v3": "C1.45Mo0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6437": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr0.8La1.2Cu1O5.28",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6441": {
+   "decision": "mantener",
+   "formula_v3": "N1V1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6459": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.5Cu0.5Sr2Ca1.7Y0.3Cu3O9.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6468": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1La1Cu1O5.12",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6478": {
+   "decision": "mantener",
+   "formula_v3": "Co28U72",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6479": {
+   "decision": "mantener",
+   "formula_v3": "Ni16Zr84",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6494": {
+   "decision": "mantener",
+   "formula_v3": "C1.35Ti0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6511": {
+   "decision": "mantener",
+   "formula_v3": "In0.5La3Tl0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6521": {
+   "decision": "mantener",
+   "formula_v3": "Ti52Nb30Si18",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6524": {
+   "decision": "mantener",
+   "formula_v3": "Os1Re1Y1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6542": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.75Ga0.25Sr2Y1.3Ce0.7Cu2O8.6",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6551": {
+   "decision": "mantener",
+   "formula_v3": "Na0.35Co1D1.4O2",
+   "categoria": "isotopo_D_T"
+  },
+  "6561": {
+   "decision": "mantener",
+   "formula_v3": "Cu40Zr60",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6566": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti20Zr55",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6569": {
+   "decision": "excluir",
+   "formula_v3": "D0.11Nb1D0.13Nb1",
+   "categoria": "elemento_repetido_artefacto"
+  },
+  "6576": {
+   "decision": "mantener",
+   "formula_v3": "N4H12Na2Cs1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "6582": {
+   "decision": "mantener",
+   "formula_v3": "La0.98Lu0.02",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6592": {
+   "decision": "excluir",
+   "formula_v3": "Y1.01Ba2.01Cu2.697Fe0.303O",
+   "categoria": "O_final_sin_coeficiente"
+  },
+  "6593": {
+   "decision": "mantener",
+   "formula_v3": "Cu20Sn80",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6600": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.18Nb0.82",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6610": {
+   "decision": "mantener",
+   "formula_v3": "Ga4Mn0.01Mo0.99",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6612": {
+   "decision": "mantener",
+   "formula_v3": "Y2I2C2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6620": {
+   "decision": "mantener",
+   "formula_v3": "N1Ti1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6622": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.95Be0.05",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6624": {
+   "decision": "mantener",
+   "formula_v3": "Na0.31Co1D2.5O3.25",
+   "categoria": "isotopo_D_T"
+  },
+  "6637": {
+   "decision": "mantener",
+   "formula_v3": "Mg0.8Li0.1Al0.1B2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6647": {
+   "decision": "mantener",
+   "formula_v3": "Ir0.25Zr0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6651": {
+   "decision": "mantener",
+   "formula_v3": "Tb0.225Er0.775Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6665": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Os2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6675": {
+   "decision": "mantener",
+   "formula_v3": "C3Ho0.2Th1.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6688": {
+   "decision": "mantener",
+   "formula_v3": "Li2Cs1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "6691": {
+   "decision": "mantener",
+   "formula_v3": "Ti54Nb30Si16",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6700": {
+   "decision": "mantener",
+   "formula_v3": "Nb78.4Sn12.9Al2.2Ge6.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6701": {
+   "decision": "mantener",
+   "formula_v3": "Mo13Zr87",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6705": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.75Re0.25Sr2Y1.3Ce0.7Cu2O9.06",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6706": {
+   "decision": "mantener",
+   "formula_v3": "La1Nd0.85Ce0.15Cu1O4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6707": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga17Mn3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6708": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.9745Mn0.0255Sb49",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "6710": {
+   "decision": "mantener",
+   "formula_v3": "Cu1Ba1.6Sr0.4Yb0.65Ca0.35Cu2O6.15",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6736": {
+   "decision": "mantener",
+   "formula_v3": "Co21Zr79",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6738": {
+   "decision": "mantener",
+   "formula_v3": "D0.952Pd1",
+   "categoria": "isotopo_D_T"
+  },
+  "6750": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr0.9La1.1Cu1O5.02",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "6752": {
+   "decision": "mantener",
+   "formula_v3": "V75Ge12.5Sb12.49",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6758": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Mo0.2C2.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6759": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.3In0.7La3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6765": {
+   "decision": "mantener",
+   "formula_v3": "Ga1Sr2Ca2Cu3O9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6772": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.25Zr0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6774": {
+   "decision": "excluir",
+   "formula_v3": "Bi1Sr1Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "6780": {
+   "decision": "mantener",
+   "formula_v3": "Os10",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6786": {
+   "decision": "mantener",
+   "formula_v3": "C2La1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6791": {
+   "decision": "mantener",
+   "formula_v3": "C1.35Ru0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6794": {
+   "decision": "mantener",
+   "formula_v3": "Nd0.2Sm0.8Bi1S2F0.3O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6796": {
+   "decision": "excluir",
+   "formula_v3": "Cu1Se1Te",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "6797": {
+   "decision": "mantener",
+   "formula_v3": "Co0.85Ni0.15Zr2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6801": {
+   "decision": "mantener",
+   "formula_v3": "Er1Ir2Rh2B4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6837": {
+   "decision": "mantener",
+   "formula_v3": "C3Er0.2Th1.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6862": {
+   "decision": "mantener",
+   "formula_v3": "Ru27Zr73",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6863": {
+   "decision": "mantener",
+   "formula_v3": "Pd1Sb1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6867": {
+   "decision": "mantener",
+   "formula_v3": "Co20Th80",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6879": {
+   "decision": "mantener",
+   "formula_v3": "Pt0.25V0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6893": {
+   "decision": "mantener",
+   "formula_v3": "Al0.1Si0.9V3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6903": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.5Nd0.5Bi1S2F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6907": {
+   "decision": "mantener",
+   "formula_v3": "C60Tb2.75",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "6935": {
+   "decision": "mantener",
+   "formula_v3": "Ga20Nb80",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6938": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr1.2La0.8Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "6954": {
+   "decision": "mantener",
+   "formula_v3": "C2Mo3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "6972": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga19Co1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6974": {
+   "decision": "mantener",
+   "formula_v3": "Ni30Zr70",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "6984": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr0.9La1.1Cu1O5.22",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7007": {
+   "decision": "mantener",
+   "formula_v3": "Ca0.4La0.6Ba1.35La0.65Cu3O7.15",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7008": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.5Sn0.25Ta0.125V0.125",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7010": {
+   "decision": "mantener",
+   "formula_v3": "Au0.64Ge0.22Yb0.14",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7015": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Al0.9Ga0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7016": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Al0.175Ge0.075",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7033": {
+   "decision": "mantener",
+   "formula_v3": "Ni20Zr80",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7038": {
+   "decision": "mantener",
+   "formula_v3": "Zr0.8Ni0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7056": {
+   "decision": "mantener",
+   "formula_v3": "Nb98O2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7096": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.75W0.25Sr2Y1.3Ce0.7Cu2O8.81",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7103": {
+   "decision": "mantener",
+   "formula_v3": "Bi2Pd3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7109": {
+   "decision": "mantener",
+   "formula_v3": "Tl0.5Pb0.5Sr2Ca1Cu2O7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7120": {
+   "decision": "mantener",
+   "formula_v3": "Si0.4W0.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7128": {
+   "decision": "mantener",
+   "formula_v3": "Ga23.6V76.4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7131": {
+   "decision": "mantener",
+   "formula_v3": "Rh20Zr80",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7141": {
+   "decision": "mantener",
+   "formula_v3": "H3.63Th1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7165": {
+   "decision": "mantener",
+   "formula_v3": "Zr2Co0.5Ni0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7186": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5P0.5Sr2Ca1.8Y0.2Cu3O9.25",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7196": {
+   "decision": "mantener",
+   "formula_v3": "Bi1.6Pb0.4Sr2Ca2Cu3O10.11",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7203": {
+   "decision": "mantener",
+   "formula_v3": "Au0.167Pd0.166Te0.667",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7209": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu0.815Tb1.185",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7214": {
+   "decision": "mantener",
+   "formula_v3": "Tl1C1Sr2Ba2Cu2O10",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7223": {
+   "decision": "mantener",
+   "formula_v3": "La0.2Ce0.8Ru2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7256": {
+   "decision": "mantener",
+   "formula_v3": "Ca0.3Ba1.45La1.25Cu3O7.11",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7272": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Si16Ge4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7277": {
+   "decision": "mantener",
+   "formula_v3": "Y1.4Th0.6C3.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7292": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.5Os0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7295": {
+   "decision": "mantener",
+   "formula_v3": "Nd0.4Sm0.6Bi1S2F0.3O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7308": {
+   "decision": "mantener",
+   "formula_v3": "Mo3.95Zr96.05",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7310": {
+   "decision": "mantener",
+   "formula_v3": "V2Zr1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7314": {
+   "decision": "mantener",
+   "formula_v3": "Nd0.2Sm0.8F0.3Bi1S2O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7322": {
+   "decision": "mantener",
+   "formula_v3": "Hf1Pd2Al1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7338": {
+   "decision": "mantener",
+   "formula_v3": "Na2Rb0.5Cs0.5C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "7340": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr1La1Cu1O5.1",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7342": {
+   "decision": "mantener",
+   "formula_v3": "Nb55Rh45",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7351": {
+   "decision": "mantener",
+   "formula_v3": "Ca24Al28O66",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "7358": {
+   "decision": "mantener",
+   "formula_v3": "Tl1Sr1La1Cu1O5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7368": {
+   "decision": "mantener",
+   "formula_v3": "Nb99.976O0.024",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7387": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.375Rh0.625",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7399": {
+   "decision": "mantener",
+   "formula_v3": "Hf0.9Ta0.1V2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7422": {
+   "decision": "excluir",
+   "formula_v3": "Bi1Sr0.65Nd0.35Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "7429": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Te0.5Se0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7449": {
+   "decision": "mantener",
+   "formula_v3": "Cu1Mo3S4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7450": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn0.2Sn0.8",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7453": {
+   "decision": "mantener",
+   "formula_v3": "Mo6Se7.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7454": {
+   "decision": "mantener",
+   "formula_v3": "Tl0.5Pb0.5Sr4Cu2C1O3O7",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7465": {
+   "decision": "mantener",
+   "formula_v3": "Cu40Sn60",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7472": {
+   "decision": "mantener",
+   "formula_v3": "Sr2Sc1Fe1P1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7475": {
+   "decision": "mantener",
+   "formula_v3": "Os8.33Re91.67",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7480": {
+   "decision": "mantener",
+   "formula_v3": "Pt1V3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7508": {
+   "decision": "mantener",
+   "formula_v3": "Li2Pd1.5Pt1.5B1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7516": {
+   "decision": "mantener",
+   "formula_v3": "Ga22.2V77.8",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7517": {
+   "decision": "mantener",
+   "formula_v3": "H0.81Pd1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7532": {
+   "decision": "mantener",
+   "formula_v3": "Ta1S1.2Se0.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7538": {
+   "decision": "mantener",
+   "formula_v3": "Fe9.92Ga25V65.08",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7555": {
+   "decision": "mantener",
+   "formula_v3": "Si",
+   "categoria": "elemento_sin_coeficiente_monoelemental"
+  },
+  "7564": {
+   "decision": "mantener",
+   "formula_v3": "Ag1Mo4S5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7567": {
+   "decision": "mantener",
+   "formula_v3": "Mg0.9Li0.05Al0.05B2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7570": {
+   "decision": "mantener",
+   "formula_v3": "Al25Nb75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7571": {
+   "decision": "mantener",
+   "formula_v3": "K0.3O3Re1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7573": {
+   "decision": "mantener",
+   "formula_v3": "Ru8Zr92",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7591": {
+   "decision": "mantener",
+   "formula_v3": "Au0.02Nb3Rh0.98",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7607": {
+   "decision": "mantener",
+   "formula_v3": "Nb2.5Sn1Ta0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7617": {
+   "decision": "mantener",
+   "formula_v3": "Ru18Zr82",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7620": {
+   "decision": "mantener",
+   "formula_v3": "D2S1",
+   "categoria": "isotopo_D_T"
+  },
+  "7638": {
+   "decision": "mantener",
+   "formula_v3": "Er0.8Tb0.2Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7642": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1La1Cu1O5.09",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7646": {
+   "decision": "mantener",
+   "formula_v3": "Y2I1.5Br0.5C2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7652": {
+   "decision": "mantener",
+   "formula_v3": "Y0.6Ca0.4Sr2Cu2Ga1O7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7660": {
+   "decision": "mantener",
+   "formula_v3": "Si22.5V75",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "7661": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Si16B4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7671": {
+   "decision": "mantener",
+   "formula_v3": "D0.9Pd1",
+   "categoria": "isotopo_D_T"
+  },
+  "7693": {
+   "decision": "mantener",
+   "formula_v3": "Ni3Th7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7708": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.85La0.15Ru2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7726": {
+   "decision": "mantener",
+   "formula_v3": "Ni24Zr76",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7747": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti74Zr1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7751": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Rh2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7755": {
+   "decision": "mantener",
+   "formula_v3": "Pd16.5Sb83.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7769": {
+   "decision": "mantener",
+   "formula_v3": "Ga25Nb75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7771": {
+   "decision": "mantener",
+   "formula_v3": "Nb1Sn1Ta2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7777": {
+   "decision": "mantener",
+   "formula_v3": "Mo0.9Re0.1C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7807": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga17.5Cr2.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7817": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Bi0.2C2.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7846": {
+   "decision": "excluir",
+   "formula_v3": "Bi1Sr0.95Nd0.05Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "7851": {
+   "decision": "mantener",
+   "formula_v3": "Zr0.5Hf0.5V2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7852": {
+   "decision": "mantener",
+   "formula_v3": "Pd32Zr68",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7857": {
+   "decision": "mantener",
+   "formula_v3": "Ru22Zr78",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7869": {
+   "decision": "mantener",
+   "formula_v3": "Co15Zr85",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7873": {
+   "decision": "mantener",
+   "formula_v3": "Pd23Zr77",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7875": {
+   "decision": "mantener",
+   "formula_v3": "Nb25V5Ti70",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7889": {
+   "decision": "mantener",
+   "formula_v3": "Pb1S1Yb1S1",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7901": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.8Mo0.2Sr2Y1Cu2O7.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7922": {
+   "decision": "mantener",
+   "formula_v3": "Ba1.6Sr0.4Yb0.65Ca0.35Cu3O6.15",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7925": {
+   "decision": "mantener",
+   "formula_v3": "In1Pb1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7946": {
+   "decision": "mantener",
+   "formula_v3": "Nb98.68O1.32",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7947": {
+   "decision": "mantener",
+   "formula_v3": "Os1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "7962": {
+   "decision": "mantener",
+   "formula_v3": "Rh23Zr77",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "7965": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1.1La0.9Cu1O5.12",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "7992": {
+   "decision": "mantener",
+   "formula_v3": "Si21.75V69.43",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "8009": {
+   "decision": "mantener",
+   "formula_v3": "Cr4.84Ga25V70.16",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8019": {
+   "decision": "mantener",
+   "formula_v3": "V3Ge0.8Al0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8045": {
+   "decision": "mantener",
+   "formula_v3": "Nb75Ga7.5Al17.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8055": {
+   "decision": "mantener",
+   "formula_v3": "Zr31V61.8Nb7.2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8062": {
+   "decision": "mantener",
+   "formula_v3": "Tl1La1Sr1Cu1O5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8063": {
+   "decision": "mantener",
+   "formula_v3": "Rb0.33W1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8081": {
+   "decision": "mantener",
+   "formula_v3": "Pb2Cu0.9La1.1Cu2O6.19",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "8110": {
+   "decision": "mantener",
+   "formula_v3": "Mg1Co1Ni2.91Co0.09",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "8115": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.1Nd0.9F0.5Bi1S2O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8154": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.45Rh0.55",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8164": {
+   "decision": "mantener",
+   "formula_v3": "N0.72H2.16Na1K3C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "8166": {
+   "decision": "mantener",
+   "formula_v3": "La1.25Ba1.55Ca0.2Cu3O7.16",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8172": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.625Sn0.25V0.125",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8173": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Se0.3Te0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8176": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8208": {
+   "decision": "mantener",
+   "formula_v3": "Ga1Nb3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8227": {
+   "decision": "mantener",
+   "formula_v3": "Al0.9Ge0.1Nb3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8252": {
+   "decision": "mantener",
+   "formula_v3": "Am1",
+   "categoria": "elemento_raro_Am_Cm_Po"
+  },
+  "8280": {
+   "decision": "mantener",
+   "formula_v3": "Cs1.2Tl2.4C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "8281": {
+   "decision": "mantener",
+   "formula_v3": "Zr29.8V59.4Nb10.8",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8285": {
+   "decision": "mantener",
+   "formula_v3": "Co14.3U85.7",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8293": {
+   "decision": "mantener",
+   "formula_v3": "Co0.5Ni0.5Zr2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8296": {
+   "decision": "mantener",
+   "formula_v3": "Pd1T0.786",
+   "categoria": "isotopo_D_T"
+  },
+  "8315": {
+   "decision": "mantener",
+   "formula_v3": "Ho1Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8319": {
+   "decision": "mantener",
+   "formula_v3": "Cu19.8Zr79.2Mn1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8327": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.95Pb0.15Sr1.9Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "8336": {
+   "decision": "mantener",
+   "formula_v3": "Pb1Te1Pb1S1",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "8337": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.745Nb0.255Sb49",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "8342": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.99745Cr0.00255Sb49",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "8356": {
+   "decision": "mantener",
+   "formula_v3": "Mo1Rh1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8378": {
+   "decision": "mantener",
+   "formula_v3": "C3Sc1.4Th0.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8381": {
+   "decision": "mantener",
+   "formula_v3": "Sb1.16Ta2S5.16",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8386": {
+   "decision": "mantener",
+   "formula_v3": "Au0.25Nb0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8390": {
+   "decision": "mantener",
+   "formula_v3": "Nb2Ta1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8395": {
+   "decision": "mantener",
+   "formula_v3": "Nb99.078O0.922",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8396": {
+   "decision": "excluir",
+   "formula_v3": "C6Ca1H",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "8397": {
+   "decision": "mantener",
+   "formula_v3": "Y1Ir1Os1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8433": {
+   "decision": "mantener",
+   "formula_v3": "Mo6.86Zr93.14",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8441": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.6Nd0.4F0.5Bi1S2O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8446": {
+   "decision": "mantener",
+   "formula_v3": "V2Nb1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8447": {
+   "decision": "mantener",
+   "formula_v3": "Nb78Ga19Mn3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8448": {
+   "decision": "mantener",
+   "formula_v3": "C70",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "8462": {
+   "decision": "mantener",
+   "formula_v3": "C0.75Hf0.05Mo0.95",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8475": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.5Ti0.1Zr0.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8505": {
+   "decision": "mantener",
+   "formula_v3": "Ho1Rh2Ir2B4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8507": {
+   "decision": "mantener",
+   "formula_v3": "Sn0.736Pb0.184In0.08Te1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8536": {
+   "decision": "mantener",
+   "formula_v3": "Th1.8Er0.2C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8541": {
+   "decision": "mantener",
+   "formula_v3": "La3In0.8Sn0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8563": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8585": {
+   "decision": "mantener",
+   "formula_v3": "Ag7F0.25N0.75O10.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8589": {
+   "decision": "excluir",
+   "formula_v3": "Ba2Ca3Cu5O",
+   "categoria": "O_final_sin_coeficiente"
+  },
+  "8615": {
+   "decision": "mantener",
+   "formula_v3": "Ir45Nb55",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8616": {
+   "decision": "mantener",
+   "formula_v3": "La1Al2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8622": {
+   "decision": "mantener",
+   "formula_v3": "H0.33Nb0.67",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8626": {
+   "decision": "mantener",
+   "formula_v3": "Ti0.5W0.5C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8639": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr1.8La0.2Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "8641": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.25V0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8644": {
+   "decision": "mantener",
+   "formula_v3": "B3Ru7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8650": {
+   "decision": "mantener",
+   "formula_v3": "La1.25Ca0.1Ba1.65Cu3O7.06",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8658": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga14Co6",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8666": {
+   "decision": "mantener",
+   "formula_v3": "Zr0.75Pd0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8678": {
+   "decision": "mantener",
+   "formula_v3": "Nd1F0.3Bi1S2O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8679": {
+   "decision": "mantener",
+   "formula_v3": "Lu0.5Y0.5Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8689": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti70Ta5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8717": {
+   "decision": "mantener",
+   "formula_v3": "Zr28.4V56.8Nb14.8",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8725": {
+   "decision": "mantener",
+   "formula_v3": "Al99.925Mn0.075",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "8730": {
+   "decision": "mantener",
+   "formula_v3": "Tl0.5Pb0.5Sr4Cu2C1O10",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8738": {
+   "decision": "mantener",
+   "formula_v3": "La1F0.5Bi1S2O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8750": {
+   "decision": "mantener",
+   "formula_v3": "V3Si0.5Ga0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8754": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr1.45La0.55Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "8782": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Zr75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8784": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.2Nd0.8F0.5Bi1S2O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8800": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.265V0.735",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8813": {
+   "decision": "mantener",
+   "formula_v3": "Rh27Zr73",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8823": {
+   "decision": "mantener",
+   "formula_v3": "Be30Zr70",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8840": {
+   "decision": "mantener",
+   "formula_v3": "Pd1T0.734",
+   "categoria": "isotopo_D_T"
+  },
+  "8843": {
+   "decision": "mantener",
+   "formula_v3": "Al3Mg2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8846": {
+   "decision": "mantener",
+   "formula_v3": "Rh1Zr2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8858": {
+   "decision": "mantener",
+   "formula_v3": "Y2Br2C2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8859": {
+   "decision": "mantener",
+   "formula_v3": "Fe4.97Ga25V70.03",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8869": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga19.7Fe0.03",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8877": {
+   "decision": "mantener",
+   "formula_v3": "Si0.25V0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8885": {
+   "decision": "mantener",
+   "formula_v3": "K2.75Ba0.25C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "8914": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Pb0.1Sr1.9Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "8919": {
+   "decision": "mantener",
+   "formula_v3": "Nb77.3Sn18.1Al2.3Ge2.3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8951": {
+   "decision": "mantener",
+   "formula_v3": "B1C1Mo2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8955": {
+   "decision": "mantener",
+   "formula_v3": "Nb2Sn1Ta1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8963": {
+   "decision": "mantener",
+   "formula_v3": "In3Y1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8970": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga19Mn1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "8978": {
+   "decision": "mantener",
+   "formula_v3": "Sr0.8K0.2Fe2As2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "8984": {
+   "decision": "mantener",
+   "formula_v3": "Cd99.995Mn0.005",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "8986": {
+   "decision": "excluir",
+   "formula_v3": "Ru0.95Co0.05Sr2Gd1CuO8",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "9013": {
+   "decision": "mantener",
+   "formula_v3": "Pb2Cu0.9La1.1Cu2O7.42",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9019": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn0.5Zr0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9026": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.9Pb0.2Sr1.9Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "9049": {
+   "decision": "mantener",
+   "formula_v3": "Sn1Nb1S3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9062": {
+   "decision": "mantener",
+   "formula_v3": "Y2C2I2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9069": {
+   "decision": "mantener",
+   "formula_v3": "V75Si20Ga5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9081": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.205V0.795",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9083": {
+   "decision": "mantener",
+   "formula_v3": "Ga1Sr2Y0.6Ca0.4Cu2O7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9088": {
+   "decision": "mantener",
+   "formula_v3": "Ru1Sr2Eu1.4Ce0.6Cu2O10",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9089": {
+   "decision": "mantener",
+   "formula_v3": "Ti55Nb30Si15",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9093": {
+   "decision": "excluir",
+   "formula_v3": "La1.85Sr0.15CuNi0.04O4",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "9104": {
+   "decision": "mantener",
+   "formula_v3": "Th90.9Tm9.1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9123": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr1La1Cu1O5.03",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9131": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Rh0.98Ir0.02",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9139": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1.1La0.9Cu1O5.07",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9147": {
+   "decision": "mantener",
+   "formula_v3": "Ru7B3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9178": {
+   "decision": "mantener",
+   "formula_v3": "Cu1V2S4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9185": {
+   "decision": "mantener",
+   "formula_v3": "Si1C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9190": {
+   "decision": "mantener",
+   "formula_v3": "Nb5Zr2Be8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9194": {
+   "decision": "excluir",
+   "formula_v3": "Hg0.7Pb0.3Sr2Ca2Cu3OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "9195": {
+   "decision": "mantener",
+   "formula_v3": "C1.55Th0.3Y0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9196": {
+   "decision": "mantener",
+   "formula_v3": "La1.81Ho0.04Sr0.15Cu1O4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9215": {
+   "decision": "mantener",
+   "formula_v3": "Cr3Rh1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9223": {
+   "decision": "mantener",
+   "formula_v3": "La1Bi1Se1S1F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9225": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.75Co0.25Sr2Y1.3Ce0.7Cu2O8.43",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9228": {
+   "decision": "mantener",
+   "formula_v3": "Rh0.4Ta0.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9234": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.25C0.75Ca3Cu2O6.85",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9236": {
+   "decision": "mantener",
+   "formula_v3": "Al0.25La0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9238": {
+   "decision": "excluir",
+   "formula_v3": "La2Cu1FO4",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "9244": {
+   "decision": "mantener",
+   "formula_v3": "Au0.3Pd0.033Te0.666",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9248": {
+   "decision": "excluir",
+   "formula_v3": "Bi1Sr0.75Nd0.25Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "9252": {
+   "decision": "mantener",
+   "formula_v3": "Ca0.1La1.25Ba1.65Cu3O7.06",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9265": {
+   "decision": "mantener",
+   "formula_v3": "Dy1Rh2Ir2B4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9271": {
+   "decision": "mantener",
+   "formula_v3": "Ni29Zr71",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9274": {
+   "decision": "mantener",
+   "formula_v3": "O3Rb0.27W1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9286": {
+   "decision": "mantener",
+   "formula_v3": "Be35Zr65",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9300": {
+   "decision": "mantener",
+   "formula_v3": "Sn1O1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9305": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.85Zn0.15OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "9307": {
+   "decision": "mantener",
+   "formula_v3": "In0.25Sb0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9314": {
+   "decision": "mantener",
+   "formula_v3": "N0.87H2.61Na1K2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "9320": {
+   "decision": "mantener",
+   "formula_v3": "Sr0.5Ce0.5F1Bi1S2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9342": {
+   "decision": "mantener",
+   "formula_v3": "Nb76.3Sn7.1Al14.3Ge2.3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9344": {
+   "decision": "mantener",
+   "formula_v3": "C60Yb2.75",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "9385": {
+   "decision": "mantener",
+   "formula_v3": "Na4H4C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "9386": {
+   "decision": "mantener",
+   "formula_v3": "Sr0.5La0.5Bi1S2F1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9390": {
+   "decision": "mantener",
+   "formula_v3": "Na0.3Co1D2.8O3.4",
+   "categoria": "isotopo_D_T"
+  },
+  "9401": {
+   "decision": "mantener",
+   "formula_v3": "B2Nb0.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9413": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1La1Cu1O5.05",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9421": {
+   "decision": "mantener",
+   "formula_v3": "Ca1Ba1La1Cu3O7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9454": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr2.8Nd0.2Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "9461": {
+   "decision": "mantener",
+   "formula_v3": "Cs3Hg3.3C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "9464": {
+   "decision": "mantener",
+   "formula_v3": "B105",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "9478": {
+   "decision": "mantener",
+   "formula_v3": "C1.55W0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9484": {
+   "decision": "mantener",
+   "formula_v3": "N0.85H2.55Na1K2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "9487": {
+   "decision": "mantener",
+   "formula_v3": "Nb2Sn1V1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9498": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5C0.5Ba2Ca3Cu4O11",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9500": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.95Zn0.05OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "9508": {
+   "decision": "mantener",
+   "formula_v3": "D3.63Th1",
+   "categoria": "isotopo_D_T"
+  },
+  "9533": {
+   "decision": "mantener",
+   "formula_v3": "Si1V2.7Ti0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9536": {
+   "decision": "mantener",
+   "formula_v3": "Bi0.5Sn0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9561": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.248V0.752",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9568": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.97Ni0.03OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "9581": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Al0.19Ge0.06",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9599": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1La1Cu1O5.15",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9605": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti65Ta10",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9627": {
+   "decision": "mantener",
+   "formula_v3": "C1Ti0.5W0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9631": {
+   "decision": "mantener",
+   "formula_v3": "C1Mo0.9Ru0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9641": {
+   "decision": "mantener",
+   "formula_v3": "Ce1Fe1As1H0.4O0.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9642": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.75V0.25Sr2Y1.3Ce0.7Cu2O8.77",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9651": {
+   "decision": "mantener",
+   "formula_v3": "La1Fe1As1F0.05O0.95",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9671": {
+   "decision": "mantener",
+   "formula_v3": "As1Ni0.12Pd0.88",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9675": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Yb1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9683": {
+   "decision": "mantener",
+   "formula_v3": "Nb15Ti75Ta10",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9688": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.7275Zr0.0225Al0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9696": {
+   "decision": "mantener",
+   "formula_v3": "Ba24Si100",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "9697": {
+   "decision": "mantener",
+   "formula_v3": "Y1Pt0.5Ge1.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9713": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Se0.2Te0.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9728": {
+   "decision": "mantener",
+   "formula_v3": "Na0.2O3W1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9747": {
+   "decision": "mantener",
+   "formula_v3": "Bi1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9771": {
+   "decision": "mantener",
+   "formula_v3": "Mo80P10B10",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9777": {
+   "decision": "mantener",
+   "formula_v3": "Y1Os1Re1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9796": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5P0.5Sr2Ca1.9Y0.1Cu3O9.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9805": {
+   "decision": "mantener",
+   "formula_v3": "Mo0.12U0.88",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9814": {
+   "decision": "mantener",
+   "formula_v3": "Zr3V3O1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9827": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.2Nd0.8Bi1S2F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9828": {
+   "decision": "mantener",
+   "formula_v3": "Na2Rb0.75Cs0.25C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "9847": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.6Pb0.4Sr2Cu2.75Mo0.25OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "9851": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5C0.5Ba2Ca2Cu3O9",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9861": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.5Nd0.5F0.5Bi1S2O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9902": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.5Cu0.5Sr2Ca1.9Y0.1Cu3O9.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "9911": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu0.697Tb1.303",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "9933": {
+   "decision": "excluir",
+   "formula_v3": "Nd2Cu1FO4",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "9956": {
+   "decision": "mantener",
+   "formula_v3": "Zr0.61Rh0.285O0.105",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9974": {
+   "decision": "mantener",
+   "formula_v3": "Sc1Pd2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9978": {
+   "decision": "mantener",
+   "formula_v3": "C1.35Si0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9984": {
+   "decision": "mantener",
+   "formula_v3": "Pb7Bi3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "9989": {
+   "decision": "mantener",
+   "formula_v3": "Rh43Zr57",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10004": {
+   "decision": "mantener",
+   "formula_v3": "Bi14Rh3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10025": {
+   "decision": "mantener",
+   "formula_v3": "C1Mo0.2Ta0.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10030": {
+   "decision": "mantener",
+   "formula_v3": "Au63.5Ge20.5Yb16",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10038": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.2Nd0.8F0.3Bi1S2O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10045": {
+   "decision": "mantener",
+   "formula_v3": "Mo6.35Pb1S8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10068": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.3Nd0.7Bi1S2F0.5O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10090": {
+   "decision": "mantener",
+   "formula_v3": "V2.7Cr0.3Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10096": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.25Sn0.25Ta0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10099": {
+   "decision": "mantener",
+   "formula_v3": "Nb96.5O3.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10100": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Zr1Al1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10111": {
+   "decision": "mantener",
+   "formula_v3": "Ti0.5Nb0.25Sb0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10114": {
+   "decision": "mantener",
+   "formula_v3": "O3Sr1Ti1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10115": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Si20",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10118": {
+   "decision": "excluir",
+   "formula_v3": "Bi2.2Sr1.8Ca1Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "10119": {
+   "decision": "mantener",
+   "formula_v3": "La0.06Si1V2.94",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10125": {
+   "decision": "mantener",
+   "formula_v3": "Mo8.75Zr91.25",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10126": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga18Co2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10129": {
+   "decision": "mantener",
+   "formula_v3": "Nd0.8Sm0.2Bi1S2F0.3O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10147": {
+   "decision": "mantener",
+   "formula_v3": "O1Re1Ti1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10152": {
+   "decision": "mantener",
+   "formula_v3": "La1Os1Ru3P12",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10158": {
+   "decision": "mantener",
+   "formula_v3": "Y0.7Th0.3C1.35",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10164": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Au0.175Pt0.075",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10167": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.55Ag0.45OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "10194": {
+   "decision": "mantener",
+   "formula_v3": "S2Ta1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10199": {
+   "decision": "mantener",
+   "formula_v3": "Pd34Zr66",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10215": {
+   "decision": "mantener",
+   "formula_v3": "C2Pt1U2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10229": {
+   "decision": "mantener",
+   "formula_v3": "V2.79Mn0.21Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10230": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.625Pt0.375",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10232": {
+   "decision": "mantener",
+   "formula_v3": "Hf1V2D0.75",
+   "categoria": "isotopo_D_T"
+  },
+  "10241": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Au0.7Pt0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10245": {
+   "decision": "mantener",
+   "formula_v3": "Zr55Cu30Al10Ni5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10248": {
+   "decision": "mantener",
+   "formula_v3": "Nb1Os1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10272": {
+   "decision": "mantener",
+   "formula_v3": "Fe0.5Mn0.5U6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10277": {
+   "decision": "mantener",
+   "formula_v3": "Nd0.6Sm0.4Bi1S2F0.3O0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10286": {
+   "decision": "mantener",
+   "formula_v3": "C3Er0.8Th1.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10303": {
+   "decision": "mantener",
+   "formula_v3": "Nb3In0.5Zr0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10336": {
+   "decision": "mantener",
+   "formula_v3": "Cu1S4V2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10343": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr1.6La0.4Ca1Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "10347": {
+   "decision": "mantener",
+   "formula_v3": "C1.45V0.1Y0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10351": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.4Cu0.6Sr2Ca1.9Y0.1Cu3O9.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "10365": {
+   "decision": "mantener",
+   "formula_v3": "Ta0.2Mo0.8C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10374": {
+   "decision": "mantener",
+   "formula_v3": "N0.8H2.4Na1Rb2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "10382": {
+   "decision": "mantener",
+   "formula_v3": "Ga1V3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10383": {
+   "decision": "excluir",
+   "formula_v3": "YbCa0.4Ba1.6Sr0.4Cu4O8",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "10390": {
+   "decision": "mantener",
+   "formula_v3": "Ti50V50",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10398": {
+   "decision": "mantener",
+   "formula_v3": "Ce1Rh0.5Co0.5In5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10404": {
+   "decision": "mantener",
+   "formula_v3": "Al2Gd0.002La0.998",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10417": {
+   "decision": "mantener",
+   "formula_v3": "Er0.775Tb0.225Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10433": {
+   "decision": "mantener",
+   "formula_v3": "C60Yb3.5",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "10438": {
+   "decision": "mantener",
+   "formula_v3": "Nb78Ga20Mn2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10445": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.5Sb0.25Ti0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10446": {
+   "decision": "mantener",
+   "formula_v3": "Zr62.4Ti15.6Ni22",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10447": {
+   "decision": "mantener",
+   "formula_v3": "Pd20Zr80",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10455": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Os0.02Rh0.98",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10465": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Zr0.5In0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10475": {
+   "decision": "mantener",
+   "formula_v3": "La75Au15Cu10",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10476": {
+   "decision": "mantener",
+   "formula_v3": "Si1V3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10484": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Sn0.9Ge0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10485": {
+   "decision": "mantener",
+   "formula_v3": "Na2Cs0.88C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "10495": {
+   "decision": "mantener",
+   "formula_v3": "Nb77Sn13.8Al6.9Ge2.3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10515": {
+   "decision": "mantener",
+   "formula_v3": "V2.88Ce0.12Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10548": {
+   "decision": "mantener",
+   "formula_v3": "Ni33Zr67",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10556": {
+   "decision": "mantener",
+   "formula_v3": "Rb0.8Fe1.6Se2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10577": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr0.8La1.2Cu1O5.1",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "10579": {
+   "decision": "mantener",
+   "formula_v3": "Ni21Zr79",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10580": {
+   "decision": "mantener",
+   "formula_v3": "Al0.5Ga0.5Nb3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10604": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Te0.7Se0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10622": {
+   "decision": "mantener",
+   "formula_v3": "Pd50.745V0.255Sb49",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "10624": {
+   "decision": "mantener",
+   "formula_v3": "Y2C2Br0.5I1.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10626": {
+   "decision": "mantener",
+   "formula_v3": "Y1Pd2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10630": {
+   "decision": "mantener",
+   "formula_v3": "In31.5Sb68.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10635": {
+   "decision": "mantener",
+   "formula_v3": "V75Si20Ge5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10642": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5P0.5Sr2Ca1.9Y0.1Cu3O9.4",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "10643": {
+   "decision": "mantener",
+   "formula_v3": "Y2C2Br2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10650": {
+   "decision": "mantener",
+   "formula_v3": "Ir0.05Nb3Rh0.95",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10653": {
+   "decision": "mantener",
+   "formula_v3": "V2.7Zr0.3Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10654": {
+   "decision": "mantener",
+   "formula_v3": "La1Ca1Ba1Cu3O7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10656": {
+   "decision": "mantener",
+   "formula_v3": "Hf1V2H1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10661": {
+   "decision": "mantener",
+   "formula_v3": "Bi0.15Nb3Sn0.85",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10666": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr1.4La0.6Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "10677": {
+   "decision": "mantener",
+   "formula_v3": "Co1Zr2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10681": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5P0.5Sr2Ca2Cu3O9.25",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "10682": {
+   "decision": "mantener",
+   "formula_v3": "V2Hf0.9Ta0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10690": {
+   "decision": "mantener",
+   "formula_v3": "O1V3Zr3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10706": {
+   "decision": "excluir",
+   "formula_v3": "Bi4Sr3Ca3Cu4OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "10717": {
+   "decision": "mantener",
+   "formula_v3": "B12Zr1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10723": {
+   "decision": "mantener",
+   "formula_v3": "Nb50.35Zr44.45Mo5.2",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10739": {
+   "decision": "mantener",
+   "formula_v3": "Au0.5Ge0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10749": {
+   "decision": "mantener",
+   "formula_v3": "Ti55Nb30Si12B3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10756": {
+   "decision": "excluir",
+   "formula_v3": "BaKBi1O3",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "10757": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5S0.5Sr2Ca2Cu3O12",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "10763": {
+   "decision": "mantener",
+   "formula_v3": "Nb10V50Ti40",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10769": {
+   "decision": "mantener",
+   "formula_v3": "Hf1V2D1",
+   "categoria": "isotopo_D_T"
+  },
+  "10780": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.5Zr0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10822": {
+   "decision": "mantener",
+   "formula_v3": "Y1.8Sn0.2C2.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10834": {
+   "decision": "mantener",
+   "formula_v3": "V75Si12.5Ge12.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10856": {
+   "decision": "mantener",
+   "formula_v3": "Zr1Pd2Al1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10883": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr1La1Cu1O5.15",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "10892": {
+   "decision": "mantener",
+   "formula_v3": "Fe30Zr70",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10921": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.6Os0.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10948": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.75Ce0.25Sr2Y1.3Ce0.7Cu2O8.91",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "10951": {
+   "decision": "mantener",
+   "formula_v3": "Nb75Ga15Al10",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10955": {
+   "decision": "mantener",
+   "formula_v3": "Co0.01Mo99.99",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "10976": {
+   "decision": "mantener",
+   "formula_v3": "Yb1Sb2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "10986": {
+   "decision": "mantener",
+   "formula_v3": "Ni19.5Zr78Mn2.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11003": {
+   "decision": "mantener",
+   "formula_v3": "Er0.2Y0.8Pd2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11030": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr1.25La0.75Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "11038": {
+   "decision": "mantener",
+   "formula_v3": "Mo0.99Mn0.01Ga4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11040": {
+   "decision": "mantener",
+   "formula_v3": "Ce1Co0.5Rh0.5In5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11084": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.7Ag0.3OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "11125": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Al0.1875Ge0.0625",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11129": {
+   "decision": "mantener",
+   "formula_v3": "C60Rb4",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "11130": {
+   "decision": "mantener",
+   "formula_v3": "Nb99.861O0.139",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11153": {
+   "decision": "mantener",
+   "formula_v3": "V0.75Ge0.175Al0.075",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11178": {
+   "decision": "mantener",
+   "formula_v3": "Y1.4Ti0.6C3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11195": {
+   "decision": "mantener",
+   "formula_v3": "V3Si0.2Ge0.8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11207": {
+   "decision": "mantener",
+   "formula_v3": "Ag1.2Mo4.8S6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11213": {
+   "decision": "mantener",
+   "formula_v3": "Pb1Mo6S7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11217": {
+   "decision": "mantener",
+   "formula_v3": "V3Si0.9Al0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11243": {
+   "decision": "mantener",
+   "formula_v3": "Pd31Zr69",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11274": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Te0.6Se0.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11281": {
+   "decision": "mantener",
+   "formula_v3": "Ni14.3U85.7",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11285": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr1.7La0.3Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "11288": {
+   "decision": "mantener",
+   "formula_v3": "Th70.2Tm29.8",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11289": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti70Mo5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11309": {
+   "decision": "mantener",
+   "formula_v3": "Rh2Ta3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11314": {
+   "decision": "mantener",
+   "formula_v3": "Na2Cs0.93C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "11316": {
+   "decision": "mantener",
+   "formula_v3": "Sn1Nb1Se3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11332": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Rh0.98Co0.02",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11336": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.75Al0.175Ga0.075",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11348": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.5Cu0.5Sr1La1Cu1O5.19",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "11355": {
+   "decision": "mantener",
+   "formula_v3": "Ti0.25Nb0.5Sb0.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11363": {
+   "decision": "mantener",
+   "formula_v3": "Y2C2Br1I1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11371": {
+   "decision": "mantener",
+   "formula_v3": "V66.6Zr33.3",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11378": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr2.7Nd0.3Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "11388": {
+   "decision": "mantener",
+   "formula_v3": "Y1In3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11398": {
+   "decision": "excluir",
+   "formula_v3": "Bi1Sr0.7Nd0.3Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "11399": {
+   "decision": "mantener",
+   "formula_v3": "N0.84H2.52Na1K2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "11400": {
+   "decision": "mantener",
+   "formula_v3": "V75Si5Ga20",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11409": {
+   "decision": "mantener",
+   "formula_v3": "V1Nb2Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11412": {
+   "decision": "excluir",
+   "formula_v3": "Y1CaBa2Cu3NiO6.89",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "11415": {
+   "decision": "mantener",
+   "formula_v3": "Ga7Pt3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11422": {
+   "decision": "mantener",
+   "formula_v3": "Pd27Zr73",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11436": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr0.8La1.2Cu1O5.29",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "11445": {
+   "decision": "mantener",
+   "formula_v3": "La1C2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11447": {
+   "decision": "mantener",
+   "formula_v3": "Pd22Zr78",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11448": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Ge0.1Sn0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11461": {
+   "decision": "excluir",
+   "formula_v3": "NbSn3",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "11477": {
+   "decision": "mantener",
+   "formula_v3": "Eu1Rb1Fe4As4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11486": {
+   "decision": "mantener",
+   "formula_v3": "Ti1V1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11488": {
+   "decision": "mantener",
+   "formula_v3": "Bi1.6Pb0.4Sr2Cu3Ca2O10.11",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11490": {
+   "decision": "mantener",
+   "formula_v3": "Os0.25W0.75",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11504": {
+   "decision": "mantener",
+   "formula_v3": "Ce1Fe1As1D0.4O0.6",
+   "categoria": "isotopo_D_T"
+  },
+  "11516": {
+   "decision": "excluir",
+   "formula_v3": "La1.85Sr0.15Cu1FeO4",
+   "categoria": "elemento_sin_coeficiente_multielemental"
+  },
+  "11528": {
+   "decision": "mantener",
+   "formula_v3": "La0.15Ce0.85Ru2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11530": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu2.982Zn0.018OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "11536": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.5Si0.5V3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11538": {
+   "decision": "mantener",
+   "formula_v3": "V3Si0.8Al0.2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11539": {
+   "decision": "mantener",
+   "formula_v3": "Nb24Ti75Ta1",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11544": {
+   "decision": "mantener",
+   "formula_v3": "In25Sb75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11555": {
+   "decision": "mantener",
+   "formula_v3": "Sr0.2Mo1S2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11560": {
+   "decision": "mantener",
+   "formula_v3": "Pd0.165Sb0.835",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11575": {
+   "decision": "mantener",
+   "formula_v3": "Pd35Zr65",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11583": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Se0.5Te0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11615": {
+   "decision": "mantener",
+   "formula_v3": "Si1V2.7Zr0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11616": {
+   "decision": "mantener",
+   "formula_v3": "K2Cs1C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "11620": {
+   "decision": "mantener",
+   "formula_v3": "Ru11Zr89",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11622": {
+   "decision": "excluir",
+   "formula_v3": "Bi4Sr3Ca1.8Y1.2Cu4OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "11645": {
+   "decision": "mantener",
+   "formula_v3": "Cu2Mo6S8",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11646": {
+   "decision": "mantener",
+   "formula_v3": "Fe1.9Co0.1As2Sr4Mg1Ti1O6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11654": {
+   "decision": "mantener",
+   "formula_v3": "Si1V2.7Cr0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11657": {
+   "decision": "mantener",
+   "formula_v3": "Nb3Rh0.98Pt0.02",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11661": {
+   "decision": "mantener",
+   "formula_v3": "Na0.35Co1H1.4O2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11663": {
+   "decision": "mantener",
+   "formula_v3": "D0.13Nb1",
+   "categoria": "isotopo_D_T"
+  },
+  "11667": {
+   "decision": "mantener",
+   "formula_v3": "Ga25V75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11672": {
+   "decision": "mantener",
+   "formula_v3": "La1.25Ba1.65Ca0.1Cu3O7.15",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11674": {
+   "decision": "mantener",
+   "formula_v3": "Pd2Sc1Sn1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11688": {
+   "decision": "excluir",
+   "formula_v3": "Nd1.32Ce0.27Sr0.41Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "11707": {
+   "decision": "mantener",
+   "formula_v3": "N0.75H2.25Na1K2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "11711": {
+   "decision": "mantener",
+   "formula_v3": "Tl0.5Pb0.5Ca1Sr2Cu2O7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11727": {
+   "decision": "mantener",
+   "formula_v3": "Co0.5Fe0.5U6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11730": {
+   "decision": "mantener",
+   "formula_v3": "Rh3Bi14",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11749": {
+   "decision": "mantener",
+   "formula_v3": "Nb2.97Zr0.03Al1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11765": {
+   "decision": "mantener",
+   "formula_v3": "Al0.2Si0.8V3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11769": {
+   "decision": "mantener",
+   "formula_v3": "Rb0.27W1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11781": {
+   "decision": "mantener",
+   "formula_v3": "Mg1Co1Ni2.94Co0.06",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "11788": {
+   "decision": "mantener",
+   "formula_v3": "V2.7Ru0.3Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11798": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti10Zr65",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11814": {
+   "decision": "mantener",
+   "formula_v3": "V3Si0.9Ge0.1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11817": {
+   "decision": "mantener",
+   "formula_v3": "Ag0.16D0.47Pd0.84",
+   "categoria": "isotopo_D_T"
+  },
+  "11832": {
+   "decision": "mantener",
+   "formula_v3": "Li2B1Pd2.4Pt0.6",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11838": {
+   "decision": "excluir",
+   "formula_v3": "Sr2Ho1Cu3O",
+   "categoria": "O_final_sin_coeficiente"
+  },
+  "11841": {
+   "decision": "mantener",
+   "formula_v3": "Ru0.5W0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11848": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.72Nb3.28",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11853": {
+   "decision": "mantener",
+   "formula_v3": "In6Sn94",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11868": {
+   "decision": "mantener",
+   "formula_v3": "Au1Ge1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11870": {
+   "decision": "mantener",
+   "formula_v3": "Nb75Ga5Al20",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11877": {
+   "decision": "mantener",
+   "formula_v3": "Nb78.5Sn2.2Al12.8Ge6.5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11880": {
+   "decision": "mantener",
+   "formula_v3": "Rh0.33Zr0.66",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11882": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga15Co5",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11917": {
+   "decision": "mantener",
+   "formula_v3": "V2.97Nb0.03Si1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11937": {
+   "decision": "mantener",
+   "formula_v3": "Pb0.6Cu0.4Sr1La1Cu1O5.19",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "11939": {
+   "decision": "mantener",
+   "formula_v3": "Fe1Se0.1Te0.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "11950": {
+   "decision": "mantener",
+   "formula_v3": "Nb99.445O0.555",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "11966": {
+   "decision": "mantener",
+   "formula_v3": "Al2La1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12023": {
+   "decision": "mantener",
+   "formula_v3": "Co35Zr65",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12049": {
+   "decision": "mantener",
+   "formula_v3": "Mo3Al2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12057": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.625Sn0.25Ta0.125",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12067": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Si16C4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12070": {
+   "decision": "excluir",
+   "formula_v3": "Y1Ba2Cu3OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "12076": {
+   "decision": "mantener",
+   "formula_v3": "Sr2Mg0.5Ti0.5Fe0.95Co0.05As1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12079": {
+   "decision": "mantener",
+   "formula_v3": "Al0.05Nb3Sn0.95",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12081": {
+   "decision": "mantener",
+   "formula_v3": "Ge0.4Cu0.6Sr2Ca1.8Y0.2Cu3O9.3",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "12082": {
+   "decision": "mantener",
+   "formula_v3": "Nb25Ti65Mo10",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12090": {
+   "decision": "mantener",
+   "formula_v3": "Th81.3Tm18.7",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12094": {
+   "decision": "excluir",
+   "formula_v3": "Bi1Sr0.8Nd0.2Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "12099": {
+   "decision": "mantener",
+   "formula_v3": "La0.75Y00.25",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12115": {
+   "decision": "mantener",
+   "formula_v3": "Mo64Re16P10B10",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12132": {
+   "decision": "mantener",
+   "formula_v3": "K0.4W1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12141": {
+   "decision": "mantener",
+   "formula_v3": "Nb0.25Sb0.25Ti0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12143": {
+   "decision": "mantener",
+   "formula_v3": "Ga0.7Pt0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12160": {
+   "decision": "mantener",
+   "formula_v3": "Y0.75Lu0.25Ni2B2C1",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12169": {
+   "decision": "mantener",
+   "formula_v3": "C3Er0.1Th1.9",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12181": {
+   "decision": "mantener",
+   "formula_v3": "Nb80Ga16Fe4",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12184": {
+   "decision": "mantener",
+   "formula_v3": "Al0.75Ge0.25Nb3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12202": {
+   "decision": "mantener",
+   "formula_v3": "Ga25.3V74.7",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12213": {
+   "decision": "mantener",
+   "formula_v3": "La98Lu0.754Tb1.246",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12222": {
+   "decision": "mantener",
+   "formula_v3": "Cu0.5P0.5Sr2Ca1.7Y0.3Cu3O9.4",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "12234": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.8Pb0.2Sr1.35La0.65Cu1OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "12242": {
+   "decision": "mantener",
+   "formula_v3": "Nb70Mo10Si20",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12248": {
+   "decision": "mantener",
+   "formula_v3": "Bi1.08S5.08Ta2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12257": {
+   "decision": "mantener",
+   "formula_v3": "Nd1F0.5Bi1S2O0.5",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12293": {
+   "decision": "mantener",
+   "formula_v3": "Ni25Th75",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12295": {
+   "decision": "mantener",
+   "formula_v3": "N1H3Na1K2C60",
+   "categoria": "coeficiente_alto_cluster_o_celda"
+  },
+  "12301": {
+   "decision": "mantener",
+   "formula_v3": "Na0.3Co1H2.8O3.4",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12306": {
+   "decision": "mantener",
+   "formula_v3": "Mg1Co1Ni2.97Co0.03",
+   "categoria": "elemento_repetido_notacion_por_sitio"
+  },
+  "12313": {
+   "decision": "mantener",
+   "formula_v3": "V3Ge0.7Al0.3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12325": {
+   "decision": "mantener",
+   "formula_v3": "Zr66.3Ti11.7Ni22",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12337": {
+   "decision": "excluir",
+   "formula_v3": "Bi2Sr1.8La0.2Ca1Cu2OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "12349": {
+   "decision": "mantener",
+   "formula_v3": "Tl1Ba2Sr2Cu2C1O10",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12351": {
+   "decision": "mantener",
+   "formula_v3": "C1.5Ti0.3Y0.7",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12368": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.6Pb0.4Sr2Cu2.85Mo0.15OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "12373": {
+   "decision": "mantener",
+   "formula_v3": "Zr74.1Ti3.9Ni22",
+   "categoria": "coeficiente_alto_porcentaje_atomico"
+  },
+  "12386": {
+   "decision": "excluir",
+   "formula_v3": "Bi4Sr3Ca2.1Y0.9Cu4OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "12397": {
+   "decision": "corregir",
+   "formula_v3": "La1.85Sr0.15Cu0.98Ni0.02O4",
+   "categoria": "coeficiente_extremo_error_tipografico"
+  },
+  "12404": {
+   "decision": "mantener",
+   "formula_v3": "Sr1Ti1O3",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12408": {
+   "decision": "excluir",
+   "formula_v3": "Bi4Sr3Ca2.25Y0.75Cu4OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  },
+  "12413": {
+   "decision": "mantener",
+   "formula_v3": "Ce0.8La0.2Ru2",
+   "categoria": "duplicado_composicion_normalizada"
+  },
+  "12428": {
+   "decision": "excluir",
+   "formula_v3": "Bi1.6Pb0.4Sr2Cu2.95Mo0.05OY",
+   "categoria": "OY_oxigeno_indeterminado"
+  }
+ }
+}

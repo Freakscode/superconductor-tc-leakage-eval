@@ -1,0 +1,385 @@
+{
+ "sommer2023": {
+  "doi": "10.1038/s41597-023-02721-y",
+  "title": "3DSC - a dataset of superconductors including crystal structures",
+  "authors": [
+   {
+    "family": "Sommer",
+    "given": "Timo"
+   },
+   {
+    "family": "Willa",
+    "given": "Roland"
+   },
+   {
+    "family": "Schmalian",
+    "given": "Jörg"
+   },
+   {
+    "family": "Friederich",
+    "given": "Pascal"
+   }
+  ],
+  "journal": "Scientific Data",
+  "journal_abbrev": "Sci. Data",
+  "volume": "10",
+  "issue": "1",
+  "page": null,
+  "article_number": "816",
+  "year": 2023,
+  "publisher": "Springer Science and Business Media LLC",
+  "procedencia": {
+   "fuente": "api.crossref.org/works/<doi>",
+   "consultado_utc": "2026-09-14T04:59:15+00:00",
+   "script": "code/v3/fetch_refs_crossref.py"
+  }
+ },
+ "meredig2018": {
+  "doi": "10.1039/c8me00012c",
+  "title": "Can machine learning identify the next high-temperature superconductor? Examining extrapolation performance for materials discovery",
+  "authors": [
+   {
+    "family": "Meredig",
+    "given": "Bryce"
+   },
+   {
+    "family": "Antono",
+    "given": "Erin"
+   },
+   {
+    "family": "Church",
+    "given": "Carena"
+   },
+   {
+    "family": "Hutchinson",
+    "given": "Maxwell"
+   },
+   {
+    "family": "Ling",
+    "given": "Julia"
+   },
+   {
+    "family": "Paradiso",
+    "given": "Sean"
+   },
+   {
+    "family": "Blaiszik",
+    "given": "Ben"
+   },
+   {
+    "family": "Foster",
+    "given": "Ian"
+   },
+   {
+    "family": "Gibbons",
+    "given": "Brenna"
+   },
+   {
+    "family": "Hattrick-Simpers",
+    "given": "Jason"
+   },
+   {
+    "family": "Mehta",
+    "given": "Apurva"
+   },
+   {
+    "family": "Ward",
+    "given": "Logan"
+   }
+  ],
+  "journal": "Molecular Systems Design & Engineering",
+  "journal_abbrev": "Mol. Syst. Des. Eng.",
+  "volume": "3",
+  "issue": "5",
+  "page": "819-825",
+  "article_number": null,
+  "year": 2018,
+  "publisher": "Royal Society of Chemistry (RSC)",
+  "procedencia": {
+   "fuente": "api.crossref.org/works/<doi>",
+   "consultado_utc": "2026-09-14T04:59:15+00:00",
+   "script": "code/v3/fetch_refs_crossref.py"
+  }
+ },
+ "vasylenko2023": {
+  "doi": "10.1038/s41524-023-01072-x",
+  "title": "Element selection for functional materials discovery by integrated machine learning of elemental contributions to properties",
+  "authors": [
+   {
+    "family": "Vasylenko",
+    "given": "Andrij"
+   },
+   {
+    "family": "Antypov",
+    "given": "Dmytro"
+   },
+   {
+    "family": "Gusev",
+    "given": "Vladimir V."
+   },
+   {
+    "family": "Gaultois",
+    "given": "Michael W."
+   },
+   {
+    "family": "Dyer",
+    "given": "Matthew S."
+   },
+   {
+    "family": "Rosseinsky",
+    "given": "Matthew J."
+   }
+  ],
+  "journal": "npj Computational Materials",
+  "journal_abbrev": "npj Comput. Mater.",
+  "volume": "9",
+  "issue": "1",
+  "page": null,
+  "article_number": "164",
+  "year": 2023,
+  "publisher": "Springer Science and Business Media LLC",
+  "procedencia": {
+   "fuente": "api.crossref.org/works/<doi>",
+   "consultado_utc": "2026-09-14T04:59:15+00:00",
+   "script": "code/v3/fetch_refs_crossref.py"
+  }
+ },
+ "stanev2018": {
+  "doi": "10.1038/s41524-018-0085-8",
+  "title": "Machine learning modeling of superconducting critical temperature",
+  "authors": [
+   {
+    "family": "Stanev",
+    "given": "Valentin"
+   },
+   {
+    "family": "Oses",
+    "given": "Corey"
+   },
+   {
+    "family": "Kusne",
+    "given": "A. Gilad"
+   },
+   {
+    "family": "Rodriguez",
+    "given": "Efrain"
+   },
+   {
+    "family": "Paglione",
+    "given": "Johnpierre"
+   },
+   {
+    "family": "Curtarolo",
+    "given": "Stefano"
+   },
+   {
+    "family": "Takeuchi",
+    "given": "Ichiro"
+   }
+  ],
+  "journal": "npj Computational Materials",
+  "journal_abbrev": "npj Comput. Mater.",
+  "volume": "4",
+  "issue": "1",
+  "page": null,
+  "article_number": "29",
+  "year": 2018,
+  "publisher": "Springer Science and Business Media LLC",
+  "procedencia": {
+   "fuente": "api.crossref.org/works/<doi>",
+   "consultado_utc": "2026-09-14T04:59:15+00:00",
+   "script": "code/v3/fetch_refs_crossref.py"
+  }
+ },
+ "hamidieh2018": {
+  "doi": "10.1016/j.commatsci.2018.07.052",
+  "title": "A data-driven statistical model for predicting the critical temperature of a superconductor",
+  "authors": [
+   {
+    "family": "Hamidieh",
+    "given": "Kam"
+   }
+  ],
+  "journal": "Computational Materials Science",
+  "journal_abbrev": "Comput. Mater. Sci.",
+  "volume": "154",
+  "issue": null,
+  "page": "346-354",
+  "article_number": null,
+  "year": 2018,
+  "publisher": "Elsevier BV",
+  "procedencia": {
+   "fuente": "api.crossref.org/works/<doi>",
+   "consultado_utc": "2026-09-14T04:59:15+00:00",
+   "script": "code/v3/fetch_refs_crossref.py"
+  }
+ },
+ "xiong2020": {
+  "doi": "10.1016/j.commatsci.2019.109203",
+  "title": "Evaluating explorative prediction power of machine learning algorithms for materials discovery using $k$-fold forward cross-validation",
+  "authors": [
+   {
+    "family": "Xiong",
+    "given": "Zheng"
+   },
+   {
+    "family": "Cui",
+    "given": "Yuxin"
+   },
+   {
+    "family": "Liu",
+    "given": "Zhonghao"
+   },
+   {
+    "family": "Zhao",
+    "given": "Yong"
+   },
+   {
+    "family": "Hu",
+    "given": "Ming"
+   },
+   {
+    "family": "Hu",
+    "given": "Jianjun"
+   }
+  ],
+  "journal": "Computational Materials Science",
+  "journal_abbrev": "Comput. Mater. Sci.",
+  "volume": "171",
+  "issue": null,
+  "page": "109203",
+  "article_number": "109203",
+  "year": 2020,
+  "publisher": "Elsevier BV",
+  "procedencia": {
+   "fuente": "api.crossref.org/works/<doi>",
+   "consultado_utc": "2026-09-14T04:59:15+00:00",
+   "script": "code/v3/fetch_refs_crossref.py"
+  }
+ },
+ "sheridan2013": {
+  "doi": "10.1021/ci400084k",
+  "title": "Time-split cross-validation as a method for estimating the goodness of prospective prediction",
+  "authors": [
+   {
+    "family": "Sheridan",
+    "given": "Robert P."
+   }
+  ],
+  "journal": "Journal of Chemical Information and Modeling",
+  "journal_abbrev": "J. Chem. Inf. Model.",
+  "volume": "53",
+  "issue": "4",
+  "page": "783-790",
+  "article_number": null,
+  "year": 2013,
+  "publisher": "American Chemical Society (ACS)",
+  "procedencia": {
+   "fuente": "api.crossref.org/works/<doi>",
+   "consultado_utc": "2026-09-14T04:59:15+00:00",
+   "script": "code/v3/fetch_refs_crossref.py"
+  }
+ },
+ "roberts2017": {
+  "doi": "10.1111/ecog.02881",
+  "title": "Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure",
+  "authors": [
+   {
+    "family": "Roberts",
+    "given": "David R."
+   },
+   {
+    "family": "Bahn",
+    "given": "Volker"
+   },
+   {
+    "family": "Ciuti",
+    "given": "Simone"
+   },
+   {
+    "family": "Boyce",
+    "given": "Mark S."
+   },
+   {
+    "family": "Elith",
+    "given": "Jane"
+   },
+   {
+    "family": "Guillera‐Arroita",
+    "given": "Gurutzeta"
+   },
+   {
+    "family": "Hauenstein",
+    "given": "Severin"
+   },
+   {
+    "family": "Lahoz‐Monfort",
+    "given": "José J."
+   },
+   {
+    "family": "Schröder",
+    "given": "Boris"
+   },
+   {
+    "family": "Thuiller",
+    "given": "Wilfried"
+   },
+   {
+    "family": "Warton",
+    "given": "David I."
+   },
+   {
+    "family": "Wintle",
+    "given": "Brendan A."
+   },
+   {
+    "family": "Hartig",
+    "given": "Florian"
+   },
+   {
+    "family": "Dormann",
+    "given": "Carsten F."
+   }
+  ],
+  "journal": "Ecography",
+  "journal_abbrev": "Ecography",
+  "volume": "40",
+  "issue": "8",
+  "page": "913-929",
+  "article_number": null,
+  "year": 2017,
+  "publisher": "Wiley",
+  "procedencia": {
+   "fuente": "api.crossref.org/works/<doi>",
+   "consultado_utc": "2026-09-14T04:59:15+00:00",
+   "script": "code/v3/fetch_refs_crossref.py"
+  }
+ },
+ "gupta1993": {
+  "doi": "10.1016/0921-4534(93)91019-r",
+  "title": "A comparative study of the pressure-induced charge redistribution in YBa$_{2}$Cu$_{3}$O$_{7}$ and YBa$_{2}$Cu$_{4}$O$_{8}$",
+  "authors": [
+   {
+    "family": "Gupta",
+    "given": "Raju P."
+   },
+   {
+    "family": "Gupta",
+    "given": "Michèle"
+   }
+  ],
+  "journal": "Physica C: Superconductivity",
+  "journal_abbrev": "Physica C",
+  "volume": "204",
+  "issue": "3-4",
+  "page": "349-358",
+  "article_number": null,
+  "year": 1993,
+  "publisher": "Elsevier BV",
+  "procedencia": {
+   "fuente": "api.crossref.org/works/<doi>",
+   "consultado_utc": "2026-09-14T04:59:15+00:00",
+   "script": "code/v3/fetch_refs_crossref.py"
+  }
+ }
+}
