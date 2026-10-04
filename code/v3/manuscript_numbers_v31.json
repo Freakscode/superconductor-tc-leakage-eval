@@ -1,0 +1,1080 @@
+{
+ "_doc": "v3.1 additions (code/v3/apply_v31_edits.py); loaded by verify_manuscript.py with the main manifest",
+ "entries": [
+  {
+   "id": "v31_000_thr_A_min",
+   "anchor": "selection threshold $t_f$ ranges over \\SIrange{<<v>>}{90.1}{\\kelvi",
+   "source": "results_v3/v31_key.json",
+   "field": "thr_A_min",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_001_thr_A_max",
+   "anchor": "threshold $t_f$ ranges over \\SIrange{87.0}{<<v>>}{\\kelvin} (A)",
+   "source": "results_v3/v31_key.json",
+   "field": "thr_A_max",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_002_thr_B_min",
+   "anchor": "\\SIrange{87.0}{90.1}{\\kelvin} (A) and \\SIrange{<<v>>}{78.0}{\\kelvi",
+   "source": "results_v3/v31_key.json",
+   "field": "thr_B_min",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_003_thr_B_max",
+   "anchor": "\\SIrange{87.0}{90.1}{\\kelvin} (A) and \\SIrange{75.0}{<<v>>}{\\kelvin} (B)",
+   "source": "results_v3/v31_key.json",
+   "field": "thr_B_max",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_004_t2010_L0_aleatorio_MAE",
+   "anchor": "cross-validation on pre-2010 data estimates MAE \\SI{<<v>>}{\\kelvin} and",
+   "source": "results_v3/v31_key.json",
+   "field": "t2010_L0_aleatorio_MAE",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_005_t2010_temporal_real_MAE",
+   "anchor": "realised values on later compositions are \\SI{<<v>>}{\\kelvin} and",
+   "source": "results_v3/v31_key.json",
+   "field": "t2010_temporal_real_MAE",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_006_acq_A_N500_cap1_minus_capall_MAE_macro_mean",
+   "anchor": "record per system instead of whole systems lowers the per-system MAE by \\SI{<<v>>}{\\kelvin} (A)",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N500_cap1_minus_capall_MAE_macro_mean"
+    }
+   },
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_007_acq_B_N500_cap1_minus_capall_MAE_macro_mean",
+   "anchor": "per-system MAE by \\SI{2.9}{\\kelvin} (A) and \\SI{<<v>>}{\\kelvin} (B)",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N500_cap1_minus_capall_MAE_macro_mean"
+    }
+   },
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_008_const_500",
+   "anchor": "\\SI{2.9}{\\kelvin} (A) and \\SI{1.8}{\\kelvin} (B) at \\num{<<v>>} records, wit",
+   "const": 500.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_009_const_100",
+   "anchor": "\\num{500} records, without improving top-\\num{<<v>>} selection. R",
+   "const": 100.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_010_twin_A_random_pct",
+   "anchor": "When such a dataset is split at random, \\SI{<<v>>}{\\percent} of",
+   "source": "results_v3/v31_key.json",
+   "field": "twin_A_random_pct",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_011_twin_B_random_pct",
+   "anchor": "with an identical descriptor vector (\\SI{<<v>>}{\\percent} in",
+   "source": "results_v3/v31_key.json",
+   "field": "twin_B_random_pct",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_012_dlt01_A_random_pct",
+   "anchor": "(\\SI{4.9}{\\percent} in Dataset~B), and \\SI{<<v>>}{\\percent} an",
+   "source": "results_v3/v31_key.json",
+   "field": "dlt01_A_random_pct",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_013_dlt01_B_random_pct",
+   "anchor": "Dataset~B), and \\SI{57}{\\percent} and \\SI{<<v>>}{\\percent} ha",
+   "source": "results_v3/v31_key.json",
+   "field": "dlt01_B_random_pct",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_014_const_0.1",
+   "anchor": "and \\SI{43}{\\percent} have one within \\num{<<v>>} standardised",
+   "const": 0.1,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_015_evd_A_random_min",
+   "anchor": "splitting the MAE stays within \\SIrange{<<v>>}{5.7}{\\kelvin",
+   "source": "results_v3/v31_key.json",
+   "field": "evd_A_random_min",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_016_evd_A_random_max",
+   "anchor": "splitting the MAE stays within \\SIrange{4.5}{<<v>>}{\\kelvin} acr",
+   "source": "results_v3/v31_key.json",
+   "field": "evd_A_random_max",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_017_evd_B_random_min",
+   "anchor": "distance deciles on Dataset~A and \\SIrange{<<v>>}{4.9}{\\kelvin",
+   "source": "results_v3/v31_key.json",
+   "field": "evd_B_random_min",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_018_evd_B_random_max",
+   "anchor": "distance deciles on Dataset~A and \\SIrange{2.8}{<<v>>}{\\kelvin} on ",
+   "source": "results_v3/v31_key.json",
+   "field": "evd_B_random_max",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_019_evd_A_grouped_max",
+   "anchor": "Under grouped splitting it peaks at \\SI{<<v>>}{\\kelvin} (A)",
+   "source": "results_v3/v31_key.json",
+   "field": "evd_A_grouped_max",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_020_evd_B_grouped_max",
+   "anchor": "peaks at \\SI{10.5}{\\kelvin} (A) and \\SI{<<v>>}{\\kelvin} (B)",
+   "source": "results_v3/v31_key.json",
+   "field": "evd_B_grouped_max",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_021_evd_A_grouped_farthest",
+   "anchor": "intermediate distances and falls to \\SI{<<v>>}{\\kelvin} and",
+   "source": "results_v3/v31_key.json",
+   "field": "evd_A_grouped_farthest",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_022_evd_B_grouped_farthest",
+   "anchor": "distances and falls to \\SI{4.2}{\\kelvin} and \\SI{<<v>>}{\\kelvin} in ",
+   "source": "results_v3/v31_key.json",
+   "field": "evd_B_grouped_farthest",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_023_terc_meanTc_A_near",
+   "anchor": "the grouped test rows of Dataset~A is \\SI{<<v>>}{\\kelvin}, th",
+   "source": "results_v3/v31_key.json",
+   "field": "terc_meanTc_A_near",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_024_terc_meanTc_A_far",
+   "anchor": "\\SI{50.0}{\\kelvin}, that of the farthest third \\SI{<<v>>}{\\kelvin}. Am",
+   "source": "results_v3/v31_key.json",
+   "field": "terc_meanTc_A_far",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_025_evdtc_A_77_near",
+   "anchor": "error does grow with distance: from \\SI{<<v>>}{\\kelvin} to ",
+   "source": "results_v3/v31_key.json",
+   "field": "evdtc_A_77_near",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_026_evdtc_A_77_mid",
+   "anchor": "distance: from \\SI{9.4}{\\kelvin} to \\SI{<<v>>}{\\kelvin} to ",
+   "source": "results_v3/v31_key.json",
+   "field": "evdtc_A_77_mid",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_027_evdtc_A_77_far",
+   "anchor": "\\SI{9.4}{\\kelvin} to \\SI{17.1}{\\kelvin} to \\SI{<<v>>}{\\kelvin} acr",
+   "source": "results_v3/v31_key.json",
+   "field": "evdtc_A_77_far",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_028_evdtc_B_77_near",
+   "anchor": "across distance terciles on A, and from \\SI{<<v>>}{\\kelvin} to ",
+   "source": "results_v3/v31_key.json",
+   "field": "evdtc_B_77_near",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_029_evdtc_B_77_mid",
+   "anchor": "on A, and from \\SI{13.2}{\\kelvin} to \\SI{<<v>>}{\\kelvin} to ",
+   "source": "results_v3/v31_key.json",
+   "field": "evdtc_B_77_mid",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_030_evdtc_B_77_far",
+   "anchor": "\\SI{13.2}{\\kelvin} to \\SI{17.2}{\\kelvin} to \\SI{<<v>>}{\\kelvin} on ",
+   "source": "results_v3/v31_key.json",
+   "field": "evdtc_B_77_far",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_031_bd_A_Tc_range_lt10",
+   "anchor": "$\\Tc$ range the grouped MAE rises from \\SI{<<v>>}{\\kelvin} bel",
+   "source": "results_v3/v31_key.json",
+   "field": "bd_A_Tc_range_lt10",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_032_bd_A_Tc_range_ge77",
+   "anchor": "from \\SI{3.6}{\\kelvin} below 10~K to \\SI{<<v>>}{\\kelvin} at ",
+   "source": "results_v3/v31_key.json",
+   "field": "bd_A_Tc_range_ge77",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_033_bd_B_Tc_range_lt10",
+   "anchor": "\\SI{13.5}{\\kelvin} at 77~K and above on A (\\SI{<<v>>}{\\kelvin} to ",
+   "source": "results_v3/v31_key.json",
+   "field": "bd_B_Tc_range_lt10",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_034_bd_B_Tc_range_ge77",
+   "anchor": "and above on A (\\SI{2.4}{\\kelvin} to \\SI{<<v>>}{\\kelvin} on ",
+   "source": "results_v3/v31_key.json",
+   "field": "bd_B_Tc_range_ge77",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_035_bd_A_system_size_1",
+   "anchor": "\\SI{14.7}{\\kelvin} on B), and by system size from \\SI{<<v>>}{\\kelvin} for",
+   "source": "results_v3/v31_key.json",
+   "field": "bd_A_system_size_1",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_036_bd_A_system_size_gt100",
+   "anchor": "\\SI{6.5}{\\kelvin} for single-row systems to \\SI{<<v>>}{\\kelvin} for",
+   "source": "results_v3/v31_key.json",
+   "field": "bd_A_system_size_gt100",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_037_bd_B_system_size_1",
+   "anchor": "systems of more than one hundred rows (\\SI{<<v>>}{\\kelvin} to ",
+   "source": "results_v3/v31_key.json",
+   "field": "bd_B_system_size_1",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_038_bd_B_system_size_gt100",
+   "anchor": "one hundred rows (\\SI{4.0}{\\kelvin} to \\SI{<<v>>}{\\kelvin} on ",
+   "source": "results_v3/v31_key.json",
+   "field": "bd_B_system_size_gt100",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_039_wrho_A_grouped_median",
+   "anchor": "between predicted and recorded $\\Tc$ is \\num{<<v>>} on A and \\nu",
+   "source": "results_v3/v31_key.json",
+   "field": "wrho_A_grouped_median",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_040_wrho_B_grouped_median",
+   "anchor": "recorded $\\Tc$ is \\num{0.39} on A and \\num{<<v>>} on B under g",
+   "source": "results_v3/v31_key.json",
+   "field": "wrho_B_grouped_median",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_041_wrho_A_random_median",
+   "anchor": "B under grouped splitting, against \\num{<<v>>} and \\num{0.6",
+   "source": "results_v3/v31_key.json",
+   "field": "wrho_A_random_median",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_042_wrho_B_random_median",
+   "anchor": "grouped splitting, against \\num{0.39} and \\num{<<v>>} under random",
+   "source": "results_v3/v31_key.json",
+   "field": "wrho_B_random_median",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_043_wrho_A_grouped_fracpos_pct",
+   "anchor": "random splitting, and it is positive in \\SI{<<v>>}{\\percent} an",
+   "source": "results_v3/v31_key.json",
+   "field": "wrho_A_grouped_fracpos_pct",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_044_wrho_B_grouped_fracpos_pct",
+   "anchor": "is positive in \\SI{70}{\\percent} and \\SI{<<v>>}{\\percent} of",
+   "source": "results_v3/v31_key.json",
+   "field": "wrho_B_grouped_fracpos_pct",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_045_lab_rows_differ_gapped_recoded",
+   "anchor": "the same order give identical folds (\\num{<<v>>} rows differ)",
+   "source": "results_v3/v31_key.json",
+   "field": "lab_rows_differ_gapped_recoded",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_046_lab_rows_differ_gapped_first",
+   "anchor": "yields the published labels, reassigns \\num{<<v>>} rows. The pa",
+   "source": "results_v3/v31_key.json",
+   "field": "lab_rows_differ_gapped_first",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_047_dating_est_dMAE_L3_anfitrion_2010",
+   "anchor": "$\\Rsq$ and the host-grouped estimate by \\SI{<<v>>}{\\kelvin} in ",
+   "source": "results_v3/v31_key.json",
+   "field": "dating_est_dMAE_L3_anfitrion_2010",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_048_dating_dMAE_1995",
+   "anchor": "those rows changes the realised MAE by \\SI{<<v>>}{\\kelvin}, \\S",
+   "source": "results_v3/v31_key.json",
+   "field": "dating_dMAE_1995",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_049_dating_dMAE_2005",
+   "anchor": "realised MAE by \\SI{-0.14}{\\kelvin}, \\SI{+<<v>>}{\\kelvin}, \\S",
+   "source": "results_v3/v31_key.json",
+   "field": "dating_dMAE_2005",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_050_dating_dMAE_2010",
+   "anchor": "\\SI{-0.14}{\\kelvin}, \\SI{+0.54}{\\kelvin}, \\SI{+<<v>>}{\\kelvin} and",
+   "source": "results_v3/v31_key.json",
+   "field": "dating_dMAE_2010",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_051_dating_dMAE_2015",
+   "anchor": "\\SI{+0.54}{\\kelvin}, \\SI{+1.70}{\\kelvin} and \\SI{+<<v>>}{\\kelvin} and",
+   "source": "results_v3/v31_key.json",
+   "field": "dating_dMAE_2015",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_052_dating_dR2_1995",
+   "anchor": "\\SI{+0.18}{\\kelvin} and the realised $\\Rsq$ by \\num{+<<v>>}, \\num{-0.18}",
+   "source": "results_v3/v31_key.json",
+   "field": "dating_dR2_1995",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_053_dating_dR2_2005",
+   "anchor": "the realised $\\Rsq$ by \\num{+0.00}, \\num{<<v>>}, \\num{-0.53}",
+   "source": "results_v3/v31_key.json",
+   "field": "dating_dR2_2005",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_054_dating_dR2_2010",
+   "anchor": "$\\Rsq$ by \\num{+0.00}, \\num{-0.18}, \\num{<<v>>} and \\num{-0.",
+   "source": "results_v3/v31_key.json",
+   "field": "dating_dR2_2010",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_055_dating_dR2_2015",
+   "anchor": "\\num{+0.00}, \\num{-0.18}, \\num{-0.53} and \\num{<<v>>} at the 1995,",
+   "source": "results_v3/v31_key.json",
+   "field": "dating_dR2_2015",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_056_const_20",
+   "anchor": "chemistries should measure. We hold out \\SI{<<v>>}{\\percent} of",
+   "const": 20.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_057_acq_A_n_test_systems",
+   "anchor": "(three independent draws; Dataset~A: \\num{<<v>>} systems and ",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_n_test_systems",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_058_acq_A_n_test_rows_by_draw_min",
+   "anchor": "Dataset~A: \\num{673} systems and \\numrange{<<v>>}{4753} rows; ",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_n_test_rows_by_draw_min",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_059_acq_A_n_test_rows_by_draw_max",
+   "anchor": "Dataset~A: \\num{673} systems and \\numrange{3872}{<<v>>} rows; Datase",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_n_test_rows_by_draw_max",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_060_acq_B_n_test_systems",
+   "anchor": "\\numrange{3872}{4753} rows; Dataset~B: \\num{<<v>>} systems and ",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_B_n_test_systems",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_061_acq_B_n_test_rows_by_draw_min",
+   "anchor": "Dataset~B: \\num{609} systems and \\numrange{<<v>>}{2699} rows).",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_B_n_test_rows_by_draw_min",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_062_acq_B_n_test_rows_by_draw_max",
+   "anchor": "Dataset~B: \\num{609} systems and \\numrange{2321}{<<v>>} rows). From ",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_B_n_test_rows_by_draw_max",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_063_const_500",
+   "anchor": "remaining systems we draw training sets of \\num{<<v>>}, \\num{1000} ",
+   "const": 500.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_064_const_1000",
+   "anchor": "we draw training sets of \\num{500}, \\num{<<v>>} and \\num{200",
+   "const": 1000.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_065_const_2000",
+   "anchor": "training sets of \\num{500}, \\num{1000} and \\num{<<v>>} records unde",
+   "const": 2000.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_066_acq_A_N500_cap1_minus_capall_MAE_macro_mean",
+   "anchor": "systems lowers the per-system MAE by \\SI{<<v>>}{\\kelvin} \\ci",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N500_cap1_minus_capall_MAE_macro_mean"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_067_acq_A_N500_cap1_minus_capall_MAE_macro_hi",
+   "anchor": "per-system MAE by \\SI{2.86}{\\kelvin} \\ci{<<v>>}{4.92} at \\nu",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N500_cap1_minus_capall_MAE_macro_hi"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_068_acq_A_N500_cap1_minus_capall_MAE_macro_lo",
+   "anchor": "per-system MAE by \\SI{2.86}{\\kelvin} \\ci{1.40}{<<v>>} at \\num{500}",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N500_cap1_minus_capall_MAE_macro_lo"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_069_const_500",
+   "anchor": "\\SI{2.86}{\\kelvin} \\ci{1.40}{4.92} at \\num{<<v>>} records and ",
+   "const": 500.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_070_acq_A_N2000_cap1_minus_capall_MAE_macro_mean",
+   "anchor": "\\ci{1.40}{4.92} at \\num{500} records and by \\SI{<<v>>}{\\kelvin} \\ci",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N2000_cap1_minus_capall_MAE_macro_mean"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_071_acq_A_N2000_cap1_minus_capall_MAE_macro_hi",
+   "anchor": "\\num{500} records and by \\SI{2.35}{\\kelvin} \\ci{<<v>>}{3.28} at \\nu",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N2000_cap1_minus_capall_MAE_macro_hi"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_072_acq_A_N2000_cap1_minus_capall_MAE_macro_lo",
+   "anchor": "records and by \\SI{2.35}{\\kelvin} \\ci{1.53}{<<v>>} at \\num{2000",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N2000_cap1_minus_capall_MAE_macro_lo"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_073_const_2000",
+   "anchor": "\\SI{2.35}{\\kelvin} \\ci{1.53}{3.28} at \\num{<<v>>} on Dataset~A",
+   "const": 2000.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_074_acq_B_N500_cap1_minus_capall_MAE_macro_mean",
+   "anchor": "\\ci{1.53}{3.28} at \\num{2000} on Dataset~A, and by \\SI{<<v>>}{\\kelvin} \\ci",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N500_cap1_minus_capall_MAE_macro_mean"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_075_acq_B_N500_cap1_minus_capall_MAE_macro_hi",
+   "anchor": "Dataset~A, and by \\SI{1.79}{\\kelvin} \\ci{<<v>>}{3.32} and \\S",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N500_cap1_minus_capall_MAE_macro_hi"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_076_acq_B_N500_cap1_minus_capall_MAE_macro_lo",
+   "anchor": "Dataset~A, and by \\SI{1.79}{\\kelvin} \\ci{0.69}{<<v>>} and \\SI{1.50",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N500_cap1_minus_capall_MAE_macro_lo"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_077_acq_B_N2000_cap1_minus_capall_MAE_macro_mean",
+   "anchor": "\\SI{1.79}{\\kelvin} \\ci{0.69}{3.32} and \\SI{<<v>>}{\\kelvin} \\ci",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N2000_cap1_minus_capall_MAE_macro_mean"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_078_acq_B_N2000_cap1_minus_capall_MAE_macro_hi",
+   "anchor": "\\ci{0.69}{3.32} and \\SI{1.50}{\\kelvin} \\ci{<<v>>}{2.28} on Dat",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N2000_cap1_minus_capall_MAE_macro_hi"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_079_acq_B_N2000_cap1_minus_capall_MAE_macro_lo",
+   "anchor": "\\ci{0.69}{3.32} and \\SI{1.50}{\\kelvin} \\ci{1.06}{<<v>>} on Dataset~B",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N2000_cap1_minus_capall_MAE_macro_lo"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_080_acq_A_N500_cap1_minus_capall_MAE_mean",
+   "anchor": "on Dataset~B; the pooled MAE falls by \\SI{<<v>>}{\\kelvin} and",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N500_cap1_minus_capall_MAE_mean"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_081_acq_A_N2000_cap1_minus_capall_MAE_mean",
+   "anchor": "MAE falls by \\SI{2.89}{\\kelvin} and \\SI{<<v>>}{\\kelvin} (A)",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N2000_cap1_minus_capall_MAE_mean"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_082_acq_B_N500_cap1_minus_capall_MAE_mean",
+   "anchor": "\\SI{2.89}{\\kelvin} and \\SI{1.98}{\\kelvin} (A) and by \\SI{<<v>>}{\\kelvin} and",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N500_cap1_minus_capall_MAE_mean"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_083_acq_B_N2000_cap1_minus_capall_MAE_mean",
+   "anchor": "\\SI{1.98}{\\kelvin} (A) and by \\SI{1.82}{\\kelvin} and \\SI{<<v>>}{\\kelvin} (B)",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N2000_cap1_minus_capall_MAE_mean"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_084_acq_A_MAE_macro_per_doubling_systems_K",
+   "anchor": "each doubling of the number of systems lowers the per-system MAE by \\SI{<<v>>}{\\kelvin} (A)",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_MAE_macro_per_doubling_systems_K"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_085_acq_B_MAE_macro_per_doubling_systems_K",
+   "anchor": "per-system MAE by \\SI{1.12}{\\kelvin} (A) and \\SI{<<v>>}{\\kelvin} (B)",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_MAE_macro_per_doubling_systems_K"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_086_acq_A_MAE_macro_per_doubling_rows_per_system_K",
+   "anchor": "doubling of the records per system by \\SI{<<v>>}{\\kelvin} and",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_MAE_macro_per_doubling_rows_per_system_K"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_087_acq_B_MAE_macro_per_doubling_rows_per_system_K",
+   "anchor": "per system by \\SI{0.10}{\\kelvin} and \\SI{<<v>>}{\\kelvin}. In",
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_MAE_macro_per_doubling_rows_per_system_K"
+    }
+   },
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_088_const_500",
+   "anchor": "\\SI{0.07}{\\kelvin}. In budget terms, \\num{<<v>>} records spre",
+   "const": 500.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_089_const_2000",
+   "anchor": "spread one per system do as well as \\num{<<v>>} records in w",
+   "const": 2000.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_090_acq_A_cap1_N500_minus_capall_N2000_MAE_macro_mean",
+   "anchor": "records in whole systems (difference \\SI{<<v>>}{\\kelvin} \\ci",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_cap1_N500_minus_capall_N2000_MAE_macro_mean",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_091_acq_A_cap1_N500_minus_capall_N2000_MAE_macro_lo",
+   "anchor": "systems (difference \\SI{-0.47}{\\kelvin} \\ci{<<v>>}{0.46} on A a",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_cap1_N500_minus_capall_N2000_MAE_macro_lo",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_092_acq_A_cap1_N500_minus_capall_N2000_MAE_macro_hi",
+   "anchor": "(difference \\SI{-0.47}{\\kelvin} \\ci{-1.33}{<<v>>} on A and \\SI",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_cap1_N500_minus_capall_N2000_MAE_macro_hi",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_093_acq_B_cap1_N500_minus_capall_N2000_MAE_macro_mean",
+   "anchor": "\\SI{-0.47}{\\kelvin} \\ci{-1.33}{0.46} on A and \\SI{+<<v>>}{\\kelvin} \\ci",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_B_cap1_N500_minus_capall_N2000_MAE_macro_mean",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_094_acq_B_cap1_N500_minus_capall_N2000_MAE_macro_lo",
+   "anchor": "\\ci{-1.33}{0.46} on A and \\SI{+0.11}{\\kelvin} \\ci{<<v>>}{0.58} on B).",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_B_cap1_N500_minus_capall_N2000_MAE_macro_lo",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_095_acq_B_cap1_N500_minus_capall_N2000_MAE_macro_hi",
+   "anchor": "on A and \\SI{+0.11}{\\kelvin} \\ci{-0.41}{<<v>>} on B). Recor",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_B_cap1_N500_minus_capall_N2000_MAE_macro_hi",
+   "fmt": ".2f"
+  },
+  {
+   "id": "v31_096_acq_A_prev77_pct",
+   "anchor": "fixed threshold of 77~K, reached by \\SI{<<v>>}{\\percent} (A",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_prev77_pct",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_097_acq_B_prev77_pct",
+   "anchor": "reached by \\SI{17.3}{\\percent} (A) and \\SI{<<v>>}{\\percent} (B",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_B_prev77_pct",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_098_const_100",
+   "anchor": "(B) of the external test rows, top-\\num{<<v>>} precision do",
+   "const": 100.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_099_acq_A_N500_cap1_minus_capall_P_at_100_77K_mean",
+   "anchor": "system against whole systems gives \\num{+<<v>>} points \\ci{-",
+   "expr": "v*100.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N500_cap1_minus_capall_P_at_100_77K_mean"
+    }
+   },
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_100_acq_A_N500_cap1_minus_capall_P_at_100_77K_lo",
+   "anchor": "whole systems gives \\num{+13.9} points \\ci{<<v>>}{43.1} at \\nu",
+   "expr": "v*100.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N500_cap1_minus_capall_P_at_100_77K_lo"
+    }
+   },
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_101_acq_A_N500_cap1_minus_capall_P_at_100_77K_hi",
+   "anchor": "systems gives \\num{+13.9} points \\ci{-23.5}{<<v>>} at \\num{500}",
+   "expr": "v*100.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N500_cap1_minus_capall_P_at_100_77K_hi"
+    }
+   },
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_102_const_500",
+   "anchor": "\\num{+13.9} points \\ci{-23.5}{43.1} at \\num{<<v>>} records on A",
+   "const": 500.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_103_acq_B_N2000_cap1_minus_capall_P_at_100_77K_mean",
+   "anchor": "\\ci{-23.5}{43.1} at \\num{500} records on A and \\num{+<<v>>} points \\ci{-",
+   "expr": "v*100.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N2000_cap1_minus_capall_P_at_100_77K_mean"
+    }
+   },
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_104_acq_B_N2000_cap1_minus_capall_P_at_100_77K_lo",
+   "anchor": "\\num{500} records on A and \\num{+0.6} points \\ci{<<v>>}{10.0} at \\nu",
+   "expr": "v*100.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N2000_cap1_minus_capall_P_at_100_77K_lo"
+    }
+   },
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_105_acq_B_N2000_cap1_minus_capall_P_at_100_77K_hi",
+   "anchor": "records on A and \\num{+0.6} points \\ci{-17.3}{<<v>>} at \\num{2000",
+   "expr": "v*100.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N2000_cap1_minus_capall_P_at_100_77K_hi"
+    }
+   },
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_106_const_2000",
+   "anchor": "\\num{+0.6} points \\ci{-17.3}{10.0} at \\num{<<v>>} on B, and ev",
+   "const": 2000.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_107_acq_A_random_rows_N2000_P77",
+   "anchor": "records give the highest precision (\\SI{<<v>>}{\\percent} on",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_random_rows_N2000_P77",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_108_acq_B_random_rows_N2000_P77",
+   "anchor": "precision (\\SI{87.2}{\\percent} on A and \\SI{<<v>>}{\\percent} on",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_B_random_rows_N2000_P77",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_109_const_2000",
+   "anchor": "on A and \\SI{81.5}{\\percent} on B at \\num{<<v>>} records) bec",
+   "const": 2000.0,
+   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
+   "fmt": ".0f"
+  },
+  {
+   "id": "v31_110_acq_A_random_rows_N500_meanTc",
+   "anchor": "systems: their mean training $\\Tc$ is \\SI{<<v>>}{\\kelvin} on ",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_random_rows_N500_meanTc",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_111_acq_A_cap1_N500_meanTc",
+   "anchor": "$\\Tc$ is \\SI{34.8}{\\kelvin} on A against \\SI{<<v>>}{\\kelvin} for",
+   "source": "results_v3/v31_key.json",
+   "field": "acq_A_cap1_N500_meanTc",
+   "fmt": ".1f"
+  },
+  {
+   "id": "v31_flow_0_2",
+   "table": "tab:flow",
+   "row": "Dataset A as distributed by UCI",
+   "col": 2,
+   "part": 0,
+   "source": "results_v3/family_concentration_v3.csv",
+   "key": {
+    "dataset": "A"
+   },
+   "field": "N",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry abs_N_A"
+  },
+  {
+   "id": "v31_flow_0_3",
+   "table": "tab:flow",
+   "row": "Dataset A as distributed by UCI",
+   "col": 3,
+   "part": 0,
+   "source": "results_v3/family_concentration_v3.csv",
+   "key": {
+    "dataset": "A"
+   },
+   "field": "k_familias",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry abs_k_A"
+  },
+  {
+   "id": "v31_flow_1_2",
+   "table": "tab:flow",
+   "row": "Dataset B: Stanev list of SuperCon entries",
+   "col": 2,
+   "part": 0,
+   "source": "results_v3/semantic_audit_B_decisions.json",
+   "field": "meta.n_source",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry data_B_source"
+  },
+  {
+   "id": "v31_flow_2_2",
+   "table": "tab:flow",
+   "row": "B: formula not parseable",
+   "col": 2,
+   "part": 0,
+   "source": "results_v2/fix_factorize_verificacion.json",
+   "field": "n_parse_failures_pymatgen",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry data_parse_fail"
+  },
+  {
+   "id": "v31_flow_3_2",
+   "table": "tab:flow",
+   "row": "B: recorded Tc of zero or below",
+   "col": 2,
+   "part": 0,
+   "expr": "a - b - c",
+   "vars": {
+    "a": {
+     "source": "results_v3/semantic_audit_B_decisions.json",
+     "field": "meta.n_source"
+    },
+    "b": {
+     "source": "results_v3/semantic_audit_B_decisions.json",
+     "field": "meta.n_parsed_Tc_gt0"
+    },
+    "c": {
+     "source": "results_v2/fix_factorize_verificacion.json",
+     "field": "n_parse_failures_pymatgen"
+    }
+   },
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry data_B_tcle0"
+  },
+  {
+   "id": "v31_flow_4_2",
+   "table": "tab:flow",
+   "row": "B: retained before the audit",
+   "col": 2,
+   "part": 0,
+   "source": "results_v3/regeneracion_B_v3.json",
+   "field": "N_v2",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry data_B_v2N"
+  },
+  {
+   "id": "v31_flow_5_2",
+   "table": "tab:flow",
+   "row": "B: excluded by the semantic audit",
+   "col": 2,
+   "part": 0,
+   "source": "results_v3/regeneracion_B_v3.json",
+   "field": "filas_excluidas",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry data_excl"
+  },
+  {
+   "id": "v31_flow_6_2",
+   "table": "tab:flow",
+   "row": "Dataset B, audited checkpoint",
+   "col": 2,
+   "part": 0,
+   "source": "results_v3/regeneracion_B_v3.json",
+   "field": "N_v3",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry abs_N_B"
+  },
+  {
+   "id": "v31_flow_6_3",
+   "table": "tab:flow",
+   "row": "Dataset B, audited checkpoint",
+   "col": 3,
+   "part": 0,
+   "source": "results_v3/regeneracion_B_v3.json",
+   "field": "familias_v3",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry abs_k_B"
+  },
+  {
+   "id": "v31_flow_7_2",
+   "table": "tab:flow",
+   "row": "Temporal corpus: primary SuperCon reports",
+   "col": 2,
+   "part": 0,
+   "source": "results_v3/temporal_provenance.json",
+   "field": "n_raw",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry tc_raw"
+  },
+  {
+   "id": "v31_flow_8_2",
+   "table": "tab:flow",
+   "row": "Temporal: dated reports retained",
+   "col": 2,
+   "part": 0,
+   "source": "results_v3/temporal_provenance.json",
+   "field": "n_reports_kept_with_year",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry tc_reports"
+  },
+  {
+   "id": "v31_flow_9_2",
+   "table": "tab:flow",
+   "row": "Temporal: compositions, one row each",
+   "col": 2,
+   "part": 0,
+   "source": "results_v3/temporal_provenance.json",
+   "field": "procedencia.n_composiciones",
+   "fmt": ".0f",
+   "note": "value specification copied from main-manifest entry abs_ncomp"
+  }
+ ]
+}

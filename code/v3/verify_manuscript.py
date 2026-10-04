@@ -326,7 +326,12 @@ def verify(tex_path: Path, manifest_path: Path):
     ptoks = prose_tokens(text, prose, nearest)
     norm, idx = normalise(prose)
     manifest = json.load(open(manifest_path))
-    entries = manifest["entries"]
+    entries = list(manifest["entries"])
+    # additions written by later amendment scripts (e.g. manuscript_numbers_v31.json) sit next to
+    # the main manifest and are always checked together with it
+    # (only *_v3<digit>.json: manuscript_numbers_v5.json is the archived manifest of the v5 text)
+    for extra in sorted(Path(manifest_path).parent.glob(Path(manifest_path).stem + "_v3[0-9].json")):
+        entries += json.load(open(extra))["entries"]
     results, claimed_cells, claimed_prose = [], set(), set()
     tbl = {t["label"]: t for t in tables}
 

@@ -1,0 +1,83 @@
+{
+ "A_random_frac_exact_twin": 0.3700324507360203,
+ "A_random_frac_d_lt_0.01": 0.40079010487701644,
+ "A_random_frac_d_lt_0.05": 0.48930066312373605,
+ "A_random_frac_d_lt_0.1": 0.5685463010863943,
+ "A_random_frac_d_lt_0.25": 0.7129755914029065,
+ "A_random_median_dist": 0.05747165456360809,
+ "A_grouped_frac_exact_twin": 0.0,
+ "A_grouped_frac_d_lt_0.01": 0.0,
+ "A_grouped_frac_d_lt_0.05": 0.0,
+ "A_grouped_frac_d_lt_0.1": 0.00028218031322014767,
+ "A_grouped_frac_d_lt_0.25": 0.036495320509805765,
+ "A_grouped_median_dist": 1.453584296450646,
+ "B_random_frac_exact_twin": 0.04904345006485084,
+ "B_random_frac_d_lt_0.01": 0.13529507133592736,
+ "B_random_frac_d_lt_0.05": 0.30496108949416345,
+ "B_random_frac_d_lt_0.1": 0.43117704280155644,
+ "B_random_frac_d_lt_0.25": 0.5971952010376135,
+ "B_random_median_dist": 0.14411630164851294,
+ "B_grouped_frac_exact_twin": 0.0,
+ "B_grouped_frac_d_lt_0.01": 0.0004053177691309987,
+ "B_grouped_frac_d_lt_0.05": 0.013861867704280155,
+ "B_grouped_frac_d_lt_0.1": 0.03826199740596628,
+ "B_grouped_frac_d_lt_0.25": 0.13359273670557717,
+ "B_grouped_median_dist": 1.5162434198997234,
+ "c19_labelling": {
+  "n_rows": 12336,
+  "n_systems": 3046,
+  "gapped_max_label": 4189,
+  "recoded_max_label": 3045,
+  "same_partition_gapped_vs_recoded": true,
+  "rows_differ_gapped_vs_recoded": 0,
+  "rows_differ_gapped_vs_first_appearance": 8505,
+  "first_appearance_equals_published": true,
+  "order_of_labels_same_gapped_vs_first_appearance": false
+ },
+ "c8_within_system": [
+  {
+   "dataset": "A",
+   "protocol": "grouped",
+   "n_systems": 986,
+   "median_rho": 0.3907953609325267,
+   "rows_weighted_rho": 0.37754229964163966,
+   "frac_rho_gt0": 0.7018255578093306
+  },
+  {
+   "dataset": "A",
+   "protocol": "random",
+   "n_systems": 1050,
+   "median_rho": 0.39398688179124275,
+   "rows_weighted_rho": 0.45260818304125794,
+   "frac_rho_gt0": 0.7228571428571429
+  },
+  {
+   "dataset": "B",
+   "protocol": "grouped",
+   "n_systems": 706,
+   "median_rho": 0.5609116964028545,
+   "rows_weighted_rho": 0.43869002915406063,
+   "frac_rho_gt0": 0.7889518413597734
+  },
+  {
+   "dataset": "B",
+   "protocol": "random",
+   "n_systems": 707,
+   "median_rho": 0.6,
+   "rows_weighted_rho": 0.5469959018655651,
+   "frac_rho_gt0": 0.8161244695898161
+  }
+ ],
+ "procedencia": {
+  "script": "code/v3/tutor_analyses.py",
+  "oof": "results_v3/oof_v3.csv.gz XGBoost seed 42",
+  "scaler": "StandardScaler fitted on each fold's training rows",
+  "seconds": 16.1,
+  "versions": {
+   "numpy": "2.3.3",
+   "pandas": "2.3.2",
+   "sklearn": "1.7.2",
+   "scipy": "1.16.2"
+  }
+ }
+}

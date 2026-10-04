@@ -30,7 +30,7 @@
 \newcommand{\etal}{\textit{et al}}
 \newcommand{\ICC}{\mathrm{ICC}}
 \newcommand{\Neff}{N_{\mathrm{eff}}}
-\newcommand{\ci}[2]{[#1, #2]}
+\newcommand{\ci}[2]{[\num{#1}, \num{#2}]}
 
 % The class prints "Journal Name", a Crossmark box and "dd Month yyyy" placeholders in \articletype;
 % the publisher fills them at production. Suppress the placeholders in the submission PDF.
@@ -76,12 +76,10 @@ and on held-out systems the descriptors alone do not beat presence plus fraction
 composition, element system, host elements and composition clusters defines different target
 populations that are not nested. Retrospective top-\num{100} precision among corpus materials whose
 systems were held out stays at \SI{87.0}{\percent} and \SI{82.4}{\percent} (\SI{78.2}{\percent}
-once measured non-superconductors are admitted to the candidate pool) against fold prevalences of
+once entries recorded as non-superconducting are admitted to the candidate pool) against fold prevalences of
 \SIrange{3.6}{18.2}{\percent}. Finally, on a corpus of \num{12543} compositions dated by first
-report, no retrospective protocol reproduces forward-in-time performance: random cross-validation on
-pre-2010 data estimates $\Rsq = \num{0.91}$ where the realised value on later compositions is
-\num{0.33}; grouped protocols are closer and leave-clusters-out is closest in $\Rsq$, but none is
-within \num{0.1} at more than one cut. Row-level partitions, the audited checkpoint and a per-claim
+report, no cross-validation protocol reproduces the performance realised on a retrospective temporal split: random cross-validation on pre-2010 data estimates MAE \SI{4.34}{\kelvin} and $\Rsq = \num{0.91}$ where the realised values on later compositions are \SI{7.43}{\kelvin} and \num{0.33}; grouped protocols are closer and leave-clusters-out is closest in $\Rsq$, but none is
+within \num{0.1} at more than one cut. At a fixed budget of training records, spreading them over more element systems lowers the error on unseen systems: one record per system instead of whole systems lowers the per-system MAE by \SI{2.9}{\kelvin} (A) and \SI{1.8}{\kelvin} (B) at \num{500} records, without improving top-\num{100} selection. Row-level partitions, the audited checkpoint and a per-claim
 verifier are released.
 \end{abstract}
 
@@ -100,9 +98,7 @@ hydride families~\cite{sanna2024,wrona2024}.
 They are obtained in a way that does not resemble the search. The datasets derive from SuperCon and
 are assembled from \emph{doping series}: materials that share a constituent-element set and differ
 in stoichiometry. A YBa$_2$Cu$_3$O$_{7-\delta}$ series contributes dozens of entries whose
-compositions differ in the oxygen content and whose $\Tc$ values differ by a few kelvin. When such
-a dataset is split at random, near-identical variants of every test row sit in the training set,
-and the metric measures interpolation within a series the model has already seen.
+compositions differ in the oxygen content and whose $\Tc$ values differ by a few kelvin. When such a dataset is split at random, \SI{37.0}{\percent} of the Dataset~A test rows have a training row with an identical descriptor vector (\SI{4.9}{\percent} in Dataset~B), and \SI{57}{\percent} and \SI{43}{\percent} have one within \num{0.1} standardised units (section~\ref{sec:results-gap}); the metric then largely measures interpolation within series the model has already seen. That is the right measure when the target is a new member of a known system, and the wrong one when the target is a new system.
 
 That extrapolative validation is harder than interpolative validation is established. Meredig
 \etal~\cite{meredig2018} showed with leave-one-cluster-out cross-validation that extrapolative
@@ -137,10 +133,11 @@ Our contributions are:
       effective-sample-size statement---together with an audit of the chemical unit of evaluation
       (formula parsing, duplication, cross-dataset overlap; sections~\ref{sec:audit}
       and~\ref{sec:overlap}).
-\item A forward-in-time test on SuperCon dated by first report, which scores each retrospective
+\item A retrospective temporal test on SuperCon dated by first report, which scores each retrospective
       protocol against the performance actually realised on later compositions
       (section~\ref{sec:temporal}), plus row-level partitions and a per-claim verifier so that the
       corrected protocols and every number in the paper can be regenerated with one command.
+\item A fixed-budget acquisition experiment showing that, for transfer to unseen element systems, the number of distinct systems in the training set matters more than the number of records per system (section~\ref{sec:acquisition}).
 \end{enumerate}
 
 \section{Data and methods}
@@ -167,6 +164,31 @@ this paper). The semantic audit of section~\ref{sec:audit} excludes \num{104} of
 systems, featurized with the \num{132} Magpie descriptors~\cite{ward2016} of
 \texttt{matminer}~\cite{ward2018}.
 
+Table~\ref{tab:flow} gives the number of rows at each filtering step. None of the files used here records the criterion behind a $\Tc$ (resistive onset, zero resistance or magnetic transition) or the measurement conditions, so the target throughout is the $\Tc$ recorded in the database. Reports of one composition under different criteria enter Dataset~B as separate rows; in the temporal corpus they are collapsed to the median $\Tc$ of the reports, with the maximum as a sensitivity check (section~\ref{sec:temporal}).
+
+\begin{table}[t]
+\caption{\label{tab:flow}Row counts at each filtering step. Systems are element systems (identical constituent-element sets). The temporal corpus collapses the dated reports of one composition into a single row (section~\ref{sec:temporal-data}).}
+\centering\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Step & Rows & Systems \\
+\midrule
+Dataset A as distributed by UCI & \num{21263} & \num{3365} \\
+\midrule
+Dataset B: Stanev list of SuperCon entries & \num{16414} & {---} \\
+B: formula not parseable & \num{8} & {---} \\
+B: recorded Tc of zero or below & \num{3966} & {---} \\
+B: retained before the audit & \num{12440} & {---} \\
+B: excluded by the semantic audit & \num{104} & {---} \\
+Dataset B, audited checkpoint & \num{12336} & \num{3046} \\
+\midrule
+Temporal corpus: primary SuperCon reports & \num{26321} & {---} \\
+Temporal: dated reports retained & \num{20771} & {---} \\
+Temporal: compositions, one row each & \num{12543} & {---} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Semantic audit of the corpus}
 \label{sec:audit}
 
@@ -185,8 +207,7 @@ fulleride and clathrate coefficients, site-notation repeated elements and the \n
 duplicate another normalised composition are kept and flagged. No retained row changes system;
 \num{17} systems disappear, \num{12} of which existed only through \texttt{OY} rows. Because
 \texttt{GroupKFold} breaks ties by label order, the deterministic grouped partition nevertheless
-changes for \num{9453} of the \num{12336} retained rows, so a comparison of results between the two
-checkpoints includes partition noise; the comparison is reported in
+changes for \num{9453} of the \num{12336} retained rows, so a comparison of results between the two checkpoints includes partition noise. A minimal test isolates the cause: on the same rows, labels factorised before filtering (with gaps) and the same labels recoded to consecutive integers in the same order give identical folds (\num{0} rows differ), whereas factorising by first appearance after filtering, which yields the published labels, reassigns \num{8505} rows. The partition depends on the order of the labels, not on their gaps; the comparison is reported in
 section~\ref{sec:results-repro}.
 
 The same audit applied to Dataset~A revealed a collateral defect in the distributed composition
@@ -260,17 +281,15 @@ in the spirit of Meredig \etal~\cite{meredig2018}.
 \subsection{Models}
 \label{sec:models}
 
-We use the two tree ensembles that dominate reported results on this task, with hyperparameters
-fixed per dataset from prior grid searches and held constant across protocols. Dataset~A:
+We use the two tree ensembles that dominate reported results on this task, with hyperparameters fixed per dataset and held constant across protocols. They come from the author's earlier, unpublished conference manuscript on the same task, which selected them with \texttt{GridSearchCV} by three-fold \emph{random} cross-validation on a random 80/20 training split, scored by negative mean squared error; its search grids were not recorded, and its Dataset~B was a different curation of SuperCon. Dataset~A:
 XGBoost~\cite{chen2016} with \num{250} estimators, maximum depth \num{8}, learning rate \num{0.07},
 subsample \num{0.9}, column subsample \num{0.7}, \texttt{gamma} \num{0}, \texttt{reg\_alpha}
 \num{0.01}; random forest with \num{150} trees, maximum depth \num{25} and \texttt{sqrt} feature
 subsampling. Dataset~B: XGBoost with \num{300} estimators, maximum depth \num{10}, learning rate
 \num{0.05}, subsample and column subsample \num{0.8}, \texttt{hist} tree method; random forest with
 \num{150} trees and maximum depth \num{30}, without feature subsampling. Both forests use
-\texttt{min\_samples\_leaf} \num{3} and \texttt{min\_samples\_split} \num{5}. Both configurations
-were selected under \emph{random} $K$-fold cross-validation in earlier work; because that could
-bias the measured gap, section~\ref{sec:results-tuning} repeats the comparison with
+\texttt{min\_samples\_leaf} \num{3} and \texttt{min\_samples\_split} \num{5}. Because that search used
+row-level folds, which could bias the measured gap, section~\ref{sec:results-tuning} repeats the comparison with
 hyperparameters selected by nested cross-validation in \emph{both} arms and over a \num{16}-point
 grid. Regression metrics (MAE, RMSE, $\Rsq$) are computed on pooled out-of-fold predictions.
 
@@ -338,8 +357,7 @@ whose predictions are constant within a fold, is that fold's prevalence---not \S
 For $K = \num{100}$ we report precision, recall and enrichment (precision over prevalence) as
 \emph{fractional} quantities under ties (a tied group contributes its expected number of positives),
 the number of distinct systems among the selected rows, the precision under a budget of at most
-three rows per system, and, for Dataset~B, the precision when the \num{3925} measured
-non-superconductors of the Stanev list ($\Tc \le 0$, \SI{24.1}{\percent} of the enlarged pool) are
+three rows per system, and, for Dataset~B, the precision when the \num{3925} entries recorded as non-superconducting in the Stanev list ($\Tc \le 0$, \SI{24.1}{\percent} of the enlarged pool) are
 admitted to the candidate pool as scored negatives. Intervals are family bootstraps of the test
 pools, paired across rankers; per-fold standard deviations are also given.
 
@@ -358,15 +376,14 @@ per row and per system.
 
 \subsection{Nearest-neighbour diagnostic}
 
-To confirm that the protocols differ in the way the construction predicts, we measure the Euclidean
+To describe how far each protocol places test rows from the training data, we measure the Euclidean
 distance from each test row to its nearest training row in descriptor space standardised with a
-scaler fitted on the \emph{training} rows only, under a random $80/20$ hold-out and a grouped
-hold-out of the same size.
+scaler fitted on the \emph{training} rows only, under a random $80/20$ hold-out and a grouped hold-out with the same nominal 80/20 fraction (the realised test sizes differ because systems are indivisible). Using the five-fold out-of-fold predictions, with the scaler refitted on each training fold, we also relate the absolute error to this distance, to the recorded $\Tc$ and to the size of the test row's system.
 
 \subsection{Temporal corpus}
 \label{sec:temporal-data}
 
-For the forward-in-time test we rebuilt a corpus from the primary SuperCon export (\num{26321}
+For the retrospective temporal test we rebuilt a corpus from the primary SuperCon export (\num{26321}
 reports; not redistributed, see Data availability). Each report was dated by the year in its
 bibliographic field (\SI{99.7}{\percent} of reports; the year of the \emph{report}, not of
 discovery; fallback rules for the rest), the chemical exclusions of section~\ref{sec:audit} were
@@ -467,9 +484,9 @@ consistent with the gap being a property of the task rather than of one pipeline
 share \SI{96.6}{\percent} of their systems (section~\ref{sec:overlap}) it is not an independent
 replication.
 
-The nearest-neighbour diagnostic confirms the mechanism (figures~\ref{fig:anatomy}(d)
+The nearest-neighbour diagnostic is consistent with this reading (figures~\ref{fig:anatomy}(d)
 and~\ref{fig:summary}(d)). Under a random hold-out the median distance from a test row to its
-closest training row is \num{0.054} in Dataset~A; under a grouped hold-out of the same size it is
+closest training row is \num{0.054} in Dataset~A; under the grouped hold-out it is
 \num{1.26}, a factor of \num{23}. For Dataset~B the medians are \num{0.149} and \num{1.51}, a
 factor of \num{10}. Counting directly, \SI{37.0}{\percent} of Dataset~A test rows under five-fold
 random splitting have a training row with an \emph{identical} \num{81}-feature vector; under
@@ -484,6 +501,8 @@ may reflect structure, pressure, preparation or unrecorded conditions. A replica
 predictor (the median of the \emph{other} replicates of the group) reaches MAE \SI{4.72}{\kelvin}
 on these rows, against \SI{4.83}{\kelvin} for XGBoost under random splitting and
 \SI{7.81}{\kelvin} under grouped splitting.
+
+Distance alone does not order the error, because it is confounded with $\Tc$. Under random splitting the MAE stays within \SIrange{4.5}{5.7}{\kelvin} across distance deciles on Dataset~A and \SIrange{2.8}{4.9}{\kelvin} on Dataset~B. Under grouped splitting it peaks at \SI{10.5}{\kelvin} (A) and \SI{13.2}{\kelvin} (B) at intermediate distances and falls to \SI{4.2}{\kelvin} and \SI{3.2}{\kelvin} in the farthest decile, whose rows are mostly low-$\Tc$ materials: the mean $\Tc$ of the nearest third of the grouped test rows of Dataset~A is \SI{50.0}{\kelvin}, that of the farthest third \SI{12.7}{\kelvin}. Among high-$\Tc$ rows (77~K and above), where the screening question lives, the error does grow with distance: from \SI{9.4}{\kelvin} to \SI{17.1}{\kelvin} to \SI{22.3}{\kelvin} across distance terciles on A, and from \SI{13.2}{\kelvin} to \SI{17.2}{\kelvin} to \SI{27.3}{\kelvin} on B. By $\Tc$ range the grouped MAE rises from \SI{3.6}{\kelvin} below 10~K to \SI{13.5}{\kelvin} at 77~K and above on A (\SI{2.4}{\kelvin} to \SI{14.7}{\kelvin} on B), and by system size from \SI{6.5}{\kelvin} for single-row systems to \SI{13.2}{\kelvin} for systems of more than one hundred rows (\SI{4.0}{\kelvin} to \SI{18.0}{\kelvin} on B). The error of the grouped protocol is concentrated in the large, high-$\Tc$ systems, which is why the per-system inflation is smaller than the pooled one (section~\ref{sec:results-gap}). Within held-out systems the model still orders the members: among systems with at least five test rows, the median Spearman correlation between predicted and recorded $\Tc$ is \num{0.39} on A and \num{0.56} on B under grouped splitting, against \num{0.39} and \num{0.60} under random splitting, and it is positive in \SI{70}{\percent} and \SI{79}{\percent} of the held-out systems. What holding out a system removes is the model's knowledge of its $\Tc$ level, not its ability to order the system's variants.
 
 Two sensitivity checks bound the measurement. Removing the \num{1927} Dataset~A rows with
 coefficient-less oxygen (section~\ref{sec:audit}; \num{19336} rows and \num{3171} systems remain,
@@ -823,10 +842,9 @@ XGBoost retains \SI{87.0}{\percent} \ci{77.2}{92.0} on~A and \SI{82.4}{\percent}
 on~B, an enrichment of \num{10.7} and \num{8.6} over prevalence and a recall of about a quarter
 to a third of all positives with \num{100} picks. This is \emph{retrospective precision among corpus
 materials whose systems were held out}: every candidate is a known superconductor, so the number
-says nothing about the yield of a synthesis campaign. Admitting the \num{3925} measured
-non-superconductors of the Stanev list to the Dataset-B candidate pool lowers the grouped XGBoost
+says nothing about the yield of a synthesis campaign. Admitting the \num{3925} entries recorded as non-superconducting in the Stanev list to the Dataset-B candidate pool lowers the grouped XGBoost
 precision from \SI{82.4}{\percent} to \SI{78.2}{\percent} \ci{70.0}{84.8}, with \num{6.2}
-\ci{3.8}{8.8} non-superconductors expected among the \num{100} picks. The selected sets are also
+\ci{3.8}{8.8} such entries expected among the \num{100} picks. SuperCon does not distinguish a measured absence of superconductivity from an unreported or censored measurement, so these entries are recorded negatives, not confirmed non-superconductors. The selected sets are also
 concentrated: \num{19} distinct systems among \num{100} picks on~A, and a budget of at most three
 rows per system lowers the precision to \SI{74.2}{\percent}.
 
@@ -844,7 +862,7 @@ positives: $\Tc \ge$ the training-fold 90th percentile; fractional under ties). 
 paired family-bootstrap interval and between-fold standard deviation; recall and enrichment
 (precision over prevalence); distinct element systems among the selected rows; precision under a
 budget of at most three rows per system; and, for Dataset~B, precision when the \num{3925}
-measured non-superconductors are admitted to the pool. Dataset~B is the audited checkpoint.}
+entries recorded as non-superconducting are admitted to the pool; the selection threshold $t_f$ ranges over \SIrange{87.0}{90.1}{\kelvin} (A) and \SIrange{75.0}{78.0}{\kelvin} (B) across folds. Dataset~B is the audited checkpoint.}
 \label{tab:screen}
 \centering\small\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}llS[table-format=2.1]S[table-format=2.1]S[table-format=2.2]S[table-format=2.0]S[table-format=2.1]S[table-format=2.1]@{}}
@@ -880,9 +898,9 @@ XGBoost & 82.4 \ci{75.1}{88.8} & 7.6 & 34.8 & 8.57 & 27 & 71.4 & 78.2 \\
 
 Cross-validation protocols are proxies for a question that can be asked directly of SuperCon: how
 well does a model trained on everything known up to a year $T$ predict the superconductors first
-reported at or after $T$? On the dated corpus of section~\ref{sec:temporal-data}, between
+reported at or after $T$? We call this a retrospective temporal split: it uses only reports already in the database, so it is not a prospective test. On the dated corpus of section~\ref{sec:temporal-data}, between
 \SI{72}{\percent} and \SI{84}{\percent} of the compositions reported after each cut belong to
-element systems that did not exist in the database before it, so the forward-in-time test is
+element systems that did not exist in the database before it, so the retrospective temporal test is
 dominated by the regime that grouped validation is meant to emulate.
 
 The realised performance is far below the random-CV figure at every cut (table~\ref{tab:temporal},
@@ -891,8 +909,7 @@ figure~\ref{fig:temporal}). At the principal cut $T$ = 2010 (\num{10215} trainin
 \ci{6.67}{8.27} and $\Rsq = \num{0.33}$ \ci{0.18}{0.47}; on the later compositions from \emph{new}
 systems $\Rsq$ is \num{0.19} \ci{0.01}{0.34} (MAE \SI{8.47}{\kelvin}), on those from systems already
 seen it is \num{0.83} \ci{0.71}{0.89} (MAE \SI{4.07}{\kelvin}), and on later re-measurements of
-compositions already in the training set the model recovers MAE \SI{2.39}{\kelvin} and
-$\Rsq = \num{0.80}$. Random five-fold CV on the same pre-2010 data estimates MAE \SI{4.34}{\kelvin}
+compositions already in the training set the model recovers MAE \SI{2.39}{\kelvin} and $\Rsq = \num{0.80}$. Those re-measurements are scored separately: the principal test set contains no composition present in the training set, because the corpus holds one row per composition, dated by its first report. Random five-fold CV on the same pre-2010 data estimates MAE \SI{4.34}{\kelvin}
 and $\Rsq = \num{0.91}$: it understates the realised error by \SI{3.10}{\kelvin} \ci{2.25}{4.03}
 and overstates $\Rsq$ by \num{0.58} \ci{0.44}{0.73}. The $\Rsq$ overstatement of random CV is
 significant at all four cuts (\num{+0.28}, \num{+0.60}, \num{+0.58} and \num{+0.42} at 1995,
@@ -917,19 +934,17 @@ time as a precision: the prevalence of compositions above the training 90th perc
 later compositions collapses from \SI{9.2}{\percent} at 1995 to \SIrange{0.9}{1.8}{\percent} at
 2005--2015, so the realised top-\num{100} precision falls from \num{0.90} to \numrange{0.08}{0.47}
 while every protocol estimates \numrange{0.36}{0.99}; as a lift over prevalence the
-forward-in-time ranking is strong (\numrange{18}{26} times at 2005--2010), and the Spearman rank
+retrospective temporal ranking is strong (\numrange{18}{26} times at 2005--2010), and the Spearman rank
 correlation degrades more gently (\num{0.95} retrospective versus \numrange{0.57}{0.78} realised).
 Second, the realised $\Rsq$ is fragile: removing the \num{526} training compositions whose year came
 from a fallback dating rule (\SI{5}{\percent} of the training set, mostly 1960s--1970s alloys and
 Chevrel phases) shifts the XGBoost predictions for the then-unseen Bi--S--O family from about
 \SI{15}{\kelvin} to about \SI{60}{\kelvin} and drives the realised $\Rsq$ at 2010 from \num{0.33}
-to \num{-0.20} (MAE \SI{7.4}{\kelvin} to \SI{9.1}{\kelvin}), whereas the random-CV and
-leave-clusters-out estimates move by less than \SI{0.3}{\kelvin} in MAE and \num{0.02} in $\Rsq$.
+to \num{-0.20} (MAE \SI{7.4}{\kelvin} to \SI{9.1}{\kelvin}), whereas at that cut the random-CV and leave-clusters-out estimates move by less than \SI{0.3}{\kelvin} in MAE and \num{0.02} in $\Rsq$ and the host-grouped estimate by \SI{1.12}{\kelvin} in MAE.
 Using the maximum instead of the median $\Tc$ per composition, or re-seeding the random and cluster
 partitions, leaves all conclusions unchanged (\texttt{results\_v3/temporal\_validation.md}).
 
-\emph{Answer to the question.} No retrospective protocol reproduces the forward-in-time
-performance. Random cross-validation is the worst proxy for $\Rsq$ at every cut and for MAE at 1995
+\emph{Answer to the question.} No cross-validation protocol reproduces the performance realised on the temporal split. Random cross-validation is the worst proxy for $\Rsq$ at every cut and for MAE at 1995
 and 2005; at 2010 the worst MAE proxy is leave-clusters-out (\SI{+3.9}{\kelvin} against
 \SI{-3.1}{\kelvin} for random CV), at 2015 random CV is closest in MAE because the later
 compositions are low-$\Tc$ and low-variance, and at 1995 all protocols agree within their intervals
@@ -944,7 +959,7 @@ at more than one cut.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.78\textwidth]{figure5}
-\caption{\textbf{Retrospective protocol estimates against realised forward-in-time performance.}
+\caption{\textbf{Cross-validation estimates against the performance realised on the retrospective temporal split.}
 Columns: cuts $T$ = 1995, 2005, 2010, 2015 (training compositions first reported before $T$, test
 compositions at or after $T$; the share of test compositions in element systems absent before the
 cut is given in each title). Rows: MAE, $\Rsq$ and top-\num{100} precision. The red line and band
@@ -957,7 +972,7 @@ compositions; grey squares repeat the protocols and the realised value for the r
 \end{figure}
 
 \begin{table}[t]
-\caption{Retrospective protocol estimates versus realised forward-in-time performance at the
+\caption{Cross-validation estimates versus the performance realised on the retrospective temporal split at the
 principal cut $T$ = 2010 (\num{10215} compositions first reported before 2010, \num{2328} at or after;
 \SI{76}{\percent} of the later compositions belong to element systems absent before 2010).
 Estimate = five-fold out-of-fold predictions using only the pre-2010 data; realised = one model
@@ -995,6 +1010,80 @@ L0 re-weighted to the test mix & 4.95 & -2.54 & 0.794 & +0.454 & 1.00 & +0.85 & 
 \end{table}
 
 
+
+\subsection{Spending a fixed budget: more systems or more variants}
+\label{sec:acquisition}
+
+The previous sections diagnose; this one asks what a group that wants better predictions on new
+chemistries should measure. We hold out \SI{20}{\percent} of the element systems, with all their rows, as a
+fixed external test (three independent draws; Dataset~A: \num{673} systems and
+\numrange{3872}{4753} rows; Dataset~B:
+\num{609} systems and
+\numrange{2321}{2699} rows). From the remaining
+systems we draw training sets of \num{500}, \num{1000} and \num{2000} records under a
+per-system cap: the systems are visited in random order and at most $c$ records are taken from each, for
+$c$ equal to one, two, four, eight, thirty-two and unlimited (whole systems), and, as a reference, records drawn
+uniformly at random, which follow the natural sampling of the corpus. Each design is repeated ten times
+per test draw with shared system and record orders, so the designs are paired; intervals are the
+2.5th--97.5th percentiles over the thirty (draw, replicate) pairs and describe variation over training samples
+and test draws, conditional on this corpus. The model is the XGBoost configuration of
+section~\ref{sec:models}.
+
+At every budget and in both datasets, spreading the budget over more systems lowers the error on the
+unseen systems (figure~\ref{fig:acquisition}). One record per system instead of whole systems lowers the
+per-system MAE by \SI{2.86}{\kelvin}
+\ci{1.40}{4.92} at
+\num{500} records and by \SI{2.35}{\kelvin}
+\ci{1.53}{3.28} at
+\num{2000} on Dataset~A, and by \SI{1.79}{\kelvin}
+\ci{0.69}{3.32} and
+\SI{1.50}{\kelvin}
+\ci{1.06}{2.28} on
+Dataset~B; the pooled MAE falls by \SI{2.89}{\kelvin} and
+\SI{1.98}{\kelvin} (A) and by
+\SI{1.82}{\kelvin} and
+\SI{1.05}{\kelvin} (B), with every interval excluding zero.
+Across the six capped designs and three budgets the error depends on the number of distinct systems far
+more than on the number of records per system: in a regression on both, each doubling of the number of
+systems lowers the per-system MAE by \SI{1.12}{\kelvin} (A) and
+\SI{0.89}{\kelvin} (B), each doubling of the records per system by
+\SI{0.10}{\kelvin} and
+\SI{0.07}{\kelvin}. In budget terms, \num{500}
+records spread one per system do as well as \num{2000} records in whole systems (difference
+\SI{-0.47}{\kelvin}
+\ci{-1.33}{0.46}
+on A and \SI{+0.11}{\kelvin}
+\ci{-0.41}{0.58}
+on B). Records drawn at random, which concentrate on the large systems, fall between the two extremes.
+
+Selection behaves differently. At a fixed threshold of 77~K, reached by
+\SI{17.3}{\percent} (A) and \SI{11.8}{\percent} (B) of the external test rows,
+top-\num{100} precision does not separate the designs: one record per system against whole systems gives
+\num{+13.9} points
+\ci{-23.5}{43.1}
+at \num{500} records on A and \num{+0.6} points
+\ci{-17.3}{10.0}
+at \num{2000} on B, and every such interval includes zero. Random records give the highest precision
+(\SI{87.2}{\percent} on A and \SI{81.5}{\percent} on B at
+\num{2000} records) because they reproduce the corpus' over-representation of high-$\Tc$ systems: their mean
+training $\Tc$ is \SI{34.8}{\kelvin} on A against
+\SI{22.6}{\kelvin} for one-per-system sampling. Breadth buys accuracy across chemistries;
+at these budgets it does not buy a better ranking of the highest-$\Tc$ candidates, which depends on how
+many high-$\Tc$ systems the training set contains.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figure6}
+\caption{\label{fig:acquisition}\textbf{At a fixed budget of training records, spreading them over more element
+systems lowers the error on unseen systems; selection at 77~K does not separate the designs.} Rows:
+Dataset~A (top) and Dataset~B (bottom). (a,\,d)~Per-system (macro) MAE on a fixed external test of held-out
+systems against the training budget, for per-system caps from one record per system to whole systems and
+for records drawn at random (dashed); bands: 2.5th--97.5th percentiles over thirty (test draw, replicate)
+pairs for the two extreme designs. (b,\,e)~The same MAE against the number of distinct systems in the
+training set; marker shape gives the budget. (c,\,f)~Top-100 precision at a fixed 77~K threshold. XGBoost
+with the configuration of section~\ref{sec:models}; \texttt{code/v3/data\_acquisition.py}.}
+\end{figure}
+
 \section{Discussion}
 
 \subsection{What the numbers mean}
@@ -1011,7 +1100,7 @@ concentration, intraclass correlation) are reported here as descriptions; a desi
 learned, is only defined once the estimator is named, and the effective sample size of ``the
 dataset'' is not a well-posed quantity.
 
-The forward-in-time test answers the question the paper is organised around. Grouped protocols are
+The retrospective temporal test answers the question the paper is organised around. Grouped protocols are
 better proxies for performance on later superconductors than random cross-validation, in MAE and in
 $\Rsq$, and the more the grouping removes---composition, element system, host, composition
 cluster---the smaller the $\Rsq$ overstatement becomes. But none of them reproduces the realised
@@ -1020,6 +1109,8 @@ a few per cent of the training compositions are dated. The practical reading is 
 protocol should be reported \emph{as a proxy with a stated direction of error}, not as the
 extrapolation accuracy, and that the number a user should expect on genuinely new element systems is
 $\Rsq$ of order \numrange{0.1}{0.5}, not \num{0.9}.
+
+The acquisition experiment turns the diagnosis into a rule a laboratory can use. If the aim is accuracy on chemistries not yet in the database, new element systems are worth more than further variants of known ones, by a margin that a fourfold larger budget spent on whole systems does not recover. If the aim is to rank the highest-$\Tc$ candidates, breadth alone does not help at these budgets, and the composition of the training set by $\Tc$ matters more.
 
 \subsection{Relation to prior work}
 \label{sec:prior}
@@ -1040,10 +1131,10 @@ overestimate the interpolative error, which is the caution our separation ladder
 3DSC~\cite{sommer2023} uses element-system grouping as its default protocol and remarks that
 SuperCon is very clustered, without comparing grouped with random validation;
 PhaseSelect~\cite{vasylenko2023} takes the element set as the unit of analysis and thereby discards
-the stoichiometric information whose contribution we measure. What this paper adds is the
+the stoichiometric information whose contribution we measure. Konno \etal~\cite{konno2021} already separated SuperCon temporally, training only on data added before 2010 to evaluate a superconductor classifier on later materials, and argued that temporally separated splits should replace random ones; our temporal test differs in scoring every retrospective protocol against the realised performance rather than reporting a single split. Li \etal~\cite{li2023} showed that models trained on the 2018 Materials Project degrade on compounds added by 2021, and that adding a small, deliberately chosen fraction of the new data recovers much of the accuracy; our acquisition experiment asks the related question of how a fixed budget should be spread across element systems. MatFold~\cite{witman2025} and kernelised leave-one-cluster-out validation~\cite{durdy2022} provide general tools for the grouped and cluster splits used here. Murdock \etal~\cite{murdock2020} asked whether domain-knowledge featurizations are necessary and Kauwe \etal~\cite{kauwe2020} whether models can find materials with extraordinary property values; our representation ladder and selection metrics bear on the same questions, which we cite by their framing only, as we have not compared results quantitatively. What this paper adds is the
 quantification of the gap on identical rows, models and budgets, with family-paired uncertainty;
 the null and representation ladders; the audit of the chemical unit and of the overlap between
-curations; and the forward-in-time scoring of the protocols themselves.
+curations; and the retrospective temporal scoring of the protocols themselves.
 
 \begin{table}[t]
 \caption{Prior work bearing on the evaluation of composition-based $\Tc$ models. ``Split'' is the
@@ -1060,7 +1151,7 @@ Stanev \etal~\cite{stanev2018} & random rows; cross-family test between macro-fa
 Meredig \etal$^{\dagger}$~\cite{meredig2018} & leave-one-cluster-out ($k$-means clusters) & extrapolative performance far below interpolative & a formula-inspectable grouping (as in 3DSC), controlled budget, two curations, nulls, selection metric \\
 Xiong \etal$^{\dagger}$~\cite{xiong2020} & forward CV ordered by property value & explorative power far lower than CV suggests & separation by chemistry rather than by property value; within-system dependence quantified \\
 Sheridan$^{\dagger}$~\cite{sheridan2013} & random, time-split, leave-class-out vs realised prospective $\Rsq$ (QSAR) & random too optimistic, class-out too pessimistic & the same design on SuperCon (section~\ref{sec:temporal}) \\
-Roberts \etal$^{\dagger}$~\cite{roberts2017} & blocked CV (time, space, groups) & blocking usually more appropriate, but can overstate error & a ladder of blocks with matched budget and a forward-in-time referee \\
+Roberts \etal$^{\dagger}$~\cite{roberts2017} & blocked CV (time, space, groups) & blocking usually more appropriate, but can overstate error & a ladder of blocks with matched budget and a retrospective temporal referee \\
 3DSC, Sommer \etal~\cite{sommer2023} & grouped by element system (default) & SuperCon ``very clustered''; grouped vs random not compared & the size of the gap, its per-system distribution, the chemical audit it motivated \\
 PhaseSelect, Vasylenko \etal~\cite{vasylenko2023} & element set is the unit of analysis & --- & what stoichiometry adds within a system, which PhaseSelect discards by design \\
 \bottomrule
@@ -1079,12 +1170,11 @@ value.
 The two curations are not independent (section~\ref{sec:overlap}); their agreement bounds the
 sensitivity of the result to curation and featurization, not to the underlying corpus. Dataset~A is
 used as distributed and carries the oxygen defect of section~\ref{sec:audit}, whose effect on the
-gap we could only bound by row removal. The complement cross-evaluation and the forward-in-time test
+gap we could only bound by row removal. The complement cross-evaluation and the retrospective temporal test
 are the only evaluations here whose test materials are not also in the training source, and both
 have small or unrepresentative test sets at some cuts. The temporal corpus is dated by the year of
 the SuperCon report, not of discovery, \SI{23}{\percent} of its compositions have several dated
-reports (the first is used), and a fallback dating rule affects \num{570} compositions; the
-sensitivity to those rows is large for $\Rsq$ and small for MAE. We have measured only tree
+reports (the first is used), and a fallback dating rule affects \num{570} compositions; removing those rows changes the realised MAE by \SI{-0.14}{\kelvin}, \SI{+0.54}{\kelvin}, \SI{+1.70}{\kelvin} and \SI{+0.18}{\kelvin} and the realised $\Rsq$ by \num{+0.00}, \num{-0.18}, \num{-0.53} and \num{-0.02} at the 1995, 2005, 2010 and 2015 cuts, so the realised figures at 2005 and 2010 depend on dating, while the protocol closest to the realised value is the same in both scenarios at every cut and for both metrics (\texttt{code/v3/temporal\_dating\_sensitivity.py}). We have measured only tree
 ensembles, a $k$-nearest-neighbour control and extra trees; whether the gap widens for graph and
 deep composition models is not measured here. The selection metric is retrospective throughout: a
 prospective campaign with a pre-registered candidate list would be the decisive test of the
@@ -1124,14 +1214,18 @@ held-out corpus materials remains high (\SI{87.0}{\percent} and \SI{82.4}{\perce
 statement about ranking known superconductors, not about synthesis yield, and on Dataset~A the
 contribution of the descriptors to it is not distinguishable from zero.
 
-The evaluation that comes closest to a prospective test---training on everything reported before a
-year and scoring what was reported afterwards---is anticipated by none of the retrospective
-protocols: random cross-validation overstates $\Rsq$ by \numrange{0.28}{0.60}, grouped protocols
+The retrospective temporal split---training on everything reported before a
+year and scoring what was reported afterwards---is anticipated by none of the cross-validation protocols: random cross-validation overstates $\Rsq$ by \numrange{0.28}{0.60}, grouped protocols
 are closer and leave-clusters-out closest in $\Rsq$, and the realised $\Rsq$ on new element systems
 is \numrange{0.1}{0.5}. We therefore recommend reporting a grouped protocol alongside the random
-one, stating which target population it stands for, and treating its figure as a proxy with a known
-direction of error. The corrected protocols cost one additional cross-validation run each, and the
+one, stating which target population it stands for, and treating its figure as a proxy with a known direction of error. For groups deciding what to measure, the acquisition experiment gives a concrete rule: at a fixed budget, new element systems lower the error on unseen chemistries more than new variants of known ones, although they do not by themselves improve the ranking of the highest-$\Tc$ candidates. The corrected protocols cost one additional cross-validation run each, and the
 released partitions, audit and verifier make them one command.
+
+\section*{Acknowledgements}
+
+The author thanks his thesis tutor for a detailed review of a previous version of this manuscript. \textbf{[Author to complete: funding statement and competing interests.]}
+
+\textit{Use of generative AI.} A large-language-model research assistant \textbf{[author to state model and version]} was used to write and run analysis code, design and execute the experiments of sections~\ref{sec:audit}--\ref{sec:acquisition}, render the figures, verify bibliographic records and draft the text; an independent AI-assisted adversarial review was used to audit a previous version. All outputs were checked against the released result files by the per-claim verifier and by the author, who takes full responsibility for the content.
 
 \section*{Data availability}
 
@@ -1266,6 +1360,33 @@ Roberts D R, Bahn V, Ciuti S, Boyce M S, Elith J, Guillera-Arroita G, Hauenstein
 Gupta R P and Gupta M 1993 A comparative study of the pressure-induced charge redistribution in YBa$_{2}$Cu$_{3}$O$_{7}$ and YBa$_{2}$Cu$_{4}$O$_{8}$
 \textit{Physica C} \textbf{204} 349--58
 \url{https://doi.org/10.1016/0921-4534(93)91019-r}
+
+\bibitem{li2023}
+Li K, DeCost B, Choudhary K, Greenwood M and Hattrick-Simpers J 2023 A critical examination of
+robustness and generalizability of machine learning prediction of materials properties
+\textit{npj Comput. Mater.} \textbf{9} 55
+\url{https://doi.org/10.1038/s41524-023-01012-9}
+
+\bibitem{witman2025}
+Witman M D and Schindler P 2025 MatFold: systematic insights into materials discovery models'
+performance through standardized cross-validation protocols \textit{Digit. Discov.} \textbf{4} 625--35
+\url{https://doi.org/10.1039/d4dd00250d}
+
+\bibitem{durdy2022}
+Durdy S, Gaultois M W, Gusev V V, Bollegala D and Rosseinsky M J 2022 Random projections and
+kernelised leave one cluster out cross validation: universal baselines and evaluation tools for
+supervised machine learning of material properties \textit{Digit. Discov.} \textbf{1} 763--78
+\url{https://doi.org/10.1039/d2dd00039c}
+
+\bibitem{murdock2020}
+Murdock R J, Kauwe S K, Wang A Y-T and Sparks T D 2020 Is domain knowledge necessary for machine
+learning materials properties? \textit{Integr. Mater. Manuf. Innov.} \textbf{9} 221--7
+\url{https://doi.org/10.1007/s40192-020-00179-z}
+
+\bibitem{kauwe2020}
+Kauwe S K, Graser J, Murdock R and Sparks T D 2020 Can machine learning find extraordinary
+materials? \textit{Comput. Mater. Sci.} \textbf{174} 109498
+\url{https://doi.org/10.1016/j.commatsci.2019.109498}
 
 \end{thebibliography}}
 

@@ -13634,7 +13634,7 @@
   },
   {
    "id": "abs_top_Bneg",
-   "anchor": "(\\SI{<<v>>}{\\percent} once measured non-superconductors",
+   "anchor": "(\\SI{<<v>>}{\\percent} once entries recorded as non-superconducting",
    "source": "results_v3/topk_with_negatives.csv",
    "key": {
     "model": "XGBoost",
@@ -13692,7 +13692,7 @@
   },
   {
    "id": "abs_L0_R2",
-   "anchor": "pre-2010 data estimates $\\Rsq = \\num{<<v>>}$ where the realised",
+   "anchor": "{\\kelvin} and $\\Rsq = \\num{<<v>>}$ where the realised values",
    "source": "results_v3/temporal_validation_comparacion.csv",
    "key": {
     "corte": 2010,
@@ -13707,7 +13707,7 @@
   },
   {
    "id": "abs_real_R2",
-   "anchor": "the realised value on later compositions is \\num{<<v>>};",
+   "anchor": "{\\kelvin} and \\num{<<v>>}; grouped protocols are closer",
    "source": "results_v3/temporal_validation.csv",
    "key": {
     "corte": 2010,
@@ -14350,7 +14350,7 @@
   },
   {
    "id": "hp_B_rf_leaf2",
-   "anchor": "\\texttt{min\\_samples\\_split} \\num{<<v>>}. Both configurations",
+   "anchor": "\\texttt{min\\_samples\\_split} \\num{<<v>>}. Because that search",
    "expr": "a if a == b else float('nan')",
    "vars": {
     "a": {
@@ -14659,7 +14659,7 @@
   },
   {
    "id": "sel_neg3925",
-   "anchor": "the precision when the \\num{<<v>>} measured non-superconductors of the Stanev list",
+   "anchor": "the precision when the \\num{<<v>>} entries recorded as non-superconducting in the",
    "source": "results_v3/topk_with_negatives.csv",
    "key": {
     "model": "XGBoost",
@@ -15861,7 +15861,7 @@
   },
   {
    "id": "nn_A_r",
-   "anchor": "closest training row is \\num{<<v>>} in Dataset~A; under a grouped",
+   "anchor": "closest training row is \\num{<<v>>} in Dataset~A; under the grouped",
    "source": "results_v3/nn_distance_trainscaler.csv",
    "key": {
     "dataset": "A"
@@ -15871,7 +15871,7 @@
   },
   {
    "id": "nn_A_g",
-   "anchor": "hold-out of the same size it is \\num{<<v>>}, a factor of \\num{23}",
+   "anchor": "under the grouped hold-out it is \\num{<<v>>}, a factor of \\num{23}",
    "source": "results_v3/nn_distance_trainscaler.csv",
    "key": {
     "dataset": "A"
@@ -18516,7 +18516,7 @@
   },
   {
    "id": "scr_neg_n",
-   "anchor": "Admitting the \\num{<<v>>} measured non-superconductors of the Stanev list to the Dataset-B",
+   "anchor": "Admitting the \\num{<<v>>} entries recorded as non-superconducting",
    "source": "results_v3/topk_with_negatives.csv",
    "key": {
     "model": "XGBoost",
@@ -18581,7 +18581,7 @@
   },
   {
    "id": "scr_neg_exp",
-   "anchor": "with \\num{<<v>>} \\ci{3.8}{8.8} non-superconductors expected among the \\num{100} picks",
+   "anchor": "with \\num{<<v>>} \\ci{3.8}{8.8} such entries expected among the",
    "source": "results_v3/topk_with_negatives.csv",
    "key": {
     "model": "XGBoost",
@@ -18594,7 +18594,7 @@
   },
   {
    "id": "scr_neg_exp_lo",
-   "anchor": "with \\num{6.2} \\ci{<<v>>}{8.8} non-superconductors",
+   "anchor": "with \\num{6.2} \\ci{<<v>>}{8.8} such entries",
    "source": "results_v3/topk_with_negatives.csv",
    "key": {
     "model": "XGBoost",
@@ -18607,7 +18607,7 @@
   },
   {
    "id": "scr_neg_exp_hi",
-   "anchor": "with \\num{6.2} \\ci{3.8}{<<v>>} non-superconductors",
+   "anchor": "with \\num{6.2} \\ci{3.8}{<<v>>} such entries",
    "source": "results_v3/topk_with_negatives.csv",
    "key": {
     "model": "XGBoost",
@@ -18620,7 +18620,7 @@
   },
   {
    "id": "scr_neg_K",
-   "anchor": "non-superconductors expected among the \\num{<<v>>} picks. The selected",
+   "anchor": "such entries expected among the \\num{<<v>>} picks.",
    "const": 100,
    "reason": "K of the selection metric",
    "fmt": ".0f"
@@ -18790,7 +18790,7 @@
   },
   {
    "id": "cap6_neg",
-   "anchor": "precision when the \\num{<<v>>} measured non-superconductors are admitted to the pool",
+   "anchor": "precision when the \\num{<<v>>} entries recorded as non-superconducting are admitted",
    "source": "results_v3/topk_with_negatives.csv",
    "key": {
     "model": "XGBoost",
@@ -19163,7 +19163,7 @@
   },
   {
    "id": "tmp_comp_mae",
-   "anchor": "the model recovers MAE \\SI{<<v>>}{\\kelvin} and $\\Rsq = \\num{0.80}$. Random",
+   "anchor": "the model recovers MAE \\SI{<<v>>}{\\kelvin} and $\\Rsq = \\num{0.80}$. Those",
    "source": "results_v3/temporal_validation.csv",
    "key": {
     "corte": 2010,
@@ -19178,7 +19178,7 @@
   },
   {
    "id": "tmp_comp_r2",
-   "anchor": "recovers MAE \\SI{2.39}{\\kelvin} and $\\Rsq = \\num{<<v>>}$. Random",
+   "anchor": "recovers MAE \\SI{2.39}{\\kelvin} and $\\Rsq = \\num{<<v>>}$. Those",
    "source": "results_v3/temporal_validation.csv",
    "key": {
     "corte": 2010,
@@ -21177,7 +21177,7 @@
   },
   {
    "id": "tmp_sens_002",
-   "anchor": "in MAE and \\num{<<v>>} in $\\Rsq$. Using the maximum",
+   "anchor": "in MAE and \\num{<<v>>} in $\\Rsq$ and the host-grouped",
    "const": 0.02,
    "reason": "results_v3/temporal_validation_hallazgos.md bound on the L0/L4 shift under the sin_anio_ambiguo scenario",
    "fmt": ".2f"
@@ -21572,7 +21572,7 @@
   },
   {
    "id": "lim_570",
-   "anchor": "fallback dating rule affects \\num{<<v>>} compositions; the",
+   "anchor": "fallback dating rule affects \\num{<<v>>} compositions; removing",
    "const": 570,
    "reason": "results_v3/temporal_validation_hallazgos.md: compositions dated by a fallback rule",
    "fmt": ".0f"
