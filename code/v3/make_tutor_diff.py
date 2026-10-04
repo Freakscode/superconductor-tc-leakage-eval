@@ -15,9 +15,9 @@ ROOT = Path(__file__).resolve().parents[2]
 TB = Path(os.environ.get("TEXBIN", "/usr/local/texlive/2025/bin/universal-darwin"))
 TAG = "avasquee@unal.edu.co"
 NOTES = [  # (comment, anchor in v3.1 text, note)
-    (1, "once entries recorded as non-superconducting are admitted to the candidate pool)",
+    (1, "per-claim verifier are released.",
      "Resumen acotado: retirados el tamaño efectivo, la fracción de memorización y la promesa de síntesis; "
-     "la frase temporal da ahora MAE y R²; se añade el resultado de adquisición (c. 23)."),
+     "la frase temporal da ahora MAE y R²; se añade el resultado de adquisición (c. 23); extensión reducida de 355 a 213 palabras."),
     (2, "and the wrong one when the target is a new system.",
      "«every test row» sustituido por fracciones medidas (gemelo exacto 37.0 % en A, 4.9 % en B); "
      "se reconoce cuándo la partición aleatoria es la medida adecuada."),

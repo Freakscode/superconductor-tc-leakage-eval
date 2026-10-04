@@ -30,58 +30,6 @@
    "fmt": ".1f"
   },
   {
-   "id": "v31_004_t2010_L0_aleatorio_MAE",
-   "anchor": "cross-validation on pre-2010 data estimates MAE \\SI{<<v>>}{\\kelvin} and",
-   "source": "results_v3/v31_key.json",
-   "field": "t2010_L0_aleatorio_MAE",
-   "fmt": ".2f"
-  },
-  {
-   "id": "v31_005_t2010_temporal_real_MAE",
-   "anchor": "realised values on later compositions are \\SI{<<v>>}{\\kelvin} and",
-   "source": "results_v3/v31_key.json",
-   "field": "t2010_temporal_real_MAE",
-   "fmt": ".2f"
-  },
-  {
-   "id": "v31_006_acq_A_N500_cap1_minus_capall_MAE_macro_mean",
-   "anchor": "record per system instead of whole systems lowers the per-system MAE by \\SI{<<v>>}{\\kelvin} (A)",
-   "expr": "v*-1.0",
-   "vars": {
-    "v": {
-     "source": "results_v3/v31_key.json",
-     "field": "acq_A_N500_cap1_minus_capall_MAE_macro_mean"
-    }
-   },
-   "fmt": ".1f"
-  },
-  {
-   "id": "v31_007_acq_B_N500_cap1_minus_capall_MAE_macro_mean",
-   "anchor": "per-system MAE by \\SI{2.9}{\\kelvin} (A) and \\SI{<<v>>}{\\kelvin} (B)",
-   "expr": "v*-1.0",
-   "vars": {
-    "v": {
-     "source": "results_v3/v31_key.json",
-     "field": "acq_B_N500_cap1_minus_capall_MAE_macro_mean"
-    }
-   },
-   "fmt": ".1f"
-  },
-  {
-   "id": "v31_008_const_500",
-   "anchor": "\\SI{2.9}{\\kelvin} (A) and \\SI{1.8}{\\kelvin} (B) at \\num{<<v>>} records, wit",
-   "const": 500.0,
-   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
-   "fmt": ".0f"
-  },
-  {
-   "id": "v31_009_const_100",
-   "anchor": "\\num{500} records, without improving top-\\num{<<v>>} selection. R",
-   "const": 100.0,
-   "reason": "design parameter of the v3.1 analyses (code/v3/data_acquisition.py, code/v3/tutor_analyses.py)",
-   "fmt": ".0f"
-  },
-  {
    "id": "v31_010_twin_A_random_pct",
    "anchor": "When such a dataset is split at random, \\SI{<<v>>}{\\percent} of",
    "source": "results_v3/v31_key.json",
@@ -1075,6 +1023,351 @@
    "field": "procedencia.n_composiciones",
    "fmt": ".0f",
    "note": "value specification copied from main-manifest entry abs_ncomp"
+  },
+  {
+   "source": "results_v3/overlap_AB.csv",
+   "key": {
+    "checkpoint_B": "v3",
+    "criterio": "(iv) sistema elemental (familia)"
+   },
+   "field": "frac_filas_B_en_A",
+   "scale": 100,
+   "fmt": ".1f",
+   "id": "abs31_00",
+   "anchor": "curations of SuperCon that share \\SI{<<v>>}{\\percent} "
+  },
+  {
+   "source": "results_v3/family_concentration_v3.csv",
+   "key": {
+    "dataset": "A"
+   },
+   "field": "N",
+   "fmt": ".0f",
+   "id": "abs31_01",
+   "anchor": "\\SI{96.6}{\\percent} of their systems (\\num{<<v>>} and \\num{1"
+  },
+  {
+   "source": "results_v3/regeneracion_B_v3.json",
+   "field": "N_v3",
+   "fmt": ".0f",
+   "id": "abs31_02",
+   "anchor": "systems (\\num{21263} and \\num{<<v>>} rows), hol"
+  },
+  {
+   "expr": "min(v0,v1,v2,v3)",
+   "vars": {
+    "v0": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "A",
+      "model": "XGBoost",
+      "statistic": "inflacion_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v1": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "A",
+      "model": "RandomForest",
+      "statistic": "inflacion_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v2": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "B",
+      "model": "XGBoost",
+      "statistic": "inflacion_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v3": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "B",
+      "model": "RandomForest",
+      "statistic": "inflacion_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    }
+   },
+   "fmt": ".0f",
+   "id": "abs31_03",
+   "anchor": "of tree ensembles by \\SIrange{<<v>>}{64}{\\perce"
+  },
+  {
+   "expr": "max(v0,v1,v2,v3)",
+   "vars": {
+    "v0": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "A",
+      "model": "XGBoost",
+      "statistic": "inflacion_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v1": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "A",
+      "model": "RandomForest",
+      "statistic": "inflacion_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v2": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "B",
+      "model": "XGBoost",
+      "statistic": "inflacion_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v3": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "B",
+      "model": "RandomForest",
+      "statistic": "inflacion_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    }
+   },
+   "fmt": ".0f",
+   "id": "abs31_04",
+   "anchor": "tree ensembles by \\SIrange{53}{<<v>>}{\\percent},"
+  },
+  {
+   "expr": "min(v0,v1,v2,v3)",
+   "vars": {
+    "v0": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "A",
+      "model": "XGBoost",
+      "statistic": "inflacion_macro_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v1": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "A",
+      "model": "RandomForest",
+      "statistic": "inflacion_macro_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v2": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "B",
+      "model": "XGBoost",
+      "statistic": "inflacion_macro_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v3": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "B",
+      "model": "RandomForest",
+      "statistic": "inflacion_macro_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    }
+   },
+   "fmt": ".0f",
+   "id": "abs31_05",
+   "anchor": "family-bootstrap intervals that exclude zero; per system the inflation is \\SIrange{<<v>>}{29}{\\perce"
+  },
+  {
+   "expr": "max(v0,v1,v2,v3)",
+   "vars": {
+    "v0": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "A",
+      "model": "XGBoost",
+      "statistic": "inflacion_macro_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v1": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "A",
+      "model": "RandomForest",
+      "statistic": "inflacion_macro_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v2": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "B",
+      "model": "XGBoost",
+      "statistic": "inflacion_macro_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    },
+    "v3": {
+     "source": "results_v3/paired_family_bootstrap.csv",
+     "key": {
+      "dataset": "B",
+      "model": "RandomForest",
+      "statistic": "inflacion_macro_pct",
+      "scheme": "family_paired"
+     },
+     "field": "point"
+    }
+   },
+   "fmt": ".0f",
+   "id": "abs31_06",
+   "anchor": "the inflation is \\SIrange{22}{<<v>>}{\\percent},"
+  },
+  {
+   "source": "results_v3/topk_metrics.csv",
+   "key": {
+    "dataset": "A",
+    "model": "XGBoost",
+    "protocol": "grouped",
+    "K": 100,
+    "fold": "mean_5folds"
+   },
+   "field": "K",
+   "fmt": ".0f",
+   "id": "abs31_07",
+   "anchor": "fractions. Retrospective top-\\num{<<v>>} precision "
+  },
+  {
+   "source": "results_v3/topk_metrics.csv",
+   "key": {
+    "dataset": "A",
+    "model": "XGBoost",
+    "protocol": "grouped",
+    "K": 100,
+    "fold": "mean_5folds"
+   },
+   "field": "precision_pct",
+   "fmt": ".1f",
+   "id": "abs31_08",
+   "anchor": "held-out systems stays at \\SI{<<v>>}{\\percent} "
+  },
+  {
+   "source": "results_v3/topk_metrics.csv",
+   "key": {
+    "dataset": "Bv3",
+    "model": "XGBoost",
+    "protocol": "grouped",
+    "K": 100,
+    "fold": "mean_5folds"
+   },
+   "field": "precision_pct",
+   "fmt": ".1f",
+   "id": "abs31_09",
+   "anchor": "at \\SI{87.0}{\\percent} and \\SI{<<v>>}{\\percent}."
+  },
+  {
+   "source": "results_v3/temporal_provenance.json",
+   "field": "procedencia.n_composiciones",
+   "fmt": ".0f",
+   "id": "abs31_10",
+   "anchor": "and \\SI{82.4}{\\percent}. On \\num{<<v>>} compositio"
+  },
+  {
+   "source": "results_v3/v31_key.json",
+   "field": "t2010_L0_aleatorio_MAE",
+   "fmt": ".2f",
+   "id": "abs31_11",
+   "anchor": "cross-validation on pre-2010 data estimates MAE \\SI{<<v>>}{\\kelvin} a"
+  },
+  {
+   "source": "results_v3/temporal_validation_comparacion.csv",
+   "key": {
+    "corte": 2010,
+    "escenario": "principal",
+    "protocolo": "L0_aleatorio",
+    "modelo": "XGBoost",
+    "estimacion": "todo",
+    "metrica": "R2"
+   },
+   "field": "estimacion_retrospectiva",
+   "fmt": ".2f",
+   "id": "abs31_12",
+   "anchor": "\\SI{4.34}{\\kelvin} and $\\Rsq = \\num{<<v>>}$, against "
+  },
+  {
+   "source": "results_v3/v31_key.json",
+   "field": "t2010_temporal_real_MAE",
+   "fmt": ".2f",
+   "id": "abs31_13",
+   "anchor": "$\\Rsq = \\num{0.91}$, against \\SI{<<v>>}{\\kelvin} a"
+  },
+  {
+   "source": "results_v3/temporal_validation.csv",
+   "key": {
+    "corte": 2010,
+    "escenario": "principal",
+    "condicion": "temporal_real",
+    "modelo": "XGBoost",
+    "estrato": "todo",
+    "metrica": "R2"
+   },
+   "field": "valor",
+   "fmt": ".2f",
+   "id": "abs31_14",
+   "anchor": "against \\SI{7.43}{\\kelvin} and \\num{<<v>>} realised o"
+  },
+  {
+   "const": 0.1,
+   "reason": "tolerance chosen to summarise table tab:temporal / results_v3/temporal_validation_comparacion.csv",
+   "fmt": ".1f",
+   "id": "abs31_15",
+   "anchor": "closer, but none is within \\num{<<v>>} of the rea"
+  },
+  {
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_A_N500_cap1_minus_capall_MAE_macro_mean"
+    }
+   },
+   "fmt": ".1f",
+   "id": "abs31_16",
+   "anchor": "error on unseen systems by \\SI{<<v>>}{\\kelvin} a"
+  },
+  {
+   "expr": "v*-1.0",
+   "vars": {
+    "v": {
+     "source": "results_v3/v31_key.json",
+     "field": "acq_B_N500_cap1_minus_capall_MAE_macro_mean"
+    }
+   },
+   "fmt": ".1f",
+   "id": "abs31_17",
+   "anchor": "systems by \\SI{2.9}{\\kelvin} and \\SI{<<v>>}{\\kelvin} i"
   }
  ]
 }

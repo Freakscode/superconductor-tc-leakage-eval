@@ -59,28 +59,22 @@ data leakage, cross-validation, temporal validation, clustered data}
 
 \begin{abstract}
 Composition-based models of the superconducting critical temperature are usually validated by
-splitting SuperCon-derived datasets at the level of the individual row, although those datasets
-are assembled from doping series of a few thousand element systems. We ask which retrospective
-evaluation best anticipates performance on element systems or dates that were not observed, and
-which predictive information survives once duplication, family dependence and corpus selection are
-controlled. On two curations of SuperCon (\num{21263} rows in \num{3365} element systems;
-\num{12336} audited rows in \num{3046} systems) holding out whole element systems raises the pooled
-MAE of gradient-boosted trees and random forests by \SIrange{53}{64}{\percent} and lowers $\Rsq$ by
-\numrange{0.074}{0.084}, with paired family-bootstrap intervals that exclude zero; averaged per
-system the inflation is \SIrange{22}{29}{\percent}, so the gap concentrates in the large systems.
-The two curations share \SI{96.6}{\percent} of their element systems and are not independent
-replicates. Element identity alone explains most of the conventional $\Rsq$; of what the Magpie
-descriptors add over element presence, about nine-tenths is recovered by stoichiometric fractions,
-and on held-out systems the descriptors alone do not beat presence plus fractions
-(\SI{+0.46}{\kelvin} \ci{0.00}{0.98} and \SI{+0.16}{\kelvin} \ci{-0.18}{0.59} MAE). Separation by
-composition, element system, host elements and composition clusters defines different target
-populations that are not nested. Retrospective top-\num{100} precision among corpus materials whose
-systems were held out stays at \SI{87.0}{\percent} and \SI{82.4}{\percent} (\SI{78.2}{\percent}
-once entries recorded as non-superconducting are admitted to the candidate pool) against fold prevalences of
-\SIrange{3.6}{18.2}{\percent}. Finally, on a corpus of \num{12543} compositions dated by first
-report, no cross-validation protocol reproduces the performance realised on a retrospective temporal split: random cross-validation on pre-2010 data estimates MAE \SI{4.34}{\kelvin} and $\Rsq = \num{0.91}$ where the realised values on later compositions are \SI{7.43}{\kelvin} and \num{0.33}; grouped protocols are closer and leave-clusters-out is closest in $\Rsq$, but none is
-within \num{0.1} at more than one cut. At a fixed budget of training records, spreading them over more element systems lowers the error on unseen systems: one record per system instead of whole systems lowers the per-system MAE by \SI{2.9}{\kelvin} (A) and \SI{1.8}{\kelvin} (B) at \num{500} records, without improving top-\num{100} selection. Row-level partitions, the audited checkpoint and a per-claim
-verifier are released.
+splitting SuperCon-derived datasets row by row, although those datasets are built from doping series
+of a few thousand element systems. We ask which retrospective evaluation best anticipates performance
+on unseen element systems or later dates. On two curations of SuperCon that share
+\SI{96.6}{\percent} of their systems (\num{21263} and \num{12336} rows), holding out whole element
+systems raises the pooled MAE of tree ensembles by \SIrange{53}{64}{\percent}, with paired
+family-bootstrap intervals that exclude zero; per system the inflation is \SIrange{22}{29}{\percent},
+so the gap concentrates in the large systems. Element identity explains most of the conventional
+$\Rsq$, and on held-out systems the elemental-property descriptors do not beat element presence plus
+stoichiometric fractions. Retrospective top-\num{100} precision on held-out systems stays at
+\SI{87.0}{\percent} and \SI{82.4}{\percent}. On \num{12543} compositions dated by first report,
+random cross-validation on pre-2010 data estimates MAE \SI{4.34}{\kelvin} and $\Rsq = \num{0.91}$,
+against \SI{7.43}{\kelvin} and \num{0.33} realised on later compositions; grouped protocols come
+closer, but none is within \num{0.1} of the realised $\Rsq$ at more than one cut. At a fixed budget,
+one training record per system instead of whole systems lowers the per-system error on unseen systems
+by \SI{2.9}{\kelvin} and \SI{1.8}{\kelvin} in the two curations. Row-level partitions, the audited data and a
+per-claim verifier are released.
 \end{abstract}
 
 \section{Introduction}
@@ -1225,7 +1219,7 @@ released partitions, audit and verifier make them one command.
 
 The author thanks his thesis tutor for a detailed review of a previous version of this manuscript. \textbf{[Author to complete: funding statement and competing interests.]}
 
-\textit{Use of generative AI.} A large-language-model research assistant \textbf{[author to state model and version]} was used to write and run analysis code, design and execute the experiments of sections~\ref{sec:audit}--\ref{sec:acquisition}, render the figures, verify bibliographic records and draft the text; an independent AI-assisted adversarial review was used to audit a previous version. All outputs were checked against the released result files by the per-claim verifier and by the author, who takes full responsibility for the content.
+\textit{Use of generative AI.} Claude Opus 5.5 (Anthropic) was used in the execution of the algorithms---writing and running the analysis code---and in the search for and verification of sources of information. It was also used to design and execute the experiments of sections~\ref{sec:audit}--\ref{sec:acquisition}, render the figures, verify bibliographic records and draft the text; an independent AI-assisted adversarial review was used to audit a previous version. All outputs were checked against the released result files by the per-claim verifier and by the author, who takes full responsibility for the content.
 
 \section*{Data availability}
 
