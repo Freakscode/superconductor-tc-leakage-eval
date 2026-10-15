@@ -1126,7 +1126,12 @@ overestimate the interpolative error, which is the caution our separation ladder
 3DSC~\cite{sommer2023} uses element-system grouping as its default protocol and remarks that
 SuperCon is very clustered, without comparing grouped with random validation;
 PhaseSelect~\cite{vasylenko2023} takes the element set as the unit of analysis and thereby discards
-the stoichiometric information whose contribution we measure. Konno \etal~\cite{konno2021} already separated SuperCon temporally, training only on data added before 2010 to evaluate a superconductor classifier on later materials, and argued that temporally separated splits should replace random ones; our temporal test differs in scoring every retrospective protocol against the realised performance rather than reporting a single split. Li \etal~\cite{li2023} showed that models trained on the 2018 Materials Project degrade on compounds added by 2021, and that adding a small, deliberately chosen fraction of the new data recovers much of the accuracy; our acquisition experiment asks the related question of how a fixed budget should be spread across element systems. MatFold~\cite{witman2025} and kernelised leave-one-cluster-out validation~\cite{durdy2022} provide general tools for the grouped and cluster splits used here. Murdock \etal~\cite{murdock2020} asked whether domain-knowledge featurizations are necessary and Kauwe \etal~\cite{kauwe2020} whether models can find materials with extraordinary property values; our representation ladder and selection metrics bear on the same questions, which we cite by their framing only, as we have not compared results quantitatively. What this paper adds is the
+the stoichiometric information whose contribution we measure. Konno \etal~\cite{konno2021} already separated SuperCon temporally, training only on data added before 2010 to evaluate a superconductor classifier on later materials, and argued that temporally separated splits should replace random ones; our temporal test differs in scoring every retrospective protocol against the realised performance rather than reporting a single split. Li \etal~\cite{li2023} showed that models trained on the 2018 Materials Project degrade on compounds added by 2021, and that adding a small, deliberately chosen fraction of the new data recovers much of the accuracy; our acquisition experiment asks the related question of how a fixed budget should be spread across element systems. MatFold~\cite{witman2025} and kernelised leave-one-cluster-out validation~\cite{durdy2022} provide general tools for the grouped and cluster splits used here. General materials benchmarks fix a common protocol so that models can be compared: Matbench
+evaluates every task by five-fold nested cross-validation~\cite{dunn2020}. Matbench
+Discovery~\cite{riebesell2024} argues instead for prospective benchmarking, testing models on newly
+generated candidate structures, and warns that retrospective splits based on clustering can test
+artificial or unrepresentative use cases---a caution that applies to our cluster level and is one
+reason the temporal test of section~\ref{sec:temporal} is used to score the retrospective protocols. Murdock \etal~\cite{murdock2020} asked whether domain-knowledge featurizations are necessary and Kauwe \etal~\cite{kauwe2020} whether models can find materials with extraordinary property values; our representation ladder and selection metrics bear on the same questions, which we cite by their framing only, as we have not compared results quantitatively. What this paper adds is the
 quantification of the gap on identical rows, models and budgets, with family-paired uncertainty;
 the null and representation ladders; the audit of the chemical unit and of the overlap between
 curations; and the retrospective temporal scoring of the protocols themselves.
@@ -1361,6 +1366,18 @@ kernelised leave one cluster out cross validation: universal baselines and evalu
 supervised machine learning of material properties \textit{Digit. Discov.} \textbf{1} 763--78
 \url{https://doi.org/10.1039/d2dd00039c}
 
+\bibitem{dunn2020}
+Dunn A, Wang Q, Ganose A, Dopp D and Jain A 2020 Benchmarking materials property prediction
+methods: the Matbench test set and Automatminer reference algorithm
+\textit{npj Comput. Mater.} \textbf{6} 138
+\url{https://doi.org/10.1038/s41524-020-00406-3}
+
+\bibitem{riebesell2024}
+Riebesell J, Goodall R E A, Benner P, Chiang Y, Deng B, Ceder G, Asta M, Lee A A, Jain A and
+Persson K A 2025 A framework to evaluate machine learning crystal stability predictions
+\textit{Nat. Mach. Intell.} \textbf{7} 836--47
+\url{https://doi.org/10.1038/s42256-025-01055-1}
+
 \bibitem{murdock2020}
 Murdock R J, Kauwe S K, Wang A Y-T and Sparks T D 2020 Is domain knowledge necessary for machine
 learning materials properties? \textit{Integr. Mater. Manuf. Innov.} \textbf{9} 221--7
@@ -1370,18 +1387,6 @@ learning materials properties? \textit{Integr. Mater. Manuf. Innov.} \textbf{9} 
 Kauwe S K, Graser J, Murdock R and Sparks T D 2020 Can machine learning find extraordinary
 materials? \textit{Comput. Mater. Sci.} \textbf{174} 109498
 \url{https://doi.org/10.1016/j.commatsci.2019.109498}
-
-\bibitem{riebesell2024}
-Riebesell J, Goodall R E A, Benner P, Chiang Y, Deng B, Ceder G, Asta M, Lee A A, Jain A and
-Persson K A 2025 A framework to evaluate machine learning crystal stability predictions
-\textit{Nat. Mach. Intell.} \textbf{7} 836--47
-\url{https://doi.org/10.1038/s42256-025-01055-1}
-
-\bibitem{dunn2020}
-Dunn A, Wang Q, Ganose A, Dopp D and Jain A 2020 Benchmarking materials property prediction
-methods: the Matbench test set and Automatminer reference algorithm
-\textit{npj Comput. Mater.} \textbf{6} 138
-\url{https://doi.org/10.1038/s41524-020-00406-3}
 
 \end{thebibliography}}
 
