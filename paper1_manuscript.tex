@@ -80,14 +80,16 @@ per-claim verifier are released.
 \section{Introduction}
 
 Predicting the superconducting critical temperature $\Tc$ from chemical composition alone is one
-of the most-benchmarked regression tasks in materials informatics. Gradient-boosted trees and
-random forests on the Hamidieh featurization~\cite{hamidieh2018} or on Magpie
-descriptors~\cite{ward2016} report $\Rsq \gtrsim \num{0.92}$ and MAE below \SI{6}{\kelvin}, and
-deep architectures push the same metrics further~\cite{konno2021,zeng2019,stanev2018}. Such
-numbers are quoted when arguing that machine learning is ready to guide the search for new
-superconductors, and models of this class have been used to propose candidates from text-mined
-phase diagrams~\cite{court2020}, from Eliashberg-theory descriptors~\cite{xie2022}, and to screen
-hydride families~\cite{sanna2024,wrona2024}.
+of the most-benchmarked regression tasks in materials informatics. Gradient-boosted trees on the
+Hamidieh featurization reach $\Rsq \approx \num{0.92}$ with an RMSE of about \SI{9.5}{\kelvin}~\cite{hamidieh2018},
+random forests on elemental-property statistics of the Magpie type~\cite{ward2016} reach
+$\Rsq \approx \num{0.88}$~\cite{stanev2018}, and deep architectures report $\Rsq = \num{0.92}$~\cite{konno2021} and
+$\Rsq = \num{0.97}$ with an MAE of \SI{4.1}{\kelvin}~\cite{zeng2019}. Such numbers are quoted when
+arguing that machine learning is ready to guide the search for new superconductors, and data-driven
+methods have been used to predict transition temperatures of compounds absent from text-mined
+phase diagrams~\cite{court2020}, to improve closed-form $\Tc$ formulae built on Eliashberg-theory
+quantities~\cite{xie2022}, and to screen hydrides, by machine-learning-accelerated high-throughput
+search~\cite{sanna2024} or by empirical descriptors~\cite{wrona2024}.
 
 They are obtained in a way that does not resemble the search. The datasets derive from SuperCon and
 are assembled from \emph{doping series}: materials that share a constituent-element set and differ
@@ -151,12 +153,12 @@ features. We do not remove them: they are part of the object of study, and the g
 section~\ref{sec:families} places every such pair in the same fold.
 
 \textbf{Dataset~B} is the SuperCon-derived list curated by Stanev \etal~\cite{stanev2018}
-(\num{16414} entries). Dropping the \num{3966} entries with $\Tc \le 0$ and \num{8} whose formula
+(\num{16414} entries in its released file). Dropping the \num{3966} entries with $\Tc \le 0$ and \num{8} whose formula
 \texttt{pymatgen} cannot parse leaves \num{12440} rows (the checkpoint of the previous version of
 this paper). The semantic audit of section~\ref{sec:audit} excludes \num{104} of these and corrects
 \num{3}, giving the audited checkpoint used throughout: \num{12336} rows in \num{3046} element
-systems, featurized with the \num{132} Magpie descriptors~\cite{ward2016} of
-\texttt{matminer}~\cite{ward2018}.
+systems, featurized with the \num{132} features of the Magpie preset of \texttt{matminer}~\cite{ward2018}, a subset of the
+elemental-property attributes of Ward \etal~\cite{ward2016}.
 
 Table~\ref{tab:flow} gives the number of rows at each filtering step. None of the files used here records the criterion behind a $\Tc$ (resistive onset, zero resistance or magnetic transition) or the measurement conditions, so the target throughout is the $\Tc$ recorded in the database. Reports of one composition under different criteria enter Dataset~B as separate rows; in the temporal corpus they are collapsed to the median $\Tc$ of the reports, with the maximum as a sensitivity check (section~\ref{sec:temporal}).
 
@@ -236,10 +238,9 @@ belong to $\{$Ba, La, Cu, O$\}$. This is the grouping used by 3DSC~\cite{sommer2
 unit of analysis, by PhaseSelect~\cite{vasylenko2023}; it is inspectable from the formula. It is an
 \emph{operational} grouping, not a one-to-one map onto doping series: the single system
 $\{$Ba, Cu, O, Y$\}$ holds \num{720} Dataset~A rows in \num{184} distinct formulas with $\Tc$ from
-\SI{4.3}{\kelvin} to \SI{130}{\kelvin}, and it merges the structurally distinct
-YBa$_2$Cu$_3$O$_{7-\delta}$, Y$_2$Ba$_4$Cu$_7$O$_{15-\delta}$ and YBa$_2$Cu$_4$O$_8$ phases
-(\num{596}, \num{38} and \num{51} rows with Cu:Y ratios of \num{3}, \num{3.5} and
-\num{4})~\cite{gupta1993}. Holding out a system therefore holds out several related phases at once,
+\SI{4.3}{\kelvin} to \SI{130}{\kelvin}, and it merges the phases YBa$_2$Cu$_3$O$_{7-\delta}$, Y$_2$Ba$_4$Cu$_7$O$_{15-\delta}$ and YBa$_2$Cu$_4$O$_8$
+(\num{596}, \num{38} and \num{51} rows with Cu:Y ratios of \num{3}, \num{3.5} and \num{4}), which are structurally distinct: the first has single and the last double
+Cu--O chains~\cite{gupta1993}. Holding out a system therefore holds out several related phases at once,
 which is a conservative choice for the question of unseen chemistries and a coarse one for the
 question of unseen phases; section~\ref{sec:results-levels} compares it with finer and coarser
 separations.
@@ -1245,6 +1246,11 @@ Hamidieh K 2018 A data-driven statistical model for predicting the critical temp
 superconductor \textit{Comput. Mater. Sci.} \textbf{154} 346--54
 \url{https://doi.org/10.1016/j.commatsci.2018.07.052}
 
+\bibitem{ward2016}
+Ward L, Agrawal A, Choudhary A and Wolverton C 2016 A general-purpose machine learning framework
+for predicting properties of inorganic materials \textit{npj Comput. Mater.} \textbf{2} 16028
+\url{https://doi.org/10.1038/npjcompumats.2016.28}
+
 \bibitem{stanev2018}
 Stanev V, Oses C, Kusne A G, Rodriguez E, Paglione J, Curtarolo S and Takeuchi I 2018
 Machine learning modeling of superconducting critical temperature
@@ -1281,59 +1287,15 @@ Prediction of ambient pressure conventional superconductivity above 80 K in hydr
 \url{https://doi.org/10.1038/s41524-024-01214-9}
 
 \bibitem{wrona2024}
-Wrona I A, Jarosik M W, Szcz\k{e}\'sniak R and Durajski A P 2024 A recipe for an effective
+Wrona I A, Niegodajew P and Durajski A P 2024 A recipe for an effective
 selection of promising candidates for high-temperature superconductors among binary hydrides
 \textit{Mater. Today Phys.} \textbf{46} 101499
 \url{https://doi.org/10.1016/j.mtphys.2024.101499}
-
-\bibitem{kapoor2023}
-Kapoor S and Narayanan A 2023 Leakage and the reproducibility crisis in machine-learning-based
-science \textit{Patterns} \textbf{4} 100804
-\url{https://doi.org/10.1016/j.patter.2023.100804}
-
-\bibitem{riebesell2024}
-Riebesell J, Goodall R E A, Benner P, Chiang Y, Deng B, Lee A A, Jain A and Persson K A 2024
-Matbench Discovery: A framework to evaluate machine learning crystal stability predictions
-\textit{arXiv}:2308.14920
-\url{https://doi.org/10.48550/arXiv.2308.14920}
-
-\bibitem{dunn2020}
-Dunn A, Wang Q, Ganose A, Dopp D and Jain A 2020 Benchmarking materials property prediction
-methods: the Matbench test set and Automatminer reference algorithm
-\textit{npj Comput. Mater.} \textbf{6} 138
-\url{https://doi.org/10.1038/s41524-020-00406-3}
-
-\bibitem{ward2018}
-Ward L, Dunn A, Faghaninia A, Zimmermann N E R, Bajaj S, Wang Q, Montoya J, Chen J, Bystrom K,
-Dylla M, Chard K, Asta M, Persson K A, Snyder G J, Foster I and Jain A 2018
-Matminer: An open source toolkit for materials data mining
-\textit{Comput. Mater. Sci.} \textbf{152} 60--9
-\url{https://doi.org/10.1016/j.commatsci.2018.05.018}
-
-\bibitem{ward2016}
-Ward L, Agrawal A, Choudhary A and Wolverton C 2016 A general-purpose machine learning framework
-for predicting properties of inorganic materials \textit{npj Comput. Mater.} \textbf{2} 16028
-\url{https://doi.org/10.1038/npjcompumats.2016.28}
-
-\bibitem{chen2016}
-Chen T and Guestrin C 2016 XGBoost: A scalable tree boosting system
-\textit{Proc. 22nd ACM SIGKDD Int. Conf. on Knowledge Discovery and Data Mining} 785--94
-\url{https://doi.org/10.1145/2939672.2939785}
-
-\bibitem{sommer2023}
-Sommer T, Willa R, Schmalian J and Friederich P 2023 3DSC - a dataset of superconductors including crystal structures
-\textit{Sci. Data} \textbf{10} 816
-\url{https://doi.org/10.1038/s41597-023-02721-y}
 
 \bibitem{meredig2018}
 Meredig B, Antono E, Church C, Hutchinson M, Ling J, Paradiso S, Blaiszik B, Foster I, Gibbons B, Hattrick-Simpers J, Mehta A and Ward L 2018 Can machine learning identify the next high-temperature superconductor? Examining extrapolation performance for materials discovery
 \textit{Mol. Syst. Des. Eng.} \textbf{3} 819--25
 \url{https://doi.org/10.1039/c8me00012c}
-
-\bibitem{vasylenko2023}
-Vasylenko A, Antypov D, Gusev V V, Gaultois M W, Dyer M S and Rosseinsky M J 2023 Element selection for functional materials discovery by integrated machine learning of elemental contributions to properties
-\textit{npj Comput. Mater.} \textbf{9} 164
-\url{https://doi.org/10.1038/s41524-023-01072-x}
 
 \bibitem{xiong2020}
 Xiong Z, Cui Y, Liu Z, Zhao Y, Hu M and Hu J 2020 Evaluating explorative prediction power of machine learning algorithms for materials discovery using $k$-fold forward cross-validation
@@ -1350,10 +1312,37 @@ Roberts D R, Bahn V, Ciuti S, Boyce M S, Elith J, Guillera-Arroita G, Hauenstein
 \textit{Ecography} \textbf{40} 913--29
 \url{https://doi.org/10.1111/ecog.02881}
 
+\bibitem{kapoor2023}
+Kapoor S and Narayanan A 2023 Leakage and the reproducibility crisis in machine-learning-based
+science \textit{Patterns} \textbf{4} 100804
+\url{https://doi.org/10.1016/j.patter.2023.100804}
+
+\bibitem{sommer2023}
+Sommer T, Willa R, Schmalian J and Friederich P 2023 3DSC - a dataset of superconductors including crystal structures
+\textit{Sci. Data} \textbf{10} 816
+\url{https://doi.org/10.1038/s41597-023-02721-y}
+
+\bibitem{vasylenko2023}
+Vasylenko A, Antypov D, Gusev V V, Gaultois M W, Dyer M S and Rosseinsky M J 2023 Element selection for functional materials discovery by integrated machine learning of elemental contributions to properties
+\textit{npj Comput. Mater.} \textbf{9} 164
+\url{https://doi.org/10.1038/s41524-023-01072-x}
+
+\bibitem{ward2018}
+Ward L, Dunn A, Faghaninia A, Zimmermann N E R, Bajaj S, Wang Q, Montoya J, Chen J, Bystrom K,
+Dylla M, Chard K, Asta M, Persson K A, Snyder G J, Foster I and Jain A 2018
+Matminer: An open source toolkit for materials data mining
+\textit{Comput. Mater. Sci.} \textbf{152} 60--9
+\url{https://doi.org/10.1016/j.commatsci.2018.05.018}
+
 \bibitem{gupta1993}
 Gupta R P and Gupta M 1993 A comparative study of the pressure-induced charge redistribution in YBa$_{2}$Cu$_{3}$O$_{7}$ and YBa$_{2}$Cu$_{4}$O$_{8}$
 \textit{Physica C} \textbf{204} 349--58
 \url{https://doi.org/10.1016/0921-4534(93)91019-r}
+
+\bibitem{chen2016}
+Chen T and Guestrin C 2016 XGBoost: A scalable tree boosting system
+\textit{Proc. 22nd ACM SIGKDD Int. Conf. on Knowledge Discovery and Data Mining} 785--94
+\url{https://doi.org/10.1145/2939672.2939785}
 
 \bibitem{li2023}
 Li K, DeCost B, Choudhary K, Greenwood M and Hattrick-Simpers J 2023 A critical examination of
@@ -1381,6 +1370,18 @@ learning materials properties? \textit{Integr. Mater. Manuf. Innov.} \textbf{9} 
 Kauwe S K, Graser J, Murdock R and Sparks T D 2020 Can machine learning find extraordinary
 materials? \textit{Comput. Mater. Sci.} \textbf{174} 109498
 \url{https://doi.org/10.1016/j.commatsci.2019.109498}
+
+\bibitem{riebesell2024}
+Riebesell J, Goodall R E A, Benner P, Chiang Y, Deng B, Ceder G, Asta M, Lee A A, Jain A and
+Persson K A 2025 A framework to evaluate machine learning crystal stability predictions
+\textit{Nat. Mach. Intell.} \textbf{7} 836--47
+\url{https://doi.org/10.1038/s42256-025-01055-1}
+
+\bibitem{dunn2020}
+Dunn A, Wang Q, Ganose A, Dopp D and Jain A 2020 Benchmarking materials property prediction
+methods: the Matbench test set and Automatminer reference algorithm
+\textit{npj Comput. Mater.} \textbf{6} 138
+\url{https://doi.org/10.1038/s41524-020-00406-3}
 
 \end{thebibliography}}
 

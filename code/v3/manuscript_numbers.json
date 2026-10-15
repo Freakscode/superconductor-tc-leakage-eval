@@ -3,12 +3,6 @@
  "_tex": "paper1_manuscript.tex (v3)",
  "entries": [
   {
-   "id": "lit_MAE_6K",
-   "anchor": "MAE below \\SI{<<v>>}{\\kelvin}, and deep",
-   "const": 6,
-   "reason": "literature range quoted in the introduction (no result file)"
-  },
-  {
    "id": "data_dup_exact",
    "anchor": "It contains \\num{<<v>>} rows that are exact duplicates",
    "source": "results_v2/twins_noise_A.csv",
@@ -59,7 +53,7 @@
   },
   {
    "id": "data_nfeat_B",
-   "anchor": "with the \\num{<<v>>} Magpie descriptors",
+   "anchor": "featurized with the \\num{<<v>>} features of the Magpie preset",
    "source": "results_v2/nulo_presencia.csv",
    "key": {
     "dataset": "B",
@@ -13179,13 +13173,6 @@
    "fmt": ".2f"
   },
   {
-   "id": "intro_R2_092",
-   "anchor": "report $\\Rsq \\gtrsim \\num{<<v>>}$ and MAE below",
-   "const": 0.92,
-   "reason": "literature range quoted in the introduction (no result file)",
-   "fmt": ".2f"
-  },
-  {
    "id": "data_N_A",
    "anchor": "Data Set~<<*>>: \\num{<<v>>} rows with \\num{81}",
    "source": "results_v3/family_concentration_v3.csv",
@@ -13209,7 +13196,7 @@
   },
   {
    "id": "data_B_source",
-   "anchor": "(\\num{<<v>>} entries). Dropping the \\num{3966}",
+   "anchor": "(\\num{<<v>>} entries in its released file). Dropping the \\num{3966}",
    "source": "results_v3/semantic_audit_B_decisions.json",
    "field": "meta.n_source",
    "fmt": ".0f"
@@ -13583,14 +13570,14 @@
   },
   {
    "id": "fam_123",
-   "anchor": "phases (\\num{<<v>>}, \\num{38} and \\num{51} rows",
+   "anchor": "YBa$_2$Cu$_4$O$_8$ (\\num{<<v>>}, \\num{38} and \\num{51} rows",
    "source": "results_v3/h09_ybco_family_check.json",
    "field": "datasetA.rows_CuY_eq_3_(123-type)",
    "fmt": ".0f"
   },
   {
    "id": "fam_247",
-   "anchor": "phases (\\num{596}, \\num{<<v>>} and \\num{51} rows",
+   "anchor": "(\\num{596}, \\num{<<v>>} and \\num{51} rows",
    "const": 38,
    "reason": "results_v3/h09_ybco_family_check.json datasetA.rows_CuY_eq_3.5_(247-type) (key contains a dot, not addressable by json path)",
    "fmt": ".0f"
@@ -13618,7 +13605,7 @@
   },
   {
    "id": "fam_ratio4",
-   "anchor": "ratios of \\num{3}, \\num{3.5} and \\num{<<v>>})~<<*>>. Holding out a system",
+   "anchor": "ratios of \\num{3}, \\num{3.5} and \\num{<<v>>}), which are structurally distinct",
    "const": 4,
    "reason": "Cu:Y stoichiometric ratio of the 124 phase (definition)",
    "fmt": ".0f"
@@ -21602,6 +21589,48 @@
     }
    },
    "fmt": ".1f"
+  },
+  {
+   "id": "lit_ham_R2",
+   "anchor": "Hamidieh featurization reach $\\Rsq \\approx \\num{<<v>>}$",
+   "const": 0.92,
+   "fmt": ".2f",
+   "reason": "literature value quoted from the cited source (hamidieh2018: out-of-sample R2 about 0.92)"
+  },
+  {
+   "id": "lit_ham_RMSE",
+   "anchor": "with an RMSE of about \\SI{<<v>>}{\\kelvin}",
+   "const": 9.5,
+   "fmt": ".1f",
+   "reason": "literature value quoted from the cited source (hamidieh2018: out-of-sample rmse about 9.5 K)"
+  },
+  {
+   "id": "lit_stanev_R2",
+   "anchor": "Magpie type~ reach $\\Rsq \\approx \\num{<<v>>}$",
+   "const": 0.88,
+   "fmt": ".2f",
+   "reason": "literature value quoted from the cited source (stanev2018: regression R2 ~ 0.88 (Fig. 4a))"
+  },
+  {
+   "id": "lit_deep_R2_lo",
+   "anchor": "deep architectures report $\\Rsq = \\num{<<v>>}$",
+   "const": 0.92,
+   "fmt": ".2f",
+   "reason": "literature value quoted from the cited source (konno2021: R2 0.92)"
+  },
+  {
+   "id": "lit_deep_R2_hi",
+   "anchor": "and $\\Rsq = \\num{<<v>>}$ with an MAE of",
+   "const": 0.97,
+   "fmt": ".2f",
+   "reason": "literature value quoted from the cited source (zeng2019: r2 0.97 on test set)"
+  },
+  {
+   "id": "lit_deep_MAE",
+   "anchor": "with an MAE of \\SI{<<v>>}{\\kelvin}",
+   "const": 4.1,
+   "fmt": ".1f",
+   "reason": "literature value quoted from the cited source (zeng2019: test-set MAE 4.12 K)"
   }
  ]
 }
